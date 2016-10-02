@@ -1,0 +1,3 @@
+include extensions/header.pxd
+include extensions/line_profiler.c
+include extensions/timer.h

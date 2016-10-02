@@ -60,7 +60,8 @@ setup(
     packages=find_packages(exclude=["contrib", "docs", "tests"]),
 
     ext_modules=[
-        Extension("_wsgi_lineprof", sources=[source])
+        Extension("_wsgi_lineprof",
+                  sources=[source, "extensions/timer.c"])
     ],
 
     # List run-time dependencies here.  These will be installed by pip when
