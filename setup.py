@@ -1,13 +1,27 @@
 from codecs import open
 from os import path
+from warnings import warn
 
-from setuptools import find_packages, setup
+from setuptools import Extension, find_packages, setup
 
 
 root = path.abspath(path.dirname(__file__))
 
 with open(path.join(root, "README.rst"), encoding="utf-8") as f:
     long_description = f.read()
+
+cmdclass = {}
+source = "extensions/line_profiler."
+
+try:
+    from Cython.Distutils import build_ext
+    cmdclass["build_ext"] = build_ext
+    source += "pyx"
+except ImportError:
+    source += "c"
+    if not path.exists(path.join(root, source)):
+        raise Exception("No Cython installation, no generated C file")
+    warn("Could not import Cython, using generated C source code instead")
 
 setup(
     name="wsgi-lineprof",
@@ -44,6 +58,10 @@ setup(
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
     packages=find_packages(exclude=["contrib", "docs", "tests"]),
+
+    ext_modules=[
+        Extension("_wsgi_lineprof", sources=[source])
+    ],
 
     # List run-time dependencies here.  These will be installed by pip when
     # your project is installed. For an analysis of "install_requires" vs pip"s
