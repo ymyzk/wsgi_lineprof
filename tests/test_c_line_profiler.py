@@ -1,7 +1,7 @@
 from _wsgi_lineprof import LineTiming
 
 
-class TestLineTiming:
+class TestLineTiming(object):
     def test_as_tuple(self):
         def func():
             return 123
