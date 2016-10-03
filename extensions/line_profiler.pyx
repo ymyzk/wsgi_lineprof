@@ -25,6 +25,10 @@ cdef class LineProfiler:
     def disable(self):
         PyEval_SetTrace(NULL, <object>NULL)
 
+    @staticmethod
+    def get_unit():
+        return hpTimerUnit()
+
 
 cdef class LineTiming:
     cdef public object code

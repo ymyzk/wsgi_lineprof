@@ -513,7 +513,7 @@ struct __pyx_obj_14_wsgi_lineprof_LineProfiler {
 };
 
 
-/* "extensions/line_profiler.pyx":29
+/* "extensions/line_profiler.pyx":33
  * 
  * 
  * cdef class LineTiming:             # <<<<<<<<<<<<<<
@@ -530,7 +530,7 @@ struct __pyx_obj_14_wsgi_lineprof_LineTiming {
 };
 
 
-/* "extensions/line_profiler.pyx":53
+/* "extensions/line_profiler.pyx":57
  * 
  * 
  * cdef class LastTime:             # <<<<<<<<<<<<<<
@@ -545,7 +545,7 @@ struct __pyx_obj_14_wsgi_lineprof_LastTime {
 
 
 
-/* "extensions/line_profiler.pyx":29
+/* "extensions/line_profiler.pyx":33
  * 
  * 
  * cdef class LineTiming:             # <<<<<<<<<<<<<<
@@ -621,6 +621,25 @@ static struct __pyx_vtabstruct_14_wsgi_lineprof_LineTiming *__pyx_vtabptr_14_wsg
     } while (0)
 #define __Pyx_CLEAR(r)    do { PyObject* tmp = ((PyObject*)(r)); r = NULL; __Pyx_DECREF(tmp);} while(0)
 #define __Pyx_XCLEAR(r)   do { if((r) != NULL) {PyObject* tmp = ((PyObject*)(r)); r = NULL; __Pyx_DECREF(tmp);}} while(0)
+
+/* PyObjectGetAttrStr.proto */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject* attr_name) {
+    PyTypeObject* tp = Py_TYPE(obj);
+    if (likely(tp->tp_getattro))
+        return tp->tp_getattro(obj, attr_name);
+#if PY_MAJOR_VERSION < 3
+    if (likely(tp->tp_getattr))
+        return tp->tp_getattr(obj, PyString_AS_STRING(attr_name));
+#endif
+    return PyObject_GetAttr(obj, attr_name);
+}
+#else
+#define __Pyx_PyObject_GetAttrStr(o,n) PyObject_GetAttr(o,n)
+#endif
+
+/* GetBuiltinName.proto */
+static PyObject *__Pyx_GetBuiltinName(PyObject *name);
 
 /* RaiseArgTupleInvalid.proto */
 static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
@@ -743,6 +762,12 @@ static void __Pyx_WriteUnraisable(const char *name, int clineno,
 
 /* SetVTable.proto */
 static int __Pyx_SetVtable(PyObject *dict, void *vtable);
+
+/* GetModuleGlobalName.proto */
+static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name);
+
+/* GetNameInClass.proto */
+static PyObject *__Pyx_GetNameInClass(PyObject *nmspace, PyObject *name);
 
 /* CodeObjectCache.proto */
 typedef struct {
@@ -898,25 +923,35 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *, PyFrameObj
 int __pyx_module_is_main__wsgi_lineprof = 0;
 
 /* Implementation of '_wsgi_lineprof' */
+static PyObject *__pyx_builtin_staticmethod;
 static const char __pyx_k_code[] = "code";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_time[] = "time";
 static const char __pyx_k_lineno[] = "lineno";
 static const char __pyx_k_f_lineno[] = "f_lineno";
+static const char __pyx_k_get_unit[] = "get_unit";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
+static const char __pyx_k_staticmethod[] = "staticmethod";
+static const char __pyx_k_wsgi_lineprof[] = "_wsgi_lineprof";
 static const char __pyx_k_LineTiming_for_r_lineno_r_n_hit[] = "<LineTiming for %r lineno: %r n_hits: %r total_time: %r>";
+static const char __pyx_k_Users_yusuke_Development_wsgi_l[] = "/Users/yusuke/Development/wsgi-lineprof/extensions/line_profiler.pyx";
 static PyObject *__pyx_kp_s_LineTiming_for_r_lineno_r_n_hit;
+static PyObject *__pyx_kp_s_Users_yusuke_Development_wsgi_l;
 static PyObject *__pyx_n_s_code;
 static PyObject *__pyx_n_s_f_lineno;
+static PyObject *__pyx_n_s_get_unit;
 static PyObject *__pyx_n_s_lineno;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_pyx_vtable;
+static PyObject *__pyx_n_s_staticmethod;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_time;
+static PyObject *__pyx_n_s_wsgi_lineprof;
 static int __pyx_pf_14_wsgi_lineprof_12LineProfiler___init__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_2enable(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_4disable(CYTHON_UNUSED struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_6get_unit(); /* proto */
 static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_7results___get__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self); /* proto */
 static int __pyx_pf_14_wsgi_lineprof_12LineProfiler_7results_2__set__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
 static int __pyx_pf_14_wsgi_lineprof_12LineProfiler_7results_4__del__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self); /* proto */
@@ -939,6 +974,7 @@ static int __pyx_pf_14_wsgi_lineprof_8LastTime___cinit__(struct __pyx_obj_14_wsg
 static PyObject *__pyx_tp_new_14_wsgi_lineprof_LineProfiler(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_14_wsgi_lineprof_LineTiming(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_14_wsgi_lineprof_LastTime(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_codeobj_;
 
 /* "extensions/line_profiler.pyx":18
  *     cdef public dict last_time
@@ -1101,7 +1137,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_4disable(CYTHON_UNUSED
  *     def disable(self):
  *         PyEval_SetTrace(NULL, <object>NULL)             # <<<<<<<<<<<<<<
  * 
- * 
+ *     @staticmethod
  */
   PyEval_SetTrace(NULL, ((PyObject *)NULL));
 
@@ -1115,6 +1151,70 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_4disable(CYTHON_UNUSED
 
   /* function exit code */
   __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "extensions/line_profiler.pyx":29
+ * 
+ *     @staticmethod
+ *     def get_unit():             # <<<<<<<<<<<<<<
+ *         return hpTimerUnit()
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_14_wsgi_lineprof_12LineProfiler_7get_unit(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_14_wsgi_lineprof_12LineProfiler_7get_unit = {"get_unit", (PyCFunction)__pyx_pw_14_wsgi_lineprof_12LineProfiler_7get_unit, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_14_wsgi_lineprof_12LineProfiler_7get_unit(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("get_unit (wrapper)", 0);
+  if (unlikely(PyTuple_GET_SIZE(__pyx_args) > 0)) {
+    __Pyx_RaiseArgtupleInvalid("get_unit", 1, 0, 0, PyTuple_GET_SIZE(__pyx_args)); return NULL;}
+  if (unlikely(__pyx_kwds) && unlikely(PyDict_Size(__pyx_kwds) > 0) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "get_unit", 0))) return NULL;
+  __pyx_r = __pyx_pf_14_wsgi_lineprof_12LineProfiler_6get_unit();
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_6get_unit() {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  __Pyx_RefNannySetupContext("get_unit", 0);
+
+  /* "extensions/line_profiler.pyx":30
+ *     @staticmethod
+ *     def get_unit():
+ *         return hpTimerUnit()             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = PyFloat_FromDouble(hpTimerUnit()); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "extensions/line_profiler.pyx":29
+ * 
+ *     @staticmethod
+ *     def get_unit():             # <<<<<<<<<<<<<<
+ *         return hpTimerUnit()
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("_wsgi_lineprof.LineProfiler.get_unit", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -1330,7 +1430,7 @@ static int __pyx_pf_14_wsgi_lineprof_12LineProfiler_9last_time_4__del__(struct _
   return __pyx_r;
 }
 
-/* "extensions/line_profiler.pyx":35
+/* "extensions/line_profiler.pyx":39
  *     cdef public long n_hits
  * 
  *     def __init__(self, object code, int lineno):             # <<<<<<<<<<<<<<
@@ -1366,11 +1466,11 @@ static int __pyx_pw_14_wsgi_lineprof_10LineTiming_1__init__(PyObject *__pyx_v_se
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_lineno)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, 1); __PYX_ERR(0, 35, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, 1); __PYX_ERR(0, 39, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 35, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 39, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1379,11 +1479,11 @@ static int __pyx_pw_14_wsgi_lineprof_10LineTiming_1__init__(PyObject *__pyx_v_se
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
     __pyx_v_code = values[0];
-    __pyx_v_lineno = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_lineno == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 35, __pyx_L3_error)
+    __pyx_v_lineno = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_lineno == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 39, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 35, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 39, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("_wsgi_lineprof.LineTiming.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1401,7 +1501,7 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming___init__(struct __pyx_obj_14_w
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "extensions/line_profiler.pyx":36
+  /* "extensions/line_profiler.pyx":40
  * 
  *     def __init__(self, object code, int lineno):
  *         self.code = code             # <<<<<<<<<<<<<<
@@ -1414,7 +1514,7 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming___init__(struct __pyx_obj_14_w
   __Pyx_DECREF(__pyx_v_self->code);
   __pyx_v_self->code = __pyx_v_code;
 
-  /* "extensions/line_profiler.pyx":37
+  /* "extensions/line_profiler.pyx":41
  *     def __init__(self, object code, int lineno):
  *         self.code = code
  *         self.lineno = lineno             # <<<<<<<<<<<<<<
@@ -1423,7 +1523,7 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming___init__(struct __pyx_obj_14_w
  */
   __pyx_v_self->lineno = __pyx_v_lineno;
 
-  /* "extensions/line_profiler.pyx":38
+  /* "extensions/line_profiler.pyx":42
  *         self.code = code
  *         self.lineno = lineno
  *         self.total_time = 0             # <<<<<<<<<<<<<<
@@ -1432,7 +1532,7 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming___init__(struct __pyx_obj_14_w
  */
   __pyx_v_self->total_time = 0;
 
-  /* "extensions/line_profiler.pyx":39
+  /* "extensions/line_profiler.pyx":43
  *         self.lineno = lineno
  *         self.total_time = 0
  *         self.n_hits = 0             # <<<<<<<<<<<<<<
@@ -1441,7 +1541,7 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming___init__(struct __pyx_obj_14_w
  */
   __pyx_v_self->n_hits = 0;
 
-  /* "extensions/line_profiler.pyx":35
+  /* "extensions/line_profiler.pyx":39
  *     cdef public long n_hits
  * 
  *     def __init__(self, object code, int lineno):             # <<<<<<<<<<<<<<
@@ -1455,7 +1555,7 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming___init__(struct __pyx_obj_14_w
   return __pyx_r;
 }
 
-/* "extensions/line_profiler.pyx":41
+/* "extensions/line_profiler.pyx":45
  *         self.n_hits = 0
  * 
  *     cdef hit(self, PY_LONG_LONG dt):             # <<<<<<<<<<<<<<
@@ -1468,7 +1568,7 @@ static PyObject *__pyx_f_14_wsgi_lineprof_10LineTiming_hit(struct __pyx_obj_14_w
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("hit", 0);
 
-  /* "extensions/line_profiler.pyx":42
+  /* "extensions/line_profiler.pyx":46
  * 
  *     cdef hit(self, PY_LONG_LONG dt):
  *             self.n_hits += 1             # <<<<<<<<<<<<<<
@@ -1477,7 +1577,7 @@ static PyObject *__pyx_f_14_wsgi_lineprof_10LineTiming_hit(struct __pyx_obj_14_w
  */
   __pyx_v_self->n_hits = (__pyx_v_self->n_hits + 1);
 
-  /* "extensions/line_profiler.pyx":43
+  /* "extensions/line_profiler.pyx":47
  *     cdef hit(self, PY_LONG_LONG dt):
  *             self.n_hits += 1
  *             self.total_time += dt             # <<<<<<<<<<<<<<
@@ -1486,7 +1586,7 @@ static PyObject *__pyx_f_14_wsgi_lineprof_10LineTiming_hit(struct __pyx_obj_14_w
  */
   __pyx_v_self->total_time = (__pyx_v_self->total_time + __pyx_v_dt);
 
-  /* "extensions/line_profiler.pyx":41
+  /* "extensions/line_profiler.pyx":45
  *         self.n_hits = 0
  * 
  *     cdef hit(self, PY_LONG_LONG dt):             # <<<<<<<<<<<<<<
@@ -1501,7 +1601,7 @@ static PyObject *__pyx_f_14_wsgi_lineprof_10LineTiming_hit(struct __pyx_obj_14_w
   return __pyx_r;
 }
 
-/* "extensions/line_profiler.pyx":45
+/* "extensions/line_profiler.pyx":49
  *             self.total_time += dt
  * 
  *     def as_tuple(self):             # <<<<<<<<<<<<<<
@@ -1531,7 +1631,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_2as_tuple(struct __pyx_o
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("as_tuple", 0);
 
-  /* "extensions/line_profiler.pyx":46
+  /* "extensions/line_profiler.pyx":50
  * 
  *     def as_tuple(self):
  *         return self.lineno, self.n_hits, self.total_time             # <<<<<<<<<<<<<<
@@ -1539,13 +1639,13 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_2as_tuple(struct __pyx_o
  *     def __repr__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->lineno); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->lineno); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_From_long(__pyx_v_self->n_hits); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_long(__pyx_v_self->n_hits); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyInt_From_PY_LONG_LONG(__pyx_v_self->total_time); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_PY_LONG_LONG(__pyx_v_self->total_time); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1);
@@ -1560,7 +1660,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_2as_tuple(struct __pyx_o
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "extensions/line_profiler.pyx":45
+  /* "extensions/line_profiler.pyx":49
  *             self.total_time += dt
  * 
  *     def as_tuple(self):             # <<<<<<<<<<<<<<
@@ -1582,7 +1682,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_2as_tuple(struct __pyx_o
   return __pyx_r;
 }
 
-/* "extensions/line_profiler.pyx":48
+/* "extensions/line_profiler.pyx":52
  *         return self.lineno, self.n_hits, self.total_time
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -1612,7 +1712,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_4__repr__(struct __pyx_o
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("__repr__", 0);
 
-  /* "extensions/line_profiler.pyx":49
+  /* "extensions/line_profiler.pyx":53
  * 
  *     def __repr__(self):
  *         return '<LineTiming for %r lineno: %r n_hits: %r total_time: %r>' % (             # <<<<<<<<<<<<<<
@@ -1621,20 +1721,20 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_4__repr__(struct __pyx_o
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "extensions/line_profiler.pyx":50
+  /* "extensions/line_profiler.pyx":54
  *     def __repr__(self):
  *         return '<LineTiming for %r lineno: %r n_hits: %r total_time: %r>' % (
  *             self.code, self.lineno, self.n_hits, <long>self.total_time)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->lineno); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->lineno); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_From_long(__pyx_v_self->n_hits); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_long(__pyx_v_self->n_hits); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyInt_From_long(((long)__pyx_v_self->total_time)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_long(((long)__pyx_v_self->total_time)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyTuple_New(4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_INCREF(__pyx_v_self->code);
   __Pyx_GIVEREF(__pyx_v_self->code);
@@ -1649,21 +1749,21 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_4__repr__(struct __pyx_o
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
 
-  /* "extensions/line_profiler.pyx":49
+  /* "extensions/line_profiler.pyx":53
  * 
  *     def __repr__(self):
  *         return '<LineTiming for %r lineno: %r n_hits: %r total_time: %r>' % (             # <<<<<<<<<<<<<<
  *             self.code, self.lineno, self.n_hits, <long>self.total_time)
  * 
  */
-  __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_LineTiming_for_r_lineno_r_n_hit, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_LineTiming_for_r_lineno_r_n_hit, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "extensions/line_profiler.pyx":48
+  /* "extensions/line_profiler.pyx":52
  *         return self.lineno, self.n_hits, self.total_time
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -1685,7 +1785,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_4__repr__(struct __pyx_o
   return __pyx_r;
 }
 
-/* "extensions/line_profiler.pyx":30
+/* "extensions/line_profiler.pyx":34
  * 
  * cdef class LineTiming:
  *     cdef public object code             # <<<<<<<<<<<<<<
@@ -1780,7 +1880,7 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming_4code_4__del__(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "extensions/line_profiler.pyx":31
+/* "extensions/line_profiler.pyx":35
  * cdef class LineTiming:
  *     cdef public object code
  *     cdef public int lineno             # <<<<<<<<<<<<<<
@@ -1807,7 +1907,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_6lineno___get__(struct _
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->lineno); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->lineno); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1842,7 +1942,7 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming_6lineno_2__set__(struct __pyx_
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_value); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_value); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 35, __pyx_L1_error)
   __pyx_v_self->lineno = __pyx_t_1;
 
   /* function exit code */
@@ -1856,7 +1956,7 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming_6lineno_2__set__(struct __pyx_
   return __pyx_r;
 }
 
-/* "extensions/line_profiler.pyx":32
+/* "extensions/line_profiler.pyx":36
  *     cdef public object code
  *     cdef public int lineno
  *     cdef public PY_LONG_LONG total_time             # <<<<<<<<<<<<<<
@@ -1883,7 +1983,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_10total_time___get__(str
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_PY_LONG_LONG(__pyx_v_self->total_time); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_PY_LONG_LONG(__pyx_v_self->total_time); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1918,7 +2018,7 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming_10total_time_2__set__(struct _
   __Pyx_RefNannyDeclarations
   PY_LONG_LONG __pyx_t_1;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __pyx_t_1 = __Pyx_PyInt_As_PY_LONG_LONG(__pyx_v_value); if (unlikely((__pyx_t_1 == (PY_LONG_LONG)-1) && PyErr_Occurred())) __PYX_ERR(0, 32, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_As_PY_LONG_LONG(__pyx_v_value); if (unlikely((__pyx_t_1 == (PY_LONG_LONG)-1) && PyErr_Occurred())) __PYX_ERR(0, 36, __pyx_L1_error)
   __pyx_v_self->total_time = __pyx_t_1;
 
   /* function exit code */
@@ -1932,7 +2032,7 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming_10total_time_2__set__(struct _
   return __pyx_r;
 }
 
-/* "extensions/line_profiler.pyx":33
+/* "extensions/line_profiler.pyx":37
  *     cdef public int lineno
  *     cdef public PY_LONG_LONG total_time
  *     cdef public long n_hits             # <<<<<<<<<<<<<<
@@ -1959,7 +2059,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_6n_hits___get__(struct _
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v_self->n_hits); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v_self->n_hits); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1994,7 +2094,7 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming_6n_hits_2__set__(struct __pyx_
   __Pyx_RefNannyDeclarations
   long __pyx_t_1;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __pyx_t_1 = __Pyx_PyInt_As_long(__pyx_v_value); if (unlikely((__pyx_t_1 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_As_long(__pyx_v_value); if (unlikely((__pyx_t_1 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 37, __pyx_L1_error)
   __pyx_v_self->n_hits = __pyx_t_1;
 
   /* function exit code */
@@ -2008,7 +2108,7 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming_6n_hits_2__set__(struct __pyx_
   return __pyx_r;
 }
 
-/* "extensions/line_profiler.pyx":57
+/* "extensions/line_profiler.pyx":61
  *     cdef PY_LONG_LONG time
  * 
  *     def __cinit__(self, int f_lineno, PY_LONG_LONG time):             # <<<<<<<<<<<<<<
@@ -2044,11 +2144,11 @@ static int __pyx_pw_14_wsgi_lineprof_8LastTime_1__cinit__(PyObject *__pyx_v_self
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_time)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, 1); __PYX_ERR(0, 57, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, 1); __PYX_ERR(0, 61, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(0, 57, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(0, 61, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2056,12 +2156,12 @@ static int __pyx_pw_14_wsgi_lineprof_8LastTime_1__cinit__(PyObject *__pyx_v_self
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_f_lineno = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_f_lineno == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 57, __pyx_L3_error)
-    __pyx_v_time = __Pyx_PyInt_As_PY_LONG_LONG(values[1]); if (unlikely((__pyx_v_time == (PY_LONG_LONG)-1) && PyErr_Occurred())) __PYX_ERR(0, 57, __pyx_L3_error)
+    __pyx_v_f_lineno = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_f_lineno == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 61, __pyx_L3_error)
+    __pyx_v_time = __Pyx_PyInt_As_PY_LONG_LONG(values[1]); if (unlikely((__pyx_v_time == (PY_LONG_LONG)-1) && PyErr_Occurred())) __PYX_ERR(0, 61, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 57, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 61, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("_wsgi_lineprof.LastTime.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2079,7 +2179,7 @@ static int __pyx_pf_14_wsgi_lineprof_8LastTime___cinit__(struct __pyx_obj_14_wsg
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "extensions/line_profiler.pyx":58
+  /* "extensions/line_profiler.pyx":62
  * 
  *     def __cinit__(self, int f_lineno, PY_LONG_LONG time):
  *         self.f_lineno = f_lineno             # <<<<<<<<<<<<<<
@@ -2088,7 +2188,7 @@ static int __pyx_pf_14_wsgi_lineprof_8LastTime___cinit__(struct __pyx_obj_14_wsg
  */
   __pyx_v_self->f_lineno = __pyx_v_f_lineno;
 
-  /* "extensions/line_profiler.pyx":59
+  /* "extensions/line_profiler.pyx":63
  *     def __cinit__(self, int f_lineno, PY_LONG_LONG time):
  *         self.f_lineno = f_lineno
  *         self.time = time             # <<<<<<<<<<<<<<
@@ -2097,7 +2197,7 @@ static int __pyx_pf_14_wsgi_lineprof_8LastTime___cinit__(struct __pyx_obj_14_wsg
  */
   __pyx_v_self->time = __pyx_v_time;
 
-  /* "extensions/line_profiler.pyx":57
+  /* "extensions/line_profiler.pyx":61
  *     cdef PY_LONG_LONG time
  * 
  *     def __cinit__(self, int f_lineno, PY_LONG_LONG time):             # <<<<<<<<<<<<<<
@@ -2111,7 +2211,7 @@ static int __pyx_pf_14_wsgi_lineprof_8LastTime___cinit__(struct __pyx_obj_14_wsg
   return __pyx_r;
 }
 
-/* "extensions/line_profiler.pyx":62
+/* "extensions/line_profiler.pyx":66
  * 
  * 
  * cdef int python_trace_callback(object self_, PyFrameObject *py_frame, int what,             # <<<<<<<<<<<<<<
@@ -2138,7 +2238,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
   PyObject *__pyx_t_6 = NULL;
   __Pyx_RefNannySetupContext("python_trace_callback", 0);
 
-  /* "extensions/line_profiler.pyx":73
+  /* "extensions/line_profiler.pyx":77
  *     cdef int lineno
  * 
  *     if what != PyTrace_LINE and what != PyTrace_RETURN:             # <<<<<<<<<<<<<<
@@ -2156,7 +2256,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "extensions/line_profiler.pyx":74
+    /* "extensions/line_profiler.pyx":78
  * 
  *     if what != PyTrace_LINE and what != PyTrace_RETURN:
  *         return 0             # <<<<<<<<<<<<<<
@@ -2166,7 +2266,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
     __pyx_r = 0;
     goto __pyx_L0;
 
-    /* "extensions/line_profiler.pyx":73
+    /* "extensions/line_profiler.pyx":77
  *     cdef int lineno
  * 
  *     if what != PyTrace_LINE and what != PyTrace_RETURN:             # <<<<<<<<<<<<<<
@@ -2175,7 +2275,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
  */
   }
 
-  /* "extensions/line_profiler.pyx":76
+  /* "extensions/line_profiler.pyx":80
  *         return 0
  * 
  *     time = hpTimer()             # <<<<<<<<<<<<<<
@@ -2184,7 +2284,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
  */
   __pyx_v_time = hpTimer();
 
-  /* "extensions/line_profiler.pyx":78
+  /* "extensions/line_profiler.pyx":82
  *     time = hpTimer()
  * 
  *     self = <LineProfiler>self_             # <<<<<<<<<<<<<<
@@ -2196,7 +2296,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
   __pyx_v_self = ((struct __pyx_obj_14_wsgi_lineprof_LineProfiler *)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "extensions/line_profiler.pyx":79
+  /* "extensions/line_profiler.pyx":83
  * 
  *     self = <LineProfiler>self_
  *     last_time = self.last_time             # <<<<<<<<<<<<<<
@@ -2208,7 +2308,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
   __pyx_v_last_time = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "extensions/line_profiler.pyx":80
+  /* "extensions/line_profiler.pyx":84
  *     self = <LineProfiler>self_
  *     last_time = self.last_time
  *     results = self.results             # <<<<<<<<<<<<<<
@@ -2220,7 +2320,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
   __pyx_v_results = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "extensions/line_profiler.pyx":81
+  /* "extensions/line_profiler.pyx":85
  *     last_time = self.last_time
  *     results = self.results
  *     code = <object>py_frame.f_code             # <<<<<<<<<<<<<<
@@ -2232,7 +2332,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
   __pyx_v_code = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "extensions/line_profiler.pyx":83
+  /* "extensions/line_profiler.pyx":87
  *     code = <object>py_frame.f_code
  * 
  *     if code not in results:             # <<<<<<<<<<<<<<
@@ -2241,29 +2341,29 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
  */
   if (unlikely(__pyx_v_results == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 83, __pyx_L1_error)
+    __PYX_ERR(0, 87, __pyx_L1_error)
   }
-  __pyx_t_1 = (__Pyx_PyDict_ContainsTF(__pyx_v_code, __pyx_v_results, Py_NE)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyDict_ContainsTF(__pyx_v_code, __pyx_v_results, Py_NE)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 87, __pyx_L1_error)
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "extensions/line_profiler.pyx":84
+    /* "extensions/line_profiler.pyx":88
  * 
  *     if code not in results:
  *         results[code] = {}             # <<<<<<<<<<<<<<
  * 
  *     if code in last_time:
  */
-    __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 84, __pyx_L1_error)
+    __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     if (unlikely(__pyx_v_results == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 84, __pyx_L1_error)
+      __PYX_ERR(0, 88, __pyx_L1_error)
     }
-    if (unlikely(PyDict_SetItem(__pyx_v_results, __pyx_v_code, __pyx_t_3) < 0)) __PYX_ERR(0, 84, __pyx_L1_error)
+    if (unlikely(PyDict_SetItem(__pyx_v_results, __pyx_v_code, __pyx_t_3) < 0)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "extensions/line_profiler.pyx":83
+    /* "extensions/line_profiler.pyx":87
  *     code = <object>py_frame.f_code
  * 
  *     if code not in results:             # <<<<<<<<<<<<<<
@@ -2272,7 +2372,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
  */
   }
 
-  /* "extensions/line_profiler.pyx":86
+  /* "extensions/line_profiler.pyx":90
  *         results[code] = {}
  * 
  *     if code in last_time:             # <<<<<<<<<<<<<<
@@ -2281,13 +2381,13 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
  */
   if (unlikely(__pyx_v_last_time == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 86, __pyx_L1_error)
+    __PYX_ERR(0, 90, __pyx_L1_error)
   }
-  __pyx_t_2 = (__Pyx_PyDict_ContainsTF(__pyx_v_code, __pyx_v_last_time, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PyDict_ContainsTF(__pyx_v_code, __pyx_v_last_time, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 90, __pyx_L1_error)
   __pyx_t_1 = (__pyx_t_2 != 0);
   if (__pyx_t_1) {
 
-    /* "extensions/line_profiler.pyx":87
+    /* "extensions/line_profiler.pyx":91
  * 
  *     if code in last_time:
  *         old = last_time[code]             # <<<<<<<<<<<<<<
@@ -2296,15 +2396,15 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
  */
     if (unlikely(__pyx_v_last_time == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 87, __pyx_L1_error)
+      __PYX_ERR(0, 91, __pyx_L1_error)
     }
-    __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_last_time, __pyx_v_code); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_last_time, __pyx_v_code); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 91, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_14_wsgi_lineprof_LastTime))))) __PYX_ERR(0, 87, __pyx_L1_error)
+    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_14_wsgi_lineprof_LastTime))))) __PYX_ERR(0, 91, __pyx_L1_error)
     __pyx_v_old = ((struct __pyx_obj_14_wsgi_lineprof_LastTime *)__pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "extensions/line_profiler.pyx":88
+    /* "extensions/line_profiler.pyx":92
  *     if code in last_time:
  *         old = last_time[code]
  *         lineno = old.f_lineno             # <<<<<<<<<<<<<<
@@ -2314,37 +2414,37 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
     __pyx_t_4 = __pyx_v_old->f_lineno;
     __pyx_v_lineno = __pyx_t_4;
 
-    /* "extensions/line_profiler.pyx":90
+    /* "extensions/line_profiler.pyx":94
  *         lineno = old.f_lineno
  * 
  *         if lineno not in results[code]:             # <<<<<<<<<<<<<<
  *             results[code][lineno] = entry = LineTiming(code, lineno)
  *         else:
  */
-    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_lineno); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 90, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_lineno); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 94, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     if (unlikely(__pyx_v_results == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 90, __pyx_L1_error)
+      __PYX_ERR(0, 94, __pyx_L1_error)
     }
-    __pyx_t_5 = __Pyx_PyDict_GetItem(__pyx_v_results, __pyx_v_code); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 90, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyDict_GetItem(__pyx_v_results, __pyx_v_code); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 94, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_1 = (__Pyx_PySequence_ContainsTF(__pyx_t_3, __pyx_t_5, Py_NE)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 90, __pyx_L1_error)
+    __pyx_t_1 = (__Pyx_PySequence_ContainsTF(__pyx_t_3, __pyx_t_5, Py_NE)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 94, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_2 = (__pyx_t_1 != 0);
     if (__pyx_t_2) {
 
-      /* "extensions/line_profiler.pyx":91
+      /* "extensions/line_profiler.pyx":95
  * 
  *         if lineno not in results[code]:
  *             results[code][lineno] = entry = LineTiming(code, lineno)             # <<<<<<<<<<<<<<
  *         else:
  *             entry = results[code][lineno]
  */
-      __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_lineno); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 91, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_lineno); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 95, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 91, __pyx_L1_error)
+      __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 95, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_INCREF(__pyx_v_code);
       __Pyx_GIVEREF(__pyx_v_code);
@@ -2352,22 +2452,22 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
       __Pyx_GIVEREF(__pyx_t_5);
       PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_5);
       __pyx_t_5 = 0;
-      __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_14_wsgi_lineprof_LineTiming), __pyx_t_3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 91, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_14_wsgi_lineprof_LineTiming), __pyx_t_3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 95, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       if (unlikely(__pyx_v_results == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 91, __pyx_L1_error)
+        __PYX_ERR(0, 95, __pyx_L1_error)
       }
-      __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_results, __pyx_v_code); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 91, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_results, __pyx_v_code); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 95, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      if (unlikely(__Pyx_SetItemInt(__pyx_t_3, __pyx_v_lineno, __pyx_t_5, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 91, __pyx_L1_error)
+      if (unlikely(__Pyx_SetItemInt(__pyx_t_3, __pyx_v_lineno, __pyx_t_5, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 95, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_INCREF(__pyx_t_5);
       __pyx_v_entry = ((struct __pyx_obj_14_wsgi_lineprof_LineTiming *)__pyx_t_5);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-      /* "extensions/line_profiler.pyx":90
+      /* "extensions/line_profiler.pyx":94
  *         lineno = old.f_lineno
  * 
  *         if lineno not in results[code]:             # <<<<<<<<<<<<<<
@@ -2377,7 +2477,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
       goto __pyx_L8;
     }
 
-    /* "extensions/line_profiler.pyx":93
+    /* "extensions/line_profiler.pyx":97
  *             results[code][lineno] = entry = LineTiming(code, lineno)
  *         else:
  *             entry = results[code][lineno]             # <<<<<<<<<<<<<<
@@ -2387,31 +2487,31 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
     /*else*/ {
       if (unlikely(__pyx_v_results == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 93, __pyx_L1_error)
+        __PYX_ERR(0, 97, __pyx_L1_error)
       }
-      __pyx_t_5 = __Pyx_PyDict_GetItem(__pyx_v_results, __pyx_v_code); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 93, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyDict_GetItem(__pyx_v_results, __pyx_v_code); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 97, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_5, __pyx_v_lineno, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 93, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_5, __pyx_v_lineno, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 97, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_14_wsgi_lineprof_LineTiming))))) __PYX_ERR(0, 93, __pyx_L1_error)
+      if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_14_wsgi_lineprof_LineTiming))))) __PYX_ERR(0, 97, __pyx_L1_error)
       __pyx_v_entry = ((struct __pyx_obj_14_wsgi_lineprof_LineTiming *)__pyx_t_3);
       __pyx_t_3 = 0;
     }
     __pyx_L8:;
 
-    /* "extensions/line_profiler.pyx":95
+    /* "extensions/line_profiler.pyx":99
  *             entry = results[code][lineno]
  * 
  *         entry.hit(time - old.time)             # <<<<<<<<<<<<<<
  * 
  *         if what == PyTrace_RETURN:
  */
-    __pyx_t_3 = ((struct __pyx_vtabstruct_14_wsgi_lineprof_LineTiming *)__pyx_v_entry->__pyx_vtab)->hit(__pyx_v_entry, (__pyx_v_time - __pyx_v_old->time)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 95, __pyx_L1_error)
+    __pyx_t_3 = ((struct __pyx_vtabstruct_14_wsgi_lineprof_LineTiming *)__pyx_v_entry->__pyx_vtab)->hit(__pyx_v_entry, (__pyx_v_time - __pyx_v_old->time)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 99, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "extensions/line_profiler.pyx":97
+    /* "extensions/line_profiler.pyx":101
  *         entry.hit(time - old.time)
  * 
  *         if what == PyTrace_RETURN:             # <<<<<<<<<<<<<<
@@ -2421,7 +2521,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
     __pyx_t_2 = ((__pyx_v_what == PyTrace_RETURN) != 0);
     if (__pyx_t_2) {
 
-      /* "extensions/line_profiler.pyx":98
+      /* "extensions/line_profiler.pyx":102
  * 
  *         if what == PyTrace_RETURN:
  *             del last_time[code]             # <<<<<<<<<<<<<<
@@ -2430,11 +2530,11 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
  */
       if (unlikely(__pyx_v_last_time == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 98, __pyx_L1_error)
+        __PYX_ERR(0, 102, __pyx_L1_error)
       }
-      if (unlikely(PyDict_DelItem(__pyx_v_last_time, __pyx_v_code) < 0)) __PYX_ERR(0, 98, __pyx_L1_error)
+      if (unlikely(PyDict_DelItem(__pyx_v_last_time, __pyx_v_code) < 0)) __PYX_ERR(0, 102, __pyx_L1_error)
 
-      /* "extensions/line_profiler.pyx":97
+      /* "extensions/line_profiler.pyx":101
  *         entry.hit(time - old.time)
  * 
  *         if what == PyTrace_RETURN:             # <<<<<<<<<<<<<<
@@ -2443,7 +2543,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
  */
     }
 
-    /* "extensions/line_profiler.pyx":86
+    /* "extensions/line_profiler.pyx":90
  *         results[code] = {}
  * 
  *     if code in last_time:             # <<<<<<<<<<<<<<
@@ -2452,7 +2552,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
  */
   }
 
-  /* "extensions/line_profiler.pyx":100
+  /* "extensions/line_profiler.pyx":104
  *             del last_time[code]
  * 
  *     if what == PyTrace_LINE:             # <<<<<<<<<<<<<<
@@ -2462,18 +2562,18 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
   __pyx_t_2 = ((__pyx_v_what == PyTrace_LINE) != 0);
   if (__pyx_t_2) {
 
-    /* "extensions/line_profiler.pyx":101
+    /* "extensions/line_profiler.pyx":105
  * 
  *     if what == PyTrace_LINE:
  *         last_time[code] = LastTime(py_frame.f_lineno, hpTimer())             # <<<<<<<<<<<<<<
  * 
  *     return 0
  */
-    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_py_frame->f_lineno); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 101, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_py_frame->f_lineno); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 105, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_5 = __Pyx_PyInt_From_PY_LONG_LONG(hpTimer()); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 101, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyInt_From_PY_LONG_LONG(hpTimer()); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 101, __pyx_L1_error)
+    __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 105, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_GIVEREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_3);
@@ -2481,17 +2581,17 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
     PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_5);
     __pyx_t_3 = 0;
     __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_14_wsgi_lineprof_LastTime), __pyx_t_6, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 101, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_14_wsgi_lineprof_LastTime), __pyx_t_6, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     if (unlikely(__pyx_v_last_time == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 101, __pyx_L1_error)
+      __PYX_ERR(0, 105, __pyx_L1_error)
     }
-    if (unlikely(PyDict_SetItem(__pyx_v_last_time, __pyx_v_code, __pyx_t_5) < 0)) __PYX_ERR(0, 101, __pyx_L1_error)
+    if (unlikely(PyDict_SetItem(__pyx_v_last_time, __pyx_v_code, __pyx_t_5) < 0)) __PYX_ERR(0, 105, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "extensions/line_profiler.pyx":100
+    /* "extensions/line_profiler.pyx":104
  *             del last_time[code]
  * 
  *     if what == PyTrace_LINE:             # <<<<<<<<<<<<<<
@@ -2500,7 +2600,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
  */
   }
 
-  /* "extensions/line_profiler.pyx":103
+  /* "extensions/line_profiler.pyx":107
  *         last_time[code] = LastTime(py_frame.f_lineno, hpTimer())
  * 
  *     return 0             # <<<<<<<<<<<<<<
@@ -2508,7 +2608,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
   __pyx_r = 0;
   goto __pyx_L0;
 
-  /* "extensions/line_profiler.pyx":62
+  /* "extensions/line_profiler.pyx":66
  * 
  * 
  * cdef int python_trace_callback(object self_, PyFrameObject *py_frame, int what,             # <<<<<<<<<<<<<<
@@ -2615,6 +2715,7 @@ static int __pyx_setprop_14_wsgi_lineprof_12LineProfiler_last_time(PyObject *o, 
 static PyMethodDef __pyx_methods_14_wsgi_lineprof_LineProfiler[] = {
   {"enable", (PyCFunction)__pyx_pw_14_wsgi_lineprof_12LineProfiler_3enable, METH_NOARGS, 0},
   {"disable", (PyCFunction)__pyx_pw_14_wsgi_lineprof_12LineProfiler_5disable, METH_NOARGS, 0},
+  {"get_unit", (PyCFunction)__pyx_pw_14_wsgi_lineprof_12LineProfiler_7get_unit, METH_VARARGS|METH_KEYWORDS, 0},
   {0, 0, 0, 0}
 };
 
@@ -2963,24 +3064,43 @@ static struct PyModuleDef __pyx_moduledef = {
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_LineTiming_for_r_lineno_r_n_hit, __pyx_k_LineTiming_for_r_lineno_r_n_hit, sizeof(__pyx_k_LineTiming_for_r_lineno_r_n_hit), 0, 0, 1, 0},
+  {&__pyx_kp_s_Users_yusuke_Development_wsgi_l, __pyx_k_Users_yusuke_Development_wsgi_l, sizeof(__pyx_k_Users_yusuke_Development_wsgi_l), 0, 0, 1, 0},
   {&__pyx_n_s_code, __pyx_k_code, sizeof(__pyx_k_code), 0, 0, 1, 1},
   {&__pyx_n_s_f_lineno, __pyx_k_f_lineno, sizeof(__pyx_k_f_lineno), 0, 0, 1, 1},
+  {&__pyx_n_s_get_unit, __pyx_k_get_unit, sizeof(__pyx_k_get_unit), 0, 0, 1, 1},
   {&__pyx_n_s_lineno, __pyx_k_lineno, sizeof(__pyx_k_lineno), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_vtable, __pyx_k_pyx_vtable, sizeof(__pyx_k_pyx_vtable), 0, 0, 1, 1},
+  {&__pyx_n_s_staticmethod, __pyx_k_staticmethod, sizeof(__pyx_k_staticmethod), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_n_s_time, __pyx_k_time, sizeof(__pyx_k_time), 0, 0, 1, 1},
+  {&__pyx_n_s_wsgi_lineprof, __pyx_k_wsgi_lineprof, sizeof(__pyx_k_wsgi_lineprof), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
+  __pyx_builtin_staticmethod = __Pyx_GetBuiltinName(__pyx_n_s_staticmethod); if (!__pyx_builtin_staticmethod) __PYX_ERR(0, 28, __pyx_L1_error)
   return 0;
+  __pyx_L1_error:;
+  return -1;
 }
 
 static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
+
+  /* "extensions/line_profiler.pyx":29
+ * 
+ *     @staticmethod
+ *     def get_unit():             # <<<<<<<<<<<<<<
+ *         return hpTimerUnit()
+ * 
+ */
+  __pyx_codeobj_ = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Users_yusuke_Development_wsgi_l, __pyx_n_s_get_unit, 29, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj_)) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
+  __pyx_L1_error:;
+  __Pyx_RefNannyFinishContext();
+  return -1;
 }
 
 static int __Pyx_InitGlobals(void) {
@@ -2999,6 +3119,7 @@ PyMODINIT_FUNC PyInit__wsgi_lineprof(void)
 #endif
 {
   PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannyDeclarations
   #if CYTHON_REFNANNY
   __Pyx_RefNanny = __Pyx_RefNannyImportAPI("refnanny");
@@ -3080,14 +3201,14 @@ PyMODINIT_FUNC PyInit__wsgi_lineprof(void)
   __pyx_ptype_14_wsgi_lineprof_LineProfiler = &__pyx_type_14_wsgi_lineprof_LineProfiler;
   __pyx_vtabptr_14_wsgi_lineprof_LineTiming = &__pyx_vtable_14_wsgi_lineprof_LineTiming;
   __pyx_vtable_14_wsgi_lineprof_LineTiming.hit = (PyObject *(*)(struct __pyx_obj_14_wsgi_lineprof_LineTiming *, PY_LONG_LONG))__pyx_f_14_wsgi_lineprof_10LineTiming_hit;
-  if (PyType_Ready(&__pyx_type_14_wsgi_lineprof_LineTiming) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_14_wsgi_lineprof_LineTiming) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
   __pyx_type_14_wsgi_lineprof_LineTiming.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_14_wsgi_lineprof_LineTiming.tp_dict, __pyx_vtabptr_14_wsgi_lineprof_LineTiming) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
-  if (PyObject_SetAttrString(__pyx_m, "LineTiming", (PyObject *)&__pyx_type_14_wsgi_lineprof_LineTiming) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_14_wsgi_lineprof_LineTiming.tp_dict, __pyx_vtabptr_14_wsgi_lineprof_LineTiming) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "LineTiming", (PyObject *)&__pyx_type_14_wsgi_lineprof_LineTiming) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
   __pyx_ptype_14_wsgi_lineprof_LineTiming = &__pyx_type_14_wsgi_lineprof_LineTiming;
-  if (PyType_Ready(&__pyx_type_14_wsgi_lineprof_LastTime) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_14_wsgi_lineprof_LastTime) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
   __pyx_type_14_wsgi_lineprof_LastTime.tp_print = 0;
-  if (PyObject_SetAttrString(__pyx_m, "LastTime", (PyObject *)&__pyx_type_14_wsgi_lineprof_LastTime) < 0) __PYX_ERR(0, 53, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "LastTime", (PyObject *)&__pyx_type_14_wsgi_lineprof_LastTime) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
   __pyx_ptype_14_wsgi_lineprof_LastTime = &__pyx_type_14_wsgi_lineprof_LastTime;
   /*--- Type import code ---*/
   __pyx_ptype_7cpython_4type_type = __Pyx_ImportType(__Pyx_BUILTIN_MODULE_NAME, "type", 
@@ -3106,6 +3227,64 @@ PyMODINIT_FUNC PyInit__wsgi_lineprof(void)
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
+  /* "extensions/line_profiler.pyx":29
+ * 
+ *     @staticmethod
+ *     def get_unit():             # <<<<<<<<<<<<<<
+ *         return hpTimerUnit()
+ * 
+ */
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_14_wsgi_lineprof_12LineProfiler_7get_unit, NULL, __pyx_n_s_wsgi_lineprof); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+
+  /* "extensions/line_profiler.pyx":28
+ *         PyEval_SetTrace(NULL, <object>NULL)
+ * 
+ *     @staticmethod             # <<<<<<<<<<<<<<
+ *     def get_unit():
+ *         return hpTimerUnit()
+ */
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 28, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
+  __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_staticmethod, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 28, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_14_wsgi_lineprof_LineProfiler->tp_dict, __pyx_n_s_get_unit, __pyx_t_1) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  PyType_Modified(__pyx_ptype_14_wsgi_lineprof_LineProfiler);
+
+  /* "extensions/line_profiler.pyx":29
+ * 
+ *     @staticmethod
+ *     def get_unit():             # <<<<<<<<<<<<<<
+ *         return hpTimerUnit()
+ * 
+ */
+  __pyx_t_1 = __Pyx_GetNameInClass((PyObject *)__pyx_ptype_14_wsgi_lineprof_LineProfiler, __pyx_n_s_get_unit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+
+  /* "extensions/line_profiler.pyx":28
+ *         PyEval_SetTrace(NULL, <object>NULL)
+ * 
+ *     @staticmethod             # <<<<<<<<<<<<<<
+ *     def get_unit():
+ *         return hpTimerUnit()
+ */
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 28, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
+  __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_staticmethod, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 28, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_14_wsgi_lineprof_LineProfiler->tp_dict, __pyx_n_s_get_unit, __pyx_t_1) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  PyType_Modified(__pyx_ptype_14_wsgi_lineprof_LineProfiler);
+
   /* "extensions/line_profiler.pyx":1
  * from cpython cimport PyObject             # <<<<<<<<<<<<<<
  * 
@@ -3121,6 +3300,7 @@ PyMODINIT_FUNC PyInit__wsgi_lineprof(void)
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
   if (__pyx_m) {
     if (__pyx_d) {
       __Pyx_AddTraceback("init _wsgi_lineprof", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -3155,6 +3335,20 @@ end:
     return (__Pyx_RefNannyAPIStruct *)r;
 }
 #endif
+
+/* GetBuiltinName */
+static PyObject *__Pyx_GetBuiltinName(PyObject *name) {
+    PyObject* result = __Pyx_PyObject_GetAttrStr(__pyx_b, name);
+    if (unlikely(!result)) {
+        PyErr_Format(PyExc_NameError,
+#if PY_MAJOR_VERSION >= 3
+            "name '%U' is not defined", name);
+#else
+            "name '%.200s' is not defined", PyString_AS_STRING(name));
+#endif
+    }
+    return result;
+}
 
 /* RaiseArgTupleInvalid */
 static void __Pyx_RaiseArgtupleInvalid(
@@ -3584,8 +3778,35 @@ bad:
     return -1;
 }
 
+/* GetModuleGlobalName */
+  static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name) {
+    PyObject *result;
+#if CYTHON_COMPILING_IN_CPYTHON
+    result = PyDict_GetItem(__pyx_d, name);
+    if (likely(result)) {
+        Py_INCREF(result);
+    } else {
+#else
+    result = PyObject_GetItem(__pyx_d, name);
+    if (!result) {
+        PyErr_Clear();
+#endif
+        result = __Pyx_GetBuiltinName(name);
+    }
+    return result;
+}
+
+/* GetNameInClass */
+    static PyObject *__Pyx_GetNameInClass(PyObject *nmspace, PyObject *name) {
+    PyObject *result;
+    result = __Pyx_PyObject_GetAttrStr(nmspace, name);
+    if (!result)
+        result = __Pyx_GetModuleGlobalName(name);
+    return result;
+}
+
 /* CodeObjectCache */
-  static int __pyx_bisect_code_objects(__Pyx_CodeObjectCacheEntry* entries, int count, int code_line) {
+    static int __pyx_bisect_code_objects(__Pyx_CodeObjectCacheEntry* entries, int count, int code_line) {
     int start = 0, mid = 0, end = count - 1;
     if (end >= 0 && code_line > entries[end].code_line) {
         return count;
@@ -3665,7 +3886,7 @@ static void __pyx_insert_code_object(int code_line, PyCodeObject* code_object) {
 }
 
 /* AddTraceback */
-  #include "compile.h"
+    #include "compile.h"
 #include "frameobject.h"
 #include "traceback.h"
 static PyCodeObject* __Pyx_CreateCodeObjectForTraceback(
@@ -3746,7 +3967,7 @@ bad:
 }
 
 /* CIntFromPyVerify */
-  #define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
+    #define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
     __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 0)
 #define __PYX_VERIFY_RETURN_INT_EXC(target_type, func_type, func_value)\
     __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 1)
@@ -3768,7 +3989,7 @@ bad:
     }
 
 /* CIntToPy */
-  static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
+    static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
     const int neg_one = (int) -1, const_zero = (int) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
@@ -3795,7 +4016,7 @@ bad:
 }
 
 /* CIntToPy */
-  static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
+    static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
     const long neg_one = (long) -1, const_zero = (long) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
@@ -3822,7 +4043,7 @@ bad:
 }
 
 /* CIntToPy */
-  static CYTHON_INLINE PyObject* __Pyx_PyInt_From_PY_LONG_LONG(PY_LONG_LONG value) {
+    static CYTHON_INLINE PyObject* __Pyx_PyInt_From_PY_LONG_LONG(PY_LONG_LONG value) {
     const PY_LONG_LONG neg_one = (PY_LONG_LONG) -1, const_zero = (PY_LONG_LONG) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
@@ -3849,7 +4070,7 @@ bad:
 }
 
 /* CIntFromPy */
-  static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
+    static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
     const int neg_one = (int) -1, const_zero = (int) 0;
     const int is_unsigned = neg_one > const_zero;
 #if PY_MAJOR_VERSION < 3
@@ -4034,7 +4255,7 @@ raise_neg_overflow:
 }
 
 /* CIntFromPy */
-  static CYTHON_INLINE PY_LONG_LONG __Pyx_PyInt_As_PY_LONG_LONG(PyObject *x) {
+    static CYTHON_INLINE PY_LONG_LONG __Pyx_PyInt_As_PY_LONG_LONG(PyObject *x) {
     const PY_LONG_LONG neg_one = (PY_LONG_LONG) -1, const_zero = (PY_LONG_LONG) 0;
     const int is_unsigned = neg_one > const_zero;
 #if PY_MAJOR_VERSION < 3
@@ -4219,7 +4440,7 @@ raise_neg_overflow:
 }
 
 /* CIntFromPy */
-  static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
+    static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
     const long neg_one = (long) -1, const_zero = (long) 0;
     const int is_unsigned = neg_one > const_zero;
 #if PY_MAJOR_VERSION < 3
@@ -4404,7 +4625,7 @@ raise_neg_overflow:
 }
 
 /* CheckBinaryVersion */
-  static int __Pyx_check_binary_version(void) {
+    static int __Pyx_check_binary_version(void) {
     char ctversion[4], rtversion[4];
     PyOS_snprintf(ctversion, 4, "%d.%d", PY_MAJOR_VERSION, PY_MINOR_VERSION);
     PyOS_snprintf(rtversion, 4, "%s", Py_GetVersion());
@@ -4420,7 +4641,7 @@ raise_neg_overflow:
 }
 
 /* ModuleImport */
-  #ifndef __PYX_HAVE_RT_ImportModule
+    #ifndef __PYX_HAVE_RT_ImportModule
 #define __PYX_HAVE_RT_ImportModule
 static PyObject *__Pyx_ImportModule(const char *name) {
     PyObject *py_name = 0;
@@ -4438,7 +4659,7 @@ bad:
 #endif
 
 /* TypeImport */
-  #ifndef __PYX_HAVE_RT_ImportType
+    #ifndef __PYX_HAVE_RT_ImportType
 #define __PYX_HAVE_RT_ImportType
 static PyTypeObject *__Pyx_ImportType(const char *module_name, const char *class_name,
     size_t size, int strict)
@@ -4503,7 +4724,7 @@ bad:
 #endif
 
 /* InitStrings */
-  static int __Pyx_InitStrings(__Pyx_StringTabEntry *t) {
+    static int __Pyx_InitStrings(__Pyx_StringTabEntry *t) {
     while (t->p) {
         #if PY_MAJOR_VERSION < 3
         if (t->is_unicode) {
