@@ -24,33 +24,35 @@ except ImportError:
     warn("Could not import Cython, using generated C source code instead")
 
 setup(
-    name="wsgi-lineprof",
+    name="wsgi_lineprof",
 
     version="0.1.0",
 
     description="WSGI middleware for line-by-line profiling",
     long_description=long_description,
 
-    url="https://github.com/pypa/sampleproject",
+    url="https://github.com/ymyzk/wsgi-lineprof",
 
-    author="https://github.com/ymyzk/wsgi-lineprof",
+    author="Yusuke Miyazaki",
     author_email="miyazaki.dev@gmail.com",
 
     license="MIT",
 
-    # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
-    # classifiers=[
-    #     "Development Status :: 3 - Alpha",
-    #     "Intended Audience :: Developers",
-    #     "License :: OSI Approved :: MIT License",
-    #     # that you indicate whether you support Python 2, Python 3 or both.
-    #     "Programming Language :: Python :: 2",
-    #     "Programming Language :: Python :: 2.7",
-    #     "Programming Language :: Python :: 3",
-    #     "Programming Language :: Python :: 3.3",
-    #     "Programming Language :: Python :: 3.4",
-    #     "Programming Language :: Python :: 3.5",
-    # ],
+    classifiers=[
+        "Development Status :: 2 - Pre-Alpha",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+        "Programming Language :: C",
+        "Programming Language :: Cython",
+        "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.3",
+        "Programming Language :: Python :: 3.4",
+        "Programming Language :: Python :: 3.5",
+        "Topic :: Software Development",
+    ],
 
     # What does your project relate to?
     # keywords="sample setuptools development",
@@ -64,21 +66,11 @@ setup(
                   sources=[source, "extensions/timer.c"])
     ],
 
-    # List run-time dependencies here.  These will be installed by pip when
-    # your project is installed. For an analysis of "install_requires" vs pip"s
-    # requirements files see:
-    # https://packaging.python.org/en/latest/requirements.html
-    # install_requires=["peppercorn"],
-
-    # List additional groups of dependencies here (e.g. development
-    # dependencies). You can install these using the following syntax,
-    # for example:
-    # $ pip install -e .[dev,test]
     extras_require={
         "build": ["Cython>=0.24"],
         "test": [
             "pytest>=3.0.0,<4.0.0",
-            "tox>=2.0.0,<3.0.0"
+            "tox>=2.0.0,<3.0.0",
         ]
     },
 )
