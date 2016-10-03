@@ -3,6 +3,9 @@ wsgi_lineprof
 .. image:: https://badge.fury.io/py/wsgi-lineprof.svg
    :target: https://pypi.python.org/pypi/wsgi-lineprof/
    :alt: PyPI version
+.. image:: https://travis-ci.org/ymyzk/wsgi_lineprof.svg?branch=master
+   :target: https://travis-ci.org/ymyzk/wsgi_lineprof
+   :alt: Build Status
 
 **wsgi_lineprof** is a WSGI middleware for line-by-line profiling.
 
