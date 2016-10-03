@@ -26,12 +26,12 @@ except ImportError:
 setup(
     name="wsgi_lineprof",
 
-    version="0.1.0",
+    version="0.1.1",
 
     description="WSGI middleware for line-by-line profiling",
     long_description=long_description,
 
-    url="https://github.com/ymyzk/wsgi-lineprof",
+    url="https://github.com/ymyzk/wsgi_lineprof",
 
     author="Yusuke Miyazaki",
     author_email="miyazaki.dev@gmail.com",
