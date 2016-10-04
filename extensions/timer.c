@@ -1,5 +1,12 @@
 #include "Python.h"
 
+/*
+ * This code is derived from Modules/_lsprof.c in CPython,
+ * and modified for this library.
+ *
+ * The original code is licensed under Python Software Foundation License.
+ */
+
 /*** Selection of a high-precision timer ***/
 
 #ifdef MS_WINDOWS
