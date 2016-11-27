@@ -3,6 +3,8 @@ import itertools
 import linecache
 from os import path
 
+from six.moves import filter
+
 from _wsgi_lineprof import LineProfiler as _LineProfiler
 
 
@@ -65,3 +67,6 @@ class LineProfilerStats(object):
         stream.write("Time unit: %s [sec]\n\n" % _LineProfiler.get_unit())
         for stat in self.stats:
             stat.write_text(stream)
+
+    def filter(self, f):
+        return LineProfilerStats(filter(f.filter_function(), self.stats))

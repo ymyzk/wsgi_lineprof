@@ -66,6 +66,10 @@ setup(
                   sources=[source, "extensions/timer.c"])
     ],
 
+    install_requires=[
+        "six>=1.10.0",
+    ],
+
     extras_require={
         "build": ["Cython>=0.24,<0.25"],
         "test": [
