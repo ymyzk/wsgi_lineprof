@@ -11,7 +11,7 @@ with open(path.join(root, "README.rst"), encoding="utf-8") as f:
     long_description = f.read()
 
 cmdclass = {}
-source = "extensions/line_profiler."
+source = "extensions/_wsgi_lineprof."
 
 try:
     from Cython.Distutils import build_ext
