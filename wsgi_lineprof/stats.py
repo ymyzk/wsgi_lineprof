@@ -3,8 +3,6 @@ import itertools
 import linecache
 from os import path
 
-from six.moves import filter
-
 from _wsgi_lineprof import LineProfiler as _LineProfiler
 
 
@@ -14,6 +12,8 @@ class LineProfilerStat(object):
         self.name = name
         self.firstlineno = firstlineno
         self.timings = timings
+        self.total_time = sum(t.total_time for t in timings.values())
+        self.total_time *= _LineProfiler.get_unit()
 
     def write_text(self, stream):
         if not path.exists(self.filename):
@@ -21,10 +21,7 @@ class LineProfilerStat(object):
             return
         stream.write("File: %s\n" % self.filename)
         stream.write("Name: %s\n" % self.name)
-
-        total_time = sum(t.total_time for t in self.timings.values())
-        total_time *= _LineProfiler.get_unit()
-        stream.write("Total time: %g [sec]\n" % total_time)
+        stream.write("Total time: %g [sec]\n" % self.total_time)
 
         linecache.clearcache()
         lines = linecache.getlines(self.filename)
@@ -69,4 +66,4 @@ class LineProfilerStats(object):
             stat.write_text(stream)
 
     def filter(self, f):
-        return LineProfilerStats(filter(f.filter_function(), self.stats))
+        return LineProfilerStats(f.filter(self.stats))
