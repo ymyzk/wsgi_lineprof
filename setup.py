@@ -67,7 +67,7 @@ setup(
     ],
 
     extras_require={
-        "build": ["Cython>=0.24"],
+        "build": ["Cython>=0.24,<0.25"],
         "test": [
             "flake8>=3.0.0,<4.0.0",
             "pytest>=3.0.0,<4.0.0",
