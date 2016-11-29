@@ -71,6 +71,7 @@ setup(
     ],
 
     extras_require={
+        ":python_version < '3.5'": ["typing"],
         "build": ["Cython>=0.24,<0.25"],
         "test": [
             "flake8>=3.0.0,<4.0.0",
