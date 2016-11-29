@@ -2,8 +2,10 @@ import inspect
 import itertools
 import linecache
 from os import path
+from typing import Iterable, TextIO  # noqa: F401
 
 from _wsgi_lineprof import LineProfiler as _LineProfiler
+from wsgi_lineprof.filters import BaseFilter  # noqa: F401
 
 
 class LineProfilerStat(object):
@@ -58,12 +60,15 @@ class LineProfilerStat(object):
 
 class LineProfilerStats(object):
     def __init__(self, stats):
+        # type: (Iterable[LineProfilerStat]) -> None
         self.stats = stats
 
     def write_text(self, stream):
+        # type: (TextIO) -> None
         stream.write("Time unit: %s [sec]\n\n" % _LineProfiler.get_unit())
         for stat in self.stats:
             stat.write_text(stream)
 
     def filter(self, f):
+        # type: (BaseFilter) -> LineProfilerStats
         return LineProfilerStats(f.filter(self.stats))

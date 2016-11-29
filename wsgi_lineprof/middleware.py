@@ -1,9 +1,16 @@
 import sys
+from typing import Callable, Iterable, TextIO  # noqa: F401
+
+from wsgi_lineprof.filters import BaseFilter  # noqa: F401
 from wsgi_lineprof.profiler import LineProfiler
 
 
 class LineProfilerMiddleware(object):
-    def __init__(self, app, stream=None, filters=tuple()):
+    def __init__(self,
+                 app,  # type: Callable
+                 stream=None,  # type: TextIO
+                 filters=tuple()  # type: Iterable[BaseFilter]
+                 ):
         self.app = app
         self.stream = sys.stdout if stream is None else stream
         self.filters = filters
