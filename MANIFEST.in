@@ -1,3 +1,4 @@
+include extensions/_wsgi_lineprof.c
+include extensions/_wsgi_lineprof.pyx
 include extensions/header.pxd
-include extensions/line_profiler.c
 include extensions/timer.h

@@ -10,14 +10,14 @@ root = path.abspath(path.dirname(__file__))
 with open(path.join(root, "README.rst"), encoding="utf-8") as f:
     long_description = f.read()
 
-cmdclass = {}
 source = "extensions/_wsgi_lineprof."
 
 try:
-    from Cython.Distutils import build_ext
-    cmdclass["build_ext"] = build_ext
+    from Cython.Build import cythonize
     source += "pyx"
 except ImportError:
+    def cythonize(extensions):
+        return extensions
     source += "c"
     if not path.exists(path.join(root, source)):
         raise Exception("No Cython installation, no generated C file")
@@ -62,10 +62,10 @@ setup(
     # simple. Or you can use find_packages().
     packages=find_packages(exclude=["contrib", "docs", "tests"]),
 
-    ext_modules=[
+    ext_modules=cythonize([
         Extension("_wsgi_lineprof",
                   sources=[source, "extensions/timer.c"])
-    ],
+    ]),
 
     install_requires=[
         "six>=1.10.0",
@@ -73,7 +73,7 @@ setup(
 
     extras_require={
         ":python_version < '3.5'": ["typing"],
-        "build": ["Cython>=0.24,<0.25"],
+        "build": ["Cython>=0.25,<0.26"],
         "test": [
             "flake8>=3.0.0,<4.0.0",
             "pytest>=3.0.0,<4.0.0",
