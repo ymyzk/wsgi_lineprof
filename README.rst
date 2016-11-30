@@ -10,7 +10,7 @@ wsgi_lineprof
 **wsgi_lineprof** is a WSGI middleware for line-by-line profiling.
 
 Please note that this project is under development,
-so you may see many API imcompatible changes.
+so you may see many API incompatible changes.
 
 At a Glance
 -----------
