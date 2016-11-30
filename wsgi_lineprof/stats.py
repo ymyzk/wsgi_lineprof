@@ -2,10 +2,10 @@ import inspect
 import itertools
 import linecache
 from os import path
-from typing import Iterable, TextIO  # noqa: F401
+from typing import Callable, Iterable, TextIO, Union  # noqa: F401
 
 from _wsgi_lineprof import LineProfiler as _LineProfiler
-from wsgi_lineprof.filters import BaseFilter  # noqa: F401
+from wsgi_lineprof.filters import BaseFilter
 
 
 class LineProfilerStat(object):
@@ -58,6 +58,11 @@ class LineProfilerStat(object):
         stream.write("\n")
 
 
+CallableFilterType = Callable[[Iterable[LineProfilerStat]],
+                              Iterable[LineProfilerStat]]
+FilterType = Union[CallableFilterType, BaseFilter]
+
+
 class LineProfilerStats(object):
     def __init__(self, stats):
         # type: (Iterable[LineProfilerStat]) -> None
@@ -70,5 +75,8 @@ class LineProfilerStats(object):
             stat.write_text(stream)
 
     def filter(self, f):
-        # type: (BaseFilter) -> LineProfilerStats
-        return LineProfilerStats(f.filter(self.stats))
+        # type: (FilterType) -> LineProfilerStats
+        if isinstance(f, BaseFilter):
+            return LineProfilerStats(f.filter(self.stats))
+        else:
+            return LineProfilerStats(f(self.stats))
