@@ -1,5 +1,6 @@
+from io import TextIOWrapper  # noqa: F401
 import sys
-from typing import Callable, Iterable, TextIO  # noqa: F401
+from typing import Callable, Iterable, TextIO, Union  # noqa: F401
 
 from wsgi_lineprof.profiler import LineProfiler
 from wsgi_lineprof.stats import FilterType  # noqa: F401
@@ -8,7 +9,7 @@ from wsgi_lineprof.stats import FilterType  # noqa: F401
 class LineProfilerMiddleware(object):
     def __init__(self,
                  app,  # type: Callable
-                 stream=None,  # type: TextIO
+                 stream=None,  # type: Union[TextIO, TextIOWrapper]
                  filters=tuple()  # type: Iterable[FilterType]
                  ):
         self.app = app

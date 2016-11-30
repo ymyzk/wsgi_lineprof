@@ -1,4 +1,5 @@
 import inspect
+from io import TextIOWrapper  # noqa: F401
 import itertools
 import linecache
 from os import path
@@ -69,7 +70,7 @@ class LineProfilerStats(object):
         self.stats = stats
 
     def write_text(self, stream):
-        # type: (TextIO) -> None
+        # type: (Union[TextIO, TextIOWrapper]) -> None
         stream.write("Time unit: %s [sec]\n\n" % _LineProfiler.get_unit())
         for stat in self.stats:
             stat.write_text(stream)

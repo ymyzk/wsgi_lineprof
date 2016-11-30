@@ -9,8 +9,14 @@ wsgi_lineprof
 
 **wsgi_lineprof** is a WSGI middleware for line-by-line profiling.
 
-Please note that this project is under development,
-so you may see many API incompatible changes.
+wsgi_lineprof shows results of line-by-line profiling per request.
+You can use this project with many WSGI-compatible applications and frameworks:
+
+* Django
+* Pyramid
+* Flask
+* Bottle
+* etc...
 
 At a Glance
 -----------
@@ -44,7 +50,7 @@ Example usage with Bottle:
 
 Run the above script to start web server, then access http://127.0.0.1:8080.
 
-The results are outputted to stdout after each requests by default.
+The results are outputted to stdout by default.
 You can see the results like this:
 
 ::
@@ -160,6 +166,8 @@ For example, you can output logs to ``lineprof.log``.
 
 Links
 -----
+* `GitHub: ymyzk/wsgi_lineprof <https://github.com/ymyzk/wsgi_lineprof>`_
+
 Special Thanks
 ^^^^^^^^^^^^^^
 This project is inspired by the following projects:
