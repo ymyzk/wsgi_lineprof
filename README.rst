@@ -153,6 +153,8 @@ You can see results in stdout.
 
     127.0.0.1 - - [30/Nov/2016 17:21:12] "GET / HTTP/1.1" 200 21
 
+There are some useful filters in ``wsgi_lineprof.filters``.
+
 Stream
 ------
 By using ``stream`` option, you can output results to a file.
@@ -167,6 +169,7 @@ For example, you can output logs to ``lineprof.log``.
 Links
 -----
 * `GitHub: ymyzk/wsgi_lineprof <https://github.com/ymyzk/wsgi_lineprof>`_
+* `WSGI ミドルウェアとして使えるラインプロファイラを作った話 – ymyzk’s blog <https://blog.ymyzk.com/2016/12/line-profiler-as-a-wsgi-middleware/>`_
 
 Special Thanks
 ^^^^^^^^^^^^^^
@@ -174,3 +177,7 @@ This project is inspired by the following projects:
 
 * `rkern/line_profiler <https://github.com/rkern/line_profiler>`_
 * `kainosnoema/rack-lineprof <https://github.com/kainosnoema/rack-lineprof>`_
+
+wsgi_lineprof is integrated with the following projects:
+
+* `kobinpy/wsgicli <https://github.com/kobinpy/wsgicli>`_
