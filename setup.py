@@ -74,10 +74,11 @@ setup(
     extras_require={
         ":python_version < '3.5'": ["typing"],
         "build": ["Cython>=0.25,<0.26"],
+        "docs": ["Sphinx>=1.4,<1.5"],
         "test": [
             "flake8>=3.0.0,<4.0.0",
             "pytest>=3.0.0,<4.0.0",
-            "tox>=2.0.0,<3.0.0",
+            "tox>=2.5.0,<3.0.0",
         ],
         "test:python_version>='3.0'": [
             "mypy-lang>=0.4.0,<0.5.0",
