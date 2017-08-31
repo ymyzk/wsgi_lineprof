@@ -12,6 +12,7 @@ class LineProfilerMiddleware(object):
                  stream=None,  # type: Union[TextIO, TextIOWrapper]
                  filters=tuple()  # type: Iterable[FilterType]
                  ):
+        # type: (...) -> None
         self.app = app
         self.stream = sys.stdout if stream is None else stream
         self.filters = filters
