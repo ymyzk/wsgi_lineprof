@@ -33,7 +33,6 @@ filters = [
 ]
 app = LineProfilerMiddleware(app, filters=filters)
 
-
-with make_server('127.0.0.1', 8000, app) as httpd:
-    print("Serving on 127.0.0.1:8000...")
-    httpd.serve_forever()
+server = make_server('127.0.0.1', 8000, app)
+print("Serving on 127.0.0.1:8000...")
+server.serve_forever()
