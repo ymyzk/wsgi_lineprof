@@ -160,6 +160,7 @@ Stream
 By using ``stream`` option, you can output results to a file.
 For example, you can output logs to ``lineprof.log``.
 
+FIXME & add very simple example
 .. code-block:: python
 
     f = open("lineprof.log", "w")
@@ -173,10 +174,13 @@ Links
 
 Special Thanks
 ^^^^^^^^^^^^^^
+This project uses code from the following projects:
+
+* `kainosnoema/rack-lineprof <https://github.com/kainosnoema/rack-lineprof>`_
+
 This project is inspired by the following projects:
 
 * `rkern/line_profiler <https://github.com/rkern/line_profiler>`_
-* `kainosnoema/rack-lineprof <https://github.com/kainosnoema/rack-lineprof>`_
 
 wsgi_lineprof is integrated with the following projects:
 
