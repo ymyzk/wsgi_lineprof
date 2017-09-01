@@ -162,9 +162,9 @@ For example, you can output logs to ``lineprof.log``.
 
 .. code-block:: python
 
-    with open("lineprof.log", "w") as f:
-        app = LineProfilerMiddleware(app, stream=f)
-        bottle.run(app=app)
+    f = open("lineprof.log", "w")
+    app = LineProfilerMiddleware(app, stream=f)
+    bottle.run(app=app)
 
 Links
 -----
