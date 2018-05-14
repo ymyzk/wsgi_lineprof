@@ -19,7 +19,7 @@ class FilenameFilter(BaseFilter):
         self.filename = filename
 
     def filter(self, stats):
-        return filter(lambda s: self.filename in s.filename, stats)
+        return filter(lambda s: s.filename in self.filename , stats)
 
 
 class NameFilter(BaseFilter):
@@ -31,6 +31,14 @@ class NameFilter(BaseFilter):
         return filter(lambda s: self.name in s.name, stats)
 
 
+class DirectoryFilter(BaseFilter):
+    """Filter which all the files from the given directory"""
+    def __init__(self, directory):
+        self.directory = directory
+
+    def filter(self, stats):
+        return filter(lambda s: self.directory in s.filename, stats)
+        
 class TotalTimeSorter(BaseFilter):
     """Sort stats by total time"""
     def __init__(self, reverse=True):
