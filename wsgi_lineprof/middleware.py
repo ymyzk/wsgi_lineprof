@@ -1,9 +1,9 @@
 from io import TextIOWrapper  # noqa: F401
 import sys
-from typing import Callable, Iterable, TextIO, Union  # noqa: F401
+from typing import Callable, Iterable, TextIO, Union, List  # noqa: F401
 
 from wsgi_lineprof.profiler import LineProfiler
-from wsgi_lineprof.stats import FilterType  # noqa: F401
+from wsgi_lineprof.stats import FilterType, LineProfilerStats  # noqa: F401
 
 
 class LineProfilerMiddleware(object):
@@ -18,7 +18,7 @@ class LineProfilerMiddleware(object):
         self.stream = sys.stdout if stream is None else stream
         self.filters = filters
         self.buffer_size = buffer_size
-        self._stats_buffer = []
+        self._stats_buffer = []  # type: List[LineProfilerStats]
         self.write_stats = self._write_stats
         # if buffer enable, switch write stats function
         if self.buffer_size > 0:
