@@ -165,6 +165,15 @@ For example, you can output logs to ``lineprof.log``.
     app = LineProfilerMiddleware(app, stream=f)
     bottle.run(app=app)
 
+AsyncWrite
+----------
+By using ``async_write`` option, start writer_thread. Requests are not blocked by Writing Stats.(``default=False``)
+
+.. code-block:: python
+
+    app = LineProfilerMiddleware(app, async_write=True)
+    bottle.run(app=app)
+
 Links
 -----
 * `GitHub: ymyzk/wsgi_lineprof <https://github.com/ymyzk/wsgi_lineprof>`_
