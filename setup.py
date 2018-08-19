@@ -72,7 +72,7 @@ setup(
 
     extras_require={
         ":python_version < '3.5'": ["typing"],
-        "build": ["Cython>=0.26.1,<0.27"],
+        "build": ["Cython>=0.28.5,<0.29"],
         "docs": ["Sphinx>=1.4,<1.5"],
         "test": [
             "flake8>=3.0.0,<4.0.0",
