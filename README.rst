@@ -160,7 +160,6 @@ Stream
 By using ``stream`` option, you can output results to a file.
 For example, you can output logs to ``lineprof.log``.
 
-FIXME & add very simple example
 .. code-block:: python
 
     f = open("lineprof.log", "w")
