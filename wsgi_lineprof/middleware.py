@@ -1,11 +1,11 @@
 from io import TextIOWrapper  # noqa: F401
-from queue import Empty, Queue
+from queue import Queue
 import sys
 from threading import Thread
-from typing import Callable, Iterable, TextIO, Union  # noqa: F401
+from typing import Any, Callable, Iterable, TextIO, Union  # noqa: F401
 
 from wsgi_lineprof.profiler import LineProfiler
-from wsgi_lineprof.stats import FilterType  # noqa: F401
+from wsgi_lineprof.stats import FilterType, LineProfilerStats  # noqa: F401
 
 
 class SyncWriter(object):
@@ -54,7 +54,7 @@ class LineProfilerMiddleware(object):
         self.stream = sys.stdout if stream is None else stream
         self.filters = filters
         if async_stream:
-            self.writer = AsyncWriter(self.stream)
+            self.writer = AsyncWriter(self.stream)  # type: Any
         else:
             self.writer = SyncWriter(self.stream)
 
