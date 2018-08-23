@@ -1,6 +1,6 @@
 from io import TextIOWrapper  # noqa: F401
+from queue import Empty, Queue
 import sys
-from queue import Queue, Empty
 from threading import Thread
 from typing import Callable, Iterable, TextIO, Union  # noqa: F401
 
@@ -22,7 +22,7 @@ class LineProfilerMiddleware(object):
                  app,  # type: Callable
                  stream=None,  # type: Union[TextIO, TextIOWrapper]
                  filters=tuple(),  # type: Iterable[FilterType]
-                 async_write=False,  # type bool
+                 async_write=False,  # type: bool
                  ):
         # type: (...) -> None
         self.app = app
@@ -33,7 +33,8 @@ class LineProfilerMiddleware(object):
         if async_write:
             self.write_stats = self._write_request
             self.queue = Queue()  # type: Queue
-            self.writer_thread = Thread(target=writer, args=(self.queue, self.stream))
+            self.writer_thread = Thread(target=writer,
+                                        args=(self.queue, self.stream))
             self.writer_thread.setDaemon(True)
             self.writer_thread.start()
 

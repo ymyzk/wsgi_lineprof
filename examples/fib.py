@@ -31,7 +31,7 @@ filters = [
     FilenameFilter("fib.py"),
     TotalTimeSorter(),
 ]
-app = LineProfilerMiddleware(app, filters=filters, async_write=False)
+app = LineProfilerMiddleware(app, filters=filters)
 
 server = make_server('127.0.0.1', 8000, app)
 print("Serving on 127.0.0.1:8000...")
