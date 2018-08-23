@@ -8,13 +8,38 @@ from wsgi_lineprof.profiler import LineProfiler
 from wsgi_lineprof.stats import FilterType  # noqa: F401
 
 
-def writer(stats_queue, stream):
-    while True:
-        try:
-            stats = stats_queue.get(timeout=5)
-            stats.write_text(stream)
-        except Empty:
-            continue
+class SyncWriter(object):
+    def __init__(self,
+                 stream,  # type: Union[TextIO, TextIOWrapper]
+                 ):
+        # type: (...) -> None
+        self.stream = stream
+
+    def write(self, stats):
+        # type: (LineProfilerStats) -> None
+        stats.write_text(self.stream)
+
+
+class AsyncWriter(object):
+    def __init__(self,
+                 stream,  # type: Union[TextIO, TextIOWrapper]
+                 ):
+        # type: (...) -> None
+        self.stream = stream
+        self.queue = Queue()  # type: Queue
+        self.writer_thread = Thread(target=self._write)
+        self.writer_thread.setDaemon(True)
+        self.writer_thread.start()
+
+    def write(self, stats):
+        # type: (LineProfilerStats) -> None
+        self.queue.put(stats)
+
+    def _write(self):
+        # type: () -> None
+        while True:
+            stats = self.queue.get()
+            stats.write_text(self.stream)
 
 
 class LineProfilerMiddleware(object):
@@ -22,21 +47,16 @@ class LineProfilerMiddleware(object):
                  app,  # type: Callable
                  stream=None,  # type: Union[TextIO, TextIOWrapper]
                  filters=tuple(),  # type: Iterable[FilterType]
-                 async_write=False,  # type: bool
+                 async_stream=False,  # type: bool
                  ):
         # type: (...) -> None
         self.app = app
         self.stream = sys.stdout if stream is None else stream
         self.filters = filters
-        self.write_stats = self._write
-
-        if async_write:
-            self.write_stats = self._write_request
-            self.queue = Queue()  # type: Queue
-            self.writer_thread = Thread(target=writer,
-                                        args=(self.queue, self.stream))
-            self.writer_thread.setDaemon(True)
-            self.writer_thread.start()
+        if async_stream:
+            self.writer = AsyncWriter(self.stream)
+        else:
+            self.writer = SyncWriter(self.stream)
 
     def __call__(self, env, start_response):
         profiler = LineProfiler()
@@ -50,11 +70,6 @@ class LineProfilerMiddleware(object):
         for f in self.filters:
             stats = stats.filter(f)
 
-        self.write_stats(stats)
+        self.writer.write(stats)
+
         return result
-
-    def _write(self, stats):
-        stats.write_text(self.stream)
-
-    def _write_request(self, stats):
-        self.queue.put(stats)
