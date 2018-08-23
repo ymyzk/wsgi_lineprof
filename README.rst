@@ -165,13 +165,15 @@ For example, you can output logs to ``lineprof.log``.
     app = LineProfilerMiddleware(app, stream=f)
     bottle.run(app=app)
 
-AsyncWrite
-----------
-By using ``async_write`` option, start writer_thread. Requests are not blocked by Writing Stats.(``default=False``)
+Async Stream
+------------
+By using ``async_stream`` option, wsgi_lineprof starts a new thread for writing results.
+This option is useful when you do not want the main thread blocked for writing results.
 
 .. code-block:: python
 
-    app = LineProfilerMiddleware(app, async_write=True)
+    # Start a new thread for writing results
+    app = LineProfilerMiddleware(app, async_stream=True)
     bottle.run(app=app)
 
 Links
