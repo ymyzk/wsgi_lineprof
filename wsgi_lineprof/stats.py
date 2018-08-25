@@ -1,16 +1,26 @@
 import inspect
-from io import TextIOWrapper  # noqa: F401
 import itertools
 import linecache
 from os import path
-from typing import Callable, Iterable, TextIO, Union  # noqa: F401
+from typing import Any, Callable, Dict, Iterable, Sequence, Union  # noqa: F401
 
 from _wsgi_lineprof import LineProfiler as _LineProfiler
 from wsgi_lineprof.filters import BaseFilter
+from wsgi_lineprof.types import Stream  # noqa: F401
+
+
+# TODO: _wsgi_lineprof.LineTiming
+Timings = Dict[int, Any]
 
 
 class LineProfilerStat(object):
-    def __init__(self, filename, name, firstlineno, timings):
+    def __init__(self,
+                 filename,  # type: str
+                 name,  # type: str
+                 firstlineno,  # type: int
+                 timings  # type: Timings
+                 ):
+        # type: (...) -> None
         self.filename = filename
         self.name = name
         self.firstlineno = firstlineno
@@ -19,6 +29,7 @@ class LineProfilerStat(object):
         self.total_time *= _LineProfiler.get_unit()
 
     def write_text(self, stream):
+        # type: (Stream) -> None
         if not path.exists(self.filename):
             stream.write("ERROR: %s\n" % self.filename)
             return
@@ -27,7 +38,7 @@ class LineProfilerStat(object):
         stream.write("Total time: %g [sec]\n" % self.total_time)
 
         linecache.clearcache()
-        lines = linecache.getlines(self.filename)
+        lines = linecache.getlines(self.filename)  # type: Sequence[str]
         if self.name != "<module>":
             lines = inspect.getblock(lines[self.firstlineno - 1:])
 
@@ -70,7 +81,7 @@ class LineProfilerStats(object):
         self.stats = stats
 
     def write_text(self, stream):
-        # type: (Union[TextIO, TextIOWrapper]) -> None
+        # type: (Stream) -> None
         stream.write("Time unit: %s [sec]\n\n" % _LineProfiler.get_unit())
         for stat in self.stats:
             stat.write_text(stream)
