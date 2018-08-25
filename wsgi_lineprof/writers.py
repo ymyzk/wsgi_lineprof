@@ -1,12 +1,29 @@
+from abc import ABCMeta, abstractmethod
 from io import TextIOWrapper  # noqa: F401
 from queue import Queue
+from six import add_metaclass
 from threading import Thread
-from typing import TextIO, Union  # noqa: F401
+from typing import Any, TextIO, Union  # noqa: F401
 
 from wsgi_lineprof.stats import LineProfilerStats  # noqa: F401
 
 
-class SyncWriter(object):
+@add_metaclass(ABCMeta)
+class BaseWriter(object):
+    @abstractmethod
+    def __init__(self,
+                 stream,  # type: Union[TextIO, TextIOWrapper]
+                 *kwargs  # type: Any
+                 ):
+        # type: (...) -> None
+        return
+
+    @abstractmethod
+    def write(self, stats):
+        return
+
+
+class SyncWriter(BaseWriter):
     def __init__(self,
                  stream,  # type: Union[TextIO, TextIOWrapper]
                  ):
@@ -18,7 +35,7 @@ class SyncWriter(object):
         stats.write_text(self.stream)
 
 
-class AsyncWriter(object):
+class AsyncWriter(BaseWriter):
     def __init__(self,
                  stream,  # type: Union[TextIO, TextIOWrapper]
                  ):
