@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from io import TextIOWrapper  # noqa: F401
-from queue import Queue
 from six import add_metaclass
+from six.moves import queue
 from threading import Thread
 from typing import Any, TextIO, Union  # noqa: F401
 
@@ -41,7 +41,7 @@ class AsyncWriter(BaseWriter):
                  ):
         # type: (...) -> None
         self.stream = stream
-        self.queue = Queue()  # type: Queue
+        self.queue = queue.Queue()  # type: queue.Queue
         self.writer_thread = Thread(target=self._write)
         self.writer_thread.setDaemon(True)
         self.writer_thread.start()
