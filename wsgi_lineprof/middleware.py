@@ -1,30 +1,37 @@
 import sys
-from typing import Any, Callable, Iterable  # noqa: F401
+from typing import (Any, Callable, Iterable, Optional,  # noqa: F401
+                    TYPE_CHECKING)  # noqa: F401
 
 from wsgi_lineprof.profiler import LineProfiler
 from wsgi_lineprof.stats import FilterType  # noqa: F401
 from wsgi_lineprof.types import Stream  # noqa: F401
-from wsgi_lineprof.writers import AsyncWriter, SyncWriter
+from wsgi_lineprof.writers import (AsyncWriter, BaseWriter,  # noqa: F401
+                                   SyncWriter)  # noqa: F401
+
+
+if TYPE_CHECKING:
+    from wsgiref.types import (StartResponse, WSGIApplication,  # noqa: F401
+                               WSGIEnvironment)  # noqa: F401
 
 
 class LineProfilerMiddleware(object):
     def __init__(self,
-                 app,  # type: Callable
-                 stream=None,  # type: Stream
+                 app,  # type: WSGIApplication
+                 stream=None,  # type: Optional[Stream]
                  filters=tuple(),  # type: Iterable[FilterType]
                  async_stream=False,  # type: bool
                  ):
         # type: (...) -> None
         self.app = app
-        self.stream = sys.stdout if stream is None else stream
+        self.stream = sys.stdout if stream is None else stream  # type: Stream
         self.filters = filters
-        # TODO: "type: ignore" is for supressing mypy errors
         if async_stream:
-            self.writer = AsyncWriter(self.stream)  # type: ignore
+            self.writer = AsyncWriter(self.stream)  # type: BaseWriter
         else:
-            self.writer = SyncWriter(self.stream)  # type: ignore
+            self.writer = SyncWriter(self.stream)  # type: BaseWriter
 
     def __call__(self, env, start_response):
+        # type: (WSGIEnvironment, StartResponse) -> Iterable[bytes]
         profiler = LineProfiler()
 
         profiler.enable()

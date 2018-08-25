@@ -20,6 +20,7 @@ class BaseWriter(object):
 
     @abstractmethod
     def write(self, stats):
+        # type: (LineProfilerStats) -> None
         return
 
 
