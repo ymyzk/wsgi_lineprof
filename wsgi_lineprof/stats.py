@@ -1,12 +1,12 @@
 import inspect
-from io import TextIOWrapper  # noqa: F401
 import itertools
 import linecache
 from os import path
-from typing import Callable, Iterable, TextIO, Union  # noqa: F401
+from typing import Callable, Iterable, Union  # noqa: F401
 
 from _wsgi_lineprof import LineProfiler as _LineProfiler
 from wsgi_lineprof.filters import BaseFilter
+from wsgi_lineprof.types import Stream  # noqa: F401
 
 
 class LineProfilerStat(object):
@@ -70,7 +70,7 @@ class LineProfilerStats(object):
         self.stats = stats
 
     def write_text(self, stream):
-        # type: (Union[TextIO, TextIOWrapper]) -> None
+        # type: (Stream) -> None
         stream.write("Time unit: %s [sec]\n\n" % _LineProfiler.get_unit())
         for stat in self.stats:
             stat.write_text(stream)
