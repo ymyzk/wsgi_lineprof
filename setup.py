@@ -1,4 +1,4 @@
-from codecs import open
+from io import open
 from os import path
 from warnings import warn
 
