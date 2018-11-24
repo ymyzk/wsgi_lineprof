@@ -26,13 +26,14 @@ def app(environ, start_response):
     return [res.encode("utf-8")]
 
 
-# Set up profiler
-filters = [
-    FilenameFilter("fib.py"),
-    TotalTimeSorter(),
-]
-app = LineProfilerMiddleware(app, filters=filters)
+if __name__ == "__main__":
+    # Set up profiler
+    filters = [
+        FilenameFilter("fib.py"),
+        TotalTimeSorter(),
+    ]
+    app = LineProfilerMiddleware(app, filters=filters)
 
-server = make_server('127.0.0.1', 8000, app)
-print("Serving on 127.0.0.1:8000...")
-server.serve_forever()
+    server = make_server('127.0.0.1', 8000, app)
+    print("Serving on 127.0.0.1:8000...")
+    server.serve_forever()
