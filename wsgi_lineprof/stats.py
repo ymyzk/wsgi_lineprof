@@ -4,13 +4,9 @@ import linecache
 from os import path
 from typing import Any, Callable, Dict, Iterable, Sequence, Union  # noqa: F401
 
-from wsgi_lineprof.extensions import LineProfiler as _LineProfiler
+from wsgi_lineprof.extensions import LineProfiler as _LineProfiler, LineTiming
 from wsgi_lineprof.filters import BaseFilter
 from wsgi_lineprof.types import Stream  # noqa: F401
-
-
-# TODO: _wsgi_lineprof.LineTiming
-Timings = Dict[int, Any]
 
 
 class LineProfilerStat(object):
@@ -18,15 +14,15 @@ class LineProfilerStat(object):
                  filename,  # type: str
                  name,  # type: str
                  firstlineno,  # type: int
-                 timings  # type: Timings
+                 timings  # type: Dict[int, LineTiming]
                  ):
         # type: (...) -> None
         self.filename = filename
         self.name = name
         self.firstlineno = firstlineno
         self.timings = timings
-        self.total_time = sum(t.total_time for t in timings.values())
-        self.total_time *= _LineProfiler.get_unit()
+        total_time = sum(t.total_time for t in timings.values())
+        self.total_time = total_time * _LineProfiler.get_unit()
 
     def write_text(self, stream):
         # type: (Stream) -> None
@@ -49,7 +45,7 @@ class LineProfilerStat(object):
         stream.write("=" * len(header))
         stream.write("\n")
 
-        d = {}
+        d = {}  # type: Dict[int, Dict[str, Any]]
         for i, code in zip(itertools.count(self.firstlineno), lines):
             timing = self.timings.get(i)
             if timing is None:

@@ -1,14 +1,5 @@
+from types import CodeType
 from typing import Any, Dict, Tuple
-
-
-class LineProfiler:
-    results: Dict[Any, Any]
-    last_time: Dict[Any, Any]
-
-    def enable(self) -> None: ...
-    def disable(self) -> None: ...
-    @staticmethod
-    def get_unit() -> float: ...
 
 
 class LineTiming:
@@ -22,3 +13,13 @@ class LineTiming:
 
 
 class LastTime: ...
+
+
+class LineProfiler:
+    results: Dict[CodeType, Dict[int, LineTiming]]
+    last_time: Dict[CodeType, LastTime]
+
+    def enable(self) -> None: ...
+    def disable(self) -> None: ...
+    @staticmethod
+    def get_unit() -> float: ...

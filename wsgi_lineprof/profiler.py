@@ -6,8 +6,10 @@ class LineProfiler(_LineProfiler):
     def get_stats(self):
         # type: () -> LineProfilerStats
         return LineProfilerStats(
-            [LineProfilerStat(code.co_filename,
-                              code.co_name,
-                              code.co_firstlineno,
-                              timings)
+            [LineProfilerStat(
+                # TODO: Improve how to handle empty filename
+                code.co_filename if code.co_filename is not None else "",
+                code.co_name,
+                code.co_firstlineno,
+                timings)
              for code, timings in self.results.items()])
