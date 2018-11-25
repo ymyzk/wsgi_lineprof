@@ -26,12 +26,13 @@ class LineProfilerStat(object):
 
     def write_text(self, stream):
         # type: (Stream) -> None
-        if not path.exists(self.filename):
-            stream.write("ERROR: %s\n" % self.filename)
-            return
         stream.write("File: %s\n" % self.filename)
         stream.write("Name: %s\n" % self.name)
         stream.write("Total time: %g [sec]\n" % self.total_time)
+        if not path.exists(self.filename):
+            # e.g., filename is <frozen importlib._bootstrap>
+            stream.write("WARNING: Cannot fild a file\n")
+            return
 
         linecache.clearcache()
         lines = linecache.getlines(self.filename)  # type: Sequence[str]
