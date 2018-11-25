@@ -77,6 +77,10 @@ setup(
 
     extras_require={
         ":python_version < '3.5'": ["typing"],
+        "benchmark": [
+            "asv>=0.3.1,<0.4",
+            "virtualenv",
+        ],
         "benchmark-deps": [
             "Jinja2==2.10",
             "WebTest==2.0.32",
