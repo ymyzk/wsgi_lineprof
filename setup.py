@@ -62,7 +62,7 @@ setup(
     # simple. Or you can use find_packages().
     packages=find_packages(exclude=["contrib", "docs", "tests"]),
     package_data={
-        "wsgi_lineprof": ["py.typed"],
+        "wsgi_lineprof": ["py.typed", "*.pyi"],
     },
 
     ext_package="wsgi_lineprof",
