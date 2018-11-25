@@ -4,7 +4,7 @@ import linecache
 from os import path
 from typing import Any, Callable, Dict, Iterable, Sequence, Union  # noqa: F401
 
-from _wsgi_lineprof import LineProfiler as _LineProfiler
+from wsgi_lineprof.extensions import LineProfiler as _LineProfiler
 from wsgi_lineprof.filters import BaseFilter
 from wsgi_lineprof.types import Stream  # noqa: F401
 

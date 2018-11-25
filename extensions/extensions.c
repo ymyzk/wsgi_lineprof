@@ -9,13 +9,13 @@
         "include_dirs": [
             "extensions"
         ],
-        "name": "_wsgi_lineprof",
+        "name": "extensions",
         "sources": [
-            "extensions/_wsgi_lineprof.pyx",
+            "extensions/extensions.pyx",
             "extensions/timer.c"
         ]
     },
-    "module_name": "_wsgi_lineprof"
+    "module_name": "extensions"
 }
 END: Cython Metadata */
 
@@ -581,8 +581,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE___wsgi_lineprof
-#define __PYX_HAVE_API___wsgi_lineprof
+#define __PYX_HAVE__extensions
+#define __PYX_HAVE_API__extensions
 /* Early includes */
 #include <string.h>
 #include <stdio.h>
@@ -792,7 +792,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "extensions/_wsgi_lineprof.pyx",
+  "extensions/extensions.pyx",
   "stringsource",
   "type.pxd",
   "bool.pxd",
@@ -800,34 +800,34 @@ static const char *__pyx_f[] = {
 };
 
 /*--- Type declarations ---*/
-struct __pyx_obj_14_wsgi_lineprof_LineProfiler;
-struct __pyx_obj_14_wsgi_lineprof_LineTiming;
-struct __pyx_obj_14_wsgi_lineprof_LastTime;
+struct __pyx_obj_10extensions_LineProfiler;
+struct __pyx_obj_10extensions_LineTiming;
+struct __pyx_obj_10extensions_LastTime;
 
-/* "_wsgi_lineprof.pyx":14
+/* "extensions.pyx":14
  * 
  * 
  * cdef class LineProfiler:             # <<<<<<<<<<<<<<
  *     cdef public dict results
  *     cdef public dict last_time
  */
-struct __pyx_obj_14_wsgi_lineprof_LineProfiler {
+struct __pyx_obj_10extensions_LineProfiler {
   PyObject_HEAD
   PyObject *results;
   PyObject *last_time;
 };
 
 
-/* "_wsgi_lineprof.pyx":33
+/* "extensions.pyx":33
  * 
  * 
  * cdef class LineTiming:             # <<<<<<<<<<<<<<
  *     cdef public object code
  *     cdef public int lineno
  */
-struct __pyx_obj_14_wsgi_lineprof_LineTiming {
+struct __pyx_obj_10extensions_LineTiming {
   PyObject_HEAD
-  struct __pyx_vtabstruct_14_wsgi_lineprof_LineTiming *__pyx_vtab;
+  struct __pyx_vtabstruct_10extensions_LineTiming *__pyx_vtab;
   PyObject *code;
   int lineno;
   PY_LONG_LONG total_time;
@@ -835,14 +835,14 @@ struct __pyx_obj_14_wsgi_lineprof_LineTiming {
 };
 
 
-/* "_wsgi_lineprof.pyx":57
+/* "extensions.pyx":57
  * 
  * 
  * cdef class LastTime:             # <<<<<<<<<<<<<<
  *     cdef int f_lineno
  *     cdef PY_LONG_LONG time
  */
-struct __pyx_obj_14_wsgi_lineprof_LastTime {
+struct __pyx_obj_10extensions_LastTime {
   PyObject_HEAD
   int f_lineno;
   PY_LONG_LONG time;
@@ -850,7 +850,7 @@ struct __pyx_obj_14_wsgi_lineprof_LastTime {
 
 
 
-/* "_wsgi_lineprof.pyx":33
+/* "extensions.pyx":33
  * 
  * 
  * cdef class LineTiming:             # <<<<<<<<<<<<<<
@@ -858,10 +858,10 @@ struct __pyx_obj_14_wsgi_lineprof_LastTime {
  *     cdef public int lineno
  */
 
-struct __pyx_vtabstruct_14_wsgi_lineprof_LineTiming {
-  PyObject *(*hit)(struct __pyx_obj_14_wsgi_lineprof_LineTiming *, PY_LONG_LONG);
+struct __pyx_vtabstruct_10extensions_LineTiming {
+  PyObject *(*hit)(struct __pyx_obj_10extensions_LineTiming *, PY_LONG_LONG);
 };
-static struct __pyx_vtabstruct_14_wsgi_lineprof_LineTiming *__pyx_vtabptr_14_wsgi_lineprof_LineTiming;
+static struct __pyx_vtabstruct_10extensions_LineTiming *__pyx_vtabptr_10extensions_LineTiming;
 
 /* --- Runtime support code (head) --- */
 /* Refnanny.proto */
@@ -1214,7 +1214,7 @@ static PyTypeObject *__Pyx_ImportType(const char *module_name, const char *class
 /* InitStrings.proto */
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
-static PyObject *__pyx_f_14_wsgi_lineprof_10LineTiming_hit(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self, PY_LONG_LONG __pyx_v_dt); /* proto*/
+static PyObject *__pyx_f_10extensions_10LineTiming_hit(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self, PY_LONG_LONG __pyx_v_dt); /* proto*/
 
 /* Module declarations from 'cpython.version' */
 
@@ -1301,18 +1301,18 @@ static PyTypeObject *__pyx_ptype_7cpython_7complex_complex = 0;
 
 /* Module declarations from 'header' */
 
-/* Module declarations from '_wsgi_lineprof' */
-static PyTypeObject *__pyx_ptype_14_wsgi_lineprof_LineProfiler = 0;
-static PyTypeObject *__pyx_ptype_14_wsgi_lineprof_LineTiming = 0;
-static PyTypeObject *__pyx_ptype_14_wsgi_lineprof_LastTime = 0;
-static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *, PyFrameObject *, int, PyObject *); /*proto*/
-static PyObject *__pyx_f_14_wsgi_lineprof___pyx_unpickle_LineProfiler__set_state(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *, PyObject *); /*proto*/
-static PyObject *__pyx_f_14_wsgi_lineprof___pyx_unpickle_LineTiming__set_state(struct __pyx_obj_14_wsgi_lineprof_LineTiming *, PyObject *); /*proto*/
-#define __Pyx_MODULE_NAME "_wsgi_lineprof"
-extern int __pyx_module_is_main__wsgi_lineprof;
-int __pyx_module_is_main__wsgi_lineprof = 0;
+/* Module declarations from 'extensions' */
+static PyTypeObject *__pyx_ptype_10extensions_LineProfiler = 0;
+static PyTypeObject *__pyx_ptype_10extensions_LineTiming = 0;
+static PyTypeObject *__pyx_ptype_10extensions_LastTime = 0;
+static int __pyx_f_10extensions_python_trace_callback(PyObject *, PyFrameObject *, int, PyObject *); /*proto*/
+static PyObject *__pyx_f_10extensions___pyx_unpickle_LineProfiler__set_state(struct __pyx_obj_10extensions_LineProfiler *, PyObject *); /*proto*/
+static PyObject *__pyx_f_10extensions___pyx_unpickle_LineTiming__set_state(struct __pyx_obj_10extensions_LineTiming *, PyObject *); /*proto*/
+#define __Pyx_MODULE_NAME "extensions"
+extern int __pyx_module_is_main_extensions;
+int __pyx_module_is_main_extensions = 0;
 
-/* Implementation of '_wsgi_lineprof' */
+/* Implementation of 'extensions' */
 static PyObject *__pyx_builtin_staticmethod;
 static PyObject *__pyx_builtin_TypeError;
 static const char __pyx_k_new[] = "__new__";
@@ -1335,6 +1335,7 @@ static const char __pyx_k_setstate[] = "__setstate__";
 static const char __pyx_k_TypeError[] = "TypeError";
 static const char __pyx_k_pyx_state[] = "__pyx_state";
 static const char __pyx_k_reduce_ex[] = "__reduce_ex__";
+static const char __pyx_k_extensions[] = "extensions";
 static const char __pyx_k_pyx_result[] = "__pyx_result";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static const char __pyx_k_PickleError[] = "PickleError";
@@ -1342,13 +1343,12 @@ static const char __pyx_k_pyx_checksum[] = "__pyx_checksum";
 static const char __pyx_k_staticmethod[] = "staticmethod";
 static const char __pyx_k_stringsource[] = "stringsource";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
-static const char __pyx_k_wsgi_lineprof[] = "_wsgi_lineprof";
 static const char __pyx_k_pyx_PickleError[] = "__pyx_PickleError";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_pyx_unpickle_LineTiming[] = "__pyx_unpickle_LineTiming";
+static const char __pyx_k_extensions_extensions_pyx[] = "extensions/extensions.pyx";
 static const char __pyx_k_pyx_unpickle_LineProfiler[] = "__pyx_unpickle_LineProfiler";
-static const char __pyx_k_extensions__wsgi_lineprof_pyx[] = "extensions/_wsgi_lineprof.pyx";
 static const char __pyx_k_LineTiming_for_r_lineno_r_n_hit[] = "<LineTiming for %r lineno: %r n_hits: %r total_time: %r>";
 static const char __pyx_k_Incompatible_checksums_s_vs_0x15[] = "Incompatible checksums (%s vs 0x154fe27 = (last_time, results))";
 static const char __pyx_k_Incompatible_checksums_s_vs_0x45[] = "Incompatible checksums (%s vs 0x45e5218 = (code, lineno, n_hits, total_time))";
@@ -1361,7 +1361,8 @@ static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_code;
 static PyObject *__pyx_n_s_dict;
-static PyObject *__pyx_kp_s_extensions__wsgi_lineprof_pyx;
+static PyObject *__pyx_n_s_extensions;
+static PyObject *__pyx_kp_s_extensions_extensions_pyx;
 static PyObject *__pyx_n_s_f_lineno;
 static PyObject *__pyx_n_s_get_unit;
 static PyObject *__pyx_n_s_getstate;
@@ -1390,41 +1391,40 @@ static PyObject *__pyx_kp_s_stringsource;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_time;
 static PyObject *__pyx_n_s_update;
-static PyObject *__pyx_n_s_wsgi_lineprof;
-static int __pyx_pf_14_wsgi_lineprof_12LineProfiler___init__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_2enable(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_4disable(CYTHON_UNUSED struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_6get_unit(void); /* proto */
-static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_7results___get__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self); /* proto */
-static int __pyx_pf_14_wsgi_lineprof_12LineProfiler_7results_2__set__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
-static int __pyx_pf_14_wsgi_lineprof_12LineProfiler_7results_4__del__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_9last_time___get__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self); /* proto */
-static int __pyx_pf_14_wsgi_lineprof_12LineProfiler_9last_time_2__set__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
-static int __pyx_pf_14_wsgi_lineprof_12LineProfiler_9last_time_4__del__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_8__reduce_cython__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_10__setstate_cython__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
-static int __pyx_pf_14_wsgi_lineprof_10LineTiming___init__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self, PyObject *__pyx_v_code, int __pyx_v_lineno); /* proto */
-static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_2as_tuple(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_4__repr__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_4code___get__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self); /* proto */
-static int __pyx_pf_14_wsgi_lineprof_10LineTiming_4code_2__set__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
-static int __pyx_pf_14_wsgi_lineprof_10LineTiming_4code_4__del__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_6lineno___get__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self); /* proto */
-static int __pyx_pf_14_wsgi_lineprof_10LineTiming_6lineno_2__set__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
-static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_10total_time___get__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self); /* proto */
-static int __pyx_pf_14_wsgi_lineprof_10LineTiming_10total_time_2__set__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
-static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_6n_hits___get__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self); /* proto */
-static int __pyx_pf_14_wsgi_lineprof_10LineTiming_6n_hits_2__set__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
-static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_6__reduce_cython__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_8__setstate_cython__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
-static int __pyx_pf_14_wsgi_lineprof_8LastTime___cinit__(struct __pyx_obj_14_wsgi_lineprof_LastTime *__pyx_v_self, int __pyx_v_f_lineno, PY_LONG_LONG __pyx_v_time); /* proto */
-static PyObject *__pyx_pf_14_wsgi_lineprof_8LastTime_2__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_14_wsgi_lineprof_LastTime *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_14_wsgi_lineprof_8LastTime_4__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_14_wsgi_lineprof_LastTime *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
-static PyObject *__pyx_pf_14_wsgi_lineprof___pyx_unpickle_LineProfiler(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
-static PyObject *__pyx_pf_14_wsgi_lineprof_2__pyx_unpickle_LineTiming(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
-static PyObject *__pyx_tp_new_14_wsgi_lineprof_LineProfiler(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
-static PyObject *__pyx_tp_new_14_wsgi_lineprof_LineTiming(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
-static PyObject *__pyx_tp_new_14_wsgi_lineprof_LastTime(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static int __pyx_pf_10extensions_12LineProfiler___init__(struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_10extensions_12LineProfiler_2enable(struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_10extensions_12LineProfiler_4disable(CYTHON_UNUSED struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_10extensions_12LineProfiler_6get_unit(void); /* proto */
+static PyObject *__pyx_pf_10extensions_12LineProfiler_7results___get__(struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self); /* proto */
+static int __pyx_pf_10extensions_12LineProfiler_7results_2__set__(struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
+static int __pyx_pf_10extensions_12LineProfiler_7results_4__del__(struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_10extensions_12LineProfiler_9last_time___get__(struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self); /* proto */
+static int __pyx_pf_10extensions_12LineProfiler_9last_time_2__set__(struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
+static int __pyx_pf_10extensions_12LineProfiler_9last_time_4__del__(struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_10extensions_12LineProfiler_8__reduce_cython__(struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_10extensions_12LineProfiler_10__setstate_cython__(struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
+static int __pyx_pf_10extensions_10LineTiming___init__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self, PyObject *__pyx_v_code, int __pyx_v_lineno); /* proto */
+static PyObject *__pyx_pf_10extensions_10LineTiming_2as_tuple(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_10extensions_10LineTiming_4__repr__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_10extensions_10LineTiming_4code___get__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self); /* proto */
+static int __pyx_pf_10extensions_10LineTiming_4code_2__set__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
+static int __pyx_pf_10extensions_10LineTiming_4code_4__del__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_10extensions_10LineTiming_6lineno___get__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self); /* proto */
+static int __pyx_pf_10extensions_10LineTiming_6lineno_2__set__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
+static PyObject *__pyx_pf_10extensions_10LineTiming_10total_time___get__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self); /* proto */
+static int __pyx_pf_10extensions_10LineTiming_10total_time_2__set__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
+static PyObject *__pyx_pf_10extensions_10LineTiming_6n_hits___get__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self); /* proto */
+static int __pyx_pf_10extensions_10LineTiming_6n_hits_2__set__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
+static PyObject *__pyx_pf_10extensions_10LineTiming_6__reduce_cython__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_10extensions_10LineTiming_8__setstate_cython__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
+static int __pyx_pf_10extensions_8LastTime___cinit__(struct __pyx_obj_10extensions_LastTime *__pyx_v_self, int __pyx_v_f_lineno, PY_LONG_LONG __pyx_v_time); /* proto */
+static PyObject *__pyx_pf_10extensions_8LastTime_2__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_10extensions_LastTime *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_10extensions_8LastTime_4__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_10extensions_LastTime *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_10extensions___pyx_unpickle_LineProfiler(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_10extensions_2__pyx_unpickle_LineTiming(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_tp_new_10extensions_LineProfiler(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_10extensions_LineTiming(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_tp_new_10extensions_LastTime(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_int_22347303;
 static PyObject *__pyx_int_73290264;
 static PyObject *__pyx_tuple_;
@@ -1436,7 +1436,7 @@ static PyObject *__pyx_codeobj__5;
 static PyObject *__pyx_codeobj__7;
 /* Late includes */
 
-/* "_wsgi_lineprof.pyx":18
+/* "extensions.pyx":18
  *     cdef public dict last_time
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
@@ -1445,28 +1445,28 @@ static PyObject *__pyx_codeobj__7;
  */
 
 /* Python wrapper */
-static int __pyx_pw_14_wsgi_lineprof_12LineProfiler_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static int __pyx_pw_14_wsgi_lineprof_12LineProfiler_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static int __pyx_pw_10extensions_12LineProfiler_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_10extensions_12LineProfiler_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__init__ (wrapper)", 0);
   if (unlikely(PyTuple_GET_SIZE(__pyx_args) > 0)) {
     __Pyx_RaiseArgtupleInvalid("__init__", 1, 0, 0, PyTuple_GET_SIZE(__pyx_args)); return -1;}
   if (unlikely(__pyx_kwds) && unlikely(PyDict_Size(__pyx_kwds) > 0) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "__init__", 0))) return -1;
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_12LineProfiler___init__(((struct __pyx_obj_14_wsgi_lineprof_LineProfiler *)__pyx_v_self));
+  __pyx_r = __pyx_pf_10extensions_12LineProfiler___init__(((struct __pyx_obj_10extensions_LineProfiler *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_14_wsgi_lineprof_12LineProfiler___init__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self) {
+static int __pyx_pf_10extensions_12LineProfiler___init__(struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "_wsgi_lineprof.pyx":19
+  /* "extensions.pyx":19
  * 
  *     def __init__(self):
  *         self.results = {}             # <<<<<<<<<<<<<<
@@ -1481,7 +1481,7 @@ static int __pyx_pf_14_wsgi_lineprof_12LineProfiler___init__(struct __pyx_obj_14
   __pyx_v_self->results = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "_wsgi_lineprof.pyx":20
+  /* "extensions.pyx":20
  *     def __init__(self):
  *         self.results = {}
  *         self.last_time = {}             # <<<<<<<<<<<<<<
@@ -1496,7 +1496,7 @@ static int __pyx_pf_14_wsgi_lineprof_12LineProfiler___init__(struct __pyx_obj_14
   __pyx_v_self->last_time = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "_wsgi_lineprof.pyx":18
+  /* "extensions.pyx":18
  *     cdef public dict last_time
  * 
  *     def __init__(self):             # <<<<<<<<<<<<<<
@@ -1509,14 +1509,14 @@ static int __pyx_pf_14_wsgi_lineprof_12LineProfiler___init__(struct __pyx_obj_14
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("_wsgi_lineprof.LineProfiler.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.LineProfiler.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "_wsgi_lineprof.pyx":22
+/* "extensions.pyx":22
  *         self.last_time = {}
  * 
  *     def enable(self):             # <<<<<<<<<<<<<<
@@ -1525,33 +1525,33 @@ static int __pyx_pf_14_wsgi_lineprof_12LineProfiler___init__(struct __pyx_obj_14
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_14_wsgi_lineprof_12LineProfiler_3enable(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_14_wsgi_lineprof_12LineProfiler_3enable(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_10extensions_12LineProfiler_3enable(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_10extensions_12LineProfiler_3enable(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("enable (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_12LineProfiler_2enable(((struct __pyx_obj_14_wsgi_lineprof_LineProfiler *)__pyx_v_self));
+  __pyx_r = __pyx_pf_10extensions_12LineProfiler_2enable(((struct __pyx_obj_10extensions_LineProfiler *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_2enable(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self) {
+static PyObject *__pyx_pf_10extensions_12LineProfiler_2enable(struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("enable", 0);
 
-  /* "_wsgi_lineprof.pyx":23
+  /* "extensions.pyx":23
  * 
  *     def enable(self):
  *         PyEval_SetTrace(python_trace_callback, self)             # <<<<<<<<<<<<<<
  * 
  *     def disable(self):
  */
-  PyEval_SetTrace(__pyx_f_14_wsgi_lineprof_python_trace_callback, ((PyObject *)__pyx_v_self));
+  PyEval_SetTrace(__pyx_f_10extensions_python_trace_callback, ((PyObject *)__pyx_v_self));
 
-  /* "_wsgi_lineprof.pyx":22
+  /* "extensions.pyx":22
  *         self.last_time = {}
  * 
  *     def enable(self):             # <<<<<<<<<<<<<<
@@ -1566,7 +1566,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_2enable(struct __pyx_o
   return __pyx_r;
 }
 
-/* "_wsgi_lineprof.pyx":25
+/* "extensions.pyx":25
  *         PyEval_SetTrace(python_trace_callback, self)
  * 
  *     def disable(self):             # <<<<<<<<<<<<<<
@@ -1575,24 +1575,24 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_2enable(struct __pyx_o
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_14_wsgi_lineprof_12LineProfiler_5disable(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_14_wsgi_lineprof_12LineProfiler_5disable(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_10extensions_12LineProfiler_5disable(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_10extensions_12LineProfiler_5disable(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("disable (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_12LineProfiler_4disable(((struct __pyx_obj_14_wsgi_lineprof_LineProfiler *)__pyx_v_self));
+  __pyx_r = __pyx_pf_10extensions_12LineProfiler_4disable(((struct __pyx_obj_10extensions_LineProfiler *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_4disable(CYTHON_UNUSED struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self) {
+static PyObject *__pyx_pf_10extensions_12LineProfiler_4disable(CYTHON_UNUSED struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("disable", 0);
 
-  /* "_wsgi_lineprof.pyx":26
+  /* "extensions.pyx":26
  * 
  *     def disable(self):
  *         PyEval_SetTrace(NULL, <object>NULL)             # <<<<<<<<<<<<<<
@@ -1601,7 +1601,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_4disable(CYTHON_UNUSED
  */
   PyEval_SetTrace(NULL, ((PyObject *)NULL));
 
-  /* "_wsgi_lineprof.pyx":25
+  /* "extensions.pyx":25
  *         PyEval_SetTrace(python_trace_callback, self)
  * 
  *     def disable(self):             # <<<<<<<<<<<<<<
@@ -1616,7 +1616,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_4disable(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "_wsgi_lineprof.pyx":29
+/* "extensions.pyx":29
  * 
  *     @staticmethod
  *     def get_unit():             # <<<<<<<<<<<<<<
@@ -1625,29 +1625,29 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_4disable(CYTHON_UNUSED
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_14_wsgi_lineprof_12LineProfiler_7get_unit(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_14_wsgi_lineprof_12LineProfiler_7get_unit = {"get_unit", (PyCFunction)__pyx_pw_14_wsgi_lineprof_12LineProfiler_7get_unit, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_14_wsgi_lineprof_12LineProfiler_7get_unit(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_10extensions_12LineProfiler_7get_unit(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_10extensions_12LineProfiler_7get_unit = {"get_unit", (PyCFunction)__pyx_pw_10extensions_12LineProfiler_7get_unit, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_10extensions_12LineProfiler_7get_unit(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_unit (wrapper)", 0);
   if (unlikely(PyTuple_GET_SIZE(__pyx_args) > 0)) {
     __Pyx_RaiseArgtupleInvalid("get_unit", 1, 0, 0, PyTuple_GET_SIZE(__pyx_args)); return NULL;}
   if (unlikely(__pyx_kwds) && unlikely(PyDict_Size(__pyx_kwds) > 0) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "get_unit", 0))) return NULL;
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_12LineProfiler_6get_unit();
+  __pyx_r = __pyx_pf_10extensions_12LineProfiler_6get_unit();
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_6get_unit(void) {
+static PyObject *__pyx_pf_10extensions_12LineProfiler_6get_unit(void) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("get_unit", 0);
 
-  /* "_wsgi_lineprof.pyx":30
+  /* "extensions.pyx":30
  *     @staticmethod
  *     def get_unit():
  *         return hpTimerUnit()             # <<<<<<<<<<<<<<
@@ -1661,7 +1661,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_6get_unit(void) {
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "_wsgi_lineprof.pyx":29
+  /* "extensions.pyx":29
  * 
  *     @staticmethod
  *     def get_unit():             # <<<<<<<<<<<<<<
@@ -1672,7 +1672,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_6get_unit(void) {
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("_wsgi_lineprof.LineProfiler.get_unit", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.LineProfiler.get_unit", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -1680,7 +1680,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_6get_unit(void) {
   return __pyx_r;
 }
 
-/* "_wsgi_lineprof.pyx":15
+/* "extensions.pyx":15
  * 
  * cdef class LineProfiler:
  *     cdef public dict results             # <<<<<<<<<<<<<<
@@ -1689,19 +1689,19 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_6get_unit(void) {
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_14_wsgi_lineprof_12LineProfiler_7results_1__get__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_14_wsgi_lineprof_12LineProfiler_7results_1__get__(PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_10extensions_12LineProfiler_7results_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_10extensions_12LineProfiler_7results_1__get__(PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_12LineProfiler_7results___get__(((struct __pyx_obj_14_wsgi_lineprof_LineProfiler *)__pyx_v_self));
+  __pyx_r = __pyx_pf_10extensions_12LineProfiler_7results___get__(((struct __pyx_obj_10extensions_LineProfiler *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_7results___get__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self) {
+static PyObject *__pyx_pf_10extensions_12LineProfiler_7results___get__(struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__get__", 0);
@@ -1718,19 +1718,19 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_7results___get__(struc
 }
 
 /* Python wrapper */
-static int __pyx_pw_14_wsgi_lineprof_12LineProfiler_7results_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
-static int __pyx_pw_14_wsgi_lineprof_12LineProfiler_7results_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
+static int __pyx_pw_10extensions_12LineProfiler_7results_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
+static int __pyx_pw_10extensions_12LineProfiler_7results_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_12LineProfiler_7results_2__set__(((struct __pyx_obj_14_wsgi_lineprof_LineProfiler *)__pyx_v_self), ((PyObject *)__pyx_v_value));
+  __pyx_r = __pyx_pf_10extensions_12LineProfiler_7results_2__set__(((struct __pyx_obj_10extensions_LineProfiler *)__pyx_v_self), ((PyObject *)__pyx_v_value));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_14_wsgi_lineprof_12LineProfiler_7results_2__set__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self, PyObject *__pyx_v_value) {
+static int __pyx_pf_10extensions_12LineProfiler_7results_2__set__(struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self, PyObject *__pyx_v_value) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1749,7 +1749,7 @@ static int __pyx_pf_14_wsgi_lineprof_12LineProfiler_7results_2__set__(struct __p
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("_wsgi_lineprof.LineProfiler.results.__set__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.LineProfiler.results.__set__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -1757,19 +1757,19 @@ static int __pyx_pf_14_wsgi_lineprof_12LineProfiler_7results_2__set__(struct __p
 }
 
 /* Python wrapper */
-static int __pyx_pw_14_wsgi_lineprof_12LineProfiler_7results_5__del__(PyObject *__pyx_v_self); /*proto*/
-static int __pyx_pw_14_wsgi_lineprof_12LineProfiler_7results_5__del__(PyObject *__pyx_v_self) {
+static int __pyx_pw_10extensions_12LineProfiler_7results_5__del__(PyObject *__pyx_v_self); /*proto*/
+static int __pyx_pw_10extensions_12LineProfiler_7results_5__del__(PyObject *__pyx_v_self) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__del__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_12LineProfiler_7results_4__del__(((struct __pyx_obj_14_wsgi_lineprof_LineProfiler *)__pyx_v_self));
+  __pyx_r = __pyx_pf_10extensions_12LineProfiler_7results_4__del__(((struct __pyx_obj_10extensions_LineProfiler *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_14_wsgi_lineprof_12LineProfiler_7results_4__del__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self) {
+static int __pyx_pf_10extensions_12LineProfiler_7results_4__del__(struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__del__", 0);
@@ -1785,7 +1785,7 @@ static int __pyx_pf_14_wsgi_lineprof_12LineProfiler_7results_4__del__(struct __p
   return __pyx_r;
 }
 
-/* "_wsgi_lineprof.pyx":16
+/* "extensions.pyx":16
  * cdef class LineProfiler:
  *     cdef public dict results
  *     cdef public dict last_time             # <<<<<<<<<<<<<<
@@ -1794,19 +1794,19 @@ static int __pyx_pf_14_wsgi_lineprof_12LineProfiler_7results_4__del__(struct __p
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_14_wsgi_lineprof_12LineProfiler_9last_time_1__get__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_14_wsgi_lineprof_12LineProfiler_9last_time_1__get__(PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_10extensions_12LineProfiler_9last_time_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_10extensions_12LineProfiler_9last_time_1__get__(PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_12LineProfiler_9last_time___get__(((struct __pyx_obj_14_wsgi_lineprof_LineProfiler *)__pyx_v_self));
+  __pyx_r = __pyx_pf_10extensions_12LineProfiler_9last_time___get__(((struct __pyx_obj_10extensions_LineProfiler *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_9last_time___get__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self) {
+static PyObject *__pyx_pf_10extensions_12LineProfiler_9last_time___get__(struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__get__", 0);
@@ -1823,19 +1823,19 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_9last_time___get__(str
 }
 
 /* Python wrapper */
-static int __pyx_pw_14_wsgi_lineprof_12LineProfiler_9last_time_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
-static int __pyx_pw_14_wsgi_lineprof_12LineProfiler_9last_time_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
+static int __pyx_pw_10extensions_12LineProfiler_9last_time_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
+static int __pyx_pw_10extensions_12LineProfiler_9last_time_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_12LineProfiler_9last_time_2__set__(((struct __pyx_obj_14_wsgi_lineprof_LineProfiler *)__pyx_v_self), ((PyObject *)__pyx_v_value));
+  __pyx_r = __pyx_pf_10extensions_12LineProfiler_9last_time_2__set__(((struct __pyx_obj_10extensions_LineProfiler *)__pyx_v_self), ((PyObject *)__pyx_v_value));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_14_wsgi_lineprof_12LineProfiler_9last_time_2__set__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self, PyObject *__pyx_v_value) {
+static int __pyx_pf_10extensions_12LineProfiler_9last_time_2__set__(struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self, PyObject *__pyx_v_value) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1854,7 +1854,7 @@ static int __pyx_pf_14_wsgi_lineprof_12LineProfiler_9last_time_2__set__(struct _
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("_wsgi_lineprof.LineProfiler.last_time.__set__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.LineProfiler.last_time.__set__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -1862,19 +1862,19 @@ static int __pyx_pf_14_wsgi_lineprof_12LineProfiler_9last_time_2__set__(struct _
 }
 
 /* Python wrapper */
-static int __pyx_pw_14_wsgi_lineprof_12LineProfiler_9last_time_5__del__(PyObject *__pyx_v_self); /*proto*/
-static int __pyx_pw_14_wsgi_lineprof_12LineProfiler_9last_time_5__del__(PyObject *__pyx_v_self) {
+static int __pyx_pw_10extensions_12LineProfiler_9last_time_5__del__(PyObject *__pyx_v_self); /*proto*/
+static int __pyx_pw_10extensions_12LineProfiler_9last_time_5__del__(PyObject *__pyx_v_self) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__del__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_12LineProfiler_9last_time_4__del__(((struct __pyx_obj_14_wsgi_lineprof_LineProfiler *)__pyx_v_self));
+  __pyx_r = __pyx_pf_10extensions_12LineProfiler_9last_time_4__del__(((struct __pyx_obj_10extensions_LineProfiler *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_14_wsgi_lineprof_12LineProfiler_9last_time_4__del__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self) {
+static int __pyx_pf_10extensions_12LineProfiler_9last_time_4__del__(struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__del__", 0);
@@ -1897,19 +1897,19 @@ static int __pyx_pf_14_wsgi_lineprof_12LineProfiler_9last_time_4__del__(struct _
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_14_wsgi_lineprof_12LineProfiler_9__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_14_wsgi_lineprof_12LineProfiler_9__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_10extensions_12LineProfiler_9__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_10extensions_12LineProfiler_9__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_12LineProfiler_8__reduce_cython__(((struct __pyx_obj_14_wsgi_lineprof_LineProfiler *)__pyx_v_self));
+  __pyx_r = __pyx_pf_10extensions_12LineProfiler_8__reduce_cython__(((struct __pyx_obj_10extensions_LineProfiler *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_8__reduce_cython__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self) {
+static PyObject *__pyx_pf_10extensions_12LineProfiler_8__reduce_cython__(struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self) {
   int __pyx_v_use_setstate;
   PyObject *__pyx_v_state = NULL;
   PyObject *__pyx_v__dict = NULL;
@@ -2125,7 +2125,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_8__reduce_cython__(str
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_AddTraceback("_wsgi_lineprof.LineProfiler.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.LineProfiler.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_state);
@@ -2143,19 +2143,19 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_8__reduce_cython__(str
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_14_wsgi_lineprof_12LineProfiler_11__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_14_wsgi_lineprof_12LineProfiler_11__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_10extensions_12LineProfiler_11__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_10extensions_12LineProfiler_11__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_12LineProfiler_10__setstate_cython__(((struct __pyx_obj_14_wsgi_lineprof_LineProfiler *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_10extensions_12LineProfiler_10__setstate_cython__(((struct __pyx_obj_10extensions_LineProfiler *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_10__setstate_cython__(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_10extensions_12LineProfiler_10__setstate_cython__(struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2167,7 +2167,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_10__setstate_cython__(
  *     __pyx_unpickle_LineProfiler__set_state(self, __pyx_state)             # <<<<<<<<<<<<<<
  */
   if (!(likely(PyTuple_CheckExact(__pyx_v___pyx_state))||((__pyx_v___pyx_state) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v___pyx_state)->tp_name), 0))) __PYX_ERR(1, 15, __pyx_L1_error)
-  __pyx_t_1 = __pyx_f_14_wsgi_lineprof___pyx_unpickle_LineProfiler__set_state(__pyx_v_self, ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 15, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_10extensions___pyx_unpickle_LineProfiler__set_state(__pyx_v_self, ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
@@ -2183,7 +2183,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_10__setstate_cython__(
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("_wsgi_lineprof.LineProfiler.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.LineProfiler.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -2191,7 +2191,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_10__setstate_cython__(
   return __pyx_r;
 }
 
-/* "_wsgi_lineprof.pyx":39
+/* "extensions.pyx":39
  *     cdef public long n_hits
  * 
  *     def __init__(self, object code, int lineno):             # <<<<<<<<<<<<<<
@@ -2200,8 +2200,8 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_12LineProfiler_10__setstate_cython__(
  */
 
 /* Python wrapper */
-static int __pyx_pw_14_wsgi_lineprof_10LineTiming_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static int __pyx_pw_14_wsgi_lineprof_10LineTiming_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static int __pyx_pw_10extensions_10LineTiming_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_10extensions_10LineTiming_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_code = 0;
   int __pyx_v_lineno;
   int __pyx_r;
@@ -2249,23 +2249,23 @@ static int __pyx_pw_14_wsgi_lineprof_10LineTiming_1__init__(PyObject *__pyx_v_se
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 39, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("_wsgi_lineprof.LineTiming.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.LineTiming.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_10LineTiming___init__(((struct __pyx_obj_14_wsgi_lineprof_LineTiming *)__pyx_v_self), __pyx_v_code, __pyx_v_lineno);
+  __pyx_r = __pyx_pf_10extensions_10LineTiming___init__(((struct __pyx_obj_10extensions_LineTiming *)__pyx_v_self), __pyx_v_code, __pyx_v_lineno);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_14_wsgi_lineprof_10LineTiming___init__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self, PyObject *__pyx_v_code, int __pyx_v_lineno) {
+static int __pyx_pf_10extensions_10LineTiming___init__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self, PyObject *__pyx_v_code, int __pyx_v_lineno) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "_wsgi_lineprof.pyx":40
+  /* "extensions.pyx":40
  * 
  *     def __init__(self, object code, int lineno):
  *         self.code = code             # <<<<<<<<<<<<<<
@@ -2278,7 +2278,7 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming___init__(struct __pyx_obj_14_w
   __Pyx_DECREF(__pyx_v_self->code);
   __pyx_v_self->code = __pyx_v_code;
 
-  /* "_wsgi_lineprof.pyx":41
+  /* "extensions.pyx":41
  *     def __init__(self, object code, int lineno):
  *         self.code = code
  *         self.lineno = lineno             # <<<<<<<<<<<<<<
@@ -2287,7 +2287,7 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming___init__(struct __pyx_obj_14_w
  */
   __pyx_v_self->lineno = __pyx_v_lineno;
 
-  /* "_wsgi_lineprof.pyx":42
+  /* "extensions.pyx":42
  *         self.code = code
  *         self.lineno = lineno
  *         self.total_time = 0             # <<<<<<<<<<<<<<
@@ -2296,7 +2296,7 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming___init__(struct __pyx_obj_14_w
  */
   __pyx_v_self->total_time = 0;
 
-  /* "_wsgi_lineprof.pyx":43
+  /* "extensions.pyx":43
  *         self.lineno = lineno
  *         self.total_time = 0
  *         self.n_hits = 0             # <<<<<<<<<<<<<<
@@ -2305,7 +2305,7 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming___init__(struct __pyx_obj_14_w
  */
   __pyx_v_self->n_hits = 0;
 
-  /* "_wsgi_lineprof.pyx":39
+  /* "extensions.pyx":39
  *     cdef public long n_hits
  * 
  *     def __init__(self, object code, int lineno):             # <<<<<<<<<<<<<<
@@ -2319,7 +2319,7 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming___init__(struct __pyx_obj_14_w
   return __pyx_r;
 }
 
-/* "_wsgi_lineprof.pyx":45
+/* "extensions.pyx":45
  *         self.n_hits = 0
  * 
  *     cdef hit(self, PY_LONG_LONG dt):             # <<<<<<<<<<<<<<
@@ -2327,12 +2327,12 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming___init__(struct __pyx_obj_14_w
  *             self.total_time += dt
  */
 
-static PyObject *__pyx_f_14_wsgi_lineprof_10LineTiming_hit(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self, PY_LONG_LONG __pyx_v_dt) {
+static PyObject *__pyx_f_10extensions_10LineTiming_hit(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self, PY_LONG_LONG __pyx_v_dt) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("hit", 0);
 
-  /* "_wsgi_lineprof.pyx":46
+  /* "extensions.pyx":46
  * 
  *     cdef hit(self, PY_LONG_LONG dt):
  *             self.n_hits += 1             # <<<<<<<<<<<<<<
@@ -2341,7 +2341,7 @@ static PyObject *__pyx_f_14_wsgi_lineprof_10LineTiming_hit(struct __pyx_obj_14_w
  */
   __pyx_v_self->n_hits = (__pyx_v_self->n_hits + 1);
 
-  /* "_wsgi_lineprof.pyx":47
+  /* "extensions.pyx":47
  *     cdef hit(self, PY_LONG_LONG dt):
  *             self.n_hits += 1
  *             self.total_time += dt             # <<<<<<<<<<<<<<
@@ -2350,7 +2350,7 @@ static PyObject *__pyx_f_14_wsgi_lineprof_10LineTiming_hit(struct __pyx_obj_14_w
  */
   __pyx_v_self->total_time = (__pyx_v_self->total_time + __pyx_v_dt);
 
-  /* "_wsgi_lineprof.pyx":45
+  /* "extensions.pyx":45
  *         self.n_hits = 0
  * 
  *     cdef hit(self, PY_LONG_LONG dt):             # <<<<<<<<<<<<<<
@@ -2365,7 +2365,7 @@ static PyObject *__pyx_f_14_wsgi_lineprof_10LineTiming_hit(struct __pyx_obj_14_w
   return __pyx_r;
 }
 
-/* "_wsgi_lineprof.pyx":49
+/* "extensions.pyx":49
  *             self.total_time += dt
  * 
  *     def as_tuple(self):             # <<<<<<<<<<<<<<
@@ -2374,19 +2374,19 @@ static PyObject *__pyx_f_14_wsgi_lineprof_10LineTiming_hit(struct __pyx_obj_14_w
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_14_wsgi_lineprof_10LineTiming_3as_tuple(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_14_wsgi_lineprof_10LineTiming_3as_tuple(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_10extensions_10LineTiming_3as_tuple(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_10extensions_10LineTiming_3as_tuple(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("as_tuple (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_10LineTiming_2as_tuple(((struct __pyx_obj_14_wsgi_lineprof_LineTiming *)__pyx_v_self));
+  __pyx_r = __pyx_pf_10extensions_10LineTiming_2as_tuple(((struct __pyx_obj_10extensions_LineTiming *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_2as_tuple(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self) {
+static PyObject *__pyx_pf_10extensions_10LineTiming_2as_tuple(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2395,7 +2395,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_2as_tuple(struct __pyx_o
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("as_tuple", 0);
 
-  /* "_wsgi_lineprof.pyx":50
+  /* "extensions.pyx":50
  * 
  *     def as_tuple(self):
  *         return self.lineno, self.n_hits, self.total_time             # <<<<<<<<<<<<<<
@@ -2424,7 +2424,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_2as_tuple(struct __pyx_o
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "_wsgi_lineprof.pyx":49
+  /* "extensions.pyx":49
  *             self.total_time += dt
  * 
  *     def as_tuple(self):             # <<<<<<<<<<<<<<
@@ -2438,7 +2438,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_2as_tuple(struct __pyx_o
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_AddTraceback("_wsgi_lineprof.LineTiming.as_tuple", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.LineTiming.as_tuple", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -2446,7 +2446,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_2as_tuple(struct __pyx_o
   return __pyx_r;
 }
 
-/* "_wsgi_lineprof.pyx":52
+/* "extensions.pyx":52
  *         return self.lineno, self.n_hits, self.total_time
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -2455,19 +2455,19 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_2as_tuple(struct __pyx_o
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_14_wsgi_lineprof_10LineTiming_5__repr__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_14_wsgi_lineprof_10LineTiming_5__repr__(PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_10extensions_10LineTiming_5__repr__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_10extensions_10LineTiming_5__repr__(PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__repr__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_10LineTiming_4__repr__(((struct __pyx_obj_14_wsgi_lineprof_LineTiming *)__pyx_v_self));
+  __pyx_r = __pyx_pf_10extensions_10LineTiming_4__repr__(((struct __pyx_obj_10extensions_LineTiming *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_4__repr__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self) {
+static PyObject *__pyx_pf_10extensions_10LineTiming_4__repr__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2476,7 +2476,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_4__repr__(struct __pyx_o
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("__repr__", 0);
 
-  /* "_wsgi_lineprof.pyx":53
+  /* "extensions.pyx":53
  * 
  *     def __repr__(self):
  *         return '<LineTiming for %r lineno: %r n_hits: %r total_time: %r>' % (             # <<<<<<<<<<<<<<
@@ -2485,7 +2485,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_4__repr__(struct __pyx_o
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "_wsgi_lineprof.pyx":54
+  /* "extensions.pyx":54
  *     def __repr__(self):
  *         return '<LineTiming for %r lineno: %r n_hits: %r total_time: %r>' % (
  *             self.code, self.lineno, self.n_hits, <long>self.total_time)             # <<<<<<<<<<<<<<
@@ -2513,7 +2513,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_4__repr__(struct __pyx_o
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
 
-  /* "_wsgi_lineprof.pyx":53
+  /* "extensions.pyx":53
  * 
  *     def __repr__(self):
  *         return '<LineTiming for %r lineno: %r n_hits: %r total_time: %r>' % (             # <<<<<<<<<<<<<<
@@ -2527,7 +2527,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_4__repr__(struct __pyx_o
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "_wsgi_lineprof.pyx":52
+  /* "extensions.pyx":52
  *         return self.lineno, self.n_hits, self.total_time
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -2541,7 +2541,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_4__repr__(struct __pyx_o
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_AddTraceback("_wsgi_lineprof.LineTiming.__repr__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.LineTiming.__repr__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -2549,7 +2549,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_4__repr__(struct __pyx_o
   return __pyx_r;
 }
 
-/* "_wsgi_lineprof.pyx":34
+/* "extensions.pyx":34
  * 
  * cdef class LineTiming:
  *     cdef public object code             # <<<<<<<<<<<<<<
@@ -2558,19 +2558,19 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_4__repr__(struct __pyx_o
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_14_wsgi_lineprof_10LineTiming_4code_1__get__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_14_wsgi_lineprof_10LineTiming_4code_1__get__(PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_10extensions_10LineTiming_4code_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_10extensions_10LineTiming_4code_1__get__(PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_10LineTiming_4code___get__(((struct __pyx_obj_14_wsgi_lineprof_LineTiming *)__pyx_v_self));
+  __pyx_r = __pyx_pf_10extensions_10LineTiming_4code___get__(((struct __pyx_obj_10extensions_LineTiming *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_4code___get__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self) {
+static PyObject *__pyx_pf_10extensions_10LineTiming_4code___get__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__get__", 0);
@@ -2587,19 +2587,19 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_4code___get__(struct __p
 }
 
 /* Python wrapper */
-static int __pyx_pw_14_wsgi_lineprof_10LineTiming_4code_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
-static int __pyx_pw_14_wsgi_lineprof_10LineTiming_4code_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
+static int __pyx_pw_10extensions_10LineTiming_4code_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
+static int __pyx_pw_10extensions_10LineTiming_4code_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_10LineTiming_4code_2__set__(((struct __pyx_obj_14_wsgi_lineprof_LineTiming *)__pyx_v_self), ((PyObject *)__pyx_v_value));
+  __pyx_r = __pyx_pf_10extensions_10LineTiming_4code_2__set__(((struct __pyx_obj_10extensions_LineTiming *)__pyx_v_self), ((PyObject *)__pyx_v_value));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_14_wsgi_lineprof_10LineTiming_4code_2__set__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self, PyObject *__pyx_v_value) {
+static int __pyx_pf_10extensions_10LineTiming_4code_2__set__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self, PyObject *__pyx_v_value) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__", 0);
@@ -2616,19 +2616,19 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming_4code_2__set__(struct __pyx_ob
 }
 
 /* Python wrapper */
-static int __pyx_pw_14_wsgi_lineprof_10LineTiming_4code_5__del__(PyObject *__pyx_v_self); /*proto*/
-static int __pyx_pw_14_wsgi_lineprof_10LineTiming_4code_5__del__(PyObject *__pyx_v_self) {
+static int __pyx_pw_10extensions_10LineTiming_4code_5__del__(PyObject *__pyx_v_self); /*proto*/
+static int __pyx_pw_10extensions_10LineTiming_4code_5__del__(PyObject *__pyx_v_self) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__del__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_10LineTiming_4code_4__del__(((struct __pyx_obj_14_wsgi_lineprof_LineTiming *)__pyx_v_self));
+  __pyx_r = __pyx_pf_10extensions_10LineTiming_4code_4__del__(((struct __pyx_obj_10extensions_LineTiming *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_14_wsgi_lineprof_10LineTiming_4code_4__del__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self) {
+static int __pyx_pf_10extensions_10LineTiming_4code_4__del__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__del__", 0);
@@ -2644,7 +2644,7 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming_4code_4__del__(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "_wsgi_lineprof.pyx":35
+/* "extensions.pyx":35
  * cdef class LineTiming:
  *     cdef public object code
  *     cdef public int lineno             # <<<<<<<<<<<<<<
@@ -2653,19 +2653,19 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming_4code_4__del__(struct __pyx_ob
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_14_wsgi_lineprof_10LineTiming_6lineno_1__get__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_14_wsgi_lineprof_10LineTiming_6lineno_1__get__(PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_10extensions_10LineTiming_6lineno_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_10extensions_10LineTiming_6lineno_1__get__(PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_10LineTiming_6lineno___get__(((struct __pyx_obj_14_wsgi_lineprof_LineTiming *)__pyx_v_self));
+  __pyx_r = __pyx_pf_10extensions_10LineTiming_6lineno___get__(((struct __pyx_obj_10extensions_LineTiming *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_6lineno___get__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self) {
+static PyObject *__pyx_pf_10extensions_10LineTiming_6lineno___get__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2680,7 +2680,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_6lineno___get__(struct _
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("_wsgi_lineprof.LineTiming.lineno.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.LineTiming.lineno.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -2689,19 +2689,19 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_6lineno___get__(struct _
 }
 
 /* Python wrapper */
-static int __pyx_pw_14_wsgi_lineprof_10LineTiming_6lineno_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
-static int __pyx_pw_14_wsgi_lineprof_10LineTiming_6lineno_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
+static int __pyx_pw_10extensions_10LineTiming_6lineno_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
+static int __pyx_pw_10extensions_10LineTiming_6lineno_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_10LineTiming_6lineno_2__set__(((struct __pyx_obj_14_wsgi_lineprof_LineTiming *)__pyx_v_self), ((PyObject *)__pyx_v_value));
+  __pyx_r = __pyx_pf_10extensions_10LineTiming_6lineno_2__set__(((struct __pyx_obj_10extensions_LineTiming *)__pyx_v_self), ((PyObject *)__pyx_v_value));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_14_wsgi_lineprof_10LineTiming_6lineno_2__set__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self, PyObject *__pyx_v_value) {
+static int __pyx_pf_10extensions_10LineTiming_6lineno_2__set__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self, PyObject *__pyx_v_value) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
@@ -2713,14 +2713,14 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming_6lineno_2__set__(struct __pyx_
   __pyx_r = 0;
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_AddTraceback("_wsgi_lineprof.LineTiming.lineno.__set__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.LineTiming.lineno.__set__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "_wsgi_lineprof.pyx":36
+/* "extensions.pyx":36
  *     cdef public object code
  *     cdef public int lineno
  *     cdef public PY_LONG_LONG total_time             # <<<<<<<<<<<<<<
@@ -2729,19 +2729,19 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming_6lineno_2__set__(struct __pyx_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_14_wsgi_lineprof_10LineTiming_10total_time_1__get__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_14_wsgi_lineprof_10LineTiming_10total_time_1__get__(PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_10extensions_10LineTiming_10total_time_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_10extensions_10LineTiming_10total_time_1__get__(PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_10LineTiming_10total_time___get__(((struct __pyx_obj_14_wsgi_lineprof_LineTiming *)__pyx_v_self));
+  __pyx_r = __pyx_pf_10extensions_10LineTiming_10total_time___get__(((struct __pyx_obj_10extensions_LineTiming *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_10total_time___get__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self) {
+static PyObject *__pyx_pf_10extensions_10LineTiming_10total_time___get__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2756,7 +2756,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_10total_time___get__(str
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("_wsgi_lineprof.LineTiming.total_time.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.LineTiming.total_time.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -2765,19 +2765,19 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_10total_time___get__(str
 }
 
 /* Python wrapper */
-static int __pyx_pw_14_wsgi_lineprof_10LineTiming_10total_time_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
-static int __pyx_pw_14_wsgi_lineprof_10LineTiming_10total_time_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
+static int __pyx_pw_10extensions_10LineTiming_10total_time_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
+static int __pyx_pw_10extensions_10LineTiming_10total_time_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_10LineTiming_10total_time_2__set__(((struct __pyx_obj_14_wsgi_lineprof_LineTiming *)__pyx_v_self), ((PyObject *)__pyx_v_value));
+  __pyx_r = __pyx_pf_10extensions_10LineTiming_10total_time_2__set__(((struct __pyx_obj_10extensions_LineTiming *)__pyx_v_self), ((PyObject *)__pyx_v_value));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_14_wsgi_lineprof_10LineTiming_10total_time_2__set__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self, PyObject *__pyx_v_value) {
+static int __pyx_pf_10extensions_10LineTiming_10total_time_2__set__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self, PyObject *__pyx_v_value) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   PY_LONG_LONG __pyx_t_1;
@@ -2789,14 +2789,14 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming_10total_time_2__set__(struct _
   __pyx_r = 0;
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_AddTraceback("_wsgi_lineprof.LineTiming.total_time.__set__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.LineTiming.total_time.__set__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "_wsgi_lineprof.pyx":37
+/* "extensions.pyx":37
  *     cdef public int lineno
  *     cdef public PY_LONG_LONG total_time
  *     cdef public long n_hits             # <<<<<<<<<<<<<<
@@ -2805,19 +2805,19 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming_10total_time_2__set__(struct _
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_14_wsgi_lineprof_10LineTiming_6n_hits_1__get__(PyObject *__pyx_v_self); /*proto*/
-static PyObject *__pyx_pw_14_wsgi_lineprof_10LineTiming_6n_hits_1__get__(PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_10extensions_10LineTiming_6n_hits_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_10extensions_10LineTiming_6n_hits_1__get__(PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_10LineTiming_6n_hits___get__(((struct __pyx_obj_14_wsgi_lineprof_LineTiming *)__pyx_v_self));
+  __pyx_r = __pyx_pf_10extensions_10LineTiming_6n_hits___get__(((struct __pyx_obj_10extensions_LineTiming *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_6n_hits___get__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self) {
+static PyObject *__pyx_pf_10extensions_10LineTiming_6n_hits___get__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2832,7 +2832,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_6n_hits___get__(struct _
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("_wsgi_lineprof.LineTiming.n_hits.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.LineTiming.n_hits.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -2841,19 +2841,19 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_6n_hits___get__(struct _
 }
 
 /* Python wrapper */
-static int __pyx_pw_14_wsgi_lineprof_10LineTiming_6n_hits_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
-static int __pyx_pw_14_wsgi_lineprof_10LineTiming_6n_hits_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
+static int __pyx_pw_10extensions_10LineTiming_6n_hits_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value); /*proto*/
+static int __pyx_pw_10extensions_10LineTiming_6n_hits_3__set__(PyObject *__pyx_v_self, PyObject *__pyx_v_value) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_10LineTiming_6n_hits_2__set__(((struct __pyx_obj_14_wsgi_lineprof_LineTiming *)__pyx_v_self), ((PyObject *)__pyx_v_value));
+  __pyx_r = __pyx_pf_10extensions_10LineTiming_6n_hits_2__set__(((struct __pyx_obj_10extensions_LineTiming *)__pyx_v_self), ((PyObject *)__pyx_v_value));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_14_wsgi_lineprof_10LineTiming_6n_hits_2__set__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self, PyObject *__pyx_v_value) {
+static int __pyx_pf_10extensions_10LineTiming_6n_hits_2__set__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self, PyObject *__pyx_v_value) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   long __pyx_t_1;
@@ -2865,7 +2865,7 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming_6n_hits_2__set__(struct __pyx_
   __pyx_r = 0;
   goto __pyx_L0;
   __pyx_L1_error:;
-  __Pyx_AddTraceback("_wsgi_lineprof.LineTiming.n_hits.__set__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.LineTiming.n_hits.__set__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -2879,19 +2879,19 @@ static int __pyx_pf_14_wsgi_lineprof_10LineTiming_6n_hits_2__set__(struct __pyx_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_14_wsgi_lineprof_10LineTiming_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_14_wsgi_lineprof_10LineTiming_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_10extensions_10LineTiming_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_10extensions_10LineTiming_7__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_10LineTiming_6__reduce_cython__(((struct __pyx_obj_14_wsgi_lineprof_LineTiming *)__pyx_v_self));
+  __pyx_r = __pyx_pf_10extensions_10LineTiming_6__reduce_cython__(((struct __pyx_obj_10extensions_LineTiming *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_6__reduce_cython__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self) {
+static PyObject *__pyx_pf_10extensions_10LineTiming_6__reduce_cython__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self) {
   int __pyx_v_use_setstate;
   PyObject *__pyx_v_state = NULL;
   PyObject *__pyx_v__dict = NULL;
@@ -3110,7 +3110,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_6__reduce_cython__(struc
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_AddTraceback("_wsgi_lineprof.LineTiming.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.LineTiming.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_state);
@@ -3128,19 +3128,19 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_6__reduce_cython__(struc
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_14_wsgi_lineprof_10LineTiming_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_14_wsgi_lineprof_10LineTiming_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_10extensions_10LineTiming_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_10extensions_10LineTiming_9__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_10LineTiming_8__setstate_cython__(((struct __pyx_obj_14_wsgi_lineprof_LineTiming *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_10extensions_10LineTiming_8__setstate_cython__(((struct __pyx_obj_10extensions_LineTiming *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_8__setstate_cython__(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_10extensions_10LineTiming_8__setstate_cython__(struct __pyx_obj_10extensions_LineTiming *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3152,7 +3152,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_8__setstate_cython__(str
  *     __pyx_unpickle_LineTiming__set_state(self, __pyx_state)             # <<<<<<<<<<<<<<
  */
   if (!(likely(PyTuple_CheckExact(__pyx_v___pyx_state))||((__pyx_v___pyx_state) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v___pyx_state)->tp_name), 0))) __PYX_ERR(1, 15, __pyx_L1_error)
-  __pyx_t_1 = __pyx_f_14_wsgi_lineprof___pyx_unpickle_LineTiming__set_state(__pyx_v_self, ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 15, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_10extensions___pyx_unpickle_LineTiming__set_state(__pyx_v_self, ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
@@ -3168,7 +3168,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_8__setstate_cython__(str
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("_wsgi_lineprof.LineTiming.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.LineTiming.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -3176,7 +3176,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_8__setstate_cython__(str
   return __pyx_r;
 }
 
-/* "_wsgi_lineprof.pyx":61
+/* "extensions.pyx":61
  *     cdef PY_LONG_LONG time
  * 
  *     def __cinit__(self, int f_lineno, PY_LONG_LONG time):             # <<<<<<<<<<<<<<
@@ -3185,8 +3185,8 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_10LineTiming_8__setstate_cython__(str
  */
 
 /* Python wrapper */
-static int __pyx_pw_14_wsgi_lineprof_8LastTime_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static int __pyx_pw_14_wsgi_lineprof_8LastTime_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static int __pyx_pw_10extensions_8LastTime_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_10extensions_8LastTime_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   int __pyx_v_f_lineno;
   PY_LONG_LONG __pyx_v_time;
   int __pyx_r;
@@ -3234,23 +3234,23 @@ static int __pyx_pw_14_wsgi_lineprof_8LastTime_1__cinit__(PyObject *__pyx_v_self
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 61, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("_wsgi_lineprof.LastTime.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.LastTime.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_8LastTime___cinit__(((struct __pyx_obj_14_wsgi_lineprof_LastTime *)__pyx_v_self), __pyx_v_f_lineno, __pyx_v_time);
+  __pyx_r = __pyx_pf_10extensions_8LastTime___cinit__(((struct __pyx_obj_10extensions_LastTime *)__pyx_v_self), __pyx_v_f_lineno, __pyx_v_time);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_14_wsgi_lineprof_8LastTime___cinit__(struct __pyx_obj_14_wsgi_lineprof_LastTime *__pyx_v_self, int __pyx_v_f_lineno, PY_LONG_LONG __pyx_v_time) {
+static int __pyx_pf_10extensions_8LastTime___cinit__(struct __pyx_obj_10extensions_LastTime *__pyx_v_self, int __pyx_v_f_lineno, PY_LONG_LONG __pyx_v_time) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "_wsgi_lineprof.pyx":62
+  /* "extensions.pyx":62
  * 
  *     def __cinit__(self, int f_lineno, PY_LONG_LONG time):
  *         self.f_lineno = f_lineno             # <<<<<<<<<<<<<<
@@ -3259,7 +3259,7 @@ static int __pyx_pf_14_wsgi_lineprof_8LastTime___cinit__(struct __pyx_obj_14_wsg
  */
   __pyx_v_self->f_lineno = __pyx_v_f_lineno;
 
-  /* "_wsgi_lineprof.pyx":63
+  /* "extensions.pyx":63
  *     def __cinit__(self, int f_lineno, PY_LONG_LONG time):
  *         self.f_lineno = f_lineno
  *         self.time = time             # <<<<<<<<<<<<<<
@@ -3268,7 +3268,7 @@ static int __pyx_pf_14_wsgi_lineprof_8LastTime___cinit__(struct __pyx_obj_14_wsg
  */
   __pyx_v_self->time = __pyx_v_time;
 
-  /* "_wsgi_lineprof.pyx":61
+  /* "extensions.pyx":61
  *     cdef PY_LONG_LONG time
  * 
  *     def __cinit__(self, int f_lineno, PY_LONG_LONG time):             # <<<<<<<<<<<<<<
@@ -3289,19 +3289,19 @@ static int __pyx_pf_14_wsgi_lineprof_8LastTime___cinit__(struct __pyx_obj_14_wsg
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_14_wsgi_lineprof_8LastTime_3__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_14_wsgi_lineprof_8LastTime_3__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_10extensions_8LastTime_3__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_10extensions_8LastTime_3__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_8LastTime_2__reduce_cython__(((struct __pyx_obj_14_wsgi_lineprof_LastTime *)__pyx_v_self));
+  __pyx_r = __pyx_pf_10extensions_8LastTime_2__reduce_cython__(((struct __pyx_obj_10extensions_LastTime *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14_wsgi_lineprof_8LastTime_2__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_14_wsgi_lineprof_LastTime *__pyx_v_self) {
+static PyObject *__pyx_pf_10extensions_8LastTime_2__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_10extensions_LastTime *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3328,7 +3328,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_8LastTime_2__reduce_cython__(CYTHON_U
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("_wsgi_lineprof.LastTime.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.LastTime.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -3343,19 +3343,19 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_8LastTime_2__reduce_cython__(CYTHON_U
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_14_wsgi_lineprof_8LastTime_5__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_14_wsgi_lineprof_8LastTime_5__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_10extensions_8LastTime_5__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_10extensions_8LastTime_5__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_8LastTime_4__setstate_cython__(((struct __pyx_obj_14_wsgi_lineprof_LastTime *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_10extensions_8LastTime_4__setstate_cython__(((struct __pyx_obj_10extensions_LastTime *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14_wsgi_lineprof_8LastTime_4__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_14_wsgi_lineprof_LastTime *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_10extensions_8LastTime_4__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_10extensions_LastTime *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3382,14 +3382,14 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_8LastTime_4__setstate_cython__(CYTHON
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("_wsgi_lineprof.LastTime.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.LastTime.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "_wsgi_lineprof.pyx":66
+/* "extensions.pyx":66
  * 
  * 
  * cdef int python_trace_callback(object self_, PyFrameObject *py_frame, int what,             # <<<<<<<<<<<<<<
@@ -3397,12 +3397,12 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_8LastTime_4__setstate_cython__(CYTHON
  *     cdef LineProfiler self
  */
 
-static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self_, PyFrameObject *__pyx_v_py_frame, int __pyx_v_what, CYTHON_UNUSED PyObject *__pyx_v_arg) {
-  struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v_self = 0;
+static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, PyFrameObject *__pyx_v_py_frame, int __pyx_v_what, CYTHON_UNUSED PyObject *__pyx_v_arg) {
+  struct __pyx_obj_10extensions_LineProfiler *__pyx_v_self = 0;
   PyObject *__pyx_v_results = 0;
   PyObject *__pyx_v_last_time = 0;
-  struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v_entry = 0;
-  struct __pyx_obj_14_wsgi_lineprof_LastTime *__pyx_v_old = 0;
+  struct __pyx_obj_10extensions_LineTiming *__pyx_v_entry = 0;
+  struct __pyx_obj_10extensions_LastTime *__pyx_v_old = 0;
   PyObject *__pyx_v_code = 0;
   PY_LONG_LONG __pyx_v_time;
   int __pyx_v_lineno;
@@ -3416,7 +3416,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
   PyObject *__pyx_t_6 = NULL;
   __Pyx_RefNannySetupContext("python_trace_callback", 0);
 
-  /* "_wsgi_lineprof.pyx":77
+  /* "extensions.pyx":77
  *     cdef int lineno
  * 
  *     if what != PyTrace_LINE and what != PyTrace_RETURN:             # <<<<<<<<<<<<<<
@@ -3434,7 +3434,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "_wsgi_lineprof.pyx":78
+    /* "extensions.pyx":78
  * 
  *     if what != PyTrace_LINE and what != PyTrace_RETURN:
  *         return 0             # <<<<<<<<<<<<<<
@@ -3444,7 +3444,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
     __pyx_r = 0;
     goto __pyx_L0;
 
-    /* "_wsgi_lineprof.pyx":77
+    /* "extensions.pyx":77
  *     cdef int lineno
  * 
  *     if what != PyTrace_LINE and what != PyTrace_RETURN:             # <<<<<<<<<<<<<<
@@ -3453,7 +3453,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
  */
   }
 
-  /* "_wsgi_lineprof.pyx":80
+  /* "extensions.pyx":80
  *         return 0
  * 
  *     time = hpTimer()             # <<<<<<<<<<<<<<
@@ -3462,7 +3462,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
  */
   __pyx_v_time = hpTimer();
 
-  /* "_wsgi_lineprof.pyx":82
+  /* "extensions.pyx":82
  *     time = hpTimer()
  * 
  *     self = <LineProfiler>self_             # <<<<<<<<<<<<<<
@@ -3471,10 +3471,10 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
  */
   __pyx_t_3 = __pyx_v_self_;
   __Pyx_INCREF(__pyx_t_3);
-  __pyx_v_self = ((struct __pyx_obj_14_wsgi_lineprof_LineProfiler *)__pyx_t_3);
+  __pyx_v_self = ((struct __pyx_obj_10extensions_LineProfiler *)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "_wsgi_lineprof.pyx":83
+  /* "extensions.pyx":83
  * 
  *     self = <LineProfiler>self_
  *     last_time = self.last_time             # <<<<<<<<<<<<<<
@@ -3486,7 +3486,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
   __pyx_v_last_time = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "_wsgi_lineprof.pyx":84
+  /* "extensions.pyx":84
  *     self = <LineProfiler>self_
  *     last_time = self.last_time
  *     results = self.results             # <<<<<<<<<<<<<<
@@ -3498,7 +3498,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
   __pyx_v_results = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "_wsgi_lineprof.pyx":85
+  /* "extensions.pyx":85
  *     last_time = self.last_time
  *     results = self.results
  *     code = <object>py_frame.f_code             # <<<<<<<<<<<<<<
@@ -3510,7 +3510,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
   __pyx_v_code = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "_wsgi_lineprof.pyx":87
+  /* "extensions.pyx":87
  *     code = <object>py_frame.f_code
  * 
  *     if code not in results:             # <<<<<<<<<<<<<<
@@ -3525,7 +3525,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "_wsgi_lineprof.pyx":88
+    /* "extensions.pyx":88
  * 
  *     if code not in results:
  *         results[code] = {}             # <<<<<<<<<<<<<<
@@ -3541,7 +3541,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
     if (unlikely(PyDict_SetItem(__pyx_v_results, __pyx_v_code, __pyx_t_3) < 0)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "_wsgi_lineprof.pyx":87
+    /* "extensions.pyx":87
  *     code = <object>py_frame.f_code
  * 
  *     if code not in results:             # <<<<<<<<<<<<<<
@@ -3550,7 +3550,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
  */
   }
 
-  /* "_wsgi_lineprof.pyx":90
+  /* "extensions.pyx":90
  *         results[code] = {}
  * 
  *     if code in last_time:             # <<<<<<<<<<<<<<
@@ -3565,7 +3565,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
   __pyx_t_1 = (__pyx_t_2 != 0);
   if (__pyx_t_1) {
 
-    /* "_wsgi_lineprof.pyx":91
+    /* "extensions.pyx":91
  * 
  *     if code in last_time:
  *         old = last_time[code]             # <<<<<<<<<<<<<<
@@ -3578,11 +3578,11 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
     }
     __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_last_time, __pyx_v_code); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 91, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_14_wsgi_lineprof_LastTime))))) __PYX_ERR(0, 91, __pyx_L1_error)
-    __pyx_v_old = ((struct __pyx_obj_14_wsgi_lineprof_LastTime *)__pyx_t_3);
+    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_10extensions_LastTime))))) __PYX_ERR(0, 91, __pyx_L1_error)
+    __pyx_v_old = ((struct __pyx_obj_10extensions_LastTime *)__pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "_wsgi_lineprof.pyx":92
+    /* "extensions.pyx":92
  *     if code in last_time:
  *         old = last_time[code]
  *         lineno = old.f_lineno             # <<<<<<<<<<<<<<
@@ -3592,7 +3592,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
     __pyx_t_4 = __pyx_v_old->f_lineno;
     __pyx_v_lineno = __pyx_t_4;
 
-    /* "_wsgi_lineprof.pyx":94
+    /* "extensions.pyx":94
  *         lineno = old.f_lineno
  * 
  *         if lineno not in results[code]:             # <<<<<<<<<<<<<<
@@ -3613,7 +3613,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
     __pyx_t_2 = (__pyx_t_1 != 0);
     if (__pyx_t_2) {
 
-      /* "_wsgi_lineprof.pyx":95
+      /* "extensions.pyx":95
  * 
  *         if lineno not in results[code]:
  *             results[code][lineno] = entry = LineTiming(code, lineno)             # <<<<<<<<<<<<<<
@@ -3630,7 +3630,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
       __Pyx_GIVEREF(__pyx_t_5);
       PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_5);
       __pyx_t_5 = 0;
-      __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_14_wsgi_lineprof_LineTiming), __pyx_t_3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 95, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_10extensions_LineTiming), __pyx_t_3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 95, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       if (unlikely(__pyx_v_results == Py_None)) {
@@ -3642,10 +3642,10 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
       if (unlikely(__Pyx_SetItemInt(__pyx_t_3, __pyx_v_lineno, __pyx_t_5, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 95, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_INCREF(__pyx_t_5);
-      __pyx_v_entry = ((struct __pyx_obj_14_wsgi_lineprof_LineTiming *)__pyx_t_5);
+      __pyx_v_entry = ((struct __pyx_obj_10extensions_LineTiming *)__pyx_t_5);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-      /* "_wsgi_lineprof.pyx":94
+      /* "extensions.pyx":94
  *         lineno = old.f_lineno
  * 
  *         if lineno not in results[code]:             # <<<<<<<<<<<<<<
@@ -3655,7 +3655,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
       goto __pyx_L8;
     }
 
-    /* "_wsgi_lineprof.pyx":97
+    /* "extensions.pyx":97
  *             results[code][lineno] = entry = LineTiming(code, lineno)
  *         else:
  *             entry = results[code][lineno]             # <<<<<<<<<<<<<<
@@ -3672,24 +3672,24 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
       __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_5, __pyx_v_lineno, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 97, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_14_wsgi_lineprof_LineTiming))))) __PYX_ERR(0, 97, __pyx_L1_error)
-      __pyx_v_entry = ((struct __pyx_obj_14_wsgi_lineprof_LineTiming *)__pyx_t_3);
+      if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_10extensions_LineTiming))))) __PYX_ERR(0, 97, __pyx_L1_error)
+      __pyx_v_entry = ((struct __pyx_obj_10extensions_LineTiming *)__pyx_t_3);
       __pyx_t_3 = 0;
     }
     __pyx_L8:;
 
-    /* "_wsgi_lineprof.pyx":99
+    /* "extensions.pyx":99
  *             entry = results[code][lineno]
  * 
  *         entry.hit(time - old.time)             # <<<<<<<<<<<<<<
  * 
  *         if what == PyTrace_RETURN:
  */
-    __pyx_t_3 = ((struct __pyx_vtabstruct_14_wsgi_lineprof_LineTiming *)__pyx_v_entry->__pyx_vtab)->hit(__pyx_v_entry, (__pyx_v_time - __pyx_v_old->time)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 99, __pyx_L1_error)
+    __pyx_t_3 = ((struct __pyx_vtabstruct_10extensions_LineTiming *)__pyx_v_entry->__pyx_vtab)->hit(__pyx_v_entry, (__pyx_v_time - __pyx_v_old->time)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 99, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "_wsgi_lineprof.pyx":101
+    /* "extensions.pyx":101
  *         entry.hit(time - old.time)
  * 
  *         if what == PyTrace_RETURN:             # <<<<<<<<<<<<<<
@@ -3699,7 +3699,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
     __pyx_t_2 = ((__pyx_v_what == PyTrace_RETURN) != 0);
     if (__pyx_t_2) {
 
-      /* "_wsgi_lineprof.pyx":102
+      /* "extensions.pyx":102
  * 
  *         if what == PyTrace_RETURN:
  *             del last_time[code]             # <<<<<<<<<<<<<<
@@ -3712,7 +3712,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
       }
       if (unlikely(PyDict_DelItem(__pyx_v_last_time, __pyx_v_code) < 0)) __PYX_ERR(0, 102, __pyx_L1_error)
 
-      /* "_wsgi_lineprof.pyx":101
+      /* "extensions.pyx":101
  *         entry.hit(time - old.time)
  * 
  *         if what == PyTrace_RETURN:             # <<<<<<<<<<<<<<
@@ -3721,7 +3721,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
  */
     }
 
-    /* "_wsgi_lineprof.pyx":90
+    /* "extensions.pyx":90
  *         results[code] = {}
  * 
  *     if code in last_time:             # <<<<<<<<<<<<<<
@@ -3730,7 +3730,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
  */
   }
 
-  /* "_wsgi_lineprof.pyx":104
+  /* "extensions.pyx":104
  *             del last_time[code]
  * 
  *     if what == PyTrace_LINE:             # <<<<<<<<<<<<<<
@@ -3740,7 +3740,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
   __pyx_t_2 = ((__pyx_v_what == PyTrace_LINE) != 0);
   if (__pyx_t_2) {
 
-    /* "_wsgi_lineprof.pyx":105
+    /* "extensions.pyx":105
  * 
  *     if what == PyTrace_LINE:
  *         last_time[code] = LastTime(py_frame.f_lineno, hpTimer())             # <<<<<<<<<<<<<<
@@ -3759,7 +3759,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
     PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_5);
     __pyx_t_3 = 0;
     __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_14_wsgi_lineprof_LastTime), __pyx_t_6, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_10extensions_LastTime), __pyx_t_6, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     if (unlikely(__pyx_v_last_time == Py_None)) {
@@ -3769,7 +3769,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
     if (unlikely(PyDict_SetItem(__pyx_v_last_time, __pyx_v_code, __pyx_t_5) < 0)) __PYX_ERR(0, 105, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "_wsgi_lineprof.pyx":104
+    /* "extensions.pyx":104
  *             del last_time[code]
  * 
  *     if what == PyTrace_LINE:             # <<<<<<<<<<<<<<
@@ -3778,7 +3778,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
  */
   }
 
-  /* "_wsgi_lineprof.pyx":107
+  /* "extensions.pyx":107
  *         last_time[code] = LastTime(py_frame.f_lineno, hpTimer())
  * 
  *     return 0             # <<<<<<<<<<<<<<
@@ -3786,7 +3786,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
   __pyx_r = 0;
   goto __pyx_L0;
 
-  /* "_wsgi_lineprof.pyx":66
+  /* "extensions.pyx":66
  * 
  * 
  * cdef int python_trace_callback(object self_, PyFrameObject *py_frame, int what,             # <<<<<<<<<<<<<<
@@ -3799,7 +3799,7 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_WriteUnraisable("_wsgi_lineprof.python_trace_callback", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_WriteUnraisable("extensions.python_trace_callback", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF((PyObject *)__pyx_v_self);
@@ -3819,9 +3819,9 @@ static int __pyx_f_14_wsgi_lineprof_python_trace_callback(PyObject *__pyx_v_self
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_14_wsgi_lineprof_1__pyx_unpickle_LineProfiler(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_14_wsgi_lineprof_1__pyx_unpickle_LineProfiler = {"__pyx_unpickle_LineProfiler", (PyCFunction)__pyx_pw_14_wsgi_lineprof_1__pyx_unpickle_LineProfiler, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_14_wsgi_lineprof_1__pyx_unpickle_LineProfiler(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_10extensions_1__pyx_unpickle_LineProfiler(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_10extensions_1__pyx_unpickle_LineProfiler = {"__pyx_unpickle_LineProfiler", (PyCFunction)__pyx_pw_10extensions_1__pyx_unpickle_LineProfiler, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_10extensions_1__pyx_unpickle_LineProfiler(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v___pyx_type = 0;
   long __pyx_v___pyx_checksum;
   PyObject *__pyx_v___pyx_state = 0;
@@ -3880,18 +3880,18 @@ static PyObject *__pyx_pw_14_wsgi_lineprof_1__pyx_unpickle_LineProfiler(PyObject
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_LineProfiler", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 1, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("_wsgi_lineprof.__pyx_unpickle_LineProfiler", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.__pyx_unpickle_LineProfiler", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_14_wsgi_lineprof___pyx_unpickle_LineProfiler(__pyx_self, __pyx_v___pyx_type, __pyx_v___pyx_checksum, __pyx_v___pyx_state);
+  __pyx_r = __pyx_pf_10extensions___pyx_unpickle_LineProfiler(__pyx_self, __pyx_v___pyx_type, __pyx_v___pyx_checksum, __pyx_v___pyx_state);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14_wsgi_lineprof___pyx_unpickle_LineProfiler(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_10extensions___pyx_unpickle_LineProfiler(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_v___pyx_PickleError = NULL;
   PyObject *__pyx_v___pyx_result = NULL;
   PyObject *__pyx_r = NULL;
@@ -4014,7 +4014,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof___pyx_unpickle_LineProfiler(CYTHON_UN
  *     if __pyx_state is not None:
  *         __pyx_unpickle_LineProfiler__set_state(<LineProfiler> __pyx_result, __pyx_state)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_ptype_14_wsgi_lineprof_LineProfiler), __pyx_n_s_new); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 5, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_ptype_10extensions_LineProfiler), __pyx_n_s_new); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -4081,7 +4081,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof___pyx_unpickle_LineProfiler(CYTHON_UN
  * cdef __pyx_unpickle_LineProfiler__set_state(LineProfiler __pyx_result, tuple __pyx_state):
  */
     if (!(likely(PyTuple_CheckExact(__pyx_v___pyx_state))||((__pyx_v___pyx_state) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v___pyx_state)->tp_name), 0))) __PYX_ERR(1, 7, __pyx_L1_error)
-    __pyx_t_3 = __pyx_f_14_wsgi_lineprof___pyx_unpickle_LineProfiler__set_state(((struct __pyx_obj_14_wsgi_lineprof_LineProfiler *)__pyx_v___pyx_result), ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 7, __pyx_L1_error)
+    __pyx_t_3 = __pyx_f_10extensions___pyx_unpickle_LineProfiler__set_state(((struct __pyx_obj_10extensions_LineProfiler *)__pyx_v___pyx_result), ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 7, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
@@ -4119,7 +4119,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof___pyx_unpickle_LineProfiler(CYTHON_UN
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_AddTraceback("_wsgi_lineprof.__pyx_unpickle_LineProfiler", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.__pyx_unpickle_LineProfiler", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v___pyx_PickleError);
@@ -4137,7 +4137,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof___pyx_unpickle_LineProfiler(CYTHON_UN
  *     if len(__pyx_state) > 2 and hasattr(__pyx_result, '__dict__'):
  */
 
-static PyObject *__pyx_f_14_wsgi_lineprof___pyx_unpickle_LineProfiler__set_state(struct __pyx_obj_14_wsgi_lineprof_LineProfiler *__pyx_v___pyx_result, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_f_10extensions___pyx_unpickle_LineProfiler__set_state(struct __pyx_obj_10extensions_LineProfiler *__pyx_v___pyx_result, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4295,7 +4295,7 @@ static PyObject *__pyx_f_14_wsgi_lineprof___pyx_unpickle_LineProfiler__set_state
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_8);
   __Pyx_XDECREF(__pyx_t_9);
-  __Pyx_AddTraceback("_wsgi_lineprof.__pyx_unpickle_LineProfiler__set_state", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.__pyx_unpickle_LineProfiler__set_state", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -4310,9 +4310,9 @@ static PyObject *__pyx_f_14_wsgi_lineprof___pyx_unpickle_LineProfiler__set_state
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_14_wsgi_lineprof_3__pyx_unpickle_LineTiming(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_14_wsgi_lineprof_3__pyx_unpickle_LineTiming = {"__pyx_unpickle_LineTiming", (PyCFunction)__pyx_pw_14_wsgi_lineprof_3__pyx_unpickle_LineTiming, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_14_wsgi_lineprof_3__pyx_unpickle_LineTiming(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_10extensions_3__pyx_unpickle_LineTiming(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_10extensions_3__pyx_unpickle_LineTiming = {"__pyx_unpickle_LineTiming", (PyCFunction)__pyx_pw_10extensions_3__pyx_unpickle_LineTiming, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_10extensions_3__pyx_unpickle_LineTiming(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v___pyx_type = 0;
   long __pyx_v___pyx_checksum;
   PyObject *__pyx_v___pyx_state = 0;
@@ -4371,18 +4371,18 @@ static PyObject *__pyx_pw_14_wsgi_lineprof_3__pyx_unpickle_LineTiming(PyObject *
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("__pyx_unpickle_LineTiming", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 1, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("_wsgi_lineprof.__pyx_unpickle_LineTiming", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.__pyx_unpickle_LineTiming", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_14_wsgi_lineprof_2__pyx_unpickle_LineTiming(__pyx_self, __pyx_v___pyx_type, __pyx_v___pyx_checksum, __pyx_v___pyx_state);
+  __pyx_r = __pyx_pf_10extensions_2__pyx_unpickle_LineTiming(__pyx_self, __pyx_v___pyx_type, __pyx_v___pyx_checksum, __pyx_v___pyx_state);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14_wsgi_lineprof_2__pyx_unpickle_LineTiming(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_10extensions_2__pyx_unpickle_LineTiming(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_v___pyx_PickleError = NULL;
   PyObject *__pyx_v___pyx_result = NULL;
   PyObject *__pyx_r = NULL;
@@ -4505,7 +4505,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_2__pyx_unpickle_LineTiming(CYTHON_UNU
  *     if __pyx_state is not None:
  *         __pyx_unpickle_LineTiming__set_state(<LineTiming> __pyx_result, __pyx_state)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_ptype_14_wsgi_lineprof_LineTiming), __pyx_n_s_new); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 5, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_ptype_10extensions_LineTiming), __pyx_n_s_new); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_6 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -4572,7 +4572,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_2__pyx_unpickle_LineTiming(CYTHON_UNU
  * cdef __pyx_unpickle_LineTiming__set_state(LineTiming __pyx_result, tuple __pyx_state):
  */
     if (!(likely(PyTuple_CheckExact(__pyx_v___pyx_state))||((__pyx_v___pyx_state) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v___pyx_state)->tp_name), 0))) __PYX_ERR(1, 7, __pyx_L1_error)
-    __pyx_t_3 = __pyx_f_14_wsgi_lineprof___pyx_unpickle_LineTiming__set_state(((struct __pyx_obj_14_wsgi_lineprof_LineTiming *)__pyx_v___pyx_result), ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 7, __pyx_L1_error)
+    __pyx_t_3 = __pyx_f_10extensions___pyx_unpickle_LineTiming__set_state(((struct __pyx_obj_10extensions_LineTiming *)__pyx_v___pyx_result), ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 7, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
@@ -4610,7 +4610,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_2__pyx_unpickle_LineTiming(CYTHON_UNU
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_AddTraceback("_wsgi_lineprof.__pyx_unpickle_LineTiming", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.__pyx_unpickle_LineTiming", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v___pyx_PickleError);
@@ -4628,7 +4628,7 @@ static PyObject *__pyx_pf_14_wsgi_lineprof_2__pyx_unpickle_LineTiming(CYTHON_UNU
  *     if len(__pyx_state) > 4 and hasattr(__pyx_result, '__dict__'):
  */
 
-static PyObject *__pyx_f_14_wsgi_lineprof___pyx_unpickle_LineTiming__set_state(struct __pyx_obj_14_wsgi_lineprof_LineTiming *__pyx_v___pyx_result, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_f_10extensions___pyx_unpickle_LineTiming__set_state(struct __pyx_obj_10extensions_LineTiming *__pyx_v___pyx_result, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4803,7 +4803,7 @@ static PyObject *__pyx_f_14_wsgi_lineprof___pyx_unpickle_LineTiming__set_state(s
   __Pyx_XDECREF(__pyx_t_10);
   __Pyx_XDECREF(__pyx_t_11);
   __Pyx_XDECREF(__pyx_t_12);
-  __Pyx_AddTraceback("_wsgi_lineprof.__pyx_unpickle_LineTiming__set_state", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("extensions.__pyx_unpickle_LineTiming__set_state", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -4811,8 +4811,8 @@ static PyObject *__pyx_f_14_wsgi_lineprof___pyx_unpickle_LineTiming__set_state(s
   return __pyx_r;
 }
 
-static PyObject *__pyx_tp_new_14_wsgi_lineprof_LineProfiler(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
-  struct __pyx_obj_14_wsgi_lineprof_LineProfiler *p;
+static PyObject *__pyx_tp_new_10extensions_LineProfiler(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+  struct __pyx_obj_10extensions_LineProfiler *p;
   PyObject *o;
   if (likely((t->tp_flags & Py_TPFLAGS_IS_ABSTRACT) == 0)) {
     o = (*t->tp_alloc)(t, 0);
@@ -4820,14 +4820,14 @@ static PyObject *__pyx_tp_new_14_wsgi_lineprof_LineProfiler(PyTypeObject *t, CYT
     o = (PyObject *) PyBaseObject_Type.tp_new(t, __pyx_empty_tuple, 0);
   }
   if (unlikely(!o)) return 0;
-  p = ((struct __pyx_obj_14_wsgi_lineprof_LineProfiler *)o);
+  p = ((struct __pyx_obj_10extensions_LineProfiler *)o);
   p->results = ((PyObject*)Py_None); Py_INCREF(Py_None);
   p->last_time = ((PyObject*)Py_None); Py_INCREF(Py_None);
   return o;
 }
 
-static void __pyx_tp_dealloc_14_wsgi_lineprof_LineProfiler(PyObject *o) {
-  struct __pyx_obj_14_wsgi_lineprof_LineProfiler *p = (struct __pyx_obj_14_wsgi_lineprof_LineProfiler *)o;
+static void __pyx_tp_dealloc_10extensions_LineProfiler(PyObject *o) {
+  struct __pyx_obj_10extensions_LineProfiler *p = (struct __pyx_obj_10extensions_LineProfiler *)o;
   #if CYTHON_USE_TP_FINALIZE
   if (unlikely(PyType_HasFeature(Py_TYPE(o), Py_TPFLAGS_HAVE_FINALIZE) && Py_TYPE(o)->tp_finalize) && !_PyGC_FINALIZED(o)) {
     if (PyObject_CallFinalizerFromDealloc(o)) return;
@@ -4839,9 +4839,9 @@ static void __pyx_tp_dealloc_14_wsgi_lineprof_LineProfiler(PyObject *o) {
   (*Py_TYPE(o)->tp_free)(o);
 }
 
-static int __pyx_tp_traverse_14_wsgi_lineprof_LineProfiler(PyObject *o, visitproc v, void *a) {
+static int __pyx_tp_traverse_10extensions_LineProfiler(PyObject *o, visitproc v, void *a) {
   int e;
-  struct __pyx_obj_14_wsgi_lineprof_LineProfiler *p = (struct __pyx_obj_14_wsgi_lineprof_LineProfiler *)o;
+  struct __pyx_obj_10extensions_LineProfiler *p = (struct __pyx_obj_10extensions_LineProfiler *)o;
   if (p->results) {
     e = (*v)(p->results, a); if (e) return e;
   }
@@ -4851,9 +4851,9 @@ static int __pyx_tp_traverse_14_wsgi_lineprof_LineProfiler(PyObject *o, visitpro
   return 0;
 }
 
-static int __pyx_tp_clear_14_wsgi_lineprof_LineProfiler(PyObject *o) {
+static int __pyx_tp_clear_10extensions_LineProfiler(PyObject *o) {
   PyObject* tmp;
-  struct __pyx_obj_14_wsgi_lineprof_LineProfiler *p = (struct __pyx_obj_14_wsgi_lineprof_LineProfiler *)o;
+  struct __pyx_obj_10extensions_LineProfiler *p = (struct __pyx_obj_10extensions_LineProfiler *)o;
   tmp = ((PyObject*)p->results);
   p->results = ((PyObject*)Py_None); Py_INCREF(Py_None);
   Py_XDECREF(tmp);
@@ -4863,53 +4863,53 @@ static int __pyx_tp_clear_14_wsgi_lineprof_LineProfiler(PyObject *o) {
   return 0;
 }
 
-static PyObject *__pyx_getprop_14_wsgi_lineprof_12LineProfiler_results(PyObject *o, CYTHON_UNUSED void *x) {
-  return __pyx_pw_14_wsgi_lineprof_12LineProfiler_7results_1__get__(o);
+static PyObject *__pyx_getprop_10extensions_12LineProfiler_results(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_10extensions_12LineProfiler_7results_1__get__(o);
 }
 
-static int __pyx_setprop_14_wsgi_lineprof_12LineProfiler_results(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
+static int __pyx_setprop_10extensions_12LineProfiler_results(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
   if (v) {
-    return __pyx_pw_14_wsgi_lineprof_12LineProfiler_7results_3__set__(o, v);
+    return __pyx_pw_10extensions_12LineProfiler_7results_3__set__(o, v);
   }
   else {
-    return __pyx_pw_14_wsgi_lineprof_12LineProfiler_7results_5__del__(o);
+    return __pyx_pw_10extensions_12LineProfiler_7results_5__del__(o);
   }
 }
 
-static PyObject *__pyx_getprop_14_wsgi_lineprof_12LineProfiler_last_time(PyObject *o, CYTHON_UNUSED void *x) {
-  return __pyx_pw_14_wsgi_lineprof_12LineProfiler_9last_time_1__get__(o);
+static PyObject *__pyx_getprop_10extensions_12LineProfiler_last_time(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_10extensions_12LineProfiler_9last_time_1__get__(o);
 }
 
-static int __pyx_setprop_14_wsgi_lineprof_12LineProfiler_last_time(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
+static int __pyx_setprop_10extensions_12LineProfiler_last_time(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
   if (v) {
-    return __pyx_pw_14_wsgi_lineprof_12LineProfiler_9last_time_3__set__(o, v);
+    return __pyx_pw_10extensions_12LineProfiler_9last_time_3__set__(o, v);
   }
   else {
-    return __pyx_pw_14_wsgi_lineprof_12LineProfiler_9last_time_5__del__(o);
+    return __pyx_pw_10extensions_12LineProfiler_9last_time_5__del__(o);
   }
 }
 
-static PyMethodDef __pyx_methods_14_wsgi_lineprof_LineProfiler[] = {
-  {"enable", (PyCFunction)__pyx_pw_14_wsgi_lineprof_12LineProfiler_3enable, METH_NOARGS, 0},
-  {"disable", (PyCFunction)__pyx_pw_14_wsgi_lineprof_12LineProfiler_5disable, METH_NOARGS, 0},
-  {"get_unit", (PyCFunction)__pyx_pw_14_wsgi_lineprof_12LineProfiler_7get_unit, METH_VARARGS|METH_KEYWORDS, 0},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_14_wsgi_lineprof_12LineProfiler_9__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_14_wsgi_lineprof_12LineProfiler_11__setstate_cython__, METH_O, 0},
+static PyMethodDef __pyx_methods_10extensions_LineProfiler[] = {
+  {"enable", (PyCFunction)__pyx_pw_10extensions_12LineProfiler_3enable, METH_NOARGS, 0},
+  {"disable", (PyCFunction)__pyx_pw_10extensions_12LineProfiler_5disable, METH_NOARGS, 0},
+  {"get_unit", (PyCFunction)__pyx_pw_10extensions_12LineProfiler_7get_unit, METH_VARARGS|METH_KEYWORDS, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_10extensions_12LineProfiler_9__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_10extensions_12LineProfiler_11__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
-static struct PyGetSetDef __pyx_getsets_14_wsgi_lineprof_LineProfiler[] = {
-  {(char *)"results", __pyx_getprop_14_wsgi_lineprof_12LineProfiler_results, __pyx_setprop_14_wsgi_lineprof_12LineProfiler_results, (char *)0, 0},
-  {(char *)"last_time", __pyx_getprop_14_wsgi_lineprof_12LineProfiler_last_time, __pyx_setprop_14_wsgi_lineprof_12LineProfiler_last_time, (char *)0, 0},
+static struct PyGetSetDef __pyx_getsets_10extensions_LineProfiler[] = {
+  {(char *)"results", __pyx_getprop_10extensions_12LineProfiler_results, __pyx_setprop_10extensions_12LineProfiler_results, (char *)0, 0},
+  {(char *)"last_time", __pyx_getprop_10extensions_12LineProfiler_last_time, __pyx_setprop_10extensions_12LineProfiler_last_time, (char *)0, 0},
   {0, 0, 0, 0, 0}
 };
 
-static PyTypeObject __pyx_type_14_wsgi_lineprof_LineProfiler = {
+static PyTypeObject __pyx_type_10extensions_LineProfiler = {
   PyVarObject_HEAD_INIT(0, 0)
-  "_wsgi_lineprof.LineProfiler", /*tp_name*/
-  sizeof(struct __pyx_obj_14_wsgi_lineprof_LineProfiler), /*tp_basicsize*/
+  "extensions.LineProfiler", /*tp_name*/
+  sizeof(struct __pyx_obj_10extensions_LineProfiler), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_14_wsgi_lineprof_LineProfiler, /*tp_dealloc*/
+  __pyx_tp_dealloc_10extensions_LineProfiler, /*tp_dealloc*/
   0, /*tp_print*/
   0, /*tp_getattr*/
   0, /*tp_setattr*/
@@ -4931,23 +4931,23 @@ static PyTypeObject __pyx_type_14_wsgi_lineprof_LineProfiler = {
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
   0, /*tp_doc*/
-  __pyx_tp_traverse_14_wsgi_lineprof_LineProfiler, /*tp_traverse*/
-  __pyx_tp_clear_14_wsgi_lineprof_LineProfiler, /*tp_clear*/
+  __pyx_tp_traverse_10extensions_LineProfiler, /*tp_traverse*/
+  __pyx_tp_clear_10extensions_LineProfiler, /*tp_clear*/
   0, /*tp_richcompare*/
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
   0, /*tp_iternext*/
-  __pyx_methods_14_wsgi_lineprof_LineProfiler, /*tp_methods*/
+  __pyx_methods_10extensions_LineProfiler, /*tp_methods*/
   0, /*tp_members*/
-  __pyx_getsets_14_wsgi_lineprof_LineProfiler, /*tp_getset*/
+  __pyx_getsets_10extensions_LineProfiler, /*tp_getset*/
   0, /*tp_base*/
   0, /*tp_dict*/
   0, /*tp_descr_get*/
   0, /*tp_descr_set*/
   0, /*tp_dictoffset*/
-  __pyx_pw_14_wsgi_lineprof_12LineProfiler_1__init__, /*tp_init*/
+  __pyx_pw_10extensions_12LineProfiler_1__init__, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_14_wsgi_lineprof_LineProfiler, /*tp_new*/
+  __pyx_tp_new_10extensions_LineProfiler, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -4961,10 +4961,10 @@ static PyTypeObject __pyx_type_14_wsgi_lineprof_LineProfiler = {
   0, /*tp_finalize*/
   #endif
 };
-static struct __pyx_vtabstruct_14_wsgi_lineprof_LineTiming __pyx_vtable_14_wsgi_lineprof_LineTiming;
+static struct __pyx_vtabstruct_10extensions_LineTiming __pyx_vtable_10extensions_LineTiming;
 
-static PyObject *__pyx_tp_new_14_wsgi_lineprof_LineTiming(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
-  struct __pyx_obj_14_wsgi_lineprof_LineTiming *p;
+static PyObject *__pyx_tp_new_10extensions_LineTiming(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+  struct __pyx_obj_10extensions_LineTiming *p;
   PyObject *o;
   if (likely((t->tp_flags & Py_TPFLAGS_IS_ABSTRACT) == 0)) {
     o = (*t->tp_alloc)(t, 0);
@@ -4972,14 +4972,14 @@ static PyObject *__pyx_tp_new_14_wsgi_lineprof_LineTiming(PyTypeObject *t, CYTHO
     o = (PyObject *) PyBaseObject_Type.tp_new(t, __pyx_empty_tuple, 0);
   }
   if (unlikely(!o)) return 0;
-  p = ((struct __pyx_obj_14_wsgi_lineprof_LineTiming *)o);
-  p->__pyx_vtab = __pyx_vtabptr_14_wsgi_lineprof_LineTiming;
+  p = ((struct __pyx_obj_10extensions_LineTiming *)o);
+  p->__pyx_vtab = __pyx_vtabptr_10extensions_LineTiming;
   p->code = Py_None; Py_INCREF(Py_None);
   return o;
 }
 
-static void __pyx_tp_dealloc_14_wsgi_lineprof_LineTiming(PyObject *o) {
-  struct __pyx_obj_14_wsgi_lineprof_LineTiming *p = (struct __pyx_obj_14_wsgi_lineprof_LineTiming *)o;
+static void __pyx_tp_dealloc_10extensions_LineTiming(PyObject *o) {
+  struct __pyx_obj_10extensions_LineTiming *p = (struct __pyx_obj_10extensions_LineTiming *)o;
   #if CYTHON_USE_TP_FINALIZE
   if (unlikely(PyType_HasFeature(Py_TYPE(o), Py_TPFLAGS_HAVE_FINALIZE) && Py_TYPE(o)->tp_finalize) && !_PyGC_FINALIZED(o)) {
     if (PyObject_CallFinalizerFromDealloc(o)) return;
@@ -4990,58 +4990,44 @@ static void __pyx_tp_dealloc_14_wsgi_lineprof_LineTiming(PyObject *o) {
   (*Py_TYPE(o)->tp_free)(o);
 }
 
-static int __pyx_tp_traverse_14_wsgi_lineprof_LineTiming(PyObject *o, visitproc v, void *a) {
+static int __pyx_tp_traverse_10extensions_LineTiming(PyObject *o, visitproc v, void *a) {
   int e;
-  struct __pyx_obj_14_wsgi_lineprof_LineTiming *p = (struct __pyx_obj_14_wsgi_lineprof_LineTiming *)o;
+  struct __pyx_obj_10extensions_LineTiming *p = (struct __pyx_obj_10extensions_LineTiming *)o;
   if (p->code) {
     e = (*v)(p->code, a); if (e) return e;
   }
   return 0;
 }
 
-static int __pyx_tp_clear_14_wsgi_lineprof_LineTiming(PyObject *o) {
+static int __pyx_tp_clear_10extensions_LineTiming(PyObject *o) {
   PyObject* tmp;
-  struct __pyx_obj_14_wsgi_lineprof_LineTiming *p = (struct __pyx_obj_14_wsgi_lineprof_LineTiming *)o;
+  struct __pyx_obj_10extensions_LineTiming *p = (struct __pyx_obj_10extensions_LineTiming *)o;
   tmp = ((PyObject*)p->code);
   p->code = Py_None; Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   return 0;
 }
 
-static PyObject *__pyx_getprop_14_wsgi_lineprof_10LineTiming_code(PyObject *o, CYTHON_UNUSED void *x) {
-  return __pyx_pw_14_wsgi_lineprof_10LineTiming_4code_1__get__(o);
+static PyObject *__pyx_getprop_10extensions_10LineTiming_code(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_10extensions_10LineTiming_4code_1__get__(o);
 }
 
-static int __pyx_setprop_14_wsgi_lineprof_10LineTiming_code(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
+static int __pyx_setprop_10extensions_10LineTiming_code(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
   if (v) {
-    return __pyx_pw_14_wsgi_lineprof_10LineTiming_4code_3__set__(o, v);
+    return __pyx_pw_10extensions_10LineTiming_4code_3__set__(o, v);
   }
   else {
-    return __pyx_pw_14_wsgi_lineprof_10LineTiming_4code_5__del__(o);
+    return __pyx_pw_10extensions_10LineTiming_4code_5__del__(o);
   }
 }
 
-static PyObject *__pyx_getprop_14_wsgi_lineprof_10LineTiming_lineno(PyObject *o, CYTHON_UNUSED void *x) {
-  return __pyx_pw_14_wsgi_lineprof_10LineTiming_6lineno_1__get__(o);
+static PyObject *__pyx_getprop_10extensions_10LineTiming_lineno(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_10extensions_10LineTiming_6lineno_1__get__(o);
 }
 
-static int __pyx_setprop_14_wsgi_lineprof_10LineTiming_lineno(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
+static int __pyx_setprop_10extensions_10LineTiming_lineno(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
   if (v) {
-    return __pyx_pw_14_wsgi_lineprof_10LineTiming_6lineno_3__set__(o, v);
-  }
-  else {
-    PyErr_SetString(PyExc_NotImplementedError, "__del__");
-    return -1;
-  }
-}
-
-static PyObject *__pyx_getprop_14_wsgi_lineprof_10LineTiming_total_time(PyObject *o, CYTHON_UNUSED void *x) {
-  return __pyx_pw_14_wsgi_lineprof_10LineTiming_10total_time_1__get__(o);
-}
-
-static int __pyx_setprop_14_wsgi_lineprof_10LineTiming_total_time(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
-  if (v) {
-    return __pyx_pw_14_wsgi_lineprof_10LineTiming_10total_time_3__set__(o, v);
+    return __pyx_pw_10extensions_10LineTiming_6lineno_3__set__(o, v);
   }
   else {
     PyErr_SetString(PyExc_NotImplementedError, "__del__");
@@ -5049,13 +5035,13 @@ static int __pyx_setprop_14_wsgi_lineprof_10LineTiming_total_time(PyObject *o, P
   }
 }
 
-static PyObject *__pyx_getprop_14_wsgi_lineprof_10LineTiming_n_hits(PyObject *o, CYTHON_UNUSED void *x) {
-  return __pyx_pw_14_wsgi_lineprof_10LineTiming_6n_hits_1__get__(o);
+static PyObject *__pyx_getprop_10extensions_10LineTiming_total_time(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_10extensions_10LineTiming_10total_time_1__get__(o);
 }
 
-static int __pyx_setprop_14_wsgi_lineprof_10LineTiming_n_hits(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
+static int __pyx_setprop_10extensions_10LineTiming_total_time(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
   if (v) {
-    return __pyx_pw_14_wsgi_lineprof_10LineTiming_6n_hits_3__set__(o, v);
+    return __pyx_pw_10extensions_10LineTiming_10total_time_3__set__(o, v);
   }
   else {
     PyErr_SetString(PyExc_NotImplementedError, "__del__");
@@ -5063,27 +5049,41 @@ static int __pyx_setprop_14_wsgi_lineprof_10LineTiming_n_hits(PyObject *o, PyObj
   }
 }
 
-static PyMethodDef __pyx_methods_14_wsgi_lineprof_LineTiming[] = {
-  {"as_tuple", (PyCFunction)__pyx_pw_14_wsgi_lineprof_10LineTiming_3as_tuple, METH_NOARGS, 0},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_14_wsgi_lineprof_10LineTiming_7__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_14_wsgi_lineprof_10LineTiming_9__setstate_cython__, METH_O, 0},
+static PyObject *__pyx_getprop_10extensions_10LineTiming_n_hits(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_10extensions_10LineTiming_6n_hits_1__get__(o);
+}
+
+static int __pyx_setprop_10extensions_10LineTiming_n_hits(PyObject *o, PyObject *v, CYTHON_UNUSED void *x) {
+  if (v) {
+    return __pyx_pw_10extensions_10LineTiming_6n_hits_3__set__(o, v);
+  }
+  else {
+    PyErr_SetString(PyExc_NotImplementedError, "__del__");
+    return -1;
+  }
+}
+
+static PyMethodDef __pyx_methods_10extensions_LineTiming[] = {
+  {"as_tuple", (PyCFunction)__pyx_pw_10extensions_10LineTiming_3as_tuple, METH_NOARGS, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_10extensions_10LineTiming_7__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_10extensions_10LineTiming_9__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
-static struct PyGetSetDef __pyx_getsets_14_wsgi_lineprof_LineTiming[] = {
-  {(char *)"code", __pyx_getprop_14_wsgi_lineprof_10LineTiming_code, __pyx_setprop_14_wsgi_lineprof_10LineTiming_code, (char *)0, 0},
-  {(char *)"lineno", __pyx_getprop_14_wsgi_lineprof_10LineTiming_lineno, __pyx_setprop_14_wsgi_lineprof_10LineTiming_lineno, (char *)0, 0},
-  {(char *)"total_time", __pyx_getprop_14_wsgi_lineprof_10LineTiming_total_time, __pyx_setprop_14_wsgi_lineprof_10LineTiming_total_time, (char *)0, 0},
-  {(char *)"n_hits", __pyx_getprop_14_wsgi_lineprof_10LineTiming_n_hits, __pyx_setprop_14_wsgi_lineprof_10LineTiming_n_hits, (char *)0, 0},
+static struct PyGetSetDef __pyx_getsets_10extensions_LineTiming[] = {
+  {(char *)"code", __pyx_getprop_10extensions_10LineTiming_code, __pyx_setprop_10extensions_10LineTiming_code, (char *)0, 0},
+  {(char *)"lineno", __pyx_getprop_10extensions_10LineTiming_lineno, __pyx_setprop_10extensions_10LineTiming_lineno, (char *)0, 0},
+  {(char *)"total_time", __pyx_getprop_10extensions_10LineTiming_total_time, __pyx_setprop_10extensions_10LineTiming_total_time, (char *)0, 0},
+  {(char *)"n_hits", __pyx_getprop_10extensions_10LineTiming_n_hits, __pyx_setprop_10extensions_10LineTiming_n_hits, (char *)0, 0},
   {0, 0, 0, 0, 0}
 };
 
-static PyTypeObject __pyx_type_14_wsgi_lineprof_LineTiming = {
+static PyTypeObject __pyx_type_10extensions_LineTiming = {
   PyVarObject_HEAD_INIT(0, 0)
-  "_wsgi_lineprof.LineTiming", /*tp_name*/
-  sizeof(struct __pyx_obj_14_wsgi_lineprof_LineTiming), /*tp_basicsize*/
+  "extensions.LineTiming", /*tp_name*/
+  sizeof(struct __pyx_obj_10extensions_LineTiming), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_14_wsgi_lineprof_LineTiming, /*tp_dealloc*/
+  __pyx_tp_dealloc_10extensions_LineTiming, /*tp_dealloc*/
   0, /*tp_print*/
   0, /*tp_getattr*/
   0, /*tp_setattr*/
@@ -5093,7 +5093,7 @@ static PyTypeObject __pyx_type_14_wsgi_lineprof_LineTiming = {
   #if PY_MAJOR_VERSION >= 3
   0, /*tp_as_async*/
   #endif
-  __pyx_pw_14_wsgi_lineprof_10LineTiming_5__repr__, /*tp_repr*/
+  __pyx_pw_10extensions_10LineTiming_5__repr__, /*tp_repr*/
   0, /*tp_as_number*/
   0, /*tp_as_sequence*/
   0, /*tp_as_mapping*/
@@ -5105,23 +5105,23 @@ static PyTypeObject __pyx_type_14_wsgi_lineprof_LineTiming = {
   0, /*tp_as_buffer*/
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE|Py_TPFLAGS_HAVE_GC, /*tp_flags*/
   0, /*tp_doc*/
-  __pyx_tp_traverse_14_wsgi_lineprof_LineTiming, /*tp_traverse*/
-  __pyx_tp_clear_14_wsgi_lineprof_LineTiming, /*tp_clear*/
+  __pyx_tp_traverse_10extensions_LineTiming, /*tp_traverse*/
+  __pyx_tp_clear_10extensions_LineTiming, /*tp_clear*/
   0, /*tp_richcompare*/
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
   0, /*tp_iternext*/
-  __pyx_methods_14_wsgi_lineprof_LineTiming, /*tp_methods*/
+  __pyx_methods_10extensions_LineTiming, /*tp_methods*/
   0, /*tp_members*/
-  __pyx_getsets_14_wsgi_lineprof_LineTiming, /*tp_getset*/
+  __pyx_getsets_10extensions_LineTiming, /*tp_getset*/
   0, /*tp_base*/
   0, /*tp_dict*/
   0, /*tp_descr_get*/
   0, /*tp_descr_set*/
   0, /*tp_dictoffset*/
-  __pyx_pw_14_wsgi_lineprof_10LineTiming_1__init__, /*tp_init*/
+  __pyx_pw_10extensions_10LineTiming_1__init__, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_14_wsgi_lineprof_LineTiming, /*tp_new*/
+  __pyx_tp_new_10extensions_LineTiming, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -5136,7 +5136,7 @@ static PyTypeObject __pyx_type_14_wsgi_lineprof_LineTiming = {
   #endif
 };
 
-static PyObject *__pyx_tp_new_14_wsgi_lineprof_LastTime(PyTypeObject *t, PyObject *a, PyObject *k) {
+static PyObject *__pyx_tp_new_10extensions_LastTime(PyTypeObject *t, PyObject *a, PyObject *k) {
   PyObject *o;
   if (likely((t->tp_flags & Py_TPFLAGS_IS_ABSTRACT) == 0)) {
     o = (*t->tp_alloc)(t, 0);
@@ -5144,14 +5144,14 @@ static PyObject *__pyx_tp_new_14_wsgi_lineprof_LastTime(PyTypeObject *t, PyObjec
     o = (PyObject *) PyBaseObject_Type.tp_new(t, __pyx_empty_tuple, 0);
   }
   if (unlikely(!o)) return 0;
-  if (unlikely(__pyx_pw_14_wsgi_lineprof_8LastTime_1__cinit__(o, a, k) < 0)) goto bad;
+  if (unlikely(__pyx_pw_10extensions_8LastTime_1__cinit__(o, a, k) < 0)) goto bad;
   return o;
   bad:
   Py_DECREF(o); o = 0;
   return NULL;
 }
 
-static void __pyx_tp_dealloc_14_wsgi_lineprof_LastTime(PyObject *o) {
+static void __pyx_tp_dealloc_10extensions_LastTime(PyObject *o) {
   #if CYTHON_USE_TP_FINALIZE
   if (unlikely(PyType_HasFeature(Py_TYPE(o), Py_TPFLAGS_HAVE_FINALIZE) && Py_TYPE(o)->tp_finalize) && (!PyType_IS_GC(Py_TYPE(o)) || !_PyGC_FINALIZED(o))) {
     if (PyObject_CallFinalizerFromDealloc(o)) return;
@@ -5160,18 +5160,18 @@ static void __pyx_tp_dealloc_14_wsgi_lineprof_LastTime(PyObject *o) {
   (*Py_TYPE(o)->tp_free)(o);
 }
 
-static PyMethodDef __pyx_methods_14_wsgi_lineprof_LastTime[] = {
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_14_wsgi_lineprof_8LastTime_3__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_14_wsgi_lineprof_8LastTime_5__setstate_cython__, METH_O, 0},
+static PyMethodDef __pyx_methods_10extensions_LastTime[] = {
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_10extensions_8LastTime_3__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_10extensions_8LastTime_5__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
-static PyTypeObject __pyx_type_14_wsgi_lineprof_LastTime = {
+static PyTypeObject __pyx_type_10extensions_LastTime = {
   PyVarObject_HEAD_INIT(0, 0)
-  "_wsgi_lineprof.LastTime", /*tp_name*/
-  sizeof(struct __pyx_obj_14_wsgi_lineprof_LastTime), /*tp_basicsize*/
+  "extensions.LastTime", /*tp_name*/
+  sizeof(struct __pyx_obj_10extensions_LastTime), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_14_wsgi_lineprof_LastTime, /*tp_dealloc*/
+  __pyx_tp_dealloc_10extensions_LastTime, /*tp_dealloc*/
   0, /*tp_print*/
   0, /*tp_getattr*/
   0, /*tp_setattr*/
@@ -5199,7 +5199,7 @@ static PyTypeObject __pyx_type_14_wsgi_lineprof_LastTime = {
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
   0, /*tp_iternext*/
-  __pyx_methods_14_wsgi_lineprof_LastTime, /*tp_methods*/
+  __pyx_methods_10extensions_LastTime, /*tp_methods*/
   0, /*tp_members*/
   0, /*tp_getset*/
   0, /*tp_base*/
@@ -5209,7 +5209,7 @@ static PyTypeObject __pyx_type_14_wsgi_lineprof_LastTime = {
   0, /*tp_dictoffset*/
   0, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_14_wsgi_lineprof_LastTime, /*tp_new*/
+  __pyx_tp_new_10extensions_LastTime, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -5231,17 +5231,17 @@ static PyMethodDef __pyx_methods[] = {
 #if PY_MAJOR_VERSION >= 3
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 static PyObject* __pyx_pymod_create(PyObject *spec, PyModuleDef *def); /*proto*/
-static int __pyx_pymod_exec__wsgi_lineprof(PyObject* module); /*proto*/
+static int __pyx_pymod_exec_extensions(PyObject* module); /*proto*/
 static PyModuleDef_Slot __pyx_moduledef_slots[] = {
   {Py_mod_create, (void*)__pyx_pymod_create},
-  {Py_mod_exec, (void*)__pyx_pymod_exec__wsgi_lineprof},
+  {Py_mod_exec, (void*)__pyx_pymod_exec_extensions},
   {0, NULL}
 };
 #endif
 
 static struct PyModuleDef __pyx_moduledef = {
     PyModuleDef_HEAD_INIT,
-    "_wsgi_lineprof",
+    "extensions",
     0, /* m_doc */
   #if CYTHON_PEP489_MULTI_PHASE_INIT
     0, /* m_size */
@@ -5269,7 +5269,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_code, __pyx_k_code, sizeof(__pyx_k_code), 0, 0, 1, 1},
   {&__pyx_n_s_dict, __pyx_k_dict, sizeof(__pyx_k_dict), 0, 0, 1, 1},
-  {&__pyx_kp_s_extensions__wsgi_lineprof_pyx, __pyx_k_extensions__wsgi_lineprof_pyx, sizeof(__pyx_k_extensions__wsgi_lineprof_pyx), 0, 0, 1, 0},
+  {&__pyx_n_s_extensions, __pyx_k_extensions, sizeof(__pyx_k_extensions), 0, 0, 1, 1},
+  {&__pyx_kp_s_extensions_extensions_pyx, __pyx_k_extensions_extensions_pyx, sizeof(__pyx_k_extensions_extensions_pyx), 0, 0, 1, 0},
   {&__pyx_n_s_f_lineno, __pyx_k_f_lineno, sizeof(__pyx_k_f_lineno), 0, 0, 1, 1},
   {&__pyx_n_s_get_unit, __pyx_k_get_unit, sizeof(__pyx_k_get_unit), 0, 0, 1, 1},
   {&__pyx_n_s_getstate, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},
@@ -5298,7 +5299,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_n_s_time, __pyx_k_time, sizeof(__pyx_k_time), 0, 0, 1, 1},
   {&__pyx_n_s_update, __pyx_k_update, sizeof(__pyx_k_update), 0, 0, 1, 1},
-  {&__pyx_n_s_wsgi_lineprof, __pyx_k_wsgi_lineprof, sizeof(__pyx_k_wsgi_lineprof), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
@@ -5332,14 +5332,14 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "_wsgi_lineprof.pyx":29
+  /* "extensions.pyx":29
  * 
  *     @staticmethod
  *     def get_unit():             # <<<<<<<<<<<<<<
  *         return hpTimerUnit()
  * 
  */
-  __pyx_codeobj__3 = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_extensions__wsgi_lineprof_pyx, __pyx_n_s_get_unit, 29, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__3)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_codeobj__3 = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_extensions_extensions_pyx, __pyx_n_s_get_unit, 29, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__3)) __PYX_ERR(0, 29, __pyx_L1_error)
 
   /* "(tree fragment)":1
  * def __pyx_unpickle_LineProfiler(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
@@ -5406,33 +5406,33 @@ static int __Pyx_modinit_type_init_code(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
-  if (PyType_Ready(&__pyx_type_14_wsgi_lineprof_LineProfiler) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
-  __pyx_type_14_wsgi_lineprof_LineProfiler.tp_print = 0;
-  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_14_wsgi_lineprof_LineProfiler.tp_dictoffset && __pyx_type_14_wsgi_lineprof_LineProfiler.tp_getattro == PyObject_GenericGetAttr)) {
-    __pyx_type_14_wsgi_lineprof_LineProfiler.tp_getattro = __Pyx_PyObject_GenericGetAttr;
+  if (PyType_Ready(&__pyx_type_10extensions_LineProfiler) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_type_10extensions_LineProfiler.tp_print = 0;
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_10extensions_LineProfiler.tp_dictoffset && __pyx_type_10extensions_LineProfiler.tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_type_10extensions_LineProfiler.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (PyObject_SetAttrString(__pyx_m, "LineProfiler", (PyObject *)&__pyx_type_14_wsgi_lineprof_LineProfiler) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_14_wsgi_lineprof_LineProfiler) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
-  __pyx_ptype_14_wsgi_lineprof_LineProfiler = &__pyx_type_14_wsgi_lineprof_LineProfiler;
-  __pyx_vtabptr_14_wsgi_lineprof_LineTiming = &__pyx_vtable_14_wsgi_lineprof_LineTiming;
-  __pyx_vtable_14_wsgi_lineprof_LineTiming.hit = (PyObject *(*)(struct __pyx_obj_14_wsgi_lineprof_LineTiming *, PY_LONG_LONG))__pyx_f_14_wsgi_lineprof_10LineTiming_hit;
-  if (PyType_Ready(&__pyx_type_14_wsgi_lineprof_LineTiming) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
-  __pyx_type_14_wsgi_lineprof_LineTiming.tp_print = 0;
-  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_14_wsgi_lineprof_LineTiming.tp_dictoffset && __pyx_type_14_wsgi_lineprof_LineTiming.tp_getattro == PyObject_GenericGetAttr)) {
-    __pyx_type_14_wsgi_lineprof_LineTiming.tp_getattro = __Pyx_PyObject_GenericGetAttr;
+  if (PyObject_SetAttrString(__pyx_m, "LineProfiler", (PyObject *)&__pyx_type_10extensions_LineProfiler) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_10extensions_LineProfiler) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_ptype_10extensions_LineProfiler = &__pyx_type_10extensions_LineProfiler;
+  __pyx_vtabptr_10extensions_LineTiming = &__pyx_vtable_10extensions_LineTiming;
+  __pyx_vtable_10extensions_LineTiming.hit = (PyObject *(*)(struct __pyx_obj_10extensions_LineTiming *, PY_LONG_LONG))__pyx_f_10extensions_10LineTiming_hit;
+  if (PyType_Ready(&__pyx_type_10extensions_LineTiming) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_type_10extensions_LineTiming.tp_print = 0;
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_10extensions_LineTiming.tp_dictoffset && __pyx_type_10extensions_LineTiming.tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_type_10extensions_LineTiming.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_14_wsgi_lineprof_LineTiming.tp_dict, __pyx_vtabptr_14_wsgi_lineprof_LineTiming) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
-  if (PyObject_SetAttrString(__pyx_m, "LineTiming", (PyObject *)&__pyx_type_14_wsgi_lineprof_LineTiming) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_14_wsgi_lineprof_LineTiming) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
-  __pyx_ptype_14_wsgi_lineprof_LineTiming = &__pyx_type_14_wsgi_lineprof_LineTiming;
-  if (PyType_Ready(&__pyx_type_14_wsgi_lineprof_LastTime) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
-  __pyx_type_14_wsgi_lineprof_LastTime.tp_print = 0;
-  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_14_wsgi_lineprof_LastTime.tp_dictoffset && __pyx_type_14_wsgi_lineprof_LastTime.tp_getattro == PyObject_GenericGetAttr)) {
-    __pyx_type_14_wsgi_lineprof_LastTime.tp_getattro = __Pyx_PyObject_GenericGetAttr;
+  if (__Pyx_SetVtable(__pyx_type_10extensions_LineTiming.tp_dict, __pyx_vtabptr_10extensions_LineTiming) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "LineTiming", (PyObject *)&__pyx_type_10extensions_LineTiming) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_10extensions_LineTiming) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_ptype_10extensions_LineTiming = &__pyx_type_10extensions_LineTiming;
+  if (PyType_Ready(&__pyx_type_10extensions_LastTime) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_type_10extensions_LastTime.tp_print = 0;
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_10extensions_LastTime.tp_dictoffset && __pyx_type_10extensions_LastTime.tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_type_10extensions_LastTime.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (PyObject_SetAttrString(__pyx_m, "LastTime", (PyObject *)&__pyx_type_14_wsgi_lineprof_LastTime) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_14_wsgi_lineprof_LastTime) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
-  __pyx_ptype_14_wsgi_lineprof_LastTime = &__pyx_type_14_wsgi_lineprof_LastTime;
+  if (PyObject_SetAttrString(__pyx_m, "LastTime", (PyObject *)&__pyx_type_10extensions_LastTime) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_10extensions_LastTime) < 0) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_ptype_10extensions_LastTime = &__pyx_type_10extensions_LastTime;
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -5502,11 +5502,11 @@ static int __Pyx_modinit_function_import_code(void) {
 
 
 #if PY_MAJOR_VERSION < 3
-__Pyx_PyMODINIT_FUNC init_wsgi_lineprof(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC init_wsgi_lineprof(void)
+__Pyx_PyMODINIT_FUNC initextensions(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC initextensions(void)
 #else
-__Pyx_PyMODINIT_FUNC PyInit__wsgi_lineprof(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC PyInit__wsgi_lineprof(void)
+__Pyx_PyMODINIT_FUNC PyInit_extensions(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC PyInit_extensions(void)
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 {
   return PyModuleDef_Init(&__pyx_moduledef);
@@ -5546,7 +5546,7 @@ bad:
 }
 
 
-static int __pyx_pymod_exec__wsgi_lineprof(PyObject *__pyx_pyinit_module)
+static int __pyx_pymod_exec_extensions(PyObject *__pyx_pyinit_module)
 #endif
 #endif
 {
@@ -5567,7 +5567,7 @@ if (!__Pyx_RefNanny) {
       Py_FatalError("failed to import 'refnanny' module");
 }
 #endif
-  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit__wsgi_lineprof(void)", 0);
+  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_extensions(void)", 0);
   if (__Pyx_check_binary_version() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_empty_tuple = PyTuple_New(0); if (unlikely(!__pyx_empty_tuple)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_empty_bytes = PyBytes_FromStringAndSize("", 0); if (unlikely(!__pyx_empty_bytes)) __PYX_ERR(0, 1, __pyx_L1_error)
@@ -5603,7 +5603,7 @@ if (!__Pyx_RefNanny) {
   Py_INCREF(__pyx_m);
   #else
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("_wsgi_lineprof", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("extensions", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
@@ -5622,14 +5622,14 @@ if (!__Pyx_RefNanny) {
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main__wsgi_lineprof) {
+  if (__pyx_module_is_main_extensions) {
     if (PyObject_SetAttrString(__pyx_m, "__name__", __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "_wsgi_lineprof")) {
-      if (unlikely(PyDict_SetItemString(modules, "_wsgi_lineprof", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "extensions")) {
+      if (unlikely(PyDict_SetItemString(modules, "extensions", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -5650,41 +5650,41 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "_wsgi_lineprof.pyx":29
+  /* "extensions.pyx":29
  * 
  *     @staticmethod
  *     def get_unit():             # <<<<<<<<<<<<<<
  *         return hpTimerUnit()
  * 
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_14_wsgi_lineprof_12LineProfiler_7get_unit, NULL, __pyx_n_s_wsgi_lineprof); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_10extensions_12LineProfiler_7get_unit, NULL, __pyx_n_s_extensions); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_14_wsgi_lineprof_LineProfiler->tp_dict, __pyx_n_s_get_unit, __pyx_t_1) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_10extensions_LineProfiler->tp_dict, __pyx_n_s_get_unit, __pyx_t_1) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  PyType_Modified(__pyx_ptype_14_wsgi_lineprof_LineProfiler);
+  PyType_Modified(__pyx_ptype_10extensions_LineProfiler);
 
-  /* "_wsgi_lineprof.pyx":28
+  /* "extensions.pyx":28
  *         PyEval_SetTrace(NULL, <object>NULL)
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
  *     def get_unit():
  *         return hpTimerUnit()
  */
-  __pyx_t_1 = __Pyx_GetNameInClass((PyObject *)__pyx_ptype_14_wsgi_lineprof_LineProfiler, __pyx_n_s_get_unit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetNameInClass((PyObject *)__pyx_ptype_10extensions_LineProfiler, __pyx_n_s_get_unit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_staticmethod, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 28, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_14_wsgi_lineprof_LineProfiler->tp_dict, __pyx_n_s_get_unit, __pyx_t_2) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_10extensions_LineProfiler->tp_dict, __pyx_n_s_get_unit, __pyx_t_2) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  PyType_Modified(__pyx_ptype_14_wsgi_lineprof_LineProfiler);
+  PyType_Modified(__pyx_ptype_10extensions_LineProfiler);
 
   /* "(tree fragment)":1
  * def __pyx_unpickle_LineProfiler(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
  *     if __pyx_checksum != 0x154fe27:
  *         from pickle import PickleError as __pyx_PickleError
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_14_wsgi_lineprof_1__pyx_unpickle_LineProfiler, NULL, __pyx_n_s_wsgi_lineprof); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10extensions_1__pyx_unpickle_LineProfiler, NULL, __pyx_n_s_extensions); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_LineProfiler, __pyx_t_2) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -5696,12 +5696,12 @@ if (!__Pyx_RefNanny) {
  *     __pyx_result.last_time = __pyx_state[0]; __pyx_result.results = __pyx_state[1]
  *     if len(__pyx_state) > 2 and hasattr(__pyx_result, '__dict__'):
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_14_wsgi_lineprof_3__pyx_unpickle_LineTiming, NULL, __pyx_n_s_wsgi_lineprof); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10extensions_3__pyx_unpickle_LineTiming, NULL, __pyx_n_s_extensions); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_LineTiming, __pyx_t_2) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "_wsgi_lineprof.pyx":1
+  /* "extensions.pyx":1
  * from cpython cimport PyObject             # <<<<<<<<<<<<<<
  * 
  * from header cimport (
@@ -5719,11 +5719,11 @@ if (!__Pyx_RefNanny) {
   __Pyx_XDECREF(__pyx_t_2);
   if (__pyx_m) {
     if (__pyx_d) {
-      __Pyx_AddTraceback("init _wsgi_lineprof", 0, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init extensions", 0, __pyx_lineno, __pyx_filename);
     }
     Py_DECREF(__pyx_m); __pyx_m = 0;
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init _wsgi_lineprof");
+    PyErr_SetString(PyExc_ImportError, "init extensions");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();

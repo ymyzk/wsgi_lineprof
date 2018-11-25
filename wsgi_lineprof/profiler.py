@@ -1,5 +1,4 @@
-from _wsgi_lineprof import LineProfiler as _LineProfiler  # Cython
-
+from wsgi_lineprof.extensions import LineProfiler as _LineProfiler  # Cython
 from wsgi_lineprof.stats import LineProfilerStat, LineProfilerStats
 
 

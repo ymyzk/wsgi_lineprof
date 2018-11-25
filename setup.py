@@ -10,7 +10,7 @@ root = path.abspath(path.dirname(__file__))
 with open(path.join(root, "README.rst"), encoding="utf-8") as f:
     long_description = f.read()
 
-source = "extensions/_wsgi_lineprof."
+source = "extensions/extensions."
 
 try:
     from Cython.Build import cythonize
@@ -65,8 +65,9 @@ setup(
         "wsgi_lineprof": ["py.typed"],
     },
 
+    ext_package="wsgi_lineprof",
     ext_modules=cythonize([
-        Extension("_wsgi_lineprof",
+        Extension("extensions",
                   sources=[source, "extensions/timer.c"])
     ]),
 

@@ -1,4 +1,4 @@
-from _wsgi_lineprof import LineTiming
+from wsgi_lineprof.extensions import LineTiming
 
 
 class TestLineTiming(object):
