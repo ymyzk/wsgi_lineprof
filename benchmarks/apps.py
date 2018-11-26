@@ -10,8 +10,16 @@ from six import StringIO
 from wsgi_lineprof.middleware import LineProfilerMiddleware
 
 
-RE_IP = "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
-RE_EMAIL = "([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|\"([]!#-[^-~ \t]|(\\[\t -~]))+\")@[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?(\.[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?)+"
+RE_IP = (
+    "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).){3}"
+    "(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
+)
+RE_EMAIL = (
+    "([-!#-'*+/-9=?A-Z^-~]+(.[-!#-'*+/-9=?A-Z^-~]+)*"
+    "|\"([]!#-[^-~ \t]|(\\[\t -~]))+\")@[0-9A-Za-z]"
+    "([0-9A-Za-z-]{0,61}[0-9A-Za-z])?"
+    "(.[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?)+"
+)
 JINJA_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +47,7 @@ def demo_app(environ, start_response):
     h = sorted(environ.items())
     for k, v in h:
         print(k, '=', repr(v), file=stdout)
-    start_response("200 OK", [('Content-Type','text/plain; charset=utf-8')])
+    start_response("200 OK", [('Content-Type', 'text/plain; charset=utf-8')])
     return [stdout.getvalue().encode("utf-8")]
 
 

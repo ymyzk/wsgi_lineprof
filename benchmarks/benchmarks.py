@@ -3,7 +3,6 @@ import string
 
 from webtest import TestApp
 
-from wsgi_lineprof.filters import FilenameFilter
 from wsgi_lineprof.middleware import LineProfilerMiddleware
 from .apps import demo_app, fib_app, jinja_app, re_app
 
@@ -91,7 +90,8 @@ class ReAppTest(object):
         self.app = prepare_app(re_app, profiler)
         chars = string.ascii_uppercase + string.ascii_lowercase + string.digits
         random.seed(12345)
-        self.random_str = "/" + "".join(random.choice(chars) for _ in range(2000))
+        random_str = "".join(random.choice(chars) for _ in range(2000))
+        self.random_str = "/" + random_str
         random.seed()
 
     def time_index_page(self, *args):
