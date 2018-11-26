@@ -3,6 +3,7 @@ import string
 
 from webtest import TestApp
 
+from wsgi_lineprof.filters import FilenameFilter
 from wsgi_lineprof.middleware import LineProfilerMiddleware
 from .apps import demo_app, fib_app, jinja_app, re_app
 
@@ -12,12 +13,17 @@ class StringNoopIO(object):
         pass
 
 
-def prepare_app(app, profiler):
+def prepare_app(app, profiler, filters=None):
+    if filters is None:
+        filters = []
+
     if profiler == "sync":
         app = LineProfilerMiddleware(app,
+                                     filters=filters,
                                      stream=StringNoopIO())
     elif profiler == "async":
         app = LineProfilerMiddleware(app,
+                                     filters=filters,
                                      stream=StringNoopIO(),
                                      async_stream=True)
     return TestApp(app)
@@ -56,7 +62,10 @@ class FibAppWithFilenameFilterTest(object):
     params = ["base", "sync", "async"]
 
     def setup(self, profiler):
-        self.app = prepare_app(fib_app, profiler)
+        filters = [
+            FilenameFilter("apps.py"),
+        ]
+        self.app = prepare_app(fib_app, profiler, filters=filters)
 
     def time_index_page(self, *args):
         self.app.get("/")
