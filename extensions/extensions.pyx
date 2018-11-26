@@ -1,8 +1,7 @@
 from cpython cimport PyObject
 
 from header cimport (
-    PyEval_SetTrace, PyFrameObject, Py_tracefunc, PyEval_SetTrace,
-    PY_LONG_LONG, PyTrace_LINE, PyTrace_RETURN
+    PyEval_SetTrace, PyFrameObject, PY_LONG_LONG, PyTrace_LINE, PyTrace_RETURN
 )
 
 
