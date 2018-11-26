@@ -91,6 +91,23 @@ class JinjaAppTest(object):
         self.app.get("/20")
 
 
+class JinjaAppWithFilenameFilterTest(object):
+    param_names = ["profiler"]
+    params = ["base", "sync", "async"]
+
+    def setup(self, profiler):
+        filters = [
+            FilenameFilter("apps.py"),
+        ]
+        self.app = prepare_app(jinja_app, profiler, filters=filters)
+
+    def time_10_items(self, *args):
+        self.app.get("/10")
+
+    def time_100_items(self, *args):
+        self.app.get("/20")
+
+
 class ReAppTest(object):
     param_names = ["profiler"]
     params = ["base", "sync", "async"]
