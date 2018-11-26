@@ -85,7 +85,7 @@ setup(
             "Jinja2==2.10",
             "WebTest==2.0.32",
         ],
-        "build": ["Cython>=0.28.5,<0.29"],
+        "build": ["Cython>=0.28,<0.30"],
         "docs": ["Sphinx>=1.4,<1.5"],
         "test": [
             "flake8>=3.0.0,<4.0.0",
