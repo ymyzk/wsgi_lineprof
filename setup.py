@@ -77,6 +77,10 @@ setup(
 
     extras_require={
         ":python_version < '3.5'": ["typing"],
+        "benchmark-deps": [
+            "Jinja2==2.10",
+            "WebTest==2.0.32",
+        ],
         "build": ["Cython>=0.28.5,<0.29"],
         "docs": ["Sphinx>=1.4,<1.5"],
         "test": [
