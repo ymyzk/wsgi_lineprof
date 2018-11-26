@@ -66,6 +66,7 @@ cdef int python_trace_callback(object self_, PyFrameObject *py_frame, int what,
                                PyObject *arg):
     cdef LineProfiler self
     cdef dict results
+    cdef dict result_code
     cdef dict last_time
     cdef LineTiming entry
     cdef LastTime old
@@ -87,13 +88,14 @@ cdef int python_trace_callback(object self_, PyFrameObject *py_frame, int what,
         results[code] = {}
 
     if code in last_time:
+        result_code = results[code]
         old = last_time[code]
         lineno = old.f_lineno
 
-        if lineno not in results[code]:
-            results[code][lineno] = entry = LineTiming(code, lineno)
+        if lineno not in result_code:
+            result_code[lineno] = entry = LineTiming(code, lineno)
         else:
-            entry = results[code][lineno]
+            entry = result_code[lineno]
 
         entry.hit(time - old.time)
 
