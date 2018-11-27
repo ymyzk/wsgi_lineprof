@@ -199,11 +199,11 @@ Special Thanks
 ^^^^^^^^^^^^^^
 This project uses code from the following projects:
 
-* `kainosnoema/rack-lineprof <https://github.com/kainosnoema/rack-lineprof>`_
+* `rkern/line_profiler <https://github.com/rkern/line_profiler>`_
 
 This project is inspired by the following projects:
 
-* `rkern/line_profiler <https://github.com/rkern/line_profiler>`_
+* `kainosnoema/rack-lineprof <https://github.com/kainosnoema/rack-lineprof>`_
 
 wsgi_lineprof is integrated with the following projects:
 
