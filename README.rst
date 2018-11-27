@@ -9,14 +9,12 @@ wsgi_lineprof
 
 **wsgi_lineprof** is a WSGI middleware for line-by-line profiling.
 
-wsgi_lineprof shows results of line-by-line profiling per request.
-You can use this project with many WSGI-compatible applications and frameworks:
+wsgi_lineprof has the following features:
 
-* Django
-* Pyramid
-* Flask
-* Bottle
-* etc...
+* *WSGI middleware*: It can be integrated with any WSGI-compatible applications and frameworks including Django, Pyramid, Flask, Bottle, and more.
+* *Easily pluggable*: All configurations for profiling in one place. Users don't need to make any changes to their application.
+
+wsgi_lineprof is *not recommended to be used in production environment* because of the overhead of profiling.
 
 At a Glance
 -----------
