@@ -25,6 +25,7 @@ class LineProfilerMiddleware(object):
         self.app = app
         self.stream = sys.stdout if stream is None else stream  # type: Stream
         self.filters = filters
+        self.profiler = LineProfiler()
         if async_stream:
             self.writer = AsyncWriter(self.stream)  # type: BaseWriter
         else:
@@ -32,13 +33,12 @@ class LineProfilerMiddleware(object):
 
     def __call__(self, env, start_response):
         # type: (WSGIEnvironment, StartResponse) -> Iterable[bytes]
-        profiler = LineProfiler()
-
-        profiler.enable()
+        self.profiler.reset()
+        self.profiler.enable()
         result = self.app(env, start_response)
-        profiler.disable()
+        self.profiler.disable()
 
-        stats = profiler.get_stats()
+        stats = self.profiler.get_stats()
 
         for f in self.filters:
             stats = stats.filter(f)
