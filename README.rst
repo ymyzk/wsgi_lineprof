@@ -180,6 +180,16 @@ This option is useful when you do not want the main thread blocked for writing r
     app = LineProfilerMiddleware(app, async_stream=True)
     bottle.run(app=app)
 
+Accumulate Mode
+---------------
+By default, wsgi_lineprof writes results every request.
+By enabling ``accumulate`` option, wsgi_lineprof accumulate results of all requests and writes the result on interpreter termination.
+
+.. code-block:: python
+
+    app = LineProfilerMiddleware(app, accumulate=True)
+    bottle.run(app=app)
+
 Links
 -----
 * `GitHub: ymyzk/wsgi_lineprof <https://github.com/ymyzk/wsgi_lineprof>`_
