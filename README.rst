@@ -153,7 +153,10 @@ You can see results in stdout.
 
     127.0.0.1 - - [30/Nov/2016 17:21:12] "GET / HTTP/1.1" 200 21
 
-There are some useful filters in ``wsgi_lineprof.filters``.
+There are more useful filters in ``wsgi_lineprof.filters``. Examples:
+
+* ``FilenameFilter("(file1|file2).py", regex=True)``
+* ``NameFilter("(fun1|fun2).py", regex=True)``
 
 Stream
 ------

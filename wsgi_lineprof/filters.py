@@ -1,6 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from itertools import islice
 from operator import attrgetter
+import re
 from typing import Iterable, TYPE_CHECKING  # noqa: F401
 
 from six import add_metaclass
@@ -21,24 +22,36 @@ class BaseFilter(object):
 
 class FilenameFilter(BaseFilter):
     """Filter which matches with filename"""
-    def __init__(self, filename):
-        # type: (str) -> None
+    def __init__(self, filename, regex=False):
+        # type: (str, bool) -> None
         self.filename = filename
+        self.regex = regex
+        self.compiled_regex = re.compile(filename)
 
     def filter(self, stats):
         # type: (Iterable[LineProfilerStat]) -> Iterable[LineProfilerStat]
-        return filter(lambda s: self.filename in s.filename, stats)
+        if self.regex:
+            compiled_regex = self.compiled_regex
+            return filter(lambda s: compiled_regex.search(s.filename), stats)
+        else:
+            return filter(lambda s: self.filename in s.filename, stats)
 
 
 class NameFilter(BaseFilter):
     """Filter which matches with name"""
-    def __init__(self, name):
-        # type: (str) -> None
+    def __init__(self, name, regex=True):
+        # type: (str, bool) -> None
         self.name = name
+        self.regex = regex
+        self.compiled_regex = re.compile(name)
 
     def filter(self, stats):
         # type: (Iterable[LineProfilerStat]) -> Iterable[LineProfilerStat]
-        return filter(lambda s: self.name in s.name, stats)
+        if self.regex:
+            compiled_regex = self.compiled_regex
+            return filter(lambda s: compiled_regex.search(s.name), stats)
+        else:
+            return filter(lambda s: self.name in s.name, stats)
 
 
 class TotalTimeSorter(BaseFilter):
