@@ -48,8 +48,8 @@ Example usage with Bottle:
 
 Run the above script to start web server, then access http://127.0.0.1:8080.
 
-The results are outputted to stdout by default.
-You can see the results like this:
+wsgi_lineprof writes results to stdout every time an HTTP request is processed by default.
+You can see the output like this in your console:
 
 ::
 
@@ -180,7 +180,7 @@ This option is useful when you do not want the main thread blocked for writing r
 
 Accumulate Mode
 ---------------
-By default, wsgi_lineprof writes results every request.
+By default, wsgi_lineprof writes results every time a request is processed.
 By enabling ``accumulate`` option, wsgi_lineprof accumulate results of all requests and writes the result on interpreter termination.
 
 .. code-block:: python
