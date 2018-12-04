@@ -1,3 +1,4 @@
+from __future__ import division
 import inspect
 import itertools
 import linecache
@@ -23,14 +24,14 @@ class LineProfilerStat(object):
         self.name = name
         self.firstlineno = firstlineno
         self.timings = timings
-        total_time = sum(t.total_time for t in timings.values())
-        self.total_time = total_time * _LineProfiler.get_unit()
+        self.total_time = sum(t.total_time for t in timings.values())
 
     def write_text(self, stream):
         # type: (Stream) -> None
         stream.write("File: %s\n" % self.filename)
         stream.write("Name: %s\n" % self.name)
-        stream.write("Total time: %g [sec]\n" % self.total_time)
+        total_time = self.total_time * _LineProfiler.get_unit()
+        stream.write("Total time: %g [sec]\n" % total_time)
         if not path.exists(self.filename):
             # e.g., filename is <frozen importlib._bootstrap>
             stream.write("WARNING: Cannot fild a file\n")
@@ -41,8 +42,9 @@ class LineProfilerStat(object):
         if self.name != "<module>":
             lines = inspect.getblock(lines[self.firstlineno - 1:])
 
-        template = '%6s %9s %12s  %-s'
-        header = template % ("Line", "Hits", "Time", "Code")
+        template = '%6s %9s %12s %8s %7s  %-s'
+        header = template % ("Line", "Hits", "Time", "Per Hit", "% Time",
+                             "Code")
         stream.write(header)
         stream.write("\n")
         stream.write("=" * len(header))
@@ -55,17 +57,23 @@ class LineProfilerStat(object):
                 d[i] = {
                     "hits": "",
                     "time": "",
+                    "per_hit": "",
+                    "percent": "",
                     "code": code
                 }
             else:
+                percent = '%.1f' % (100 * timing.total_time / self.total_time)
                 d[i] = {
                     "hits": timing.n_hits,
                     "time": timing.total_time,
+                    "per_hit": '%.1f' % (timing.total_time / timing.n_hits),
+                    "percent": percent,
                     "code": code
                 }
         for i in sorted(d.keys()):
             r = d[i]
-            stream.write(template % (i, r["hits"], r["time"], r["code"]))
+            stream.write(template % (i, r["hits"], r["time"], r["per_hit"],
+                                     r["percent"], r["code"]))
         stream.write("\n")
 
 
