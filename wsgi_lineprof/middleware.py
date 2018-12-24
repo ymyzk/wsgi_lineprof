@@ -25,7 +25,11 @@ class LineProfilerMiddleware(object):
                  ):
         # type: (...) -> None
         self.app = app
-        self.stream = sys.stdout if stream is None else stream  # type: Stream
+        # A hack to suppress unexpected mypy error on Python 2
+        # error: Incompatible types in assignment
+        # (expression has type "object", variable has type "TextIO")
+        stdout = sys.stdout  # type: Any
+        self.stream = stdout if stream is None else stream  # type: Stream
         self.filters = filters
         self.accumulate = accumulate
         self.profiler = LineProfiler()

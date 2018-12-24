@@ -1,5 +1,5 @@
-from typing import IO
+from typing import TextIO
 
 
 # TODO: Improve definition
-Stream = IO
+Stream = TextIO
