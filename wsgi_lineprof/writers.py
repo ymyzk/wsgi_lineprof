@@ -42,7 +42,7 @@ class AsyncWriter(BaseWriter):
                  ):
         # type: (...) -> None
         self.stream = stream
-        self.queue = queue.Queue()  # type: queue.Queue
+        self.queue = queue.Queue()  # type: queue.Queue[LineProfilerStats]
         self.writer_thread = Thread(target=self._write)
         self.writer_thread.setDaemon(True)
         self.writer_thread.start()
