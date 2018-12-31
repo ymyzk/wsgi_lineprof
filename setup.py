@@ -89,7 +89,7 @@ setup(
         "docs": ["Sphinx>=1.4,<1.5"],
         "test": [
             "flake8>=3.0.0,<4.0.0",
-            "pytest>=3.0.0,<4.0.0",
+            "pytest>=4.0.0,<5.0.0",
         ],
         "test:python_version>='3.0'": [
             "mypy>=0.650,<1.0",
