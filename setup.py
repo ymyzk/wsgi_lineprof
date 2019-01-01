@@ -88,8 +88,10 @@ setup(
         "build": ["Cython>=0.28,<0.30"],
         "docs": ["Sphinx>=1.4,<1.5"],
         "test": [
+            "codecov>=2.0.15,<3.0.0",
             "flake8>=3.0.0,<4.0.0",
             "pytest>=4.0.0,<5.0.0",
+            "pytest-cov>=2.6.0,<3.0.0",
         ],
         "test:python_version>='3.0'": [
             "mypy>=0.650,<1.0",
