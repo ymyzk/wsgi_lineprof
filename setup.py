@@ -39,7 +39,7 @@ setup(
     license="MIT",
 
     classifiers=[
-        "Development Status :: 2 - Pre-Alpha",
+        "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
@@ -96,5 +96,10 @@ setup(
         "test:python_version>='3.0'": [
             "mypy>=0.650,<1.0",
         ]
+    },
+
+    project_urls={
+        "Bug Reports": "https://github.com/ymyzk/wsgi_lineprof/issues",
+        "Source": "https://github.com/ymyzk/wsgi_lineprof",
     },
 )
