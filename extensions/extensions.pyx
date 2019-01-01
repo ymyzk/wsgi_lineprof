@@ -1,3 +1,4 @@
+# cython: language_level=2
 from cpython cimport PyObject
 
 from header cimport (
