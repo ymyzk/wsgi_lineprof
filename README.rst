@@ -192,6 +192,7 @@ Links
 -----
 * `GitHub: ymyzk/wsgi_lineprof <https://github.com/ymyzk/wsgi_lineprof>`_
 * `WSGI ミドルウェアとして使えるラインプロファイラを作った話 – ymyzk’s blog <https://blog.ymyzk.com/2016/12/line-profiler-as-a-wsgi-middleware/>`_
+* `Python ウェブアプリのためのプロファイラ wsgi_lineprof の仕組み – ymyzk’s blog <https://blog.ymyzk.com/2018/12/how-wsgi-lineprof-works/>`_
 
 Special Thanks
 ^^^^^^^^^^^^^^
