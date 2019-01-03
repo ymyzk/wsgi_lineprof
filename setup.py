@@ -2,7 +2,7 @@ from io import open
 from os import path
 from warnings import warn
 
-from setuptools import Extension, find_packages, setup
+from setuptools import Extension, setup
 
 
 root = path.abspath(path.dirname(__file__))
@@ -62,9 +62,9 @@ setup(
     # What does your project relate to?
     # keywords="sample setuptools development",
 
-    # You can just specify the packages manually here if your project is
-    # simple. Or you can use find_packages().
-    packages=find_packages(exclude=["contrib", "docs", "tests"]),
+    packages=[
+        "wsgi_lineprof",
+    ],
     package_data={
         "wsgi_lineprof": ["py.typed", "*.pyi"],
     },
