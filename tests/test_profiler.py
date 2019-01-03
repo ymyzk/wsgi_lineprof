@@ -1,5 +1,3 @@
-import sys
-
 from wsgi_lineprof.profiler import LineProfiler, LineProfilerStats
 
 
