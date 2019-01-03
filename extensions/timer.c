@@ -31,6 +31,8 @@ hpTimerUnit(void)
         return 0.000001;  /* unlikely */
 }
 
+const char HP_TIMER_IMPLEMENTATION[] = "QueryPerformanceCounter()";
+
 #else  /* !MS_WINDOWS */
 
 #ifndef HAVE_GETTIMEOFDAY
@@ -60,5 +62,7 @@ hpTimerUnit(void)
 {
     return 0.000001;
 }
+
+const char HP_TIMER_IMPLEMENTATION[] = "gettimeofday()";
 
 #endif  /* MS_WINDOWS */

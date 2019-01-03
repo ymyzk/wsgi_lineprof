@@ -2,8 +2,24 @@ from wsgi_lineprof.profiler import LineProfiler, LineProfilerStats
 
 
 class TestLineProfiler(object):
+    def test_get_timer(self):
+        timer = LineProfiler.get_timer()
+        assert isinstance(timer, int)
+
+    def test_get_timer_is_monotonic(self):
+        timer1 = LineProfiler.get_timer()
+        timer2 = LineProfiler.get_timer()
+        assert timer1 <= timer2
+
+    def test_get_timer_implementation(self):
+        implementation = LineProfiler.get_timer_implementation()
+        assert isinstance(implementation, str)
+        assert len(implementation) > 0
+
     def test_get_unit(self):
-        assert LineProfiler.get_unit() > 0
+        unit = LineProfiler.get_unit()
+        assert isinstance(unit, float)
+        assert unit > 0
 
     def test_get_stats(self):
         def func(x, y):
