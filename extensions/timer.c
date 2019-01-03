@@ -9,7 +9,7 @@
 
 /*** Selection of a high-precision timer ***/
 
-#ifdef MS_WINDOWS
+#if defined(MS_WINDOWS)
 
 #include <windows.h>
 
@@ -33,7 +33,7 @@ hpTimerUnit(void)
 
 const char HP_TIMER_IMPLEMENTATION[] = "QueryPerformanceCounter()";
 
-#else  /* !MS_WINDOWS */
+#else
 
 #ifndef HAVE_GETTIMEOFDAY
 #error "This module requires gettimeofday() on non-Windows platforms!"
@@ -65,4 +65,4 @@ hpTimerUnit(void)
 
 const char HP_TIMER_IMPLEMENTATION[] = "gettimeofday()";
 
-#endif  /* MS_WINDOWS */
+#endif
