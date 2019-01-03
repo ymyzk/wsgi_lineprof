@@ -9,6 +9,7 @@ from header cimport (
 cdef extern from "timer.h":
     PY_LONG_LONG hpTimer()
     double hpTimerUnit()
+    char[] HP_TIMER_IMPLEMENTATION
 
 
 cdef class LineProfiler:
@@ -28,6 +29,14 @@ cdef class LineProfiler:
     def reset(self):
         self.results = {}
         self.last_time = {}
+
+    @staticmethod
+    def get_timer():
+        return hpTimer()
+
+    @staticmethod
+    def get_timer_implementation():
+        return str(HP_TIMER_IMPLEMENTATION)
 
     @staticmethod
     def get_unit():
