@@ -1,14 +1,5 @@
 #include "Python.h"
 
-/*
- * This code is derived from Modules/_lsprof.c in CPython,
- * and modified for this library.
- *
- * The original code is licensed under Python Software Foundation License.
- */
-
-/*** Selection of a high-precision timer ***/
-
 #if defined(MS_WINDOWS)
 
 #include <windows.h>
@@ -57,14 +48,28 @@ hpTimerUnit(void)
 
 const char HP_TIMER_IMPLEMENTATION[] = "mach_absolute_time()";
 
-#else
+#elif defined(HAVE_CLOCK_GETTIME) && defined(CLOCK_MONOTONIC)
 
-#ifndef HAVE_GETTIMEOFDAY
-#error "This module requires gettimeofday() on non-Windows platforms!"
-#endif
+long long
+hpTimer(void)
+{
+    struct timespec ts;
+    long long ret;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    ret = ts.tv_sec;
+    ret = ret * 1000000000 + ts.tv_nsec;
+    return ret;
+}
 
-#include <sys/resource.h>
-#include <sys/times.h>
+double
+hpTimerUnit(void)
+{
+    return 0.000000001;
+}
+
+const char HP_TIMER_IMPLEMENTATION[] = "clock_gettime(CLOCK_MONOTONIC)";
+
+#elif defined(HAVE_GETTIMEOFDAY)
 
 long long
 hpTimer(void)
@@ -88,5 +93,9 @@ hpTimerUnit(void)
 }
 
 const char HP_TIMER_IMPLEMENTATION[] = "gettimeofday()";
+
+#else
+
+#error "This module requires clock_gettime(CLOCK_MONOTONIC) or gettimeofday()"
 
 #endif
