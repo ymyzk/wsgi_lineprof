@@ -865,7 +865,7 @@ struct __pyx_obj_10extensions_LineProfiler {
 };
 
 
-/* "extensions.pyx":46
+/* "extensions.pyx":48
  * 
  * 
  * cdef class LineTiming:             # <<<<<<<<<<<<<<
@@ -882,7 +882,7 @@ struct __pyx_obj_10extensions_LineTiming {
 };
 
 
-/* "extensions.pyx":70
+/* "extensions.pyx":72
  * 
  * 
  * cdef class LastTime:             # <<<<<<<<<<<<<<
@@ -897,7 +897,7 @@ struct __pyx_obj_10extensions_LastTime {
 
 
 
-/* "extensions.pyx":46
+/* "extensions.pyx":48
  * 
  * 
  * cdef class LineTiming:             # <<<<<<<<<<<<<<
@@ -991,50 +991,28 @@ static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
 /* KeywordStringCheck.proto */
 static int __Pyx_CheckKeywordStrings(PyObject *kwdict, const char* function_name, int kw_allowed);
 
-/* PyCFunctionFastCall.proto */
-#if CYTHON_FAST_PYCCALL
-static CYTHON_INLINE PyObject *__Pyx_PyCFunction_FastCall(PyObject *func, PyObject **args, Py_ssize_t nargs);
-#else
-#define __Pyx_PyCFunction_FastCall(func, args, nargs)  (assert(0), NULL)
-#endif
+/* IncludeStringH.proto */
+#include <string.h>
 
-/* PyFunctionFastCall.proto */
-#if CYTHON_FAST_PYCALL
-#define __Pyx_PyFunction_FastCall(func, args, nargs)\
-    __Pyx_PyFunction_FastCallDict((func), (args), (nargs), NULL)
-#if 1 || PY_VERSION_HEX < 0x030600B1
-static PyObject *__Pyx_PyFunction_FastCallDict(PyObject *func, PyObject **args, int nargs, PyObject *kwargs);
-#else
-#define __Pyx_PyFunction_FastCallDict(func, args, nargs, kwargs) _PyFunction_FastCallDict(func, args, nargs, kwargs)
-#endif
-#define __Pyx_BUILD_ASSERT_EXPR(cond)\
-    (sizeof(char [1 - 2*!(cond)]) - 1)
-#ifndef Py_MEMBER_SIZE
-#define Py_MEMBER_SIZE(type, member) sizeof(((type *)0)->member)
-#endif
-  static size_t __pyx_pyframe_localsplus_offset = 0;
-  #include "frameobject.h"
-  #define __Pxy_PyFrame_Initialize_Offsets()\
-    ((void)__Pyx_BUILD_ASSERT_EXPR(sizeof(PyFrameObject) == offsetof(PyFrameObject, f_localsplus) + Py_MEMBER_SIZE(PyFrameObject, f_localsplus)),\
-     (void)(__pyx_pyframe_localsplus_offset = ((size_t)PyFrame_Type.tp_basicsize) - Py_MEMBER_SIZE(PyFrameObject, f_localsplus)))
-  #define __Pyx_PyFrame_GetLocalsplus(frame)\
-    (assert(__pyx_pyframe_localsplus_offset), (PyObject **)(((char *)(frame)) + __pyx_pyframe_localsplus_offset))
-#endif
+/* decode_c_string_utf16.proto */
+static CYTHON_INLINE PyObject *__Pyx_PyUnicode_DecodeUTF16(const char *s, Py_ssize_t size, const char *errors) {
+    int byteorder = 0;
+    return PyUnicode_DecodeUTF16(s, size, errors, &byteorder);
+}
+static CYTHON_INLINE PyObject *__Pyx_PyUnicode_DecodeUTF16LE(const char *s, Py_ssize_t size, const char *errors) {
+    int byteorder = -1;
+    return PyUnicode_DecodeUTF16(s, size, errors, &byteorder);
+}
+static CYTHON_INLINE PyObject *__Pyx_PyUnicode_DecodeUTF16BE(const char *s, Py_ssize_t size, const char *errors) {
+    int byteorder = 1;
+    return PyUnicode_DecodeUTF16(s, size, errors, &byteorder);
+}
 
-/* PyObjectCall.proto */
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
-#else
-#define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
-#endif
-
-/* PyObjectCallMethO.proto */
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg);
-#endif
-
-/* PyObjectCallOneArg.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg);
+/* decode_c_string.proto */
+static CYTHON_INLINE PyObject* __Pyx_decode_c_string(
+         const char* cstring, Py_ssize_t start, Py_ssize_t stop,
+         const char* encoding, const char* errors,
+         PyObject* (*decode_func)(const char *s, Py_ssize_t size, const char *errors));
 
 /* PyErrExceptionMatches.proto */
 #if CYTHON_FAST_THREAD_STATE
@@ -1115,6 +1093,13 @@ static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
     PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
     const char* function_name);
 
+/* PyObjectCall.proto */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
+#else
+#define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
+#endif
+
 /* RaiseException.proto */
 static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause);
 
@@ -1149,8 +1134,46 @@ static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
 /* ImportFrom.proto */
 static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name);
 
+/* PyCFunctionFastCall.proto */
+#if CYTHON_FAST_PYCCALL
+static CYTHON_INLINE PyObject *__Pyx_PyCFunction_FastCall(PyObject *func, PyObject **args, Py_ssize_t nargs);
+#else
+#define __Pyx_PyCFunction_FastCall(func, args, nargs)  (assert(0), NULL)
+#endif
+
+/* PyFunctionFastCall.proto */
+#if CYTHON_FAST_PYCALL
+#define __Pyx_PyFunction_FastCall(func, args, nargs)\
+    __Pyx_PyFunction_FastCallDict((func), (args), (nargs), NULL)
+#if 1 || PY_VERSION_HEX < 0x030600B1
+static PyObject *__Pyx_PyFunction_FastCallDict(PyObject *func, PyObject **args, int nargs, PyObject *kwargs);
+#else
+#define __Pyx_PyFunction_FastCallDict(func, args, nargs, kwargs) _PyFunction_FastCallDict(func, args, nargs, kwargs)
+#endif
+#define __Pyx_BUILD_ASSERT_EXPR(cond)\
+    (sizeof(char [1 - 2*!(cond)]) - 1)
+#ifndef Py_MEMBER_SIZE
+#define Py_MEMBER_SIZE(type, member) sizeof(((type *)0)->member)
+#endif
+  static size_t __pyx_pyframe_localsplus_offset = 0;
+  #include "frameobject.h"
+  #define __Pxy_PyFrame_Initialize_Offsets()\
+    ((void)__Pyx_BUILD_ASSERT_EXPR(sizeof(PyFrameObject) == offsetof(PyFrameObject, f_localsplus) + Py_MEMBER_SIZE(PyFrameObject, f_localsplus)),\
+     (void)(__pyx_pyframe_localsplus_offset = ((size_t)PyFrame_Type.tp_basicsize) - Py_MEMBER_SIZE(PyFrameObject, f_localsplus)))
+  #define __Pyx_PyFrame_GetLocalsplus(frame)\
+    (assert(__pyx_pyframe_localsplus_offset), (PyObject **)(((char *)(frame)) + __pyx_pyframe_localsplus_offset))
+#endif
+
 /* PyObjectCall2Args.proto */
 static CYTHON_UNUSED PyObject* __Pyx_PyObject_Call2Args(PyObject* function, PyObject* arg1, PyObject* arg2);
+
+/* PyObjectCallMethO.proto */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg);
+#endif
+
+/* PyObjectCallOneArg.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg);
 
 /* GetItemInt.proto */
 #define __Pyx_GetItemInt(o, i, type, is_signed, to_py_func, is_list, wraparound, boundscheck)\
@@ -1838,8 +1861,8 @@ static PyObject *__pyx_pf_10extensions_12LineProfiler_8get_timer(void) {
  * 
  *     @staticmethod
  *     def get_timer_implementation():             # <<<<<<<<<<<<<<
- *         return str(HP_TIMER_IMPLEMENTATION)
- * 
+ *         if isinstance(HP_TIMER_IMPLEMENTATION, str):
+ *             return HP_TIMER_IMPLEMENTATION
  */
 
 /* Python wrapper */
@@ -1863,38 +1886,72 @@ static PyObject *__pyx_pf_10extensions_12LineProfiler_10get_timer_implementation
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
+  int __pyx_t_2;
+  int __pyx_t_3;
   __Pyx_RefNannySetupContext("get_timer_implementation", 0);
 
   /* "extensions.pyx":39
  *     @staticmethod
  *     def get_timer_implementation():
- *         return str(HP_TIMER_IMPLEMENTATION)             # <<<<<<<<<<<<<<
+ *         if isinstance(HP_TIMER_IMPLEMENTATION, str):             # <<<<<<<<<<<<<<
+ *             return HP_TIMER_IMPLEMENTATION
+ *         return HP_TIMER_IMPLEMENTATION.decode("ascii")
+ */
+  __pyx_t_1 = __Pyx_PyObject_FromString(HP_TIMER_IMPLEMENTATION); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyString_Check(__pyx_t_1); 
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_3 = (__pyx_t_2 != 0);
+  if (__pyx_t_3) {
+
+    /* "extensions.pyx":40
+ *     def get_timer_implementation():
+ *         if isinstance(HP_TIMER_IMPLEMENTATION, str):
+ *             return HP_TIMER_IMPLEMENTATION             # <<<<<<<<<<<<<<
+ *         return HP_TIMER_IMPLEMENTATION.decode("ascii")
+ * 
+ */
+    __Pyx_XDECREF(__pyx_r);
+    __pyx_t_1 = __Pyx_PyObject_FromString(HP_TIMER_IMPLEMENTATION); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_r = __pyx_t_1;
+    __pyx_t_1 = 0;
+    goto __pyx_L0;
+
+    /* "extensions.pyx":39
+ *     @staticmethod
+ *     def get_timer_implementation():
+ *         if isinstance(HP_TIMER_IMPLEMENTATION, str):             # <<<<<<<<<<<<<<
+ *             return HP_TIMER_IMPLEMENTATION
+ *         return HP_TIMER_IMPLEMENTATION.decode("ascii")
+ */
+  }
+
+  /* "extensions.pyx":41
+ *         if isinstance(HP_TIMER_IMPLEMENTATION, str):
+ *             return HP_TIMER_IMPLEMENTATION
+ *         return HP_TIMER_IMPLEMENTATION.decode("ascii")             # <<<<<<<<<<<<<<
  * 
  *     @staticmethod
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_FromString(HP_TIMER_IMPLEMENTATION); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_decode_c_string(HP_TIMER_IMPLEMENTATION, 0, strlen(HP_TIMER_IMPLEMENTATION), NULL, NULL, PyUnicode_DecodeASCII); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyString_Type)), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_r = __pyx_t_2;
-  __pyx_t_2 = 0;
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
   goto __pyx_L0;
 
   /* "extensions.pyx":38
  * 
  *     @staticmethod
  *     def get_timer_implementation():             # <<<<<<<<<<<<<<
- *         return str(HP_TIMER_IMPLEMENTATION)
- * 
+ *         if isinstance(HP_TIMER_IMPLEMENTATION, str):
+ *             return HP_TIMER_IMPLEMENTATION
  */
 
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
   __Pyx_AddTraceback("extensions.LineProfiler.get_timer_implementation", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -1903,7 +1960,7 @@ static PyObject *__pyx_pf_10extensions_12LineProfiler_10get_timer_implementation
   return __pyx_r;
 }
 
-/* "extensions.pyx":42
+/* "extensions.pyx":44
  * 
  *     @staticmethod
  *     def get_unit():             # <<<<<<<<<<<<<<
@@ -1934,7 +1991,7 @@ static PyObject *__pyx_pf_10extensions_12LineProfiler_12get_unit(void) {
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("get_unit", 0);
 
-  /* "extensions.pyx":43
+  /* "extensions.pyx":45
  *     @staticmethod
  *     def get_unit():
  *         return hpTimerUnit()             # <<<<<<<<<<<<<<
@@ -1942,13 +1999,13 @@ static PyObject *__pyx_pf_10extensions_12LineProfiler_12get_unit(void) {
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(hpTimerUnit()); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(hpTimerUnit()); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "extensions.pyx":42
+  /* "extensions.pyx":44
  * 
  *     @staticmethod
  *     def get_unit():             # <<<<<<<<<<<<<<
@@ -2478,7 +2535,7 @@ static PyObject *__pyx_pf_10extensions_12LineProfiler_16__setstate_cython__(stru
   return __pyx_r;
 }
 
-/* "extensions.pyx":52
+/* "extensions.pyx":54
  *     cdef public long n_hits
  * 
  *     def __init__(self, object code, int lineno):             # <<<<<<<<<<<<<<
@@ -2517,11 +2574,11 @@ static int __pyx_pw_10extensions_10LineTiming_1__init__(PyObject *__pyx_v_self, 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_lineno)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, 1); __PYX_ERR(0, 52, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, 1); __PYX_ERR(0, 54, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 52, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 54, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2530,11 +2587,11 @@ static int __pyx_pw_10extensions_10LineTiming_1__init__(PyObject *__pyx_v_self, 
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
     __pyx_v_code = values[0];
-    __pyx_v_lineno = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_lineno == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 52, __pyx_L3_error)
+    __pyx_v_lineno = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_lineno == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 54, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 52, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 54, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("extensions.LineTiming.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2552,7 +2609,7 @@ static int __pyx_pf_10extensions_10LineTiming___init__(struct __pyx_obj_10extens
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "extensions.pyx":53
+  /* "extensions.pyx":55
  * 
  *     def __init__(self, object code, int lineno):
  *         self.code = code             # <<<<<<<<<<<<<<
@@ -2565,7 +2622,7 @@ static int __pyx_pf_10extensions_10LineTiming___init__(struct __pyx_obj_10extens
   __Pyx_DECREF(__pyx_v_self->code);
   __pyx_v_self->code = __pyx_v_code;
 
-  /* "extensions.pyx":54
+  /* "extensions.pyx":56
  *     def __init__(self, object code, int lineno):
  *         self.code = code
  *         self.lineno = lineno             # <<<<<<<<<<<<<<
@@ -2574,7 +2631,7 @@ static int __pyx_pf_10extensions_10LineTiming___init__(struct __pyx_obj_10extens
  */
   __pyx_v_self->lineno = __pyx_v_lineno;
 
-  /* "extensions.pyx":55
+  /* "extensions.pyx":57
  *         self.code = code
  *         self.lineno = lineno
  *         self.total_time = 0             # <<<<<<<<<<<<<<
@@ -2583,7 +2640,7 @@ static int __pyx_pf_10extensions_10LineTiming___init__(struct __pyx_obj_10extens
  */
   __pyx_v_self->total_time = 0;
 
-  /* "extensions.pyx":56
+  /* "extensions.pyx":58
  *         self.lineno = lineno
  *         self.total_time = 0
  *         self.n_hits = 0             # <<<<<<<<<<<<<<
@@ -2592,7 +2649,7 @@ static int __pyx_pf_10extensions_10LineTiming___init__(struct __pyx_obj_10extens
  */
   __pyx_v_self->n_hits = 0;
 
-  /* "extensions.pyx":52
+  /* "extensions.pyx":54
  *     cdef public long n_hits
  * 
  *     def __init__(self, object code, int lineno):             # <<<<<<<<<<<<<<
@@ -2606,7 +2663,7 @@ static int __pyx_pf_10extensions_10LineTiming___init__(struct __pyx_obj_10extens
   return __pyx_r;
 }
 
-/* "extensions.pyx":58
+/* "extensions.pyx":60
  *         self.n_hits = 0
  * 
  *     cdef hit(self, PY_LONG_LONG dt):             # <<<<<<<<<<<<<<
@@ -2619,7 +2676,7 @@ static PyObject *__pyx_f_10extensions_10LineTiming_hit(struct __pyx_obj_10extens
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("hit", 0);
 
-  /* "extensions.pyx":59
+  /* "extensions.pyx":61
  * 
  *     cdef hit(self, PY_LONG_LONG dt):
  *             self.n_hits += 1             # <<<<<<<<<<<<<<
@@ -2628,7 +2685,7 @@ static PyObject *__pyx_f_10extensions_10LineTiming_hit(struct __pyx_obj_10extens
  */
   __pyx_v_self->n_hits = (__pyx_v_self->n_hits + 1);
 
-  /* "extensions.pyx":60
+  /* "extensions.pyx":62
  *     cdef hit(self, PY_LONG_LONG dt):
  *             self.n_hits += 1
  *             self.total_time += dt             # <<<<<<<<<<<<<<
@@ -2637,7 +2694,7 @@ static PyObject *__pyx_f_10extensions_10LineTiming_hit(struct __pyx_obj_10extens
  */
   __pyx_v_self->total_time = (__pyx_v_self->total_time + __pyx_v_dt);
 
-  /* "extensions.pyx":58
+  /* "extensions.pyx":60
  *         self.n_hits = 0
  * 
  *     cdef hit(self, PY_LONG_LONG dt):             # <<<<<<<<<<<<<<
@@ -2652,7 +2709,7 @@ static PyObject *__pyx_f_10extensions_10LineTiming_hit(struct __pyx_obj_10extens
   return __pyx_r;
 }
 
-/* "extensions.pyx":62
+/* "extensions.pyx":64
  *             self.total_time += dt
  * 
  *     def as_tuple(self):             # <<<<<<<<<<<<<<
@@ -2682,7 +2739,7 @@ static PyObject *__pyx_pf_10extensions_10LineTiming_2as_tuple(struct __pyx_obj_1
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("as_tuple", 0);
 
-  /* "extensions.pyx":63
+  /* "extensions.pyx":65
  * 
  *     def as_tuple(self):
  *         return self.lineno, self.n_hits, self.total_time             # <<<<<<<<<<<<<<
@@ -2690,13 +2747,13 @@ static PyObject *__pyx_pf_10extensions_10LineTiming_2as_tuple(struct __pyx_obj_1
  *     def __repr__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->lineno); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->lineno); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_From_long(__pyx_v_self->n_hits); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_long(__pyx_v_self->n_hits); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyInt_From_PY_LONG_LONG(__pyx_v_self->total_time); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_PY_LONG_LONG(__pyx_v_self->total_time); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1);
@@ -2711,7 +2768,7 @@ static PyObject *__pyx_pf_10extensions_10LineTiming_2as_tuple(struct __pyx_obj_1
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "extensions.pyx":62
+  /* "extensions.pyx":64
  *             self.total_time += dt
  * 
  *     def as_tuple(self):             # <<<<<<<<<<<<<<
@@ -2733,7 +2790,7 @@ static PyObject *__pyx_pf_10extensions_10LineTiming_2as_tuple(struct __pyx_obj_1
   return __pyx_r;
 }
 
-/* "extensions.pyx":65
+/* "extensions.pyx":67
  *         return self.lineno, self.n_hits, self.total_time
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -2763,7 +2820,7 @@ static PyObject *__pyx_pf_10extensions_10LineTiming_4__repr__(struct __pyx_obj_1
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("__repr__", 0);
 
-  /* "extensions.pyx":66
+  /* "extensions.pyx":68
  * 
  *     def __repr__(self):
  *         return '<LineTiming for %r lineno: %r n_hits: %r total_time: %r>' % (             # <<<<<<<<<<<<<<
@@ -2772,20 +2829,20 @@ static PyObject *__pyx_pf_10extensions_10LineTiming_4__repr__(struct __pyx_obj_1
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "extensions.pyx":67
+  /* "extensions.pyx":69
  *     def __repr__(self):
  *         return '<LineTiming for %r lineno: %r n_hits: %r total_time: %r>' % (
  *             self.code, self.lineno, self.n_hits, <long>self.total_time)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->lineno); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->lineno); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_From_long(__pyx_v_self->n_hits); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_long(__pyx_v_self->n_hits); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyInt_From_long(((long)__pyx_v_self->total_time)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_long(((long)__pyx_v_self->total_time)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyTuple_New(4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_INCREF(__pyx_v_self->code);
   __Pyx_GIVEREF(__pyx_v_self->code);
@@ -2800,21 +2857,21 @@ static PyObject *__pyx_pf_10extensions_10LineTiming_4__repr__(struct __pyx_obj_1
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
 
-  /* "extensions.pyx":66
+  /* "extensions.pyx":68
  * 
  *     def __repr__(self):
  *         return '<LineTiming for %r lineno: %r n_hits: %r total_time: %r>' % (             # <<<<<<<<<<<<<<
  *             self.code, self.lineno, self.n_hits, <long>self.total_time)
  * 
  */
-  __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_LineTiming_for_r_lineno_r_n_hit, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_LineTiming_for_r_lineno_r_n_hit, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "extensions.pyx":65
+  /* "extensions.pyx":67
  *         return self.lineno, self.n_hits, self.total_time
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -2836,7 +2893,7 @@ static PyObject *__pyx_pf_10extensions_10LineTiming_4__repr__(struct __pyx_obj_1
   return __pyx_r;
 }
 
-/* "extensions.pyx":47
+/* "extensions.pyx":49
  * 
  * cdef class LineTiming:
  *     cdef public object code             # <<<<<<<<<<<<<<
@@ -2931,7 +2988,7 @@ static int __pyx_pf_10extensions_10LineTiming_4code_4__del__(struct __pyx_obj_10
   return __pyx_r;
 }
 
-/* "extensions.pyx":48
+/* "extensions.pyx":50
  * cdef class LineTiming:
  *     cdef public object code
  *     cdef public int lineno             # <<<<<<<<<<<<<<
@@ -2958,7 +3015,7 @@ static PyObject *__pyx_pf_10extensions_10LineTiming_6lineno___get__(struct __pyx
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->lineno); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->lineno); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2993,7 +3050,7 @@ static int __pyx_pf_10extensions_10LineTiming_6lineno_2__set__(struct __pyx_obj_
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_value); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_value); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 50, __pyx_L1_error)
   __pyx_v_self->lineno = __pyx_t_1;
 
   /* function exit code */
@@ -3007,7 +3064,7 @@ static int __pyx_pf_10extensions_10LineTiming_6lineno_2__set__(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "extensions.pyx":49
+/* "extensions.pyx":51
  *     cdef public object code
  *     cdef public int lineno
  *     cdef public PY_LONG_LONG total_time             # <<<<<<<<<<<<<<
@@ -3034,7 +3091,7 @@ static PyObject *__pyx_pf_10extensions_10LineTiming_10total_time___get__(struct 
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_PY_LONG_LONG(__pyx_v_self->total_time); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_PY_LONG_LONG(__pyx_v_self->total_time); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3069,7 +3126,7 @@ static int __pyx_pf_10extensions_10LineTiming_10total_time_2__set__(struct __pyx
   __Pyx_RefNannyDeclarations
   PY_LONG_LONG __pyx_t_1;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __pyx_t_1 = __Pyx_PyInt_As_PY_LONG_LONG(__pyx_v_value); if (unlikely((__pyx_t_1 == ((PY_LONG_LONG)-1)) && PyErr_Occurred())) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_As_PY_LONG_LONG(__pyx_v_value); if (unlikely((__pyx_t_1 == ((PY_LONG_LONG)-1)) && PyErr_Occurred())) __PYX_ERR(0, 51, __pyx_L1_error)
   __pyx_v_self->total_time = __pyx_t_1;
 
   /* function exit code */
@@ -3083,7 +3140,7 @@ static int __pyx_pf_10extensions_10LineTiming_10total_time_2__set__(struct __pyx
   return __pyx_r;
 }
 
-/* "extensions.pyx":50
+/* "extensions.pyx":52
  *     cdef public int lineno
  *     cdef public PY_LONG_LONG total_time
  *     cdef public long n_hits             # <<<<<<<<<<<<<<
@@ -3110,7 +3167,7 @@ static PyObject *__pyx_pf_10extensions_10LineTiming_6n_hits___get__(struct __pyx
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v_self->n_hits); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v_self->n_hits); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3145,7 +3202,7 @@ static int __pyx_pf_10extensions_10LineTiming_6n_hits_2__set__(struct __pyx_obj_
   __Pyx_RefNannyDeclarations
   long __pyx_t_1;
   __Pyx_RefNannySetupContext("__set__", 0);
-  __pyx_t_1 = __Pyx_PyInt_As_long(__pyx_v_value); if (unlikely((__pyx_t_1 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_As_long(__pyx_v_value); if (unlikely((__pyx_t_1 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 52, __pyx_L1_error)
   __pyx_v_self->n_hits = __pyx_t_1;
 
   /* function exit code */
@@ -3463,7 +3520,7 @@ static PyObject *__pyx_pf_10extensions_10LineTiming_8__setstate_cython__(struct 
   return __pyx_r;
 }
 
-/* "extensions.pyx":74
+/* "extensions.pyx":76
  *     cdef PY_LONG_LONG time
  * 
  *     def __cinit__(self, int f_lineno, PY_LONG_LONG time):             # <<<<<<<<<<<<<<
@@ -3502,11 +3559,11 @@ static int __pyx_pw_10extensions_8LastTime_1__cinit__(PyObject *__pyx_v_self, Py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_time)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, 1); __PYX_ERR(0, 74, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, 1); __PYX_ERR(0, 76, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(0, 74, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(0, 76, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3514,12 +3571,12 @@ static int __pyx_pw_10extensions_8LastTime_1__cinit__(PyObject *__pyx_v_self, Py
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_f_lineno = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_f_lineno == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 74, __pyx_L3_error)
-    __pyx_v_time = __Pyx_PyInt_As_PY_LONG_LONG(values[1]); if (unlikely((__pyx_v_time == ((PY_LONG_LONG)-1)) && PyErr_Occurred())) __PYX_ERR(0, 74, __pyx_L3_error)
+    __pyx_v_f_lineno = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_f_lineno == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 76, __pyx_L3_error)
+    __pyx_v_time = __Pyx_PyInt_As_PY_LONG_LONG(values[1]); if (unlikely((__pyx_v_time == ((PY_LONG_LONG)-1)) && PyErr_Occurred())) __PYX_ERR(0, 76, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 74, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 76, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("extensions.LastTime.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3537,7 +3594,7 @@ static int __pyx_pf_10extensions_8LastTime___cinit__(struct __pyx_obj_10extensio
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "extensions.pyx":75
+  /* "extensions.pyx":77
  * 
  *     def __cinit__(self, int f_lineno, PY_LONG_LONG time):
  *         self.f_lineno = f_lineno             # <<<<<<<<<<<<<<
@@ -3546,7 +3603,7 @@ static int __pyx_pf_10extensions_8LastTime___cinit__(struct __pyx_obj_10extensio
  */
   __pyx_v_self->f_lineno = __pyx_v_f_lineno;
 
-  /* "extensions.pyx":76
+  /* "extensions.pyx":78
  *     def __cinit__(self, int f_lineno, PY_LONG_LONG time):
  *         self.f_lineno = f_lineno
  *         self.time = time             # <<<<<<<<<<<<<<
@@ -3555,7 +3612,7 @@ static int __pyx_pf_10extensions_8LastTime___cinit__(struct __pyx_obj_10extensio
  */
   __pyx_v_self->time = __pyx_v_time;
 
-  /* "extensions.pyx":74
+  /* "extensions.pyx":76
  *     cdef PY_LONG_LONG time
  * 
  *     def __cinit__(self, int f_lineno, PY_LONG_LONG time):             # <<<<<<<<<<<<<<
@@ -3676,7 +3733,7 @@ static PyObject *__pyx_pf_10extensions_8LastTime_4__setstate_cython__(CYTHON_UNU
   return __pyx_r;
 }
 
-/* "extensions.pyx":79
+/* "extensions.pyx":81
  * 
  * 
  * cdef int python_trace_callback(object self_, PyFrameObject *py_frame, int what,             # <<<<<<<<<<<<<<
@@ -3704,7 +3761,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
   PyObject *__pyx_t_6 = NULL;
   __Pyx_RefNannySetupContext("python_trace_callback", 0);
 
-  /* "extensions.pyx":91
+  /* "extensions.pyx":93
  *     cdef int lineno
  * 
  *     if what != PyTrace_LINE and what != PyTrace_RETURN:             # <<<<<<<<<<<<<<
@@ -3722,7 +3779,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "extensions.pyx":92
+    /* "extensions.pyx":94
  * 
  *     if what != PyTrace_LINE and what != PyTrace_RETURN:
  *         return 0             # <<<<<<<<<<<<<<
@@ -3732,7 +3789,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
     __pyx_r = 0;
     goto __pyx_L0;
 
-    /* "extensions.pyx":91
+    /* "extensions.pyx":93
  *     cdef int lineno
  * 
  *     if what != PyTrace_LINE and what != PyTrace_RETURN:             # <<<<<<<<<<<<<<
@@ -3741,7 +3798,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
  */
   }
 
-  /* "extensions.pyx":94
+  /* "extensions.pyx":96
  *         return 0
  * 
  *     time = hpTimer()             # <<<<<<<<<<<<<<
@@ -3750,7 +3807,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
  */
   __pyx_v_time = hpTimer();
 
-  /* "extensions.pyx":96
+  /* "extensions.pyx":98
  *     time = hpTimer()
  * 
  *     self = <LineProfiler>self_             # <<<<<<<<<<<<<<
@@ -3762,7 +3819,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
   __pyx_v_self = ((struct __pyx_obj_10extensions_LineProfiler *)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "extensions.pyx":97
+  /* "extensions.pyx":99
  * 
  *     self = <LineProfiler>self_
  *     last_time = self.last_time             # <<<<<<<<<<<<<<
@@ -3774,7 +3831,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
   __pyx_v_last_time = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "extensions.pyx":98
+  /* "extensions.pyx":100
  *     self = <LineProfiler>self_
  *     last_time = self.last_time
  *     results = self.results             # <<<<<<<<<<<<<<
@@ -3786,7 +3843,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
   __pyx_v_results = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "extensions.pyx":99
+  /* "extensions.pyx":101
  *     last_time = self.last_time
  *     results = self.results
  *     code = <object>py_frame.f_code             # <<<<<<<<<<<<<<
@@ -3798,7 +3855,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
   __pyx_v_code = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "extensions.pyx":101
+  /* "extensions.pyx":103
  *     code = <object>py_frame.f_code
  * 
  *     if code not in results:             # <<<<<<<<<<<<<<
@@ -3807,29 +3864,29 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
  */
   if (unlikely(__pyx_v_results == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 101, __pyx_L1_error)
+    __PYX_ERR(0, 103, __pyx_L1_error)
   }
-  __pyx_t_1 = (__Pyx_PyDict_ContainsTF(__pyx_v_code, __pyx_v_results, Py_NE)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 101, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PyDict_ContainsTF(__pyx_v_code, __pyx_v_results, Py_NE)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 103, __pyx_L1_error)
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "extensions.pyx":102
+    /* "extensions.pyx":104
  * 
  *     if code not in results:
  *         results[code] = {}             # <<<<<<<<<<<<<<
  * 
  *     if code in last_time:
  */
-    __pyx_t_3 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 102, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 104, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     if (unlikely(__pyx_v_results == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 102, __pyx_L1_error)
+      __PYX_ERR(0, 104, __pyx_L1_error)
     }
-    if (unlikely(PyDict_SetItem(__pyx_v_results, __pyx_v_code, __pyx_t_3) < 0)) __PYX_ERR(0, 102, __pyx_L1_error)
+    if (unlikely(PyDict_SetItem(__pyx_v_results, __pyx_v_code, __pyx_t_3) < 0)) __PYX_ERR(0, 104, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "extensions.pyx":101
+    /* "extensions.pyx":103
  *     code = <object>py_frame.f_code
  * 
  *     if code not in results:             # <<<<<<<<<<<<<<
@@ -3838,7 +3895,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
  */
   }
 
-  /* "extensions.pyx":104
+  /* "extensions.pyx":106
  *         results[code] = {}
  * 
  *     if code in last_time:             # <<<<<<<<<<<<<<
@@ -3847,13 +3904,13 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
  */
   if (unlikely(__pyx_v_last_time == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 104, __pyx_L1_error)
+    __PYX_ERR(0, 106, __pyx_L1_error)
   }
-  __pyx_t_2 = (__Pyx_PyDict_ContainsTF(__pyx_v_code, __pyx_v_last_time, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PyDict_ContainsTF(__pyx_v_code, __pyx_v_last_time, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 106, __pyx_L1_error)
   __pyx_t_1 = (__pyx_t_2 != 0);
   if (__pyx_t_1) {
 
-    /* "extensions.pyx":105
+    /* "extensions.pyx":107
  * 
  *     if code in last_time:
  *         result_code = results[code]             # <<<<<<<<<<<<<<
@@ -3862,15 +3919,15 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
  */
     if (unlikely(__pyx_v_results == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 105, __pyx_L1_error)
+      __PYX_ERR(0, 107, __pyx_L1_error)
     }
-    __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_results, __pyx_v_code); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 105, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_results, __pyx_v_code); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 107, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    if (!(likely(PyDict_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_3)->tp_name), 0))) __PYX_ERR(0, 105, __pyx_L1_error)
+    if (!(likely(PyDict_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_3)->tp_name), 0))) __PYX_ERR(0, 107, __pyx_L1_error)
     __pyx_v_result_code = ((PyObject*)__pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "extensions.pyx":106
+    /* "extensions.pyx":108
  *     if code in last_time:
  *         result_code = results[code]
  *         old = last_time[code]             # <<<<<<<<<<<<<<
@@ -3879,15 +3936,15 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
  */
     if (unlikely(__pyx_v_last_time == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 106, __pyx_L1_error)
+      __PYX_ERR(0, 108, __pyx_L1_error)
     }
-    __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_last_time, __pyx_v_code); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 106, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_last_time, __pyx_v_code); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 108, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_10extensions_LastTime))))) __PYX_ERR(0, 106, __pyx_L1_error)
+    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_10extensions_LastTime))))) __PYX_ERR(0, 108, __pyx_L1_error)
     __pyx_v_old = ((struct __pyx_obj_10extensions_LastTime *)__pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "extensions.pyx":107
+    /* "extensions.pyx":109
  *         result_code = results[code]
  *         old = last_time[code]
  *         lineno = old.f_lineno             # <<<<<<<<<<<<<<
@@ -3897,34 +3954,34 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
     __pyx_t_4 = __pyx_v_old->f_lineno;
     __pyx_v_lineno = __pyx_t_4;
 
-    /* "extensions.pyx":109
+    /* "extensions.pyx":111
  *         lineno = old.f_lineno
  * 
  *         if lineno not in result_code:             # <<<<<<<<<<<<<<
  *             result_code[lineno] = entry = LineTiming(code, lineno)
  *         else:
  */
-    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_lineno); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 109, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_lineno); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 111, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     if (unlikely(__pyx_v_result_code == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-      __PYX_ERR(0, 109, __pyx_L1_error)
+      __PYX_ERR(0, 111, __pyx_L1_error)
     }
-    __pyx_t_1 = (__Pyx_PyDict_ContainsTF(__pyx_t_3, __pyx_v_result_code, Py_NE)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 109, __pyx_L1_error)
+    __pyx_t_1 = (__Pyx_PyDict_ContainsTF(__pyx_t_3, __pyx_v_result_code, Py_NE)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 111, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_2 = (__pyx_t_1 != 0);
     if (__pyx_t_2) {
 
-      /* "extensions.pyx":110
+      /* "extensions.pyx":112
  * 
  *         if lineno not in result_code:
  *             result_code[lineno] = entry = LineTiming(code, lineno)             # <<<<<<<<<<<<<<
  *         else:
  *             entry = result_code[lineno]
  */
-      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_lineno); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 110, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_lineno); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 112, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 110, __pyx_L1_error)
+      __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 112, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_INCREF(__pyx_v_code);
       __Pyx_GIVEREF(__pyx_v_code);
@@ -3932,22 +3989,22 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
       __Pyx_GIVEREF(__pyx_t_3);
       PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_3);
       __pyx_t_3 = 0;
-      __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_10extensions_LineTiming), __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 110, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_10extensions_LineTiming), __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 112, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       if (unlikely(__pyx_v_result_code == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 110, __pyx_L1_error)
+        __PYX_ERR(0, 112, __pyx_L1_error)
       }
-      __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_lineno); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 110, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_lineno); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 112, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      if (unlikely(PyDict_SetItem(__pyx_v_result_code, __pyx_t_5, __pyx_t_3) < 0)) __PYX_ERR(0, 110, __pyx_L1_error)
+      if (unlikely(PyDict_SetItem(__pyx_v_result_code, __pyx_t_5, __pyx_t_3) < 0)) __PYX_ERR(0, 112, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_INCREF(__pyx_t_3);
       __pyx_v_entry = ((struct __pyx_obj_10extensions_LineTiming *)__pyx_t_3);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "extensions.pyx":109
+      /* "extensions.pyx":111
  *         lineno = old.f_lineno
  * 
  *         if lineno not in result_code:             # <<<<<<<<<<<<<<
@@ -3957,7 +4014,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
       goto __pyx_L8;
     }
 
-    /* "extensions.pyx":112
+    /* "extensions.pyx":114
  *             result_code[lineno] = entry = LineTiming(code, lineno)
  *         else:
  *             entry = result_code[lineno]             # <<<<<<<<<<<<<<
@@ -3967,31 +4024,31 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
     /*else*/ {
       if (unlikely(__pyx_v_result_code == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 112, __pyx_L1_error)
+        __PYX_ERR(0, 114, __pyx_L1_error)
       }
-      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_lineno); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 112, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_lineno); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 114, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_5 = __Pyx_PyDict_GetItem(__pyx_v_result_code, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 112, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyDict_GetItem(__pyx_v_result_code, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 114, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_10extensions_LineTiming))))) __PYX_ERR(0, 112, __pyx_L1_error)
+      if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_10extensions_LineTiming))))) __PYX_ERR(0, 114, __pyx_L1_error)
       __pyx_v_entry = ((struct __pyx_obj_10extensions_LineTiming *)__pyx_t_5);
       __pyx_t_5 = 0;
     }
     __pyx_L8:;
 
-    /* "extensions.pyx":114
+    /* "extensions.pyx":116
  *             entry = result_code[lineno]
  * 
  *         entry.hit(time - old.time)             # <<<<<<<<<<<<<<
  * 
  *         if what == PyTrace_RETURN:
  */
-    __pyx_t_5 = ((struct __pyx_vtabstruct_10extensions_LineTiming *)__pyx_v_entry->__pyx_vtab)->hit(__pyx_v_entry, (__pyx_v_time - __pyx_v_old->time)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 114, __pyx_L1_error)
+    __pyx_t_5 = ((struct __pyx_vtabstruct_10extensions_LineTiming *)__pyx_v_entry->__pyx_vtab)->hit(__pyx_v_entry, (__pyx_v_time - __pyx_v_old->time)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 116, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "extensions.pyx":116
+    /* "extensions.pyx":118
  *         entry.hit(time - old.time)
  * 
  *         if what == PyTrace_RETURN:             # <<<<<<<<<<<<<<
@@ -4001,7 +4058,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
     __pyx_t_2 = ((__pyx_v_what == PyTrace_RETURN) != 0);
     if (__pyx_t_2) {
 
-      /* "extensions.pyx":117
+      /* "extensions.pyx":119
  * 
  *         if what == PyTrace_RETURN:
  *             del last_time[code]             # <<<<<<<<<<<<<<
@@ -4010,11 +4067,11 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
  */
       if (unlikely(__pyx_v_last_time == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 117, __pyx_L1_error)
+        __PYX_ERR(0, 119, __pyx_L1_error)
       }
-      if (unlikely(PyDict_DelItem(__pyx_v_last_time, __pyx_v_code) < 0)) __PYX_ERR(0, 117, __pyx_L1_error)
+      if (unlikely(PyDict_DelItem(__pyx_v_last_time, __pyx_v_code) < 0)) __PYX_ERR(0, 119, __pyx_L1_error)
 
-      /* "extensions.pyx":116
+      /* "extensions.pyx":118
  *         entry.hit(time - old.time)
  * 
  *         if what == PyTrace_RETURN:             # <<<<<<<<<<<<<<
@@ -4023,7 +4080,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
  */
     }
 
-    /* "extensions.pyx":104
+    /* "extensions.pyx":106
  *         results[code] = {}
  * 
  *     if code in last_time:             # <<<<<<<<<<<<<<
@@ -4032,7 +4089,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
  */
   }
 
-  /* "extensions.pyx":119
+  /* "extensions.pyx":121
  *             del last_time[code]
  * 
  *     if what == PyTrace_LINE:             # <<<<<<<<<<<<<<
@@ -4042,18 +4099,18 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
   __pyx_t_2 = ((__pyx_v_what == PyTrace_LINE) != 0);
   if (__pyx_t_2) {
 
-    /* "extensions.pyx":120
+    /* "extensions.pyx":122
  * 
  *     if what == PyTrace_LINE:
  *         last_time[code] = LastTime(py_frame.f_lineno, hpTimer())             # <<<<<<<<<<<<<<
  * 
  *     return 0
  */
-    __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_py_frame->f_lineno); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 120, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_py_frame->f_lineno); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 122, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_3 = __Pyx_PyInt_From_PY_LONG_LONG(hpTimer()); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 120, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyInt_From_PY_LONG_LONG(hpTimer()); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 122, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 120, __pyx_L1_error)
+    __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 122, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_GIVEREF(__pyx_t_5);
     PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5);
@@ -4061,17 +4118,17 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
     PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_3);
     __pyx_t_5 = 0;
     __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_10extensions_LastTime), __pyx_t_6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 120, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_10extensions_LastTime), __pyx_t_6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 122, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     if (unlikely(__pyx_v_last_time == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 120, __pyx_L1_error)
+      __PYX_ERR(0, 122, __pyx_L1_error)
     }
-    if (unlikely(PyDict_SetItem(__pyx_v_last_time, __pyx_v_code, __pyx_t_3) < 0)) __PYX_ERR(0, 120, __pyx_L1_error)
+    if (unlikely(PyDict_SetItem(__pyx_v_last_time, __pyx_v_code, __pyx_t_3) < 0)) __PYX_ERR(0, 122, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "extensions.pyx":119
+    /* "extensions.pyx":121
  *             del last_time[code]
  * 
  *     if what == PyTrace_LINE:             # <<<<<<<<<<<<<<
@@ -4080,7 +4137,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
  */
   }
 
-  /* "extensions.pyx":122
+  /* "extensions.pyx":124
  *         last_time[code] = LastTime(py_frame.f_lineno, hpTimer())
  * 
  *     return 0             # <<<<<<<<<<<<<<
@@ -4088,7 +4145,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
   __pyx_r = 0;
   goto __pyx_L0;
 
-  /* "extensions.pyx":79
+  /* "extensions.pyx":81
  * 
  * 
  * cdef int python_trace_callback(object self_, PyFrameObject *py_frame, int what,             # <<<<<<<<<<<<<<
@@ -5485,19 +5542,19 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  *     @staticmethod
  *     def get_timer_implementation():             # <<<<<<<<<<<<<<
- *         return str(HP_TIMER_IMPLEMENTATION)
- * 
+ *         if isinstance(HP_TIMER_IMPLEMENTATION, str):
+ *             return HP_TIMER_IMPLEMENTATION
  */
   __pyx_codeobj__4 = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_extensions_extensions_pyx, __pyx_n_s_get_timer_implementation, 38, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__4)) __PYX_ERR(0, 38, __pyx_L1_error)
 
-  /* "extensions.pyx":42
+  /* "extensions.pyx":44
  * 
  *     @staticmethod
  *     def get_unit():             # <<<<<<<<<<<<<<
  *         return hpTimerUnit()
  * 
  */
-  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_extensions_extensions_pyx, __pyx_n_s_get_unit, 42, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_extensions_extensions_pyx, __pyx_n_s_get_unit, 44, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 44, __pyx_L1_error)
 
   /* "(tree fragment)":1
  * def __pyx_unpickle_LineProfiler(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
@@ -5574,22 +5631,22 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_ptype_10extensions_LineProfiler = &__pyx_type_10extensions_LineProfiler;
   __pyx_vtabptr_10extensions_LineTiming = &__pyx_vtable_10extensions_LineTiming;
   __pyx_vtable_10extensions_LineTiming.hit = (PyObject *(*)(struct __pyx_obj_10extensions_LineTiming *, PY_LONG_LONG))__pyx_f_10extensions_10LineTiming_hit;
-  if (PyType_Ready(&__pyx_type_10extensions_LineTiming) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_10extensions_LineTiming) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
   __pyx_type_10extensions_LineTiming.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_10extensions_LineTiming.tp_dictoffset && __pyx_type_10extensions_LineTiming.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_10extensions_LineTiming.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_10extensions_LineTiming.tp_dict, __pyx_vtabptr_10extensions_LineTiming) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_LineTiming, (PyObject *)&__pyx_type_10extensions_LineTiming) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_10extensions_LineTiming) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_10extensions_LineTiming.tp_dict, __pyx_vtabptr_10extensions_LineTiming) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_LineTiming, (PyObject *)&__pyx_type_10extensions_LineTiming) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_10extensions_LineTiming) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
   __pyx_ptype_10extensions_LineTiming = &__pyx_type_10extensions_LineTiming;
-  if (PyType_Ready(&__pyx_type_10extensions_LastTime) < 0) __PYX_ERR(0, 70, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_10extensions_LastTime) < 0) __PYX_ERR(0, 72, __pyx_L1_error)
   __pyx_type_10extensions_LastTime.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_10extensions_LastTime.tp_dictoffset && __pyx_type_10extensions_LastTime.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_10extensions_LastTime.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_LastTime, (PyObject *)&__pyx_type_10extensions_LastTime) < 0) __PYX_ERR(0, 70, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_10extensions_LastTime) < 0) __PYX_ERR(0, 70, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_LastTime, (PyObject *)&__pyx_type_10extensions_LastTime) < 0) __PYX_ERR(0, 72, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_10extensions_LastTime) < 0) __PYX_ERR(0, 72, __pyx_L1_error)
   __pyx_ptype_10extensions_LastTime = &__pyx_type_10extensions_LastTime;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -5880,8 +5937,8 @@ if (!__Pyx_RefNanny) {
  * 
  *     @staticmethod
  *     def get_timer_implementation():             # <<<<<<<<<<<<<<
- *         return str(HP_TIMER_IMPLEMENTATION)
- * 
+ *         if isinstance(HP_TIMER_IMPLEMENTATION, str):
+ *             return HP_TIMER_IMPLEMENTATION
  */
   __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_10extensions_12LineProfiler_11get_timer_implementation, NULL, __pyx_n_s_extensions); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -5894,7 +5951,7 @@ if (!__Pyx_RefNanny) {
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
  *     def get_timer_implementation():
- *         return str(HP_TIMER_IMPLEMENTATION)
+ *         if isinstance(HP_TIMER_IMPLEMENTATION, str):
  */
   __Pyx_GetNameInClass(__pyx_t_2, (PyObject *)__pyx_ptype_10extensions_LineProfiler, __pyx_n_s_get_timer_implementation); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -5905,32 +5962,32 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_10extensions_LineProfiler);
 
-  /* "extensions.pyx":42
+  /* "extensions.pyx":44
  * 
  *     @staticmethod
  *     def get_unit():             # <<<<<<<<<<<<<<
  *         return hpTimerUnit()
  * 
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_10extensions_12LineProfiler_13get_unit, NULL, __pyx_n_s_extensions); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_10extensions_12LineProfiler_13get_unit, NULL, __pyx_n_s_extensions); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_10extensions_LineProfiler->tp_dict, __pyx_n_s_get_unit, __pyx_t_1) < 0) __PYX_ERR(0, 42, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_10extensions_LineProfiler->tp_dict, __pyx_n_s_get_unit, __pyx_t_1) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_10extensions_LineProfiler);
 
-  /* "extensions.pyx":41
- *         return str(HP_TIMER_IMPLEMENTATION)
+  /* "extensions.pyx":43
+ *         return HP_TIMER_IMPLEMENTATION.decode("ascii")
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
  *     def get_unit():
  *         return hpTimerUnit()
  */
-  __Pyx_GetNameInClass(__pyx_t_1, (PyObject *)__pyx_ptype_10extensions_LineProfiler, __pyx_n_s_get_unit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __Pyx_GetNameInClass(__pyx_t_1, (PyObject *)__pyx_ptype_10extensions_LineProfiler, __pyx_n_s_get_unit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_staticmethod, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_staticmethod, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_10extensions_LineProfiler->tp_dict, __pyx_n_s_get_unit, __pyx_t_2) < 0) __PYX_ERR(0, 42, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_10extensions_LineProfiler->tp_dict, __pyx_n_s_get_unit, __pyx_t_2) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_10extensions_LineProfiler);
 
@@ -6103,227 +6160,38 @@ invalid_keyword:
     return 0;
 }
 
-/* PyCFunctionFastCall */
-#if CYTHON_FAST_PYCCALL
-static CYTHON_INLINE PyObject * __Pyx_PyCFunction_FastCall(PyObject *func_obj, PyObject **args, Py_ssize_t nargs) {
-    PyCFunctionObject *func = (PyCFunctionObject*)func_obj;
-    PyCFunction meth = PyCFunction_GET_FUNCTION(func);
-    PyObject *self = PyCFunction_GET_SELF(func);
-    int flags = PyCFunction_GET_FLAGS(func);
-    assert(PyCFunction_Check(func));
-    assert(METH_FASTCALL == (flags & ~(METH_CLASS | METH_STATIC | METH_COEXIST | METH_KEYWORDS | METH_STACKLESS)));
-    assert(nargs >= 0);
-    assert(nargs == 0 || args != NULL);
-    /* _PyCFunction_FastCallDict() must not be called with an exception set,
-       because it may clear it (directly or indirectly) and so the
-       caller loses its exception */
-    assert(!PyErr_Occurred());
-    if ((PY_VERSION_HEX < 0x030700A0) || unlikely(flags & METH_KEYWORDS)) {
-        return (*((__Pyx_PyCFunctionFastWithKeywords)(void*)meth)) (self, args, nargs, NULL);
+/* decode_c_string */
+static CYTHON_INLINE PyObject* __Pyx_decode_c_string(
+         const char* cstring, Py_ssize_t start, Py_ssize_t stop,
+         const char* encoding, const char* errors,
+         PyObject* (*decode_func)(const char *s, Py_ssize_t size, const char *errors)) {
+    Py_ssize_t length;
+    if (unlikely((start < 0) | (stop < 0))) {
+        size_t slen = strlen(cstring);
+        if (unlikely(slen > (size_t) PY_SSIZE_T_MAX)) {
+            PyErr_SetString(PyExc_OverflowError,
+                            "c-string too long to convert to Python");
+            return NULL;
+        }
+        length = (Py_ssize_t) slen;
+        if (start < 0) {
+            start += length;
+            if (start < 0)
+                start = 0;
+        }
+        if (stop < 0)
+            stop += length;
+    }
+    length = stop - start;
+    if (unlikely(length <= 0))
+        return PyUnicode_FromUnicode(NULL, 0);
+    cstring += start;
+    if (decode_func) {
+        return decode_func(cstring, length, errors);
     } else {
-        return (*((__Pyx_PyCFunctionFast)(void*)meth)) (self, args, nargs);
+        return PyUnicode_Decode(cstring, length, encoding, errors);
     }
 }
-#endif
-
-/* PyFunctionFastCall */
-#if CYTHON_FAST_PYCALL
-static PyObject* __Pyx_PyFunction_FastCallNoKw(PyCodeObject *co, PyObject **args, Py_ssize_t na,
-                                               PyObject *globals) {
-    PyFrameObject *f;
-    PyThreadState *tstate = __Pyx_PyThreadState_Current;
-    PyObject **fastlocals;
-    Py_ssize_t i;
-    PyObject *result;
-    assert(globals != NULL);
-    /* XXX Perhaps we should create a specialized
-       PyFrame_New() that doesn't take locals, but does
-       take builtins without sanity checking them.
-       */
-    assert(tstate != NULL);
-    f = PyFrame_New(tstate, co, globals, NULL);
-    if (f == NULL) {
-        return NULL;
-    }
-    fastlocals = __Pyx_PyFrame_GetLocalsplus(f);
-    for (i = 0; i < na; i++) {
-        Py_INCREF(*args);
-        fastlocals[i] = *args++;
-    }
-    result = PyEval_EvalFrameEx(f,0);
-    ++tstate->recursion_depth;
-    Py_DECREF(f);
-    --tstate->recursion_depth;
-    return result;
-}
-#if 1 || PY_VERSION_HEX < 0x030600B1
-static PyObject *__Pyx_PyFunction_FastCallDict(PyObject *func, PyObject **args, int nargs, PyObject *kwargs) {
-    PyCodeObject *co = (PyCodeObject *)PyFunction_GET_CODE(func);
-    PyObject *globals = PyFunction_GET_GLOBALS(func);
-    PyObject *argdefs = PyFunction_GET_DEFAULTS(func);
-    PyObject *closure;
-#if PY_MAJOR_VERSION >= 3
-    PyObject *kwdefs;
-#endif
-    PyObject *kwtuple, **k;
-    PyObject **d;
-    Py_ssize_t nd;
-    Py_ssize_t nk;
-    PyObject *result;
-    assert(kwargs == NULL || PyDict_Check(kwargs));
-    nk = kwargs ? PyDict_Size(kwargs) : 0;
-    if (Py_EnterRecursiveCall((char*)" while calling a Python object")) {
-        return NULL;
-    }
-    if (
-#if PY_MAJOR_VERSION >= 3
-            co->co_kwonlyargcount == 0 &&
-#endif
-            likely(kwargs == NULL || nk == 0) &&
-            co->co_flags == (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)) {
-        if (argdefs == NULL && co->co_argcount == nargs) {
-            result = __Pyx_PyFunction_FastCallNoKw(co, args, nargs, globals);
-            goto done;
-        }
-        else if (nargs == 0 && argdefs != NULL
-                 && co->co_argcount == Py_SIZE(argdefs)) {
-            /* function called with no arguments, but all parameters have
-               a default value: use default values as arguments .*/
-            args = &PyTuple_GET_ITEM(argdefs, 0);
-            result =__Pyx_PyFunction_FastCallNoKw(co, args, Py_SIZE(argdefs), globals);
-            goto done;
-        }
-    }
-    if (kwargs != NULL) {
-        Py_ssize_t pos, i;
-        kwtuple = PyTuple_New(2 * nk);
-        if (kwtuple == NULL) {
-            result = NULL;
-            goto done;
-        }
-        k = &PyTuple_GET_ITEM(kwtuple, 0);
-        pos = i = 0;
-        while (PyDict_Next(kwargs, &pos, &k[i], &k[i+1])) {
-            Py_INCREF(k[i]);
-            Py_INCREF(k[i+1]);
-            i += 2;
-        }
-        nk = i / 2;
-    }
-    else {
-        kwtuple = NULL;
-        k = NULL;
-    }
-    closure = PyFunction_GET_CLOSURE(func);
-#if PY_MAJOR_VERSION >= 3
-    kwdefs = PyFunction_GET_KW_DEFAULTS(func);
-#endif
-    if (argdefs != NULL) {
-        d = &PyTuple_GET_ITEM(argdefs, 0);
-        nd = Py_SIZE(argdefs);
-    }
-    else {
-        d = NULL;
-        nd = 0;
-    }
-#if PY_MAJOR_VERSION >= 3
-    result = PyEval_EvalCodeEx((PyObject*)co, globals, (PyObject *)NULL,
-                               args, nargs,
-                               k, (int)nk,
-                               d, (int)nd, kwdefs, closure);
-#else
-    result = PyEval_EvalCodeEx(co, globals, (PyObject *)NULL,
-                               args, nargs,
-                               k, (int)nk,
-                               d, (int)nd, closure);
-#endif
-    Py_XDECREF(kwtuple);
-done:
-    Py_LeaveRecursiveCall();
-    return result;
-}
-#endif
-#endif
-
-/* PyObjectCall */
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw) {
-    PyObject *result;
-    ternaryfunc call = func->ob_type->tp_call;
-    if (unlikely(!call))
-        return PyObject_Call(func, arg, kw);
-    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
-        return NULL;
-    result = (*call)(func, arg, kw);
-    Py_LeaveRecursiveCall();
-    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
-        PyErr_SetString(
-            PyExc_SystemError,
-            "NULL result without error in PyObject_Call");
-    }
-    return result;
-}
-#endif
-
-/* PyObjectCallMethO */
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg) {
-    PyObject *self, *result;
-    PyCFunction cfunc;
-    cfunc = PyCFunction_GET_FUNCTION(func);
-    self = PyCFunction_GET_SELF(func);
-    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
-        return NULL;
-    result = cfunc(self, arg);
-    Py_LeaveRecursiveCall();
-    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
-        PyErr_SetString(
-            PyExc_SystemError,
-            "NULL result without error in PyObject_Call");
-    }
-    return result;
-}
-#endif
-
-/* PyObjectCallOneArg */
-#if CYTHON_COMPILING_IN_CPYTHON
-static PyObject* __Pyx__PyObject_CallOneArg(PyObject *func, PyObject *arg) {
-    PyObject *result;
-    PyObject *args = PyTuple_New(1);
-    if (unlikely(!args)) return NULL;
-    Py_INCREF(arg);
-    PyTuple_SET_ITEM(args, 0, arg);
-    result = __Pyx_PyObject_Call(func, args, NULL);
-    Py_DECREF(args);
-    return result;
-}
-static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg) {
-#if CYTHON_FAST_PYCALL
-    if (PyFunction_Check(func)) {
-        return __Pyx_PyFunction_FastCall(func, &arg, 1);
-    }
-#endif
-    if (likely(PyCFunction_Check(func))) {
-        if (likely(PyCFunction_GET_FLAGS(func) & METH_O)) {
-            return __Pyx_PyObject_CallMethO(func, arg);
-#if CYTHON_FAST_PYCCALL
-        } else if (PyCFunction_GET_FLAGS(func) & METH_FASTCALL) {
-            return __Pyx_PyCFunction_FastCall(func, &arg, 1);
-#endif
-        }
-    }
-    return __Pyx__PyObject_CallOneArg(func, arg);
-}
-#else
-static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg) {
-    PyObject *result;
-    PyObject *args = PyTuple_Pack(1, arg);
-    if (unlikely(!args)) return NULL;
-    result = __Pyx_PyObject_Call(func, args, NULL);
-    Py_DECREF(args);
-    return result;
-}
-#endif
 
 /* PyErrExceptionMatches */
 #if CYTHON_FAST_THREAD_STATE
@@ -6552,6 +6420,26 @@ invalid_keyword:
 bad:
     return -1;
 }
+
+/* PyObjectCall */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw) {
+    PyObject *result;
+    ternaryfunc call = func->ob_type->tp_call;
+    if (unlikely(!call))
+        return PyObject_Call(func, arg, kw);
+    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
+        return NULL;
+    result = (*call)(func, arg, kw);
+    Py_LeaveRecursiveCall();
+    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
+        PyErr_SetString(
+            PyExc_SystemError,
+            "NULL result without error in PyObject_Call");
+    }
+    return result;
+}
+#endif
 
 /* RaiseException */
 #if PY_MAJOR_VERSION < 3
@@ -6870,6 +6758,148 @@ static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name) {
     return value;
 }
 
+/* PyCFunctionFastCall */
+#if CYTHON_FAST_PYCCALL
+static CYTHON_INLINE PyObject * __Pyx_PyCFunction_FastCall(PyObject *func_obj, PyObject **args, Py_ssize_t nargs) {
+    PyCFunctionObject *func = (PyCFunctionObject*)func_obj;
+    PyCFunction meth = PyCFunction_GET_FUNCTION(func);
+    PyObject *self = PyCFunction_GET_SELF(func);
+    int flags = PyCFunction_GET_FLAGS(func);
+    assert(PyCFunction_Check(func));
+    assert(METH_FASTCALL == (flags & ~(METH_CLASS | METH_STATIC | METH_COEXIST | METH_KEYWORDS | METH_STACKLESS)));
+    assert(nargs >= 0);
+    assert(nargs == 0 || args != NULL);
+    /* _PyCFunction_FastCallDict() must not be called with an exception set,
+       because it may clear it (directly or indirectly) and so the
+       caller loses its exception */
+    assert(!PyErr_Occurred());
+    if ((PY_VERSION_HEX < 0x030700A0) || unlikely(flags & METH_KEYWORDS)) {
+        return (*((__Pyx_PyCFunctionFastWithKeywords)(void*)meth)) (self, args, nargs, NULL);
+    } else {
+        return (*((__Pyx_PyCFunctionFast)(void*)meth)) (self, args, nargs);
+    }
+}
+#endif
+
+/* PyFunctionFastCall */
+#if CYTHON_FAST_PYCALL
+static PyObject* __Pyx_PyFunction_FastCallNoKw(PyCodeObject *co, PyObject **args, Py_ssize_t na,
+                                               PyObject *globals) {
+    PyFrameObject *f;
+    PyThreadState *tstate = __Pyx_PyThreadState_Current;
+    PyObject **fastlocals;
+    Py_ssize_t i;
+    PyObject *result;
+    assert(globals != NULL);
+    /* XXX Perhaps we should create a specialized
+       PyFrame_New() that doesn't take locals, but does
+       take builtins without sanity checking them.
+       */
+    assert(tstate != NULL);
+    f = PyFrame_New(tstate, co, globals, NULL);
+    if (f == NULL) {
+        return NULL;
+    }
+    fastlocals = __Pyx_PyFrame_GetLocalsplus(f);
+    for (i = 0; i < na; i++) {
+        Py_INCREF(*args);
+        fastlocals[i] = *args++;
+    }
+    result = PyEval_EvalFrameEx(f,0);
+    ++tstate->recursion_depth;
+    Py_DECREF(f);
+    --tstate->recursion_depth;
+    return result;
+}
+#if 1 || PY_VERSION_HEX < 0x030600B1
+static PyObject *__Pyx_PyFunction_FastCallDict(PyObject *func, PyObject **args, int nargs, PyObject *kwargs) {
+    PyCodeObject *co = (PyCodeObject *)PyFunction_GET_CODE(func);
+    PyObject *globals = PyFunction_GET_GLOBALS(func);
+    PyObject *argdefs = PyFunction_GET_DEFAULTS(func);
+    PyObject *closure;
+#if PY_MAJOR_VERSION >= 3
+    PyObject *kwdefs;
+#endif
+    PyObject *kwtuple, **k;
+    PyObject **d;
+    Py_ssize_t nd;
+    Py_ssize_t nk;
+    PyObject *result;
+    assert(kwargs == NULL || PyDict_Check(kwargs));
+    nk = kwargs ? PyDict_Size(kwargs) : 0;
+    if (Py_EnterRecursiveCall((char*)" while calling a Python object")) {
+        return NULL;
+    }
+    if (
+#if PY_MAJOR_VERSION >= 3
+            co->co_kwonlyargcount == 0 &&
+#endif
+            likely(kwargs == NULL || nk == 0) &&
+            co->co_flags == (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)) {
+        if (argdefs == NULL && co->co_argcount == nargs) {
+            result = __Pyx_PyFunction_FastCallNoKw(co, args, nargs, globals);
+            goto done;
+        }
+        else if (nargs == 0 && argdefs != NULL
+                 && co->co_argcount == Py_SIZE(argdefs)) {
+            /* function called with no arguments, but all parameters have
+               a default value: use default values as arguments .*/
+            args = &PyTuple_GET_ITEM(argdefs, 0);
+            result =__Pyx_PyFunction_FastCallNoKw(co, args, Py_SIZE(argdefs), globals);
+            goto done;
+        }
+    }
+    if (kwargs != NULL) {
+        Py_ssize_t pos, i;
+        kwtuple = PyTuple_New(2 * nk);
+        if (kwtuple == NULL) {
+            result = NULL;
+            goto done;
+        }
+        k = &PyTuple_GET_ITEM(kwtuple, 0);
+        pos = i = 0;
+        while (PyDict_Next(kwargs, &pos, &k[i], &k[i+1])) {
+            Py_INCREF(k[i]);
+            Py_INCREF(k[i+1]);
+            i += 2;
+        }
+        nk = i / 2;
+    }
+    else {
+        kwtuple = NULL;
+        k = NULL;
+    }
+    closure = PyFunction_GET_CLOSURE(func);
+#if PY_MAJOR_VERSION >= 3
+    kwdefs = PyFunction_GET_KW_DEFAULTS(func);
+#endif
+    if (argdefs != NULL) {
+        d = &PyTuple_GET_ITEM(argdefs, 0);
+        nd = Py_SIZE(argdefs);
+    }
+    else {
+        d = NULL;
+        nd = 0;
+    }
+#if PY_MAJOR_VERSION >= 3
+    result = PyEval_EvalCodeEx((PyObject*)co, globals, (PyObject *)NULL,
+                               args, nargs,
+                               k, (int)nk,
+                               d, (int)nd, kwdefs, closure);
+#else
+    result = PyEval_EvalCodeEx(co, globals, (PyObject *)NULL,
+                               args, nargs,
+                               k, (int)nk,
+                               d, (int)nd, closure);
+#endif
+    Py_XDECREF(kwtuple);
+done:
+    Py_LeaveRecursiveCall();
+    return result;
+}
+#endif
+#endif
+
 /* PyObjectCall2Args */
 static CYTHON_UNUSED PyObject* __Pyx_PyObject_Call2Args(PyObject* function, PyObject* arg1, PyObject* arg2) {
     PyObject *args, *result = NULL;
@@ -6898,6 +6928,66 @@ static CYTHON_UNUSED PyObject* __Pyx_PyObject_Call2Args(PyObject* function, PyOb
 done:
     return result;
 }
+
+/* PyObjectCallMethO */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg) {
+    PyObject *self, *result;
+    PyCFunction cfunc;
+    cfunc = PyCFunction_GET_FUNCTION(func);
+    self = PyCFunction_GET_SELF(func);
+    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
+        return NULL;
+    result = cfunc(self, arg);
+    Py_LeaveRecursiveCall();
+    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
+        PyErr_SetString(
+            PyExc_SystemError,
+            "NULL result without error in PyObject_Call");
+    }
+    return result;
+}
+#endif
+
+/* PyObjectCallOneArg */
+#if CYTHON_COMPILING_IN_CPYTHON
+static PyObject* __Pyx__PyObject_CallOneArg(PyObject *func, PyObject *arg) {
+    PyObject *result;
+    PyObject *args = PyTuple_New(1);
+    if (unlikely(!args)) return NULL;
+    Py_INCREF(arg);
+    PyTuple_SET_ITEM(args, 0, arg);
+    result = __Pyx_PyObject_Call(func, args, NULL);
+    Py_DECREF(args);
+    return result;
+}
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg) {
+#if CYTHON_FAST_PYCALL
+    if (PyFunction_Check(func)) {
+        return __Pyx_PyFunction_FastCall(func, &arg, 1);
+    }
+#endif
+    if (likely(PyCFunction_Check(func))) {
+        if (likely(PyCFunction_GET_FLAGS(func) & METH_O)) {
+            return __Pyx_PyObject_CallMethO(func, arg);
+#if CYTHON_FAST_PYCCALL
+        } else if (PyCFunction_GET_FLAGS(func) & METH_FASTCALL) {
+            return __Pyx_PyCFunction_FastCall(func, &arg, 1);
+#endif
+        }
+    }
+    return __Pyx__PyObject_CallOneArg(func, arg);
+}
+#else
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg) {
+    PyObject *result;
+    PyObject *args = PyTuple_Pack(1, arg);
+    if (unlikely(!args)) return NULL;
+    result = __Pyx_PyObject_Call(func, args, NULL);
+    Py_DECREF(args);
+    return result;
+}
+#endif
 
 /* GetItemInt */
 static PyObject *__Pyx_GetItemInt_Generic(PyObject *o, PyObject* j) {

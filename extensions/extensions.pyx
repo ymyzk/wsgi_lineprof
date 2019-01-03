@@ -36,7 +36,9 @@ cdef class LineProfiler:
 
     @staticmethod
     def get_timer_implementation():
-        return str(HP_TIMER_IMPLEMENTATION)
+        if isinstance(HP_TIMER_IMPLEMENTATION, str):
+            return HP_TIMER_IMPLEMENTATION
+        return HP_TIMER_IMPLEMENTATION.decode("ascii")
 
     @staticmethod
     def get_unit():
