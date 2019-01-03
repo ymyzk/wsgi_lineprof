@@ -1,13 +1,14 @@
 # cython: language_level=2
 from cpython cimport PyObject
+from libc.stdint cimport uint64_t
 
 from header cimport (
-    PyEval_SetTrace, PyFrameObject, PY_LONG_LONG, PyTrace_LINE, PyTrace_RETURN
+    PyEval_SetTrace, PyFrameObject, PyTrace_LINE, PyTrace_RETURN
 )
 
 
 cdef extern from "timer.h":
-    PY_LONG_LONG hpTimer()
+    uint64_t hpTimer()
     double hpTimerUnit()
     char[] HP_TIMER_IMPLEMENTATION
 
@@ -48,7 +49,7 @@ cdef class LineProfiler:
 cdef class LineTiming:
     cdef public object code
     cdef public int lineno
-    cdef public PY_LONG_LONG total_time
+    cdef public uint64_t total_time
     cdef public long n_hits
 
     def __init__(self, object code, int lineno):
@@ -57,7 +58,7 @@ cdef class LineTiming:
         self.total_time = 0
         self.n_hits = 0
 
-    cdef hit(self, PY_LONG_LONG dt):
+    cdef hit(self, uint64_t dt):
             self.n_hits += 1
             self.total_time += dt
 
@@ -71,9 +72,9 @@ cdef class LineTiming:
 
 cdef class LastTime:
     cdef int f_lineno
-    cdef PY_LONG_LONG time
+    cdef uint64_t time
 
-    def __cinit__(self, int f_lineno, PY_LONG_LONG time):
+    def __cinit__(self, int f_lineno, uint64_t time):
         self.f_lineno = f_lineno
         self.time = time
 
@@ -87,7 +88,7 @@ cdef int python_trace_callback(object self_, PyFrameObject *py_frame, int what,
     cdef LineTiming entry
     cdef LastTime old
     cdef object code
-    cdef PY_LONG_LONG time
+    cdef uint64_t time
     cdef int lineno
 
     if what != PyTrace_LINE and what != PyTrace_RETURN:

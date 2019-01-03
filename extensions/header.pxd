@@ -41,24 +41,7 @@ cdef extern from "frameobject.h":
     ctypedef int (*Py_tracefunc)(object self, PyFrameObject *py_frame, int what, PyObject *arg)
 
 cdef extern from "Python.h":
-    ctypedef long long PY_LONG_LONG
-    cdef bint PyCFunction_Check(object obj)
-
-    cdef void PyEval_SetProfile(Py_tracefunc func, object arg)
     cdef void PyEval_SetTrace(Py_tracefunc func, object arg)
-
-    ctypedef object (*PyCFunction)(object self, object args)
-
-    ctypedef struct PyMethodDef:
-        char *ml_name
-        PyCFunction ml_meth
-        int ml_flags
-        char *ml_doc
-
-    ctypedef struct PyCFunctionObject:
-        PyMethodDef *m_ml
-        PyObject *m_self
-        PyObject *m_module
 
     cdef int PyTrace_LINE
     cdef int PyTrace_RETURN

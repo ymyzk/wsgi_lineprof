@@ -4,11 +4,13 @@
 
 #include <windows.h>
 
-long long
+uint64_t
 hpTimer(void)
 {
     LARGE_INTEGER li;
     QueryPerformanceCounter(&li);
+    // li.QuadPart returns int64_t
+    // https://docs.microsoft.com/en-us/windows/desktop/api/winnt/ns-winnt-_large_integer
     return li.QuadPart;
 }
 
@@ -16,10 +18,11 @@ double
 hpTimerUnit(void)
 {
     LARGE_INTEGER li;
-    if (QueryPerformanceFrequency(&li))
+    if (QueryPerformanceFrequency(&li)) {
         return 1.0 / li.QuadPart;
-    else
+    } else {
         return 0.000001;  /* unlikely */
+    }
 }
 
 const char HP_TIMER_IMPLEMENTATION[] = "QueryPerformanceCounter()";
@@ -28,9 +31,11 @@ const char HP_TIMER_IMPLEMENTATION[] = "QueryPerformanceCounter()";
 
 #include <mach/mach_time.h>
 
-long long
+uint64_t
 hpTimer(void)
 {
+    // mach_absolute_time returns uint64_t
+    // https://developer.apple.com/documentation/kernel/1462446-mach_absolute_time
     return mach_absolute_time();
 }
 
@@ -50,11 +55,11 @@ const char HP_TIMER_IMPLEMENTATION[] = "mach_absolute_time()";
 
 #elif defined(HAVE_CLOCK_GETTIME) && defined(CLOCK_MONOTONIC)
 
-long long
+uint64_t
 hpTimer(void)
 {
     struct timespec ts;
-    long long ret;
+    uint64_t ret;
     clock_gettime(CLOCK_MONOTONIC, &ts);
     ret = ts.tv_sec;
     ret = ret * 1000000000 + ts.tv_nsec;
@@ -71,11 +76,11 @@ const char HP_TIMER_IMPLEMENTATION[] = "clock_gettime(CLOCK_MONOTONIC)";
 
 #elif defined(HAVE_GETTIMEOFDAY)
 
-long long
+uint64_t
 hpTimer(void)
 {
     struct timeval tv;
-    long long ret;
+    uint64_t ret;
 #ifdef GETTIMEOFDAY_NO_TZ
     gettimeofday(&tv);
 #else
