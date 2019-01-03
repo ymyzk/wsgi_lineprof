@@ -33,6 +33,30 @@ hpTimerUnit(void)
 
 const char HP_TIMER_IMPLEMENTATION[] = "QueryPerformanceCounter()";
 
+#elif defined(__APPLE__)
+
+#include <mach/mach_time.h>
+
+long long
+hpTimer(void)
+{
+    return mach_absolute_time();
+}
+
+double
+hpTimerUnit(void)
+{
+    static mach_timebase_info_data_t timebase;
+    static double unit = 0;
+    if (timebase.denom == 0) {
+        mach_timebase_info(&timebase);
+        unit = (double)timebase.numer / (double)timebase.denom * 1e-9;
+    }
+    return unit;
+}
+
+const char HP_TIMER_IMPLEMENTATION[] = "mach_absolute_time()";
+
 #else
 
 #ifndef HAVE_GETTIMEOFDAY
