@@ -1,10 +1,15 @@
+import sys
+
 from wsgi_lineprof.profiler import LineProfiler, LineProfilerStats
 
 
 class TestLineProfiler(object):
     def test_get_timer(self):
         timer = LineProfiler.get_timer()
-        assert isinstance(timer, int)
+        if sys.version_info >= (3,):
+            assert isinstance(timer, int)
+        else:
+            assert isinstance(timer, int) or isinstance(timer, long)
 
     def test_get_timer_is_monotonic(self):
         timer1 = LineProfiler.get_timer()
