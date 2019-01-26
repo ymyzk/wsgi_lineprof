@@ -1,5 +1,11 @@
 #include "Python.h"
 
+#ifdef _MSC_VER
+typedef unsigned __int64 uint64_t;
+#else
+#include <stdint.h>
+#endif
+
 #if defined(MS_WINDOWS)
 
 #include <windows.h>
