@@ -28,6 +28,8 @@ virtualenv -p python3 $venv
 pip install -U setuptools pip wheel
 pip install -U delocate
 delocate-addplat --rm-orig \
+  -p macosx_10_14_x86_64 \
+  -p macosx_10_13_x86_64 \
   -p macosx_10_12_x86_64 \
   -p macosx_10_11_x86_64 \
   -p macosx_10_10_x86_64 \
