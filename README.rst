@@ -6,6 +6,9 @@ wsgi_lineprof
 .. image:: https://travis-ci.org/ymyzk/wsgi_lineprof.svg?branch=master
    :target: https://travis-ci.org/ymyzk/wsgi_lineprof
    :alt: Build Status
+.. image:: https://ci.appveyor.com/api/projects/status/cjhft69q2hq1gdoj?svg=true
+   :target: https://ci.appveyor.com/project/ymyzk/wsgi-lineprof
+   :alt: AppVeyor Build Status
 
 **wsgi_lineprof** is a WSGI middleware for line-by-line profiling.
 
