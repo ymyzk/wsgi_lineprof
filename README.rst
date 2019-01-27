@@ -3,6 +3,9 @@ wsgi_lineprof
 .. image:: https://badge.fury.io/py/wsgi-lineprof.svg
    :target: https://pypi.python.org/pypi/wsgi-lineprof/
    :alt: PyPI version
+.. image:: https://img.shields.io/pypi/pyversions/wsgi_lineprof.svg
+   :target: https://pypi.python.org/pypi/wsgi-lineprof/
+   :alt: PyPI Supported Python Versions
 .. image:: https://travis-ci.org/ymyzk/wsgi_lineprof.svg?branch=master
    :target: https://travis-ci.org/ymyzk/wsgi_lineprof
    :alt: Build Status
