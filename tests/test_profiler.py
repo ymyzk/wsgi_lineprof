@@ -1,3 +1,5 @@
+import time
+
 from wsgi_lineprof.profiler import LineProfiler, LineProfilerStats
 
 
@@ -5,6 +7,15 @@ class TestLineProfiler(object):
     def test_get_timer(self):
         timer = LineProfiler.get_timer()
         assert timer >= 0
+
+    def test_get_timer_is_correct(self):
+        unit = LineProfiler.get_unit()
+        time1 = time.time()
+        timer1 = LineProfiler.get_timer()
+        time.sleep(1)
+        timer2 = LineProfiler.get_timer()
+        time2 = time.time()
+        assert abs((timer2 - timer1) * unit - (time2 - time1)) < 0.1
 
     def test_get_timer_is_monotonic(self):
         timer1 = LineProfiler.get_timer()
