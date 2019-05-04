@@ -3,7 +3,6 @@ set -e
 
 readonly versions=(
   "python2.7"
-  "python3.4"
   "python3.5"
   "python3.6"
   "python3.7"
