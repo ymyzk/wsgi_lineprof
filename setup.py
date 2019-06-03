@@ -55,7 +55,9 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: Implementation :: CPython",
+        "Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware",
         "Topic :: Software Development",
+        "Topic :: System :: Benchmark",
     ],
 
     # What does your project relate to?
