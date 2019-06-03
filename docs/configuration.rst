@@ -1,7 +1,12 @@
-Usage
-=====
-This page describes advanced usage of wsgi_lineprof.
+Configuration
+=============
+This page describes configuration options of wsgi_lineprof.
+You can provide various options as keyword arguments to change the behavior of the profiler:
 
+.. code-block:: python
+
+    from wsgi_lineprof.middleware import LineProfilerMiddleware
+    app = LineProfilerMiddleware(app, **options)
 
 Filters
 -------

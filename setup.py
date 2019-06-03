@@ -89,7 +89,10 @@ setup(
             "WebTest==2.0.32",
         ],
         "build": ["Cython>=0.28,<0.30"],
-        "docs": ["Sphinx>=2.0,<2.1"],
+        "docs": [
+            "Sphinx>=2.0,<2.1",
+            "sphinx_rtd_theme>0.4.3,<0.5",
+        ],
         "test": [
             "codecov>=2.0.15,<3.0.0",
             "flake8>=3.0.0,<4.0.0",
