@@ -1,51 +1,76 @@
 Examples
 ========
-TBD
 
-.. Results contain many other functions, you can remove unnecessary results by
-.. using *filters*.
-.. Example usage with Bottle:
-..
-.. .. code-block:: python
-..
-..    import time
-..
-..    import bottle
-..    from wsgi_lineprof.middleware import LineProfilerMiddleware
-..
-..    app = bottle.default_app()
-..
-..
-..    @app.route('/')
-..    def index():
-..        time.sleep(1)
-..        return "Hello world!!"
-..
-..    if __name__ == "__main__":
-..        # Add wsgi_lineprof as a WSGI middleware!
-..        app = LineProfilerMiddleware(app)
-..        bottle.run(app=app)
-..
-.. Run the above script to start web server, then access http://127.0.0.1:8080.
-..
-.. wsgi_lineprof writes results to stdout every time an HTTP request is processed by default.
-.. You can see the output like this in your console:
-..
-.. ::
-..
-..    ... (snip) ...
-..
-..    File: ./app.py
-..    Name: index
-..    Total time: 1.00518 [sec]
-..      Line      Hits         Time  Code
-..    ===================================
-..         9                         @app.route('/')
-..        10                         def index():
-..        11         1      1005175      time.sleep(1)
-..        12         1            4      return "Hello world!!"
-..
-..    ... (snip) ...
-..
-.. Results contain many other functions, you can remove unnecessary results by
-.. using *filters*.
+wsgiref (Python 2)
+------------------
+An example of using wsgi_lineprof with `wsgiref for Python 2 <https://docs.python.org/2.7/library/wsgiref.html>`_.
+
+.. code-block:: python
+
+   from wsgiref.simple_server import demo_app, make_server
+
+   from wsgi_lineprof.middleware import LineProfilerMiddleware
+
+
+   app = LineProfilerMiddleware(demo_app)
+
+   if __name__ == "__main__":
+       httpd = make_server('', 8000, app)
+       print("Serving HTTP on port 8000...")
+       httpd.serve_forever()
+
+wsgiref (Python 3)
+------------------
+An example of using wsgi_lineprof with `wsgiref for Python 3 <https://docs.python.org/3/library/wsgiref.html>`_.
+
+.. code-block:: python
+
+   from wsgiref.simple_server import demo_app, make_server
+
+   from wsgi_lineprof.middleware import LineProfilerMiddleware
+
+
+   app = LineProfilerMiddleware(demo_app)
+
+   if __name__ == "__main__":
+       with make_server('', 8000, app) as httpd:
+           print("Serving HTTP on port 8000...")
+           httpd.serve_forever()
+
+Bottle
+------
+Examples of using wsgi_lineprof with `Bottle <https://bottlepy.org/>`_.
+
+.. code-block:: python
+
+   import bottle
+
+   from wsgi_lineprof.middleware import LineProfilerMiddleware
+
+
+   @bottle.route('/hello/<name>')
+   def index(name):
+       return bottle.template('<b>Hello {{name}}</b>!', name=name)
+
+   app = LineProfilerMiddleware(app)
+
+   if __name__ == "__main__":
+       bottle.run(host='localhost', port=8080, app=app)
+
+.. code-block:: python
+
+   import bottle
+
+   from wsgi_lineprof.middleware import LineProfilerMiddleware
+
+
+   app = bottle.app()
+
+   @app.route('/hello/<name>')
+   def index(name):
+       return bottle.template('<b>Hello {{name}}</b>!', name=name)
+
+   app = LineProfilerMiddleware(bottle.app())
+
+   if __name__ == "__main__":
+       bottle.run(host='localhost', port=8080, app=app)
