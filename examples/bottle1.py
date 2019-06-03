@@ -7,6 +7,7 @@ from wsgi_lineprof.middleware import LineProfilerMiddleware
 def index(name):
     return bottle.template('<b>Hello {{name}}</b>!', name=name)
 
+
 app = LineProfilerMiddleware(bottle.app())
 
 if __name__ == "__main__":
