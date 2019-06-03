@@ -60,4 +60,4 @@ You can see the output like this in your console:
 
    ... (snip) ...
 
-Please check `the documentation <https://wsgi-lineprof.readthedocs.io/en/latest/index.html>` for more details.
+Please check `the documentation <https://wsgi-lineprof.readthedocs.io/en/latest/index.html>`_ for more details.

@@ -53,4 +53,4 @@ You can see the output like this in your console:
 Next Steps
 ----------
 * See :doc:`examples` for more examples of integrating wsgi_lineprof with your applications.
-* See :doc:`usage` for advanced usage such as filtering results, writing results to the file, accumulating results, and so on.
+* See :doc:`configuration` for advanced usage such as filtering results, writing results to the file, accumulating results, and so on.
