@@ -16,7 +16,7 @@ for python in ${versions[@]}; do
   rm -rf build
   rm -rf $venv
   virtualenv -p $python $venv
-  . venv-wheel/bin/activate
+  . $venv/bin/activate
   pip install -U setuptools pip wheel
   $python setup.py bdist_wheel
   deactivate
