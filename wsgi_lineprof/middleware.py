@@ -1,6 +1,6 @@
 import atexit
 import sys
-from typing import Any, Callable, Iterable, Optional, TYPE_CHECKING
+from typing import Any, Iterable, Optional, TYPE_CHECKING
 
 from wsgi_lineprof.profiler import LineProfiler
 from wsgi_lineprof.stats import FilterType
