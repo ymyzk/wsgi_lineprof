@@ -22,7 +22,7 @@ install:
 build: off
 test_script:
   - "%PYTHON%\\python.exe --version"
-  - "build.cmd %PYTHON%\\Scripts\\tox -e %TOX_ENV%"
+  #- "build.cmd %PYTHON%\\Scripts\\tox -e %TOX_ENV%"
 after_test:
   - "build.cmd %PYTHON%\\python.exe setup.py bdist_wheel"
 artifacts:
