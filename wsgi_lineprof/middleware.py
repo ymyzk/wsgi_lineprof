@@ -37,7 +37,7 @@ class LineProfilerMiddleware(object):
         if async_stream and not accumulate:
             self.writer = AsyncWriter(self.stream)  # type: BaseWriter
         else:
-            self.writer = SyncWriter(self.stream)  # type: BaseWriter
+            self.writer = SyncWriter(self.stream)
         if accumulate:
             atexit.register(self._write_stats)
 
