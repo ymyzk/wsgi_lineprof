@@ -3,13 +3,11 @@ import inspect
 import itertools
 import linecache
 from os import path
-from typing import Any, Callable, Dict, Iterable, Sequence, Union  # noqa: F401
+from typing import Any, Callable, Dict, Iterable, Sequence, Union
 
-from wsgi_lineprof.extensions import (  # noqa: F401
-    LineProfiler as _LineProfiler, LineTiming
-)
+from wsgi_lineprof.extensions import LineProfiler as _LineProfiler, LineTiming
 from wsgi_lineprof.filters import BaseFilter
-from wsgi_lineprof.types import Stream  # noqa: F401
+from wsgi_lineprof.types import Stream
 
 
 class LineProfilerStat(object):
