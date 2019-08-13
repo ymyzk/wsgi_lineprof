@@ -1,18 +1,15 @@
 import atexit
 import sys
-from typing import (Any, Callable, Iterable, Optional,  # noqa: F401
-                    TYPE_CHECKING)  # noqa: F401
+from typing import Any, Iterable, Optional, TYPE_CHECKING
 
 from wsgi_lineprof.profiler import LineProfiler
-from wsgi_lineprof.stats import FilterType  # noqa: F401
-from wsgi_lineprof.types import Stream  # noqa: F401
-from wsgi_lineprof.writers import (AsyncWriter, BaseWriter,  # noqa: F401
-                                   SyncWriter)  # noqa: F401
+from wsgi_lineprof.stats import FilterType
+from wsgi_lineprof.types import Stream
+from wsgi_lineprof.writers import AsyncWriter, BaseWriter, SyncWriter
 
 
 if TYPE_CHECKING:
-    from wsgiref.types import (StartResponse, WSGIApplication,  # noqa: F401
-                               WSGIEnvironment)  # noqa: F401
+    from wsgiref.types import StartResponse, WSGIApplication, WSGIEnvironment
 
 
 class LineProfilerMiddleware(object):

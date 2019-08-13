@@ -2,14 +2,14 @@ from abc import ABCMeta, abstractmethod
 from itertools import islice
 from operator import attrgetter
 import re
-from typing import Iterable, TYPE_CHECKING  # noqa: F401
+from typing import Iterable, TYPE_CHECKING
 
 from six import add_metaclass
 from six.moves import filter
 
 
 if TYPE_CHECKING:
-    from wsgi_lineprof.stats import LineProfilerStat  # noqa: F401
+    from wsgi_lineprof.stats import LineProfilerStat
 
 
 @add_metaclass(ABCMeta)

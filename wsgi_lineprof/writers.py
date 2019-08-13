@@ -2,10 +2,10 @@ from abc import ABCMeta, abstractmethod
 from six import add_metaclass
 from six.moves import queue
 from threading import Thread
-from typing import Any  # noqa: F401
+from typing import Any
 
-from wsgi_lineprof.stats import LineProfilerStats  # noqa: F401
-from wsgi_lineprof.types import Stream  # noqa: F401
+from wsgi_lineprof.stats import LineProfilerStats
+from wsgi_lineprof.types import Stream
 
 
 @add_metaclass(ABCMeta)
