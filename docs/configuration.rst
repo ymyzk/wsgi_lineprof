@@ -117,3 +117,13 @@ By enabling ``accumulate`` option, wsgi_lineprof accumulate results of all reque
 
     app = LineProfilerMiddleware(app, accumulate=True)
     bottle.run(app=app)
+
+Colorize Output
+---------------
+Colorized output is enabled by default for stdout and stderr.
+You can disable the feature using the ``color`` option.
+
+.. code-block:: python
+
+    app = LineProfilerMiddleware(app, color=False)
+    bottle.run(app=app)
