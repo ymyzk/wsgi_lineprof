@@ -1,8 +1,8 @@
 from abc import ABCMeta, abstractmethod
 from six import add_metaclass
-from six.moves import queue
+from six.moves.queue import Queue
 from threading import Thread
-from typing import Any
+from typing import Any, Tuple
 
 from wsgi_lineprof.stats import LineProfilerStats
 from wsgi_lineprof.types import Stream
@@ -19,8 +19,8 @@ class BaseWriter(object):
         return
 
     @abstractmethod
-    def write(self, stats):
-        # type: (LineProfilerStats) -> None
+    def write(self, stats, color=False):
+        # type: (LineProfilerStats, bool) -> None
         return
 
 
@@ -31,9 +31,9 @@ class SyncWriter(BaseWriter):
         # type: (...) -> None
         self.stream = stream
 
-    def write(self, stats):
-        # type: (LineProfilerStats) -> None
-        stats.write_text(self.stream)
+    def write(self, stats, color=False):
+        # type: (LineProfilerStats, bool) -> None
+        stats.write_text(self.stream, color=color)
 
 
 class AsyncWriter(BaseWriter):
@@ -42,17 +42,17 @@ class AsyncWriter(BaseWriter):
                  ):
         # type: (...) -> None
         self.stream = stream
-        self.queue = queue.Queue()  # type: queue.Queue[LineProfilerStats]
+        self.queue = Queue()  # type: Queue[Tuple[LineProfilerStats, bool]]
         self.writer_thread = Thread(target=self._write)
         self.writer_thread.setDaemon(True)
         self.writer_thread.start()
 
-    def write(self, stats):
-        # type: (LineProfilerStats) -> None
-        self.queue.put(stats)
+    def write(self, stats, color=False):
+        # type: (LineProfilerStats, bool) -> None
+        self.queue.put((stats, color))
 
     def _write(self):
         # type: () -> None
         while True:
-            stats = self.queue.get()
-            stats.write_text(self.stream)
+            stats, color = self.queue.get()
+            stats.write_text(self.stream, color=color)

@@ -19,6 +19,7 @@ class LineProfilerMiddleware(object):
                  filters=tuple(),  # type: Iterable[FilterType]
                  async_stream=False,  # type: bool
                  accumulate=False,  # type: bool
+                 color=True,  # type: bool
                  ):
         # type: (...) -> None
         self.app = app
@@ -37,13 +38,15 @@ class LineProfilerMiddleware(object):
             self.writer = SyncWriter(self.stream)
         if accumulate:
             atexit.register(self._write_stats)
+        # Enable colorization only for stdout/stderr
+        self.color = color and self.stream in {sys.stdout, sys.stderr}
 
     def _write_stats(self):
         # type: () -> None
         stats = self.profiler.get_stats()
         for f in self.filters:
             stats = stats.filter(f)
-        self.writer.write(stats)
+        self.writer.write(stats, color=self.color)
 
     def __call__(self, env, start_response):
         # type: (WSGIEnvironment, StartResponse) -> Iterable[bytes]
