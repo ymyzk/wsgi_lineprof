@@ -28,6 +28,7 @@ Links
 * `GitHub: ymyzk/wsgi_lineprof <https://github.com/ymyzk/wsgi_lineprof>`_
 * `WSGI ミドルウェアとして使えるラインプロファイラを作った話 – ymyzk’s blog <https://blog.ymyzk.com/2016/12/line-profiler-as-a-wsgi-middleware/>`_
 * `Python ウェブアプリのためのプロファイラ wsgi_lineprof の仕組み – ymyzk’s blog <https://blog.ymyzk.com/2018/12/how-wsgi-lineprof-works/>`_
+* `Python ウェブアプリケーションのためのプロファイラの実装 // Implementation of a profiler for Python web applications - PyCon JP 2019 <https://speakerdeck.com/ymyzk/implementation-of-a-profiler-for-python-web-applications>`_
 
 Indices and tables
 ------------------
