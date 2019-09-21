@@ -74,3 +74,23 @@ Examples of using wsgi_lineprof with `Bottle <https://bottlepy.org/>`_.
 
    if __name__ == "__main__":
        bottle.run(host='localhost', port=8080, app=app)
+
+Flask
+-----
+An example of using wsgi_lineprof with `Flask <https://github.com/pallets/flask>`_.
+
+.. code-block:: python
+
+   from flask import Flask
+   from wsgi_lineprof.middleware import LineProfilerMiddleware
+
+   app = Flask(__name__)
+
+   @app.route("/")
+   def hello():
+       return "Hello, World!"
+
+   app.wsgi_app = LineProfilerMiddleware(app.wsgi_app)
+
+   if __name__ == '__main__':
+       app.run(port=8000)
