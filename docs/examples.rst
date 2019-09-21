@@ -52,7 +52,7 @@ Examples of using wsgi_lineprof with `Bottle <https://bottlepy.org/>`_.
    def index(name):
        return bottle.template('<b>Hello {{name}}</b>!', name=name)
 
-   app = LineProfilerMiddleware(app)
+   app = LineProfilerMiddleware(bottle.app())
 
    if __name__ == "__main__":
        bottle.run(host='localhost', port=8080, app=app)
@@ -70,7 +70,7 @@ Examples of using wsgi_lineprof with `Bottle <https://bottlepy.org/>`_.
    def index(name):
        return bottle.template('<b>Hello {{name}}</b>!', name=name)
 
-   app = LineProfilerMiddleware(bottle.app())
+   app = LineProfilerMiddleware(app)
 
    if __name__ == "__main__":
        bottle.run(host='localhost', port=8080, app=app)
