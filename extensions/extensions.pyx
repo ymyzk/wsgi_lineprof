@@ -1,10 +1,16 @@
 # cython: language_level=2
 from cpython cimport PyObject
-from libc.stdint cimport uint64_t
 
 from header cimport (
     PyEval_SetTrace, PyFrameObject, PyTrace_LINE, PyTrace_RETURN
 )
+
+
+# It's better if we can use libc.stdint.uint64_t
+# but it produces #include <stdint.h> in the generated C code
+# Old Windows compilers don't support this.
+# from libc.stdint cimport uint64_t
+ctypedef unsigned long long uint64_t
 
 
 cdef extern from "timer.h":
