@@ -94,3 +94,20 @@ An example of using wsgi_lineprof with `Flask <https://github.com/pallets/flask>
 
    if __name__ == '__main__':
        app.run(port=8000)
+
+Django
+------
+An example of using wsgi_lineprof with `Django <https://www.djangoproject.com>`_.
+We can load wsgi_lineprof in ``<YOUR_PROJECT>.wsgi.py``.
+
+.. code-block:: python
+
+   import os
+
+   from django.core.wsgi import get_wsgi_application
+   from wsgi_lineprof.middleware import LineProfilerMiddleware
+
+   os.environ.setdefault('DJANGO_SETTINGS_MODULE', '<YOUR_PROJECT>.settings')
+
+   application = get_wsgi_application()
+   application = LineProfilerMiddleware(application)
