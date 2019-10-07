@@ -6,6 +6,9 @@ wsgi_lineprof
 .. image:: https://img.shields.io/pypi/pyversions/wsgi_lineprof.svg
    :target: https://pypi.python.org/pypi/wsgi-lineprof/
    :alt: PyPI Supported Python Versions
+.. image:: https://github.com/ymyzk/tox-gh-actions/workflows/Tests/badge.svg
+   :target: https://github.com/ymyzk/tox-gh-actions/actions?workflow=Tests
+   :alt: GitHub Actions (Tests)
 .. image:: https://travis-ci.org/ymyzk/wsgi_lineprof.svg?branch=master
    :target: https://travis-ci.org/ymyzk/wsgi_lineprof
    :alt: Build Status
