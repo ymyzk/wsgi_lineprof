@@ -8,9 +8,7 @@ jobs:
     strategy:
       max-parallel: 6
       matrix:
-        # We need to use windows-2016 to build wheels using Visual Studio 2017
-        # https://help.github.com/articles/software-in-virtual-environments-for-github-actions
-        platform: [ubuntu-latest, macos-latest, windows-2016]
+        platform: [ubuntu-latest, macos-latest, windows-2019]
         python-version: [2.7, 3.5, 3.6, 3.7, 3.8]
 
     steps:
@@ -22,7 +20,7 @@ jobs:
     # Install Microsoft Visual C++ Compiler for Python 2.7
     # http://aka.ms/vcpython27
     - name: Install MSVC++ for Python 2.7
-      if: matrix.platform == 'windows-2016' && matrix.python-version == 2.7
+      if: startsWith(matrix.platform, 'windows-') && matrix.python-version == 2.7
       run: choco install vcpython27 -y
     - name: Install dependencies
       run: |
@@ -30,3 +28,10 @@ jobs:
         python -m pip install tox tox-gh-actions
     - name: Test with tox
       run: tox
+      # We need to fix the following error to use Python 3.5 on Windows
+      # pyconfig.h(243): fatal error C1083: Cannot open include file: 'basetsd.h': No such file or directory
+      if: "!startsWith(matrix.platform, 'windows-') && !matrix.python-version == 3.5"
+      env:
+        # This is for avoiding the error like this:
+        # pyconfig.h(68): fatal error C1083: Cannot open include file: 'io.h': No such file or directory
+        INCLUDE: c:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/SDK/ScopeCppSDK/SDK/include/ucrt
