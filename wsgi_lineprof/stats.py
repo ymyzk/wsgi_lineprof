@@ -7,7 +7,7 @@ from typing import Any, Callable, cast, Dict, Iterable, Sequence, Union
 
 import colorama
 
-from wsgi_lineprof.extensions import LineProfiler as _LineProfiler, LineTiming
+from wsgi_lineprof.extensions import LineTiming
 from wsgi_lineprof.filters import BaseFilter
 from wsgi_lineprof.types import Stream
 
@@ -40,11 +40,11 @@ class LineProfilerStat(object):
         self.timings = timings
         self.total_time = sum(t.total_time for t in timings.values())
 
-    def write_text(self, stream, color=False):
-        # type: (Stream, bool) -> None
+    def write_text(self, stream, unit, color=False):
+        # type: (Stream, float, bool) -> None
         stream.write("File: %s\n" % self.filename)
         stream.write("Name: %s\n" % self.name)
-        total_time = self.total_time * _LineProfiler.get_unit()
+        total_time = self.total_time * unit
         stream.write("Total time: %g [sec]\n" % total_time)
         if not path.exists(self.filename):
             # e.g., filename is <frozen importlib._bootstrap>
@@ -106,19 +106,20 @@ FilterType = Union[CallableFilterType, BaseFilter]
 
 
 class LineProfilerStats(object):
-    def __init__(self, stats):
-        # type: (Iterable[LineProfilerStat]) -> None
+    def __init__(self, stats, unit):
+        # type: (Iterable[LineProfilerStat], float) -> None
         self.stats = stats
+        self.unit = unit  # seconds/hit
 
     def write_text(self, stream, color=False):
         # type: (Stream, bool) -> None
-        stream.write("Time unit: %s [sec]\n\n" % _LineProfiler.get_unit())
+        stream.write("Time unit: %s [sec]\n\n" % self.unit)
         for stat in self.stats:
-            stat.write_text(stream, color=color)
+            stat.write_text(stream, unit=self.unit, color=color)
 
     def filter(self, f):
         # type: (FilterType) -> LineProfilerStats
         if isinstance(f, BaseFilter):
-            return LineProfilerStats(f.filter(self.stats))
+            return LineProfilerStats(f.filter(self.stats), self.unit)
         else:
-            return LineProfilerStats(f(self.stats))
+            return LineProfilerStats(f(self.stats), self.unit)
