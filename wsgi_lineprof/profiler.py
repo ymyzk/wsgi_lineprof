@@ -12,4 +12,4 @@ class LineProfiler(_LineProfiler):
                 code.co_name,
                 code.co_firstlineno,
                 timings)
-             for code, timings in self.results.items()])
+             for code, timings in self.results.items()], self.get_unit())
