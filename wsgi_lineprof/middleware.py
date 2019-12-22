@@ -2,6 +2,7 @@ import atexit
 import sys
 from typing import Any, Iterable, Optional, TYPE_CHECKING
 
+from wsgi_lineprof.formatter import TextFormatter
 from wsgi_lineprof.profiler import LineProfiler
 from wsgi_lineprof.stats import FilterType
 from wsgi_lineprof.types import Stream
@@ -31,22 +32,24 @@ class LineProfilerMiddleware(object):
         self.filters = filters
         self.accumulate = accumulate
         self.profiler = LineProfiler()
+        # Enable colorization only for stdout/stderr
+        color = color and self.stream in {sys.stdout, sys.stderr}
+        self.formatter = TextFormatter(color=color)
         # Cannot use AsyncWriter with atexit
         if async_stream and not accumulate:
-            self.writer = AsyncWriter(self.stream)  # type: BaseWriter
+            self.writer = AsyncWriter(self.stream,
+                                      self.formatter)  # type: BaseWriter
         else:
-            self.writer = SyncWriter(self.stream)
+            self.writer = SyncWriter(self.stream, self.formatter)
         if accumulate:
             atexit.register(self._write_stats)
-        # Enable colorization only for stdout/stderr
-        self.color = color and self.stream in {sys.stdout, sys.stderr}
 
     def _write_stats(self):
         # type: () -> None
         stats = self.profiler.get_stats()
         for f in self.filters:
             stats = stats.filter(f)
-        self.writer.write(stats, color=self.color)
+        self.writer.write(stats)
 
     def __call__(self, env, start_response):
         # type: (WSGIEnvironment, StartResponse) -> Iterable[bytes]
