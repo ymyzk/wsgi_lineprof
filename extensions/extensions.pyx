@@ -75,6 +75,23 @@ cdef class LineTiming:
         return '<LineTiming for %r lineno: %r n_hits: %r total_time: %r>' % (
             self.code, self.lineno, self.n_hits, <long>self.total_time)
 
+    def __add__(self, other):
+        if not isinstance(other, LineTiming):
+            return NotImplemented
+        if self.code != other.code:
+            raise ValueError
+        if self.lineno != other.lineno:
+            raise ValueError
+        res = LineTiming(self.code, self.lineno)
+        res.total_time = self.total_time + other.total_time
+        res.n_hits = self.n_hits + other.n_hits
+        return res
+
+    def __copy__(self):
+        res = LineTiming(self.code, self.lineno)
+        res.total_time = self.total_time
+        res.n_hits = self.n_hits
+        return res
 
 cdef class LastTime:
     cdef int f_lineno
