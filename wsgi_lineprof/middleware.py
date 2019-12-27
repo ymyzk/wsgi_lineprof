@@ -61,7 +61,7 @@ class LineProfilerMiddleware(object):
     def __call__(self, env, start_response):
         # type: (WSGIEnvironment, StartResponse) -> Iterable[bytes]
         self.profiler.enable()
-        result = self.app(env, start_response)
+        response = self.app(env, start_response)
         self.profiler.disable()
 
         if self.accumulate:
@@ -71,7 +71,7 @@ class LineProfilerMiddleware(object):
             self._write_stats()
         self.profiler.reset()
 
-        return result
+        return response
 
 
 def _merge_timings(a, b):
