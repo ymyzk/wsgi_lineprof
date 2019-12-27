@@ -1,6 +1,6 @@
 import time
 
-from wsgi_lineprof.profiler import LineProfiler, LineProfilerStats
+from wsgi_lineprof.profiler import LineProfiler
 
 
 class TestLineProfiler(object):
@@ -31,15 +31,3 @@ class TestLineProfiler(object):
         unit = LineProfiler.get_unit()
         assert isinstance(unit, float)
         assert unit > 0
-
-    def test_get_stats(self):
-        def func(x, y):
-            return x + y
-
-        subject = LineProfiler()
-        subject.results = {
-            func.__code__: {}
-        }
-
-        stats = subject.get_stats()
-        assert isinstance(stats, LineProfilerStats)
