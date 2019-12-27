@@ -1,10 +1,13 @@
 import atexit
 import sys
-from typing import Any, Iterable, Optional, TYPE_CHECKING
+from six.moves import reduce
+from types import CodeType
+from typing import Any, Iterable, List, Optional, TYPE_CHECKING, Dict
 
+from wsgi_lineprof.extensions import LineTiming
 from wsgi_lineprof.formatter import TextFormatter
 from wsgi_lineprof.profiler import LineProfiler
-from wsgi_lineprof.stats import FilterType
+from wsgi_lineprof.stats import FilterType, LineProfilerStats, LineProfilerStat
 from wsgi_lineprof.types import Stream
 from wsgi_lineprof.writers import AsyncWriter, BaseWriter, SyncWriter
 
@@ -32,6 +35,7 @@ class LineProfilerMiddleware(object):
         self.filters = filters
         self.accumulate = accumulate
         self.profiler = LineProfiler()
+        self.results = []  # type: List[Dict[CodeType, Dict[int, LineTiming]]]
         # Enable colorization only for stdout/stderr
         color = color and self.stream in {sys.stdout, sys.stderr}
         self.formatter = TextFormatter(color=color)
@@ -46,20 +50,48 @@ class LineProfilerMiddleware(object):
 
     def _write_stats(self):
         # type: () -> None
-        stats = self.profiler.get_stats()
+        result = reduce(_merge_results, self.results)
+        stats = LineProfilerStats(
+            [LineProfilerStat(c, t) for c, t in result.items()],
+            self.profiler.get_unit())
         for f in self.filters:
             stats = stats.filter(f)
         self.writer.write(stats)
 
     def __call__(self, env, start_response):
         # type: (WSGIEnvironment, StartResponse) -> Iterable[bytes]
-        if not self.accumulate:
-            self.profiler.reset()
         self.profiler.enable()
         result = self.app(env, start_response)
         self.profiler.disable()
 
-        if not self.accumulate:
+        if self.accumulate:
+            self.results.append(self.profiler.results)
+        else:
+            self.results = [self.profiler.results]
             self._write_stats()
+        self.profiler.reset()
 
         return result
+
+
+def _merge_timings(a, b):
+    # type: (Dict[int, LineTiming], Dict[int, LineTiming]) -> Dict[int, LineTiming]
+    for line, timing in b.items():
+        if line in a:
+            a[line] += timing
+        else:
+            a[line] = timing
+    return a
+
+
+def _merge_results(
+        a,  # type: Dict[CodeType, Dict[int, LineTiming]]
+        b,  # type: Dict[CodeType, Dict[int, LineTiming]]
+):
+    # type: (...) -> Dict[CodeType, Dict[int, LineTiming]]
+    for code, timings in b.items():
+        if code in a:
+            a[code] = _merge_timings(a[code], timings)
+        else:
+            a[code] = timings
+    return a
