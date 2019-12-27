@@ -49,7 +49,7 @@ class LineProfilerMiddleware(object):
 
     def _write_stats(self):
         # type: () -> None
-        result = reduce(_merge_results, self.results, initial={})
+        result = reduce(_merge_results, self.results, {})
         stats = LineProfilerStats(
             [LineProfilerStat(c, t) for c, t in result.items()],
             LineProfiler.get_unit())
