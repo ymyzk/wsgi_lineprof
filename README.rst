@@ -12,9 +12,6 @@ wsgi_lineprof
 .. image:: https://travis-ci.org/ymyzk/wsgi_lineprof.svg?branch=master
    :target: https://travis-ci.org/ymyzk/wsgi_lineprof
    :alt: Build Status
-.. image:: https://ci.appveyor.com/api/projects/status/cjhft69q2hq1gdoj?svg=true
-   :target: https://ci.appveyor.com/project/ymyzk/wsgi-lineprof
-   :alt: AppVeyor Build Status
 .. image:: https://readthedocs.org/projects/wsgi_lineprof/badge/?version=latest
    :target: https://wsgi_lineprof.readthedocs.io/
    :alt: Documentation Status
