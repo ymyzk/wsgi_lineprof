@@ -45,17 +45,20 @@ class LineProfilerMiddleware(object):
         else:
             self.writer = SyncWriter(self.stream, self.formatter)
         if accumulate:
-            atexit.register(self._write_stats)
+            atexit.register(self._write_result_at_exit)
 
-    def _write_stats(self):
-        # type: () -> None
-        result = reduce(_merge_results, self.results, {})
-        stats = LineProfilerStats(
-            [LineProfilerStat(c, t) for c, t in result.items()],
-            LineProfiler.get_unit())
+    def _write_result_to_stream(self, result):
+        # type: (Dict[CodeType, Dict[int, LineTiming]]) -> None
+        stats = LineProfilerStats([LineProfilerStat(c, t) for c, t in result.items()],
+                                  LineProfiler.get_unit())
         for f in self.filters:
             stats = stats.filter(f)
         self.writer.write(stats)
+
+    def _write_result_at_exit(self):
+        # type: () -> None
+        result = reduce(_merge_results, self.results, {})
+        self._write_result_to_stream(result)
 
     def __call__(self, env, start_response):
         # type: (WSGIEnvironment, StartResponse) -> Iterable[bytes]
@@ -67,8 +70,7 @@ class LineProfilerMiddleware(object):
         if self.accumulate:
             self.results.append(profiler.results)
         else:
-            self.results = [profiler.results]
-            self._write_stats()
+            self._write_result_to_stream(profiler.results)
 
         return response
 
