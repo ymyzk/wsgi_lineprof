@@ -65,6 +65,7 @@ class LineProfilerMiddleware(object):
 
         This method must be registered by only one thread.
         """
+        result = {}  # type: Dict[CodeType, Dict[int, LineTiming]]
         result = reduce(_merge_results, self.results, {})
         self._write_result_to_stream(result)
 
