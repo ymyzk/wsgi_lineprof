@@ -1,6 +1,7 @@
 import atexit
-import sys
 from six.moves import reduce
+import sys
+import threading
 from types import CodeType
 from typing import Any, Iterable, List, Optional, TYPE_CHECKING, Dict
 
@@ -38,6 +39,8 @@ class LineProfilerMiddleware(object):
         # Enable colorization only for stdout/stderr
         color = color and self.stream in {sys.stdout, sys.stderr}
         self.formatter = TextFormatter(color=color)
+        # A lock to avoid multiple threads try to write the result at the same time
+        self.writer_lock = threading.Lock()
         # Cannot use AsyncWriter with atexit
         if async_stream and not accumulate:
             self.writer = AsyncWriter(self.stream,
@@ -53,21 +56,37 @@ class LineProfilerMiddleware(object):
                                   LineProfiler.get_unit())
         for f in self.filters:
             stats = stats.filter(f)
-        self.writer.write(stats)
+        with self.writer_lock:
+            self.writer.write(stats)
 
     def _write_result_at_exit(self):
         # type: () -> None
+        """Write profiling results to the stream when exiting
+
+        This method must be registered by only one thread.
+        """
         result = reduce(_merge_results, self.results, {})
         self._write_result_to_stream(result)
 
     def __call__(self, env, start_response):
         # type: (WSGIEnvironment, StartResponse) -> Iterable[bytes]
+        """Wrap an WSGI app with profiler
+
+        Note that this thread may be called by multiple different threads.
+        LineProfiler is not a thread-safe class.
+
+        1. Create a profiler for this thread
+        2. Run an WSGI application with profiling enabled
+        3. Store the result of profiling or write it immediately
+        4. Return the response from the WSGI application
+        """
         profiler = LineProfiler()
         profiler.enable()
         response = self.app(env, start_response)
         profiler.disable()
 
         if self.accumulate:
+            # list.append is a thread safe operation
             self.results.append(profiler.results)
         else:
             self._write_result_to_stream(profiler.results)
