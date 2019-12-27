@@ -34,7 +34,6 @@ class LineProfilerMiddleware(object):
         self.stream = stdout if stream is None else stream  # type: Stream
         self.filters = filters
         self.accumulate = accumulate
-        self.profiler = LineProfiler()
         self.results = []  # type: List[Dict[CodeType, Dict[int, LineTiming]]]
         # Enable colorization only for stdout/stderr
         color = color and self.stream in {sys.stdout, sys.stderr}
@@ -50,26 +49,26 @@ class LineProfilerMiddleware(object):
 
     def _write_stats(self):
         # type: () -> None
-        result = reduce(_merge_results, self.results)
+        result = reduce(_merge_results, self.results, initial={})
         stats = LineProfilerStats(
             [LineProfilerStat(c, t) for c, t in result.items()],
-            self.profiler.get_unit())
+            LineProfiler.get_unit())
         for f in self.filters:
             stats = stats.filter(f)
         self.writer.write(stats)
 
     def __call__(self, env, start_response):
         # type: (WSGIEnvironment, StartResponse) -> Iterable[bytes]
-        self.profiler.enable()
+        profiler = LineProfiler()
+        profiler.enable()
         response = self.app(env, start_response)
-        self.profiler.disable()
+        profiler.disable()
 
         if self.accumulate:
-            self.results.append(self.profiler.results)
+            self.results.append(profiler.results)
         else:
-            self.results = [self.profiler.results]
+            self.results = [profiler.results]
             self._write_stats()
-        self.profiler.reset()
 
         return response
 
