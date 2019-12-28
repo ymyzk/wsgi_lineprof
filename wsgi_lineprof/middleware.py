@@ -4,7 +4,7 @@ from six.moves import reduce
 import sys
 import threading
 from types import CodeType
-from typing import Any, Iterable, List, Optional, TYPE_CHECKING, Dict
+from typing import Any, Dict, Iterable, List, Optional, Type, TYPE_CHECKING
 
 from wsgi_lineprof.extensions import LineTiming
 from wsgi_lineprof.formatter import TextFormatter
@@ -26,35 +26,36 @@ class LineProfilerMiddleware(object):
                  async_stream=False,  # type: bool
                  accumulate=False,  # type: bool
                  color=True,  # type: bool
+                 profiler_class=LineProfiler,  # type: Type[LineProfiler]
                  ):
         # type: (...) -> None
         self.app = app
+        self.profiler_class = profiler_class
         # A hack to suppress unexpected mypy error on Python 2
         # error: Incompatible types in assignment
         # (expression has type "object", variable has type "TextIO")
         stdout = sys.stdout  # type: Any
-        self.stream = stdout if stream is None else stream  # type: Stream
+        stream = stdout if stream is None else stream
         self.filters = filters
         self.accumulate = accumulate
         self.results = []  # type: List[Dict[CodeType, Dict[int, LineTiming]]]
         # Enable colorization only for stdout/stderr
-        color = color and self.stream in {sys.stdout, sys.stderr}
-        self.formatter = TextFormatter(color=color)
+        color = color and stream in {sys.stdout, sys.stderr}
+        formatter = TextFormatter(color=color)
         # A lock to avoid multiple threads try to write the result at the same time
         self.writer_lock = threading.Lock()
         # Cannot use AsyncWriter with atexit
         if async_stream and not accumulate:
-            self.writer = AsyncWriter(self.stream,
-                                      self.formatter)  # type: BaseWriter
+            self.writer = AsyncWriter(stream, formatter)  # type: BaseWriter
         else:
-            self.writer = SyncWriter(self.stream, self.formatter)
+            self.writer = SyncWriter(stream, formatter)
         if accumulate:
             atexit.register(self._write_result_at_exit)
 
     def _write_result_to_stream(self, result):
         # type: (Dict[CodeType, Dict[int, LineTiming]]) -> None
         stats = LineProfilerStats([LineProfilerStat(c, t) for c, t in result.items()],
-                                  LineProfiler.get_unit())
+                                  self.profiler_class.get_unit())
         for f in self.filters:
             stats = stats.filter(f)
         with self.writer_lock:
@@ -82,7 +83,7 @@ class LineProfilerMiddleware(object):
         3. Store the result of profiling or write it immediately
         4. Return the response from the WSGI application
         """
-        profiler = LineProfiler()
+        profiler = self.profiler_class()
         profiler.enable()
         try:
             response = self.app(env, start_response)
