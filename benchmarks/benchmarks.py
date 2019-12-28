@@ -1,4 +1,5 @@
 import random
+from six import StringIO
 import string
 
 from webtest import TestApp
@@ -8,8 +9,8 @@ from wsgi_lineprof.middleware import LineProfilerMiddleware
 from .apps import demo_app, fib_app, jinja_app, re_app
 
 
-class StringNoopIO(object):
-    def write(self, _):
+class StringNoopIO(StringIO):
+    def write(self, *args, **kwargs):
         pass
 
 
