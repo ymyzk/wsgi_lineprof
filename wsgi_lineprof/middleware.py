@@ -83,8 +83,10 @@ class LineProfilerMiddleware(object):
         """
         profiler = LineProfiler()
         profiler.enable()
-        response = self.app(env, start_response)
-        profiler.disable()
+        try:
+            response = self.app(env, start_response)
+        finally:
+            profiler.disable()
 
         if self.accumulate:
             # list.append is a thread safe operation
