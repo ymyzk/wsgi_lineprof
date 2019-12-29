@@ -30,6 +30,9 @@ cdef class LineProfiler:
     def enable(self):
         PyEval_SetTrace(python_trace_callback, self)
 
+    def _enable_noop(self):
+        PyEval_SetTrace(python_trace_noop_callback, self)
+
     def disable(self):
         PyEval_SetTrace(NULL, <object>NULL)
 
@@ -145,4 +148,9 @@ cdef int python_trace_callback(object self_, PyFrameObject *py_frame, int what,
     if what == PyTrace_LINE:
         last_time[code] = LastTime(py_frame.f_lineno, hpTimer())
 
+    return 0
+
+
+cdef int python_trace_noop_callback(object self_, PyFrameObject *py_frame, int what,
+                                    PyObject *arg):
     return 0
