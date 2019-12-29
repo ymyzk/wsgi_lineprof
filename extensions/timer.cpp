@@ -31,7 +31,7 @@ hpTimerUnit(void)
     }
 }
 
-const char HP_TIMER_IMPLEMENTATION[] = "QueryPerformanceCounter()";
+const char* HP_TIMER_IMPLEMENTATION = "QueryPerformanceCounter()";
 
 #elif defined(__APPLE__)
 
@@ -57,7 +57,7 @@ hpTimerUnit(void)
     return unit;
 }
 
-const char HP_TIMER_IMPLEMENTATION[] = "mach_absolute_time()";
+const char* HP_TIMER_IMPLEMENTATION = "mach_absolute_time()";
 
 #elif defined(HAVE_CLOCK_GETTIME) && defined(CLOCK_MONOTONIC)
 
@@ -78,7 +78,7 @@ hpTimerUnit(void)
     return 0.000000001;
 }
 
-const char HP_TIMER_IMPLEMENTATION[] = "clock_gettime(CLOCK_MONOTONIC)";
+const char* HP_TIMER_IMPLEMENTATION = "clock_gettime(CLOCK_MONOTONIC)";
 
 #elif defined(HAVE_GETTIMEOFDAY)
 
@@ -103,7 +103,7 @@ hpTimerUnit(void)
     return 0.000001;
 }
 
-const char HP_TIMER_IMPLEMENTATION[] = "gettimeofday()";
+const char* HP_TIMER_IMPLEMENTATION = "gettimeofday()";
 
 #else
 

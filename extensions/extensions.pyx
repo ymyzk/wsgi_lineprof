@@ -1,5 +1,7 @@
 # cython: language_level=2
+# distutils: language=c++
 from cpython cimport PyObject
+from libcpp.unordered_map cimport unordered_map
 
 from header cimport (
     PyEval_SetTrace, PyFrameObject, PyTrace_LINE, PyTrace_RETURN
@@ -16,16 +18,15 @@ ctypedef unsigned long long uint64_t
 cdef extern from "timer.h":
     uint64_t hpTimer()
     double hpTimerUnit()
-    char[] HP_TIMER_IMPLEMENTATION
+    char* HP_TIMER_IMPLEMENTATION
 
 
 cdef class LineProfiler:
     cdef public dict results
-    cdef public dict last_time
+    cdef unordered_map[long, LastTime] last_time
 
     def __init__(self):
         self.results = {}
-        self.last_time = {}
 
     def enable(self):
         PyEval_SetTrace(python_trace_callback, self)
@@ -38,7 +39,7 @@ cdef class LineProfiler:
 
     def reset(self):
         self.results = {}
-        self.last_time = {}
+        self.last_time.clear()
 
     @staticmethod
     def get_timer():
@@ -96,13 +97,9 @@ cdef class LineTiming:
         res.n_hits = self.n_hits
         return res
 
-cdef class LastTime:
-    cdef int f_lineno
-    cdef uint64_t time
-
-    def __cinit__(self, int f_lineno, uint64_t time):
-        self.f_lineno = f_lineno
-        self.time = time
+cdef struct LastTime:
+    int f_lineno
+    uint64_t time
 
 
 cdef int python_trace_callback(object self_, PyFrameObject *py_frame, int what,
@@ -110,10 +107,10 @@ cdef int python_trace_callback(object self_, PyFrameObject *py_frame, int what,
     cdef LineProfiler self
     cdef dict results
     cdef dict result_code
-    cdef dict last_time
     cdef LineTiming entry
     cdef LastTime old
     cdef object code
+    cdef long code_id
     cdef uint64_t time
     cdef int lineno
 
@@ -123,17 +120,18 @@ cdef int python_trace_callback(object self_, PyFrameObject *py_frame, int what,
     time = hpTimer()
 
     self = <LineProfiler>self_
-    last_time = self.last_time
     code = <object>py_frame.f_code
 
-    if code in last_time:
+    code_id = id(code)
+    it = self.last_time.find(code_id)
+    if it == self.last_time.end():
         results = self.results
         if code in results:
             result_code = results[code]
         else:
             result_code = results[code] = {}
 
-        old = last_time[code]
+        old = self.last_time[code_id]
         lineno = old.f_lineno
 
         if lineno not in result_code:
@@ -144,10 +142,10 @@ cdef int python_trace_callback(object self_, PyFrameObject *py_frame, int what,
         entry.hit(time - old.time)
 
         if what == PyTrace_RETURN:
-            del last_time[code]
+            self.last_time.erase(it)
 
     if what == PyTrace_LINE:
-        last_time[code] = LastTime(py_frame.f_lineno, hpTimer())
+        self.last_time[code_id] = LastTime(py_frame.f_lineno, hpTimer())
 
     return 0
 

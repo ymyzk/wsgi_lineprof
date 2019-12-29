@@ -18,10 +18,10 @@ try:
 except ImportError:
     def cythonize(extensions):
         return extensions
-    source += "c"
+    source += "cpp"
     if not path.exists(path.join(root, source)):
-        raise Exception("No Cython installation, no generated C file")
-    warn("Could not import Cython, using generated C source code instead")
+        raise Exception("No Cython installation, no generated C++ file")
+    warn("Could not import Cython, using generated C++ source code instead")
 
 setup(
     name="wsgi_lineprof",
@@ -74,7 +74,7 @@ setup(
     ext_package="wsgi_lineprof",
     ext_modules=cythonize([
         Extension("extensions",
-                  sources=[source, "extensions/timer.c"])
+                  sources=[source, "extensions/timer.cpp"])
     ]),
 
     install_requires=[

@@ -8,4 +8,4 @@ typedef unsigned __int64 uint64_t;
 
 uint64_t hpTimer(void);
 double hpTimerUnit(void);
-extern const char HP_TIMER_IMPLEMENTATION[];
+extern const char* HP_TIMER_IMPLEMENTATION;

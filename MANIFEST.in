@@ -1,4 +1,4 @@
-include extensions/extensions.c
+include extensions/extensions.cpp
 include extensions/extensions.pyx
 include extensions/header.pxd
 include extensions/timer.h
