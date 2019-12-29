@@ -1,10 +1,16 @@
 from __future__ import absolute_import
 import atexit
+from collections import OrderedDict
+from datetime import datetime
+from operator import itemgetter
 from six.moves import reduce
 import sys
 import threading
 from types import CodeType
-from typing import Any, Dict, Iterable, List, Optional, Type, TYPE_CHECKING
+from typing import Any, Dict, Iterable, Optional, Type, TYPE_CHECKING
+import uuid
+
+from pytz import utc
 
 from wsgi_lineprof.extensions import LineTiming
 from wsgi_lineprof.formatter import TextFormatter
@@ -38,7 +44,7 @@ class LineProfilerMiddleware(object):
         stream = stdout if stream is None else stream
         self.filters = filters
         self.accumulate = accumulate
-        self.results = []  # type: List[Dict[CodeType, Dict[int, LineTiming]]]
+        self.results = OrderedDict()  # type: Dict[uuid.UUID, Dict[str, Any]]
         # Enable colorization only for stdout/stderr
         color = color and stream in {sys.stdout, sys.stderr}
         formatter = TextFormatter(color=color)
@@ -67,8 +73,10 @@ class LineProfilerMiddleware(object):
 
         This method must be registered by only one thread.
         """
-        result = {}  # type: Dict[CodeType, Dict[int, LineTiming]]
-        result = reduce(_merge_results, self.results, {})
+        result = reduce(
+            _merge_results,
+            map(itemgetter("results"), self.results.values()),
+            {})  # type: Dict[CodeType, Dict[int, LineTiming]]
         self._write_result_to_stream(result)
 
     def __call__(self, env, start_response):
@@ -84,16 +92,27 @@ class LineProfilerMiddleware(object):
         4. Return the response from the WSGI application
         """
         profiler = self.profiler_class()
-        profiler.enable()
+        started_at = datetime.now(tz=utc)
+        relative_start = profiler.get_timer()
         try:
+            profiler.enable()
             response = self.app(env, start_response)
         finally:
             profiler.disable()
+            elapsed = (profiler.get_timer() - relative_start) * profiler.get_unit()
 
-        if self.accumulate:
-            # list.append is a thread safe operation
-            self.results.append(profiler.results)
-        else:
+        request_id = uuid.uuid4()
+        self.results[request_id] = {
+            "id": request_id,
+            "started_at": started_at,
+            "elapsed": elapsed,
+            "results": profiler.results,
+            "request_method": env["REQUEST_METHOD"],
+            "path_info": env["PATH_INFO"],
+            "query_string": env["QUERY_STRING"],
+        }
+
+        if not self.accumulate:
             self._write_result_to_stream(profiler.results)
 
         return response

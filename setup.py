@@ -80,6 +80,7 @@ setup(
     install_requires=[
         "colorama>=0.4.1",
         "six>=1.10.0",
+        "pytz",
     ],
 
     extras_require={
