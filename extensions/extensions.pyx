@@ -124,14 +124,15 @@ cdef int python_trace_callback(object self_, PyFrameObject *py_frame, int what,
 
     self = <LineProfiler>self_
     last_time = self.last_time
-    results = self.results
     code = <object>py_frame.f_code
 
-    if code not in results:
-        results[code] = {}
-
     if code in last_time:
-        result_code = results[code]
+        results = self.results
+        if code in results:
+            result_code = results[code]
+        else:
+            result_code = results[code] = {}
+
         old = last_time[code]
         lineno = old.f_lineno
 

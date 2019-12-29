@@ -4241,7 +4241,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
  * 
  *     self = <LineProfiler>self_             # <<<<<<<<<<<<<<
  *     last_time = self.last_time
- *     results = self.results
+ *     code = <object>py_frame.f_code
  */
   __pyx_t_3 = __pyx_v_self_;
   __Pyx_INCREF(__pyx_t_3);
@@ -4252,8 +4252,8 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
  * 
  *     self = <LineProfiler>self_
  *     last_time = self.last_time             # <<<<<<<<<<<<<<
- *     results = self.results
  *     code = <object>py_frame.f_code
+ * 
  */
   __pyx_t_3 = __pyx_v_self->last_time;
   __Pyx_INCREF(__pyx_t_3);
@@ -4263,118 +4263,124 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
   /* "extensions.pyx":127
  *     self = <LineProfiler>self_
  *     last_time = self.last_time
- *     results = self.results             # <<<<<<<<<<<<<<
- *     code = <object>py_frame.f_code
- * 
- */
-  __pyx_t_3 = __pyx_v_self->results;
-  __Pyx_INCREF(__pyx_t_3);
-  __pyx_v_results = ((PyObject*)__pyx_t_3);
-  __pyx_t_3 = 0;
-
-  /* "extensions.pyx":128
- *     last_time = self.last_time
- *     results = self.results
  *     code = <object>py_frame.f_code             # <<<<<<<<<<<<<<
  * 
- *     if code not in results:
+ *     if code in last_time:
  */
   __pyx_t_3 = ((PyObject *)__pyx_v_py_frame->f_code);
   __Pyx_INCREF(__pyx_t_3);
   __pyx_v_code = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "extensions.pyx":130
+  /* "extensions.pyx":129
  *     code = <object>py_frame.f_code
- * 
- *     if code not in results:             # <<<<<<<<<<<<<<
- *         results[code] = {}
- * 
- */
-  if (unlikely(__pyx_v_results == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 130, __pyx_L1_error)
-  }
-  __pyx_t_1 = (__Pyx_PyDict_ContainsTF(__pyx_v_code, __pyx_v_results, Py_NE)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 130, __pyx_L1_error)
-  __pyx_t_2 = (__pyx_t_1 != 0);
-  if (__pyx_t_2) {
-
-    /* "extensions.pyx":131
- * 
- *     if code not in results:
- *         results[code] = {}             # <<<<<<<<<<<<<<
- * 
- *     if code in last_time:
- */
-    __pyx_t_3 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 131, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    if (unlikely(__pyx_v_results == Py_None)) {
-      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 131, __pyx_L1_error)
-    }
-    if (unlikely(PyDict_SetItem(__pyx_v_results, __pyx_v_code, __pyx_t_3) < 0)) __PYX_ERR(0, 131, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-
-    /* "extensions.pyx":130
- *     code = <object>py_frame.f_code
- * 
- *     if code not in results:             # <<<<<<<<<<<<<<
- *         results[code] = {}
- * 
- */
-  }
-
-  /* "extensions.pyx":133
- *         results[code] = {}
  * 
  *     if code in last_time:             # <<<<<<<<<<<<<<
- *         result_code = results[code]
- *         old = last_time[code]
+ *         results = self.results
+ *         if code in results:
  */
   if (unlikely(__pyx_v_last_time == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 133, __pyx_L1_error)
+    __PYX_ERR(0, 129, __pyx_L1_error)
   }
-  __pyx_t_2 = (__Pyx_PyDict_ContainsTF(__pyx_v_code, __pyx_v_last_time, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 133, __pyx_L1_error)
-  __pyx_t_1 = (__pyx_t_2 != 0);
-  if (__pyx_t_1) {
+  __pyx_t_1 = (__Pyx_PyDict_ContainsTF(__pyx_v_code, __pyx_v_last_time, Py_EQ)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 129, __pyx_L1_error)
+  __pyx_t_2 = (__pyx_t_1 != 0);
+  if (__pyx_t_2) {
 
-    /* "extensions.pyx":134
+    /* "extensions.pyx":130
  * 
  *     if code in last_time:
- *         result_code = results[code]             # <<<<<<<<<<<<<<
- *         old = last_time[code]
- *         lineno = old.f_lineno
+ *         results = self.results             # <<<<<<<<<<<<<<
+ *         if code in results:
+ *             result_code = results[code]
  */
-    if (unlikely(__pyx_v_results == Py_None)) {
-      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 134, __pyx_L1_error)
-    }
-    __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_results, __pyx_v_code); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 134, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    if (!(likely(PyDict_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_3)->tp_name), 0))) __PYX_ERR(0, 134, __pyx_L1_error)
-    __pyx_v_result_code = ((PyObject*)__pyx_t_3);
+    __pyx_t_3 = __pyx_v_self->results;
+    __Pyx_INCREF(__pyx_t_3);
+    __pyx_v_results = ((PyObject*)__pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "extensions.pyx":135
+    /* "extensions.pyx":131
  *     if code in last_time:
- *         result_code = results[code]
+ *         results = self.results
+ *         if code in results:             # <<<<<<<<<<<<<<
+ *             result_code = results[code]
+ *         else:
+ */
+    if (unlikely(__pyx_v_results == Py_None)) {
+      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
+      __PYX_ERR(0, 131, __pyx_L1_error)
+    }
+    __pyx_t_2 = (__Pyx_PyDict_ContainsTF(__pyx_v_code, __pyx_v_results, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 131, __pyx_L1_error)
+    __pyx_t_1 = (__pyx_t_2 != 0);
+    if (__pyx_t_1) {
+
+      /* "extensions.pyx":132
+ *         results = self.results
+ *         if code in results:
+ *             result_code = results[code]             # <<<<<<<<<<<<<<
+ *         else:
+ *             results[code] = result_code = {}
+ */
+      if (unlikely(__pyx_v_results == Py_None)) {
+        PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+        __PYX_ERR(0, 132, __pyx_L1_error)
+      }
+      __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_results, __pyx_v_code); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 132, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      if (!(likely(PyDict_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_3)->tp_name), 0))) __PYX_ERR(0, 132, __pyx_L1_error)
+      __pyx_v_result_code = ((PyObject*)__pyx_t_3);
+      __pyx_t_3 = 0;
+
+      /* "extensions.pyx":131
+ *     if code in last_time:
+ *         results = self.results
+ *         if code in results:             # <<<<<<<<<<<<<<
+ *             result_code = results[code]
+ *         else:
+ */
+      goto __pyx_L7;
+    }
+
+    /* "extensions.pyx":134
+ *             result_code = results[code]
+ *         else:
+ *             results[code] = result_code = {}             # <<<<<<<<<<<<<<
+ * 
+ *         old = last_time[code]
+ */
+    /*else*/ {
+      __pyx_t_3 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 134, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      if (unlikely(__pyx_v_results == Py_None)) {
+        PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+        __PYX_ERR(0, 134, __pyx_L1_error)
+      }
+      if (unlikely(PyDict_SetItem(__pyx_v_results, __pyx_v_code, __pyx_t_3) < 0)) __PYX_ERR(0, 134, __pyx_L1_error)
+      __Pyx_INCREF(__pyx_t_3);
+      __pyx_v_result_code = __pyx_t_3;
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    }
+    __pyx_L7:;
+
+    /* "extensions.pyx":136
+ *             results[code] = result_code = {}
+ * 
  *         old = last_time[code]             # <<<<<<<<<<<<<<
  *         lineno = old.f_lineno
  * 
  */
     if (unlikely(__pyx_v_last_time == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 135, __pyx_L1_error)
+      __PYX_ERR(0, 136, __pyx_L1_error)
     }
-    __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_last_time, __pyx_v_code); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 135, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyDict_GetItem(__pyx_v_last_time, __pyx_v_code); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 136, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_10extensions_LastTime))))) __PYX_ERR(0, 135, __pyx_L1_error)
+    if (!(likely(((__pyx_t_3) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_3, __pyx_ptype_10extensions_LastTime))))) __PYX_ERR(0, 136, __pyx_L1_error)
     __pyx_v_old = ((struct __pyx_obj_10extensions_LastTime *)__pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "extensions.pyx":136
- *         result_code = results[code]
+    /* "extensions.pyx":137
+ * 
  *         old = last_time[code]
  *         lineno = old.f_lineno             # <<<<<<<<<<<<<<
  * 
@@ -4383,34 +4389,34 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
     __pyx_t_4 = __pyx_v_old->f_lineno;
     __pyx_v_lineno = __pyx_t_4;
 
-    /* "extensions.pyx":138
+    /* "extensions.pyx":139
  *         lineno = old.f_lineno
  * 
  *         if lineno not in result_code:             # <<<<<<<<<<<<<<
  *             result_code[lineno] = entry = LineTiming(code, lineno)
  *         else:
  */
-    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_lineno); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_lineno); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 139, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     if (unlikely(__pyx_v_result_code == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-      __PYX_ERR(0, 138, __pyx_L1_error)
+      __PYX_ERR(0, 139, __pyx_L1_error)
     }
-    __pyx_t_1 = (__Pyx_PyDict_ContainsTF(__pyx_t_3, __pyx_v_result_code, Py_NE)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 138, __pyx_L1_error)
+    __pyx_t_1 = (__Pyx_PyDict_ContainsTF(__pyx_t_3, __pyx_v_result_code, Py_NE)); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(0, 139, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_2 = (__pyx_t_1 != 0);
     if (__pyx_t_2) {
 
-      /* "extensions.pyx":139
+      /* "extensions.pyx":140
  * 
  *         if lineno not in result_code:
  *             result_code[lineno] = entry = LineTiming(code, lineno)             # <<<<<<<<<<<<<<
  *         else:
  *             entry = result_code[lineno]
  */
-      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_lineno); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 139, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_lineno); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 140, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 139, __pyx_L1_error)
+      __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 140, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_INCREF(__pyx_v_code);
       __Pyx_GIVEREF(__pyx_v_code);
@@ -4418,22 +4424,22 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
       __Pyx_GIVEREF(__pyx_t_3);
       PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_3);
       __pyx_t_3 = 0;
-      __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_10extensions_LineTiming), __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 139, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_10extensions_LineTiming), __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 140, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       if (unlikely(__pyx_v_result_code == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 139, __pyx_L1_error)
+        __PYX_ERR(0, 140, __pyx_L1_error)
       }
-      __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_lineno); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 139, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_lineno); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 140, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      if (unlikely(PyDict_SetItem(__pyx_v_result_code, __pyx_t_5, __pyx_t_3) < 0)) __PYX_ERR(0, 139, __pyx_L1_error)
+      if (unlikely(PyDict_SetItem(__pyx_v_result_code, __pyx_t_5, __pyx_t_3) < 0)) __PYX_ERR(0, 140, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_INCREF(__pyx_t_3);
       __pyx_v_entry = ((struct __pyx_obj_10extensions_LineTiming *)__pyx_t_3);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "extensions.pyx":138
+      /* "extensions.pyx":139
  *         lineno = old.f_lineno
  * 
  *         if lineno not in result_code:             # <<<<<<<<<<<<<<
@@ -4443,7 +4449,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
       goto __pyx_L8;
     }
 
-    /* "extensions.pyx":141
+    /* "extensions.pyx":142
  *             result_code[lineno] = entry = LineTiming(code, lineno)
  *         else:
  *             entry = result_code[lineno]             # <<<<<<<<<<<<<<
@@ -4453,31 +4459,31 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
     /*else*/ {
       if (unlikely(__pyx_v_result_code == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 141, __pyx_L1_error)
+        __PYX_ERR(0, 142, __pyx_L1_error)
       }
-      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_lineno); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 141, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_lineno); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 142, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_5 = __Pyx_PyDict_GetItem(__pyx_v_result_code, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 141, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyDict_GetItem(__pyx_v_result_code, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 142, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_10extensions_LineTiming))))) __PYX_ERR(0, 141, __pyx_L1_error)
+      if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_10extensions_LineTiming))))) __PYX_ERR(0, 142, __pyx_L1_error)
       __pyx_v_entry = ((struct __pyx_obj_10extensions_LineTiming *)__pyx_t_5);
       __pyx_t_5 = 0;
     }
     __pyx_L8:;
 
-    /* "extensions.pyx":143
+    /* "extensions.pyx":144
  *             entry = result_code[lineno]
  * 
  *         entry.hit(time - old.time)             # <<<<<<<<<<<<<<
  * 
  *         if what == PyTrace_RETURN:
  */
-    __pyx_t_5 = ((struct __pyx_vtabstruct_10extensions_LineTiming *)__pyx_v_entry->__pyx_vtab)->hit(__pyx_v_entry, (__pyx_v_time - __pyx_v_old->time)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 143, __pyx_L1_error)
+    __pyx_t_5 = ((struct __pyx_vtabstruct_10extensions_LineTiming *)__pyx_v_entry->__pyx_vtab)->hit(__pyx_v_entry, (__pyx_v_time - __pyx_v_old->time)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 144, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "extensions.pyx":145
+    /* "extensions.pyx":146
  *         entry.hit(time - old.time)
  * 
  *         if what == PyTrace_RETURN:             # <<<<<<<<<<<<<<
@@ -4487,7 +4493,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
     __pyx_t_2 = ((__pyx_v_what == PyTrace_RETURN) != 0);
     if (__pyx_t_2) {
 
-      /* "extensions.pyx":146
+      /* "extensions.pyx":147
  * 
  *         if what == PyTrace_RETURN:
  *             del last_time[code]             # <<<<<<<<<<<<<<
@@ -4496,11 +4502,11 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
  */
       if (unlikely(__pyx_v_last_time == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 146, __pyx_L1_error)
+        __PYX_ERR(0, 147, __pyx_L1_error)
       }
-      if (unlikely(PyDict_DelItem(__pyx_v_last_time, __pyx_v_code) < 0)) __PYX_ERR(0, 146, __pyx_L1_error)
+      if (unlikely(PyDict_DelItem(__pyx_v_last_time, __pyx_v_code) < 0)) __PYX_ERR(0, 147, __pyx_L1_error)
 
-      /* "extensions.pyx":145
+      /* "extensions.pyx":146
  *         entry.hit(time - old.time)
  * 
  *         if what == PyTrace_RETURN:             # <<<<<<<<<<<<<<
@@ -4509,16 +4515,16 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
  */
     }
 
-    /* "extensions.pyx":133
- *         results[code] = {}
+    /* "extensions.pyx":129
+ *     code = <object>py_frame.f_code
  * 
  *     if code in last_time:             # <<<<<<<<<<<<<<
- *         result_code = results[code]
- *         old = last_time[code]
+ *         results = self.results
+ *         if code in results:
  */
   }
 
-  /* "extensions.pyx":148
+  /* "extensions.pyx":149
  *             del last_time[code]
  * 
  *     if what == PyTrace_LINE:             # <<<<<<<<<<<<<<
@@ -4528,18 +4534,18 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
   __pyx_t_2 = ((__pyx_v_what == PyTrace_LINE) != 0);
   if (__pyx_t_2) {
 
-    /* "extensions.pyx":149
+    /* "extensions.pyx":150
  * 
  *     if what == PyTrace_LINE:
  *         last_time[code] = LastTime(py_frame.f_lineno, hpTimer())             # <<<<<<<<<<<<<<
  * 
  *     return 0
  */
-    __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_py_frame->f_lineno); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 149, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_py_frame->f_lineno); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_3 = __Pyx_PyInt_From_unsigned_PY_LONG_LONG(hpTimer()); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 149, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyInt_From_unsigned_PY_LONG_LONG(hpTimer()); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 149, __pyx_L1_error)
+    __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_GIVEREF(__pyx_t_5);
     PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5);
@@ -4547,17 +4553,17 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
     PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_3);
     __pyx_t_5 = 0;
     __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_10extensions_LastTime), __pyx_t_6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 149, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_10extensions_LastTime), __pyx_t_6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     if (unlikely(__pyx_v_last_time == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-      __PYX_ERR(0, 149, __pyx_L1_error)
+      __PYX_ERR(0, 150, __pyx_L1_error)
     }
-    if (unlikely(PyDict_SetItem(__pyx_v_last_time, __pyx_v_code, __pyx_t_3) < 0)) __PYX_ERR(0, 149, __pyx_L1_error)
+    if (unlikely(PyDict_SetItem(__pyx_v_last_time, __pyx_v_code, __pyx_t_3) < 0)) __PYX_ERR(0, 150, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "extensions.pyx":148
+    /* "extensions.pyx":149
  *             del last_time[code]
  * 
  *     if what == PyTrace_LINE:             # <<<<<<<<<<<<<<
@@ -4566,7 +4572,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
  */
   }
 
-  /* "extensions.pyx":151
+  /* "extensions.pyx":152
  *         last_time[code] = LastTime(py_frame.f_lineno, hpTimer())
  * 
  *     return 0             # <<<<<<<<<<<<<<
@@ -4603,7 +4609,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
   return __pyx_r;
 }
 
-/* "extensions.pyx":154
+/* "extensions.pyx":155
  * 
  * 
  * cdef int python_trace_noop_callback(object self_, PyFrameObject *py_frame, int what,             # <<<<<<<<<<<<<<
@@ -4616,7 +4622,7 @@ static int __pyx_f_10extensions_python_trace_noop_callback(CYTHON_UNUSED PyObjec
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("python_trace_noop_callback", 0);
 
-  /* "extensions.pyx":156
+  /* "extensions.pyx":157
  * cdef int python_trace_noop_callback(object self_, PyFrameObject *py_frame, int what,
  *                                     PyObject *arg):
  *     return 0             # <<<<<<<<<<<<<<
@@ -4624,7 +4630,7 @@ static int __pyx_f_10extensions_python_trace_noop_callback(CYTHON_UNUSED PyObjec
   __pyx_r = 0;
   goto __pyx_L0;
 
-  /* "extensions.pyx":154
+  /* "extensions.pyx":155
  * 
  * 
  * cdef int python_trace_noop_callback(object self_, PyFrameObject *py_frame, int what,             # <<<<<<<<<<<<<<
