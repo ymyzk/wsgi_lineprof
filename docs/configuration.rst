@@ -127,3 +127,13 @@ You can disable the feature using the ``color`` option.
 
     app = LineProfilerMiddleware(app, color=False)
     bottle.run(app=app)
+
+Result Endpoint
+---------------
+By default, you can access an endpoint ``/wsgi_lineprof/`` to see the results.
+This endpoint is configurable.
+
+.. code-block:: python
+
+    app = LineProfilerMiddleware(app, endpoint='/custom_result_endpoint/')
+    bottle.run(app=app)

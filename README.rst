@@ -40,7 +40,7 @@ Apply wsgi_lineprof to the existing WSGI web application:
    from wsgi_lineprof.middleware import LineProfilerMiddleware
    app = LineProfilerMiddleware(app)
 
-Start the web application and access to the application.
+Start the web application and access the application.
 wsgi_lineprof writes results to stdout every time an HTTP request is processed by default.
 You can see the output like this in your console:
 
@@ -59,5 +59,7 @@ You can see the output like this in your console:
        12         1            4      return "Hello world!!"
 
    ... (snip) ...
+
+Also, you can check the result on your web browser by accessing the special endpoint ``/wsgi_lineprof/``.
 
 Please check `the documentation <https://wsgi-lineprof.readthedocs.io/en/latest/index.html>`_ for more details.
