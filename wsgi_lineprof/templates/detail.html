@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>wsgi_lineprof: {{ result.request_method }} {{ result.path_info }}</h1>
+<dl>
+  <dt>Started at</dt>
+  <dd>{{ result.started_at.strftime("%Y-%m-%dT%H:%M:%S%z") }}</dd>
+  <dt>Elapsed</dt>
+  <dd>{{ "%.03f"|format((1000 * result.elapsed)|round(3)) }} ms</dd>
+</dl>
+<hr>
+<pre><code>{{ stats }}</code></pre>
+{% endblock %}

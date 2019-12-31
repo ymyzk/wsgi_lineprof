@@ -68,7 +68,7 @@ setup(
         "wsgi_lineprof",
     ],
     package_data={
-        "wsgi_lineprof": ["py.typed", "*.pyi"],
+        "wsgi_lineprof": ["py.typed", "*.pyi", "templates/*"],
     },
 
     ext_package="wsgi_lineprof",
@@ -79,6 +79,7 @@ setup(
 
     install_requires=[
         "colorama>=0.4.1",
+        "Jinja2",
         "six>=1.10.0",
         "pytz",
     ],

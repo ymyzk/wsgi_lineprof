@@ -3,6 +3,8 @@ import atexit
 from collections import OrderedDict
 from datetime import datetime
 from operator import itemgetter
+import re
+from six import StringIO
 from six.moves import reduce
 import sys
 import threading
@@ -10,6 +12,7 @@ from types import CodeType
 from typing import Any, Dict, Iterable, Optional, Type, TYPE_CHECKING
 import uuid
 
+from jinja2 import Environment, PackageLoader
 from pytz import utc
 
 from wsgi_lineprof.extensions import LineTiming
@@ -24,6 +27,10 @@ if TYPE_CHECKING:
     from wsgiref.types import StartResponse, WSGIApplication, WSGIEnvironment
 
 
+UUID_RE = re.compile('^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$',
+                     re.I)
+
+
 class LineProfilerMiddleware(object):
     def __init__(self,
                  app,  # type: WSGIApplication
@@ -33,6 +40,7 @@ class LineProfilerMiddleware(object):
                  accumulate=False,  # type: bool
                  color=True,  # type: bool
                  profiler_class=LineProfiler,  # type: Type[LineProfiler]
+                 endpoint="/wsgi_lineprof/",  # type: str
                  ):
         # type: (...) -> None
         self.app = app
@@ -58,6 +66,12 @@ class LineProfilerMiddleware(object):
         if accumulate:
             atexit.register(self._write_result_at_exit)
 
+        if not endpoint.endswith("/"):
+            endpoint += "/"
+        self.endpoint = endpoint
+        self.template_env = Environment(
+            loader=PackageLoader("wsgi_lineprof", "templates"), autoescape=True)
+
     def _write_result_to_stream(self, result):
         # type: (Dict[CodeType, Dict[int, LineTiming]]) -> None
         stats = LineProfilerStats([LineProfilerStat(c, t) for c, t in result.items()],
@@ -79,6 +93,44 @@ class LineProfilerMiddleware(object):
             {})  # type: Dict[CodeType, Dict[int, LineTiming]]
         self._write_result_to_stream(result)
 
+    def _serve_result_index(self, start_response):
+        # type: (StartResponse) -> Iterable[bytes]
+        template = self.template_env.get_template("index.html")
+        # To suppress the following mypy error on Python 3:
+        # error: No overload variant of "reversed" matches argument
+        results = self.results.values()  # type: Any
+        start_response("200 OK", [("Content-Type", "text/html; charset=utf-8")])
+        return [template.render(results=reversed(results)).encode("utf-8")]
+
+    def _serve_result_detail(self, start_response, result):
+        # type: (StartResponse, Dict[str, Any]) -> Iterable[bytes]
+        template = self.template_env.get_template("detail.html")
+        stream = StringIO()  # type: Any
+        writer = SyncWriter(stream, TextFormatter(color=False))
+        stats = LineProfilerStats(
+            [LineProfilerStat(c, t) for c, t in result["results"].items()],
+            LineProfiler.get_unit())
+        for f in self.filters:
+            stats = stats.filter(f)
+        writer.write(stats)
+        start_response("200 OK", [("Content-Type", "text/html; charset=utf-8")])
+        return [
+            template.render(result=result, stats=stream.getvalue()).encode("utf-8")
+        ]
+
+    def _serve_result(self, env, start_response):
+        # type: (WSGIEnvironment, StartResponse) -> Iterable[bytes]
+        path = env["PATH_INFO"][len(self.endpoint):]
+        if path == "":
+            return self._serve_result_index(start_response)
+        if UUID_RE.match(path):
+            path_uuid = uuid.UUID(path)
+            if path_uuid in self.results:
+                return self._serve_result_detail(start_response,
+                                                 self.results[path_uuid])
+        start_response("404 Not Found", [])
+        return []
+
     def __call__(self, env, start_response):
         # type: (WSGIEnvironment, StartResponse) -> Iterable[bytes]
         """Wrap an WSGI app with profiler
@@ -91,6 +143,9 @@ class LineProfilerMiddleware(object):
         3. Store the result of profiling or write it immediately
         4. Return the response from the WSGI application
         """
+        if env["PATH_INFO"].startswith(self.endpoint):
+            return self._serve_result(env, start_response)
+
         profiler = self.profiler_class()
         started_at = datetime.now(tz=utc)
         relative_start = profiler.get_timer()
