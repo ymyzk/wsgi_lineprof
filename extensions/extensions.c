@@ -4319,7 +4319,7 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
  *         if code in results:
  *             result_code = results[code]             # <<<<<<<<<<<<<<
  *         else:
- *             results[code] = result_code = {}
+ *             result_code = results[code] = {}
  */
       if (unlikely(__pyx_v_results == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
@@ -4344,26 +4344,26 @@ static int __pyx_f_10extensions_python_trace_callback(PyObject *__pyx_v_self_, P
     /* "extensions.pyx":134
  *             result_code = results[code]
  *         else:
- *             results[code] = result_code = {}             # <<<<<<<<<<<<<<
+ *             result_code = results[code] = {}             # <<<<<<<<<<<<<<
  * 
  *         old = last_time[code]
  */
     /*else*/ {
       __pyx_t_3 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 134, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_3);
+      __pyx_v_result_code = __pyx_t_3;
       if (unlikely(__pyx_v_results == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
         __PYX_ERR(0, 134, __pyx_L1_error)
       }
       if (unlikely(PyDict_SetItem(__pyx_v_results, __pyx_v_code, __pyx_t_3) < 0)) __PYX_ERR(0, 134, __pyx_L1_error)
-      __Pyx_INCREF(__pyx_t_3);
-      __pyx_v_result_code = __pyx_t_3;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
     __pyx_L7:;
 
     /* "extensions.pyx":136
- *             results[code] = result_code = {}
+ *             result_code = results[code] = {}
  * 
  *         old = last_time[code]             # <<<<<<<<<<<<<<
  *         lineno = old.f_lineno
