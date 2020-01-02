@@ -80,8 +80,9 @@ setup(
     install_requires=[
         "colorama>=0.4.1",
         "Jinja2",
-        "six>=1.10.0",
         "pytz",
+        "six>=1.10.0",
+        "typing-extensions",
     ],
 
     extras_require={

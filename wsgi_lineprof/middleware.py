@@ -14,6 +14,7 @@ import uuid
 
 from jinja2 import Environment, PackageLoader
 from pytz import utc
+from typing_extensions import TypedDict
 
 from wsgi_lineprof.extensions import LineTiming
 from wsgi_lineprof.formatter import TextFormatter
@@ -29,6 +30,15 @@ if TYPE_CHECKING:
 
 UUID_RE = re.compile('^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$',
                      re.I)
+RequestMeasurement = TypedDict("RequestMeasurement", {
+    "id": uuid.UUID,
+    "started_at": datetime,
+    "elapsed": float,
+    "results": Dict[CodeType, Dict[int, LineTiming]],
+    "request_method": str,
+    "path_info": str,
+    "query_string": str,
+})
 
 
 class LineProfilerMiddleware(object):
@@ -52,7 +62,8 @@ class LineProfilerMiddleware(object):
         stream = stdout if stream is None else stream
         self.filters = filters
         self.accumulate = accumulate
-        self.results = OrderedDict()  # type: Dict[uuid.UUID, Dict[str, Any]]
+        # TODO: Use typing.OrderedDict
+        self.results = OrderedDict()  # type: Dict[uuid.UUID, RequestMeasurement]
         # Enable colorization only for stdout/stderr
         color = color and stream in {sys.stdout, sys.stderr}
         formatter = TextFormatter(color=color)
@@ -102,20 +113,21 @@ class LineProfilerMiddleware(object):
         start_response("200 OK", [("Content-Type", "text/html; charset=utf-8")])
         return [template.render(results=reversed(results)).encode("utf-8")]
 
-    def _serve_result_detail(self, start_response, result):
-        # type: (StartResponse, Dict[str, Any]) -> Iterable[bytes]
+    def _serve_result_detail(self, start_response, request_measurement):
+        # type: (StartResponse, RequestMeasurement) -> Iterable[bytes]
         template = self.template_env.get_template("detail.html")
         stream = StringIO()  # type: Any
         writer = SyncWriter(stream, TextFormatter(color=False))
         stats = LineProfilerStats(
-            [LineProfilerStat(c, t) for c, t in result["results"].items()],
+            [LineProfilerStat(c, t) for c, t in request_measurement["results"].items()],
             LineProfiler.get_unit())
         for f in self.filters:
             stats = stats.filter(f)
         writer.write(stats)
         start_response("200 OK", [("Content-Type", "text/html; charset=utf-8")])
         return [
-            template.render(result=result, stats=stream.getvalue()).encode("utf-8")
+            template.render(result=request_measurement,
+                            stats=stream.getvalue()).encode("utf-8")
         ]
 
     def _serve_result(self, env, start_response):
