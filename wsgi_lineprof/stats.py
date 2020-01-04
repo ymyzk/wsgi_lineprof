@@ -1,15 +1,15 @@
 from __future__ import absolute_import
 from types import CodeType
-from typing import Callable, Dict, Iterable, Union
+from typing import Callable, Iterable, Union
 
-from wsgi_lineprof.extensions import LineTiming
 from wsgi_lineprof.filters import BaseFilter
+from wsgi_lineprof.types import CodeTiming
 
 
 class LineProfilerStat(object):
     def __init__(self,
                  code,  # type: CodeType
-                 timings  # type: Dict[int, LineTiming]
+                 timings  # type: CodeTiming
                  ):
         # type: (...) -> None
         self.code = code

@@ -8,19 +8,16 @@ from six import StringIO
 from six.moves import reduce
 import sys
 import threading
-from types import CodeType
 from typing import Any, Dict, Iterable, Optional, Type, TYPE_CHECKING
 import uuid
 
 from jinja2 import Environment, PackageLoader
 from pytz import utc
-from typing_extensions import TypedDict
 
-from wsgi_lineprof.extensions import LineTiming
 from wsgi_lineprof.formatter import TextFormatter
 from wsgi_lineprof.profiler import LineProfiler
 from wsgi_lineprof.stats import FilterType, LineProfilerStats, LineProfilerStat
-from wsgi_lineprof.types import Stream
+from wsgi_lineprof.types import CodeTiming, Measurement, RequestMeasurement, Stream
 from wsgi_lineprof.writers import AsyncWriter, BaseWriter, SyncWriter
 
 
@@ -30,15 +27,6 @@ if TYPE_CHECKING:
 
 UUID_RE = re.compile('^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$',
                      re.I)
-RequestMeasurement = TypedDict("RequestMeasurement", {
-    "id": uuid.UUID,
-    "started_at": datetime,
-    "elapsed": float,
-    "results": Dict[CodeType, Dict[int, LineTiming]],
-    "request_method": str,
-    "path_info": str,
-    "query_string": str,
-})
 
 
 class LineProfilerMiddleware(object):
@@ -83,10 +71,11 @@ class LineProfilerMiddleware(object):
         self.template_env = Environment(
             loader=PackageLoader("wsgi_lineprof", "templates"), autoescape=True)
 
-    def _write_result_to_stream(self, result):
-        # type: (Dict[CodeType, Dict[int, LineTiming]]) -> None
-        stats = LineProfilerStats([LineProfilerStat(c, t) for c, t in result.items()],
-                                  self.profiler_class.get_unit())
+    def _write_result_to_stream(self, measurement):
+        # type: (Measurement) -> None
+        stats = LineProfilerStats(
+            [LineProfilerStat(c, t) for c, t in measurement.items()],
+            self.profiler_class.get_unit())
         for f in self.filters:
             stats = stats.filter(f)
         with self.writer_lock:
@@ -98,11 +87,11 @@ class LineProfilerMiddleware(object):
 
         This method must be registered by only one thread.
         """
-        result = reduce(
+        measurement = reduce(
             _merge_results,
             map(itemgetter("results"), self.results.values()),
-            {})  # type: Dict[CodeType, Dict[int, LineTiming]]
-        self._write_result_to_stream(result)
+            {})  # type: Measurement
+        self._write_result_to_stream(measurement)
 
     def _serve_result_index(self, start_response):
         # type: (StartResponse) -> Iterable[bytes]
@@ -186,7 +175,7 @@ class LineProfilerMiddleware(object):
 
 
 def _merge_timings(a, b):
-    # type: (Dict[int, LineTiming], Dict[int, LineTiming]) -> Dict[int, LineTiming]
+    # type: (CodeTiming, CodeTiming) -> CodeTiming
     for line, timing in b.items():
         if line in a:
             a[line] += timing
@@ -195,11 +184,8 @@ def _merge_timings(a, b):
     return a
 
 
-def _merge_results(
-        a,  # type: Dict[CodeType, Dict[int, LineTiming]]
-        b,  # type: Dict[CodeType, Dict[int, LineTiming]]
-):
-    # type: (...) -> Dict[CodeType, Dict[int, LineTiming]]
+def _merge_results(a, b):
+    # type: (Measurement, Measurement) -> Measurement
     for code, timings in b.items():
         if code in a:
             a[code] = _merge_timings(a[code], timings)
