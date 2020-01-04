@@ -28,6 +28,16 @@ class TestAsyncStreamWriter(object):
 
         formatter.format_stats.assert_called_once_with(stats, stream)
 
+    def test_write_when_none_is_given(self, mocker):
+        stream = mocker.Mock()
+        formatter = mocker.Mock()
+        writer = AsyncStreamWriter(stream, formatter)
+
+        writer.write(None)
+        writer._join()
+
+        formatter.format_stats.assert_not_called()
+
     def test_join_stops_thread(self, mocker):
         original_active_thread_count = threading.active_count()
         writer = AsyncStreamWriter(mocker.Mock(), mocker.Mock())
