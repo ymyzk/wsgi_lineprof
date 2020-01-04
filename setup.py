@@ -114,6 +114,7 @@ setup(
         ],
         "test:python_version>='3.5'": [
             "pytest>=5.0.0,<6.0.0",
+            "pytest-randomly",
         ],
     },
 
