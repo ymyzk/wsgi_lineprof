@@ -15,6 +15,7 @@ RequestMeasurement = TypedDict("RequestMeasurement", {
     "id": uuid.UUID,
     "started_at": datetime,
     "elapsed": float,
+    "unit": float,
     "results": Measurement,
     "request_method": str,
     "path_info": str,

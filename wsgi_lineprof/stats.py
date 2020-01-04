@@ -3,7 +3,7 @@ from types import CodeType
 from typing import Callable, Iterable, Union
 
 from wsgi_lineprof.filters import BaseFilter
-from wsgi_lineprof.types import CodeTiming
+from wsgi_lineprof.types import CodeTiming, Measurement, RequestMeasurement
 
 
 class LineProfilerStat(object):
@@ -44,6 +44,17 @@ class LineProfilerStats(object):
         # type: (Iterable[LineProfilerStat], float) -> None
         self.stats = stats
         self.unit = unit  # seconds/hit
+
+    @classmethod
+    def from_request_measurement(cls, request_measurement):
+        # type: (RequestMeasurement) -> LineProfilerStats
+        return cls.from_measurement_and_unit(
+            request_measurement["results"], request_measurement["unit"])
+
+    @classmethod
+    def from_measurement_and_unit(cls, measurement, unit):
+        # type: (Measurement, float) -> LineProfilerStats
+        return cls([LineProfilerStat(c, t) for c, t in measurement.items()], unit)
 
     def filter(self, f):
         # type: (FilterType) -> LineProfilerStats
