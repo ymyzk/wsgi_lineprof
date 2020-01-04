@@ -18,7 +18,7 @@ from wsgi_lineprof.formatter import TextFormatter
 from wsgi_lineprof.profiler import LineProfiler
 from wsgi_lineprof.stats import FilterType, LineProfilerStats
 from wsgi_lineprof.types import CodeTiming, Measurement, RequestMeasurement, Stream
-from wsgi_lineprof.writers import AsyncWriter, BaseWriter, SyncWriter
+from wsgi_lineprof.writers import AsyncStreamWriter, BaseStreamWriter, SyncStreamWriter
 
 
 if TYPE_CHECKING:
@@ -59,9 +59,9 @@ class LineProfilerMiddleware(object):
         self.writer_lock = threading.Lock()
         # Cannot use AsyncWriter with atexit
         if async_stream and not accumulate:
-            self.writer = AsyncWriter(stream, formatter)  # type: BaseWriter
+            self.writer = AsyncStreamWriter(stream, formatter)  # type: BaseStreamWriter
         else:
-            self.writer = SyncWriter(stream, formatter)
+            self.writer = SyncStreamWriter(stream, formatter)
         if accumulate:
             atexit.register(self._write_result_at_exit)
 
@@ -105,7 +105,7 @@ class LineProfilerMiddleware(object):
         # type: (StartResponse, RequestMeasurement) -> Iterable[bytes]
         template = self.template_env.get_template("detail.html")
         stream = StringIO()  # type: Any
-        writer = SyncWriter(stream, TextFormatter(color=False))
+        writer = SyncStreamWriter(stream, TextFormatter(color=False))
         stats = LineProfilerStats.from_request_measurement(request_measurement)
         for f in self.filters:
             stats = stats.filter(f)

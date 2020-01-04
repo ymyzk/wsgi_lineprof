@@ -104,6 +104,7 @@ setup(
             "codecov>=2.0.15,<3.0.0",
             "flake8>=3.0.0,<4.0.0",
             "pytest-cov>=2.6.0,<3.0.0",
+            "pytest-mock>=1.11",
         ],
         "test:python_version>='3.0'": [
             "mypy>=0.650,<1.0",
