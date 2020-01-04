@@ -10,15 +10,15 @@ from wsgi_lineprof.types import Stream
 
 
 @add_metaclass(ABCMeta)
-class BaseWriter(object):
-    @abstractmethod
+class BaseStreamWriter(object):
     def __init__(self,
                  stream,  # type: Stream
                  formatter,  # type: BaseFormatter
                  *kwargs  # type: Any
                  ):
         # type: (...) -> None
-        return
+        self.stream = stream
+        self.formatter = formatter
 
     @abstractmethod
     def write(self, stats):
@@ -26,28 +26,19 @@ class BaseWriter(object):
         return
 
 
-class SyncWriter(BaseWriter):
-    def __init__(self,
-                 stream,  # type: Stream
-                 formatter  # type: BaseFormatter
-                 ):
-        # type: (...) -> None
-        self.stream = stream
-        self.formatter = formatter
-
+class SyncStreamWriter(BaseStreamWriter):
     def write(self, stats):
         # type: (LineProfilerStats) -> None
         self.formatter.format_stats(stats, self.stream)
 
 
-class AsyncWriter(BaseWriter):
+class AsyncStreamWriter(BaseStreamWriter):
     def __init__(self,
                  stream,  # type: Stream
                  formatter  # type: BaseFormatter
                  ):
         # type: (...) -> None
-        self.stream = stream
-        self.formatter = formatter
+        super(AsyncStreamWriter, self).__init__(stream, formatter)
         self.queue = Queue()  # type: Queue[LineProfilerStats]
         self.writer_thread = Thread(target=self._write)
         self.writer_thread.setDaemon(True)
