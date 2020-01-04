@@ -16,7 +16,7 @@ from pytz import utc
 
 from wsgi_lineprof.formatter import TextFormatter
 from wsgi_lineprof.profiler import LineProfiler
-from wsgi_lineprof.stats import FilterType, LineProfilerStats, LineProfilerStat
+from wsgi_lineprof.stats import FilterType, LineProfilerStats
 from wsgi_lineprof.types import CodeTiming, Measurement, RequestMeasurement, Stream
 from wsgi_lineprof.writers import AsyncWriter, BaseWriter, SyncWriter
 
@@ -73,9 +73,8 @@ class LineProfilerMiddleware(object):
 
     def _write_result_to_stream(self, measurement):
         # type: (Measurement) -> None
-        stats = LineProfilerStats(
-            [LineProfilerStat(c, t) for c, t in measurement.items()],
-            self.profiler_class.get_unit())
+        stats = LineProfilerStats.from_measurement_and_unit(
+            measurement, self.profiler_class.get_unit())
         for f in self.filters:
             stats = stats.filter(f)
         with self.writer_lock:
@@ -107,9 +106,7 @@ class LineProfilerMiddleware(object):
         template = self.template_env.get_template("detail.html")
         stream = StringIO()  # type: Any
         writer = SyncWriter(stream, TextFormatter(color=False))
-        stats = LineProfilerStats(
-            [LineProfilerStat(c, t) for c, t in request_measurement["results"].items()],
-            LineProfiler.get_unit())
+        stats = LineProfilerStats.from_request_measurement(request_measurement)
         for f in self.filters:
             stats = stats.filter(f)
         writer.write(stats)
@@ -155,13 +152,15 @@ class LineProfilerMiddleware(object):
             response = self.app(env, start_response)
         finally:
             profiler.disable()
-            elapsed = (profiler.get_timer() - relative_start) * profiler.get_unit()
+            unit = profiler.get_unit()
+            elapsed = (profiler.get_timer() - relative_start) * unit
 
         request_id = uuid.uuid4()
         self.results[request_id] = {
             "id": request_id,
             "started_at": started_at,
             "elapsed": elapsed,
+            "unit": unit,
             "results": profiler.results,
             "request_method": env["REQUEST_METHOD"],
             "path_info": env["PATH_INFO"],
