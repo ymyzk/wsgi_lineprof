@@ -78,7 +78,7 @@ class TextFormatter(BaseFormatter):
             else:
                 if stat.total_time == 0:
                     # TODO: Consider a better way to handle when total_time is 0
-                    percent = 0
+                    percent = 0.0
                 else:
                     percent = 100 * timing.total_time / stat.total_time
                 d[i] = {
