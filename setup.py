@@ -26,7 +26,7 @@ except ImportError:
 setup(
     name="wsgi_lineprof",
 
-    version="0.11.0",
+    version="0.12.0",
 
     description="WSGI middleware for line-by-line profiling",
     long_description=long_description,

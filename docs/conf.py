@@ -18,11 +18,11 @@
 # -- Project information -----------------------------------------------------
 
 project = 'wsgi_lineprof'
-copyright = '2019, Yusuke Miyazaki'
+copyright = '2020, Yusuke Miyazaki'
 author = 'Yusuke Miyazaki'
 
 # The full version, including alpha/beta/rc tags
-release = '0.11.0'
+release = '0.12.0'
 
 
 # -- General configuration ---------------------------------------------------
