@@ -55,6 +55,7 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: Implementation :: CPython",
         "Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware",
         "Topic :: Software Development",
@@ -107,7 +108,7 @@ setup(
             "pytest-mock>=1.11",
         ],
         "test:python_version>='3.0'": [
-            "mypy>=0.650,<1.0",
+            "mypy>=0.800,<1.0",
         ],
         "test:python_version<'3.5'": [
             "pytest>=4.0.0,<5.0.0",
