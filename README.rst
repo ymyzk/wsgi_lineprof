@@ -9,9 +9,6 @@ wsgi_lineprof
 .. image:: https://github.com/ymyzk/wsgi_lineprof/workflows/Tests/badge.svg
    :target: https://github.com/ymyzk/wsgi_lineprof/actions?workflow=Tests
    :alt: GitHub Actions (Tests)
-.. image:: https://travis-ci.org/ymyzk/wsgi_lineprof.svg?branch=master
-   :target: https://travis-ci.org/ymyzk/wsgi_lineprof
-   :alt: Build Status
 .. image:: https://readthedocs.org/projects/wsgi_lineprof/badge/?version=latest
    :target: https://wsgi_lineprof.readthedocs.io/
    :alt: Documentation Status
