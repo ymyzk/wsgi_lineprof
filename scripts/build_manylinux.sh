@@ -4,7 +4,7 @@ set -e -x
 cd $(dirname $0)
 cd ..
 
-for PYBIN in /opt/python/*/bin; do
+for PYBIN in /opt/python/cp3*/bin; do
   rm -rf build
   "${PYBIN}/python" setup.py bdist_wheel
 done
