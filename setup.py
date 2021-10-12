@@ -89,7 +89,7 @@ setup(
     extras_require={
         ":python_version < '3.5'": ["typing"],
         "benchmark": [
-            "asv>=0.3.1,<0.4",
+            "asv>=0.4,<0.5",
             "virtualenv",
         ],
         "benchmark-deps": [
