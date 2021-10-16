@@ -9,7 +9,7 @@ jobs:
       max-parallel: 6
       matrix:
         platform: [ubuntu-latest, macos-latest, windows-2019]
-        python-version: [2.7, 3.5, 3.6, 3.7, 3.8, 3.9]
+        python-version: [3.5, 3.6, 3.7, 3.8, 3.9]
 
     steps:
     - uses: actions/checkout@v1
@@ -17,11 +17,6 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
-    # Install Microsoft Visual C++ Compiler for Python 2.7
-    # http://aka.ms/vcpython27
-    - name: Install MSVC++ for Python 2.7
-      if: startsWith(matrix.platform, 'windows-') && matrix.python-version == 2.7
-      run: choco install vcpython27 -y
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip setuptools wheel

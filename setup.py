@@ -48,9 +48,8 @@ setup(
         "Operating System :: Unix",
         "Programming Language :: C",
         "Programming Language :: Cython",
-        "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3 :: Only",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
@@ -78,6 +77,8 @@ setup(
                   sources=[source, "extensions/timer.c"])
     ]),
 
+    python_requires=">=3.5",
+
     install_requires=[
         "colorama>=0.4.1",
         "Jinja2",
@@ -87,7 +88,6 @@ setup(
     ],
 
     extras_require={
-        ":python_version < '3.5'": ["typing"],
         "benchmark": [
             "asv>=0.4,<0.5",
             "virtualenv",
@@ -104,17 +104,10 @@ setup(
         "test": [
             "codecov>=2.0.15,<3.0.0",
             "flake8>=3.0.0,<4.0.0",
+            "mypy>=0.800,<1.0",
+            "pytest>=5.0.0,<6.0.0",
             "pytest-cov>=2.6.0,<3.0.0",
             "pytest-mock>=1.11",
-        ],
-        "test:python_version>='3.0'": [
-            "mypy>=0.800,<1.0",
-        ],
-        "test:python_version<'3.5'": [
-            "pytest>=4.0.0,<5.0.0",
-        ],
-        "test:python_version>='3.5'": [
-            "pytest>=5.0.0,<6.0.0",
             "pytest-randomly",
         ],
     },

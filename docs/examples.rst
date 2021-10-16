@@ -1,27 +1,9 @@
 Examples
 ========
 
-wsgiref (Python 2)
-------------------
-An example of using wsgi_lineprof with `wsgiref for Python 2 <https://docs.python.org/2.7/library/wsgiref.html>`_.
-
-.. code-block:: python
-
-   from wsgiref.simple_server import demo_app, make_server
-
-   from wsgi_lineprof.middleware import LineProfilerMiddleware
-
-
-   app = LineProfilerMiddleware(demo_app)
-
-   if __name__ == "__main__":
-       httpd = make_server('', 8000, app)
-       print("Serving HTTP on port 8000...")
-       httpd.serve_forever()
-
-wsgiref (Python 3)
-------------------
-An example of using wsgi_lineprof with `wsgiref for Python 3 <https://docs.python.org/3/library/wsgiref.html>`_.
+wsgiref
+-------
+An example of using wsgi_lineprof with `wsgiref <https://docs.python.org/3/library/wsgiref.html>`_.
 
 .. code-block:: python
 
