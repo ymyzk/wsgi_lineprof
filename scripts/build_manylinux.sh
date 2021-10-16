@@ -1,16 +1,17 @@
 #!/bin/bash
-set -e -x
+set -ex
 
-cd $(dirname $0)
-cd ..
+cd "$(dirname $0)/.."
 
-for PYBIN in /opt/python/cp3*/bin; do
+# Avoid using PyPy under /opt/python/
+for PYBIN in /opt/python/cp*/bin; do
   rm -rf build
-  "${PYBIN}/python" setup.py bdist_wheel
+  "${PYBIN}/python" -m build --wheel
 done
 
 cd dist
 for whl in *.whl; do
-    auditwheel repair "$whl"
-    rm "$whl"
+  # Writes to dist/wheelhouse/
+  auditwheel repair "$whl"
+  rm "$whl"
 done
