@@ -103,9 +103,9 @@ setup(
         ],
         "test": [
             "codecov>=2.0.15,<3.0.0",
-            "flake8>=3.0.0,<4.0.0",
+            "flake8>=4,<5",
             "mypy>=0.800,<1.0",
-            "pytest>=5.0.0,<6.0.0",
+            "pytest>=6.2.5,<7",
             "pytest-cov>=2.6.0,<3.0.0",
             "pytest-mock>=1.11",
             "pytest-randomly",
