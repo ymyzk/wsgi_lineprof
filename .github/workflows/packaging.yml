@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Build manylinux1/manylinux2010 wheel
+    - name: Build manylinux wheel
       run: |
         docker info
         ./scripts/build_manylinux_wrapper.sh
