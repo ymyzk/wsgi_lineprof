@@ -3,7 +3,7 @@ Quickstart
 
 Requirements
 ------------
-* CPython 3.5/3.6/3.7/3.8/3.9
+* CPython 3.6/3.7/3.8/3.9
 * WSGI application
 
 Installation
