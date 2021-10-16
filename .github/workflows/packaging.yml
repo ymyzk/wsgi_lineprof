@@ -57,14 +57,8 @@ jobs:
     - name: delocate for macOS wheels
       run: |
         python -m pip install --upgrade delocate
-        delocate-addplat --rm-orig \
-          -p macosx_10_15_x86_64 \
-          -p macosx_10_14_x86_64 \
-          -p macosx_10_13_x86_64 \
-          -p macosx_10_12_x86_64 \
-          -p macosx_10_11_x86_64 \
-          -p macosx_10_10_x86_64 \
-          dist/*.whl
+        delocate-listdeps --all --depending dist/*.whl
+        delocate-addplat --rm-orig -p macosx_10_10_x86_64 dist/*.whl
     - uses: actions/upload-artifact@master
       with:
         name: wsgi_lineprof_dist
