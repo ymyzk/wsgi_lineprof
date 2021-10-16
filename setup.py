@@ -109,6 +109,8 @@ setup(
             "pytest-cov>=2.6.0,<3.0.0",
             "pytest-mock>=1.11",
             "pytest-randomly",
+            "types-pytz",
+            "types-six",
         ],
     },
 
