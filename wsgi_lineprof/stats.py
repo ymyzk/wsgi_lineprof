@@ -5,7 +5,7 @@ from wsgi_lineprof.filters import BaseFilter
 from wsgi_lineprof.types import CodeTiming, Measurement, RequestMeasurement
 
 
-class LineProfilerStat(object):
+class LineProfilerStat:
     def __init__(
         self,
         code: CodeType,
@@ -35,7 +35,7 @@ CallableFilterType = Callable[[Iterable[LineProfilerStat]],
 FilterType = Union[CallableFilterType, BaseFilter]
 
 
-class LineProfilerStats(object):
+class LineProfilerStats:
     def __init__(self, stats: Iterable[LineProfilerStat], unit: float) -> None:
         self.stats = stats
         self.unit = unit  # seconds/hit

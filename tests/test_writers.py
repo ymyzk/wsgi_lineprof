@@ -4,7 +4,7 @@ from wsgi_lineprof.stats import LineProfilerStats
 from wsgi_lineprof.writers import AsyncStreamWriter, SyncStreamWriter
 
 
-class TestSyncStreamWriter(object):
+class TestSyncStreamWriter:
     def test_write_calls_format_stats(self, mocker):
         stream = mocker.Mock()
         formatter = mocker.Mock()
@@ -16,7 +16,7 @@ class TestSyncStreamWriter(object):
         formatter.format_stats.assert_called_once_with(stats, stream)
 
 
-class TestAsyncStreamWriter(object):
+class TestAsyncStreamWriter:
     def test_write_calls_format_stats(self, mocker):
         stream = mocker.Mock()
         formatter = mocker.Mock()

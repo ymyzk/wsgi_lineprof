@@ -3,7 +3,7 @@ import time
 from wsgi_lineprof.profiler import LineProfiler
 
 
-class TestLineProfiler(object):
+class TestLineProfiler:
     def test_get_timer(self):
         timer = LineProfiler.get_timer()
         assert timer >= 0

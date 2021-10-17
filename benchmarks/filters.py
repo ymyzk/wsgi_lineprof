@@ -13,7 +13,7 @@ from .apps import fib_app, jinja_app
 from .utils import StringNoopIO
 
 
-class BaseTest(object):
+class BaseTest:
     param_names = ["filters"]
     params = ["base", "no_filter", "filter"]
 

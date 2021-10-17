@@ -28,7 +28,7 @@ REQUEST_1 = {
 }
 
 
-class TestResultsApp(object):
+class TestResultsApp:
     @pytest.fixture
     def results(self):
         return OrderedDict()

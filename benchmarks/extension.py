@@ -19,7 +19,7 @@ class NoopLineProfiler(LineProfiler):
         self._enable_noop()
 
 
-class Middleware(object):
+class Middleware:
     def __init__(self, app, profiler_class):
         self.app = app
         self.profiler_class = profiler_class
@@ -34,7 +34,7 @@ class Middleware(object):
         return response
 
 
-class BaseTest(object):
+class BaseTest:
     param_names = ["profiler"]
     params = ["base", "noop", "enabled"]
 

@@ -11,7 +11,7 @@ from wsgi_lineprof.stats import LineProfilerStat, LineProfilerStats
 from wsgi_lineprof.types import Stream
 
 
-class BaseFormatter(object, metaclass=ABCMeta):
+class BaseFormatter(metaclass=ABCMeta):
     def __init__(self, *kwargs: Any) -> None:
         return
 

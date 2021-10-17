@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from wsgi_lineprof.stats import LineProfilerStat
 
 
-class BaseFilter(object, metaclass=ABCMeta):
+class BaseFilter(metaclass=ABCMeta):
     @abstractmethod
     def filter(
         self, stats: Iterable["LineProfilerStat"]

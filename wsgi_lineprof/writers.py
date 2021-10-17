@@ -8,7 +8,7 @@ from wsgi_lineprof.stats import LineProfilerStats
 from wsgi_lineprof.types import Stream
 
 
-class BaseStreamWriter(object, metaclass=ABCMeta):
+class BaseStreamWriter(metaclass=ABCMeta):
     def __init__(
         self,
         stream: Stream,

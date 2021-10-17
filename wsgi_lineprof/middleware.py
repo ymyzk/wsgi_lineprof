@@ -22,7 +22,7 @@ if TYPE_CHECKING:
     from wsgiref.types import StartResponse, WSGIApplication, WSGIEnvironment
 
 
-class LineProfilerMiddleware(object):
+class LineProfilerMiddleware:
     def __init__(
         self,
         app: "WSGIApplication",

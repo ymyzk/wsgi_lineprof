@@ -18,7 +18,7 @@ UUID_RE = re.compile('^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{
                      re.I)
 
 
-class ResultsApp(object):
+class ResultsApp:
     """WSGI application to show the profiling results"""
 
     def __init__(

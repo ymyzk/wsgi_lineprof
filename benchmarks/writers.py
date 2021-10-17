@@ -15,7 +15,7 @@ from .apps import demo_app, fib_app, jinja_app, re_app
 from .utils import StringNoopIO
 
 
-class BaseTest(object):
+class BaseTest:
     param_names = ["writer"]
     params = ["base", "sync", "async"]
 
