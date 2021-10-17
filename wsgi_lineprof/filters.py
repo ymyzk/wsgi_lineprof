@@ -4,16 +4,12 @@ from operator import attrgetter
 import re
 from typing import Iterable, TYPE_CHECKING
 
-from six import add_metaclass
-from six.moves import filter
-
 
 if TYPE_CHECKING:
     from wsgi_lineprof.stats import LineProfilerStat
 
 
-@add_metaclass(ABCMeta)
-class BaseFilter(object):
+class BaseFilter(object, metaclass=ABCMeta):
     @abstractmethod
     def filter(
         self, stats: Iterable["LineProfilerStat"]

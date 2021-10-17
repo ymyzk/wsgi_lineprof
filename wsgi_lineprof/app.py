@@ -1,6 +1,6 @@
 from __future__ import absolute_import
+from io import StringIO
 import re
-from six import StringIO
 from typing import Any, Dict, Iterable, TYPE_CHECKING
 from uuid import UUID
 

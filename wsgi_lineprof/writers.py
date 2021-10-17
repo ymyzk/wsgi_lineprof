@@ -1,6 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from six import add_metaclass
-from six.moves.queue import Queue
+from queue import Queue
 from threading import Thread
 from typing import Any, Optional
 
@@ -9,8 +8,7 @@ from wsgi_lineprof.stats import LineProfilerStats
 from wsgi_lineprof.types import Stream
 
 
-@add_metaclass(ABCMeta)
-class BaseStreamWriter(object):
+class BaseStreamWriter(object, metaclass=ABCMeta):
     def __init__(
         self,
         stream: Stream,

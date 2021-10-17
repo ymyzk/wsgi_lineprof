@@ -2,8 +2,8 @@ from __future__ import absolute_import
 import atexit
 from collections import OrderedDict
 from datetime import datetime
+from functools import reduce
 from operator import itemgetter
-from six.moves import reduce
 import sys
 import threading
 from typing import Any, Dict, Iterable, Optional, Type, TYPE_CHECKING

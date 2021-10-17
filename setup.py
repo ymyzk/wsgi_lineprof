@@ -83,7 +83,6 @@ setup(
         "colorama>=0.4.1",
         "Jinja2",
         "pytz",
-        "six>=1.10.0",
         "typing-extensions",
     ],
 
@@ -110,7 +109,6 @@ setup(
             "pytest-mock>=1.11",
             "pytest-randomly",
             "types-pytz",
-            "types-six",
         ],
     },
 

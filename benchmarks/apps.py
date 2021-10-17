@@ -1,11 +1,11 @@
 from __future__ import print_function
+from io import StringIO
 import re
 import sys
 from wsgiref.simple_server import make_server
 from wsgiref.util import setup_testing_defaults
 
 import jinja2
-from six import StringIO
 
 from wsgi_lineprof.middleware import LineProfilerMiddleware
 

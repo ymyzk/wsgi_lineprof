@@ -4,7 +4,6 @@ import inspect
 import itertools
 import linecache
 from os import path
-from six import add_metaclass
 from typing import Any, cast, Dict, Sequence
 
 import colorama
@@ -13,8 +12,7 @@ from wsgi_lineprof.stats import LineProfilerStat, LineProfilerStats
 from wsgi_lineprof.types import Stream
 
 
-@add_metaclass(ABCMeta)
-class BaseFormatter(object):
+class BaseFormatter(object, metaclass=ABCMeta):
     def __init__(self, *kwargs: Any) -> None:
         return
 
