@@ -14,8 +14,9 @@ if TYPE_CHECKING:
     from wsgiref.types import StartResponse, WSGIEnvironment
 
 
-UUID_RE = re.compile('^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$',
-                     re.I)
+UUID_RE = re.compile(
+    "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$", re.I
+)
 
 
 class ResultsApp:
@@ -34,7 +35,8 @@ class ResultsApp:
         self.results = results
         self.filters = filters
         self.template_env = Environment(
-            loader=PackageLoader("wsgi_lineprof", "templates"), autoescape=True)
+            loader=PackageLoader("wsgi_lineprof", "templates"), autoescape=True
+        )
 
     def __call__(
         self, env: "WSGIEnvironment", start_response: "StartResponse"
@@ -42,7 +44,7 @@ class ResultsApp:
         if not self.should_handle_request(env):
             return _return_404(start_response)
 
-        path = env["PATH_INFO"][len(self.endpoint):]
+        path = env["PATH_INFO"][len(self.endpoint) :]
         if path == "":
             return self._handle_index(start_response)
         elif UUID_RE.match(path):
@@ -78,8 +80,9 @@ class ResultsApp:
         writer.write(stats)
         start_response("200 OK", [("Content-Type", "text/html; charset=utf-8")])
         return [
-            template.render(result=request_measurement,
-                            stats=stream.getvalue()).encode("utf-8")
+            template.render(result=request_measurement, stats=stream.getvalue()).encode(
+                "utf-8"
+            )
         ]
 
 

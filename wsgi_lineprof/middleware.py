@@ -66,7 +66,8 @@ class LineProfilerMiddleware:
 
     def _write_result_to_stream(self, measurement: Measurement) -> None:
         stats = LineProfilerStats.from_measurement_and_unit(
-            measurement, self.profiler_class.get_unit())
+            measurement, self.profiler_class.get_unit()
+        )
         for f in self.filters:
             stats = stats.filter(f)
         with self.writer_lock:

@@ -30,8 +30,7 @@ class LineProfilerStat:
         return self.code.co_firstlineno
 
 
-CallableFilterType = Callable[[Iterable[LineProfilerStat]],
-                              Iterable[LineProfilerStat]]
+CallableFilterType = Callable[[Iterable[LineProfilerStat]], Iterable[LineProfilerStat]]
 FilterType = Union[CallableFilterType, BaseFilter]
 
 

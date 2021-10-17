@@ -45,8 +45,9 @@ class TestResultsApp:
         app = ResultsApp(endpoint="/wsgi_lineprof", results=results, filters=[])
         assert app.endpoint == "/wsgi_lineprof/"
 
-    @pytest.mark.parametrize("endpoint,path_info,expected",
-                             SHOULD_HANDLE_REQUEST_TEST_CASES)
+    @pytest.mark.parametrize(
+        "endpoint,path_info,expected", SHOULD_HANDLE_REQUEST_TEST_CASES
+    )
     def test_should_handle_request(self, app, endpoint, path_info, expected):
         app.endpoint = endpoint
         env = {"PATH_INFO": path_info}
@@ -64,7 +65,8 @@ class TestResultsApp:
         response = b"".join(app(env, start_response)).decode("utf-8")
 
         start_response.assert_called_once_with(
-            "200 OK", [("Content-Type", "text/html; charset=utf-8")])
+            "200 OK", [("Content-Type", "text/html; charset=utf-8")]
+        )
         assert len(response) > 0
         assert "GET" not in response
 
@@ -75,7 +77,8 @@ class TestResultsApp:
         response = b"".join(app(env, start_response)).decode("utf-8")
 
         start_response.assert_called_once_with(
-            "200 OK", [("Content-Type", "text/html; charset=utf-8")])
+            "200 OK", [("Content-Type", "text/html; charset=utf-8")]
+        )
         assert len(response) > 0
         assert "GET" in response
         assert "/fib" in response
@@ -88,7 +91,8 @@ class TestResultsApp:
         response = b"".join(app(env, start_response)).decode("utf-8")
 
         start_response.assert_called_once_with(
-            "200 OK", [("Content-Type", "text/html; charset=utf-8")])
+            "200 OK", [("Content-Type", "text/html; charset=utf-8")]
+        )
         assert len(response) > 0
         assert "GET" in response
         assert "/fib" in response

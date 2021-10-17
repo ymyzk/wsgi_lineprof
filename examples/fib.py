@@ -15,8 +15,8 @@ def fib(n):
 def app(environ, start_response):
     setup_testing_defaults(environ)
 
-    status = '200 OK'
-    headers = [('Content-type', 'text/plain; charset=utf-8')]
+    status = "200 OK"
+    headers = [("Content-type", "text/plain; charset=utf-8")]
 
     start_response(status, headers)
 
@@ -34,6 +34,6 @@ if __name__ == "__main__":
     ]
     app = LineProfilerMiddleware(app, filters=filters)
 
-    server = make_server('127.0.0.1', 8000, app)
+    server = make_server("127.0.0.1", 8000, app)
     print("Serving on 127.0.0.1:8000...")
     server.serve_forever()

@@ -101,6 +101,7 @@ setup(
             "sphinx_rtd_theme>=0.4.3,<0.5",
         ],
         "test": [
+            "black",
             "codecov>=2.0.15,<3.0.0",
             "flake8>=4,<5",
             "mypy>=0.800,<1.0",

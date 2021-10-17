@@ -43,11 +43,10 @@ class TextFormatter(BaseFormatter):
         linecache.clearcache()
         lines: Sequence[str] = linecache.getlines(stat.filename)
         if stat.name != "<module>":
-            lines = inspect.getblock(lines[stat.firstlineno - 1:])
+            lines = inspect.getblock(lines[stat.firstlineno - 1 :])
 
-        template = '%6s %9s %12s %8s %7s  %-s'
-        header = template % ("Line", "Hits", "Time", "Per Hit", "% Time",
-                             "Code")
+        template = "%6s %9s %12s %8s %7s  %-s"
+        header = template % ("Line", "Hits", "Time", "Per Hit", "% Time", "Code")
         stream.write(header)
         stream.write("\n")
         stream.write("=" * len(header))
@@ -74,8 +73,8 @@ class TextFormatter(BaseFormatter):
                 d[i] = {
                     "hits": timing.n_hits,
                     "time": timing.total_time,
-                    "per_hit": '%.1f' % (timing.total_time / timing.n_hits),
-                    "percent": '%.1f' % percent,
+                    "per_hit": "%.1f" % (timing.total_time / timing.n_hits),
+                    "percent": "%.1f" % percent,
                     "code": code,
                     "style": self.style_for_percent(percent),
                 }
@@ -85,8 +84,10 @@ class TextFormatter(BaseFormatter):
             r = d[i]
             if self.color:
                 stream.write(r["style"])
-            stream.write(template % (i, r["hits"], r["time"], r["per_hit"],
-                                     r["percent"], r["code"]))
+            stream.write(
+                template
+                % (i, r["hits"], r["time"], r["per_hit"], r["percent"], r["code"])
+            )
         if self.color:
             stream.write(colorama.Style.RESET_ALL)
             colorama.deinit()
