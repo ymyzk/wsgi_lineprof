@@ -22,8 +22,12 @@ UUID_RE = re.compile('^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{
 class ResultsApp(object):
     """WSGI application to show the profiling results"""
 
-    def __init__(self, endpoint, results, filters):
-        # type: (str, Dict[UUID, RequestMeasurement], Iterable[FilterType]) -> None
+    def __init__(
+        self,
+        endpoint: str,
+        results: Dict[UUID, RequestMeasurement],
+        filters: Iterable[FilterType],
+    ) -> None:
         assert endpoint.startswith("/")
         if not endpoint.endswith("/"):
             endpoint += "/"
@@ -33,8 +37,9 @@ class ResultsApp(object):
         self.template_env = Environment(
             loader=PackageLoader("wsgi_lineprof", "templates"), autoescape=True)
 
-    def __call__(self, env, start_response):
-        # type: (WSGIEnvironment, StartResponse) -> Iterable[bytes]
+    def __call__(
+        self, env: "WSGIEnvironment", start_response: "StartResponse"
+    ) -> Iterable[bytes]:
         if not self.should_handle_request(env):
             return _return_404(start_response)
 
@@ -46,28 +51,27 @@ class ResultsApp(object):
         else:
             return _return_404(start_response)
 
-    def should_handle_request(self, env):
-        # type: (WSGIEnvironment) -> bool
+    def should_handle_request(self, env: "WSGIEnvironment") -> bool:
         """Returns true only if this app should handle the request"""
         return bool(env["PATH_INFO"].startswith(self.endpoint))
 
-    def _handle_index(self, start_response):
-        # type: (StartResponse) -> Iterable[bytes]
+    def _handle_index(self, start_response: "StartResponse") -> Iterable[bytes]:
         template = self.template_env.get_template("index.html")
         # To suppress the following mypy error on Python 3:
         # error: No overload variant of "reversed" matches argument
-        results = self.results.values()  # type: Any
+        results: Any = self.results.values()
         start_response("200 OK", [("Content-Type", "text/html; charset=utf-8")])
         return [template.render(results=reversed(results)).encode("utf-8")]
 
-    def _handle_detail(self, start_response, request_id):
-        # type: (StartResponse, UUID) -> Iterable[bytes]
+    def _handle_detail(
+        self, start_response: "StartResponse", request_id: UUID
+    ) -> Iterable[bytes]:
         request_measurement = self.results.get(request_id)
         if request_measurement is None:
             return _return_404(start_response)
 
         template = self.template_env.get_template("detail.html")
-        stream = StringIO()  # type: Any
+        stream: Any = StringIO()
         writer = SyncStreamWriter(stream, TextFormatter(color=False))
         stats = LineProfilerStats.from_request_measurement(request_measurement)
         for f in self.filters:
@@ -80,7 +84,6 @@ class ResultsApp(object):
         ]
 
 
-def _return_404(start_response):
-    # type: (StartResponse) -> Iterable[bytes]
+def _return_404(start_response: "StartResponse") -> Iterable[bytes]:
     start_response("404 Not Found", [])
     return []

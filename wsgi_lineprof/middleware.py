@@ -24,28 +24,28 @@ if TYPE_CHECKING:
 
 
 class LineProfilerMiddleware(object):
-    def __init__(self,
-                 app,  # type: WSGIApplication
-                 stream=None,  # type: Optional[Stream]
-                 filters=tuple(),  # type: Iterable[FilterType]
-                 async_stream=False,  # type: bool
-                 accumulate=False,  # type: bool
-                 color=True,  # type: bool
-                 profiler_class=LineProfiler,  # type: Type[LineProfiler]
-                 endpoint="/wsgi_lineprof/",  # type: str
-                 ):
-        # type: (...) -> None
+    def __init__(
+        self,
+        app: "WSGIApplication",
+        stream: Optional[Stream] = None,
+        filters: Iterable[FilterType] = tuple(),
+        async_stream: bool = False,
+        accumulate: bool = False,
+        color: bool = True,
+        profiler_class: Type[LineProfiler] = LineProfiler,
+        endpoint: str = "/wsgi_lineprof/",
+    ) -> None:
         self.app = app
         self.profiler_class = profiler_class
         # A hack to suppress unexpected mypy error on Python 2
         # error: Incompatible types in assignment
         # (expression has type "object", variable has type "TextIO")
-        stdout = sys.stdout  # type: Any
+        stdout: Any = sys.stdout
         stream = stdout if stream is None else stream
         self.filters = filters
         self.accumulate = accumulate
         # TODO: Use typing.OrderedDict
-        self.results = OrderedDict()  # type: Dict[uuid.UUID, RequestMeasurement]
+        self.results: Dict[uuid.UUID, RequestMeasurement] = OrderedDict()
         # Enable colorization only for stdout/stderr
         color = color and stream in {sys.stdout, sys.stderr}
         formatter = TextFormatter(color=color)
@@ -53,7 +53,7 @@ class LineProfilerMiddleware(object):
         self.writer_lock = threading.Lock()
         # Cannot use AsyncWriter with atexit
         if async_stream and not accumulate:
-            self.writer = AsyncStreamWriter(stream, formatter)  # type: BaseStreamWriter
+            self.writer: BaseStreamWriter = AsyncStreamWriter(stream, formatter)
         else:
             self.writer = SyncStreamWriter(stream, formatter)
         if accumulate:
@@ -65,8 +65,7 @@ class LineProfilerMiddleware(object):
             filters=self.filters,
         )
 
-    def _write_result_to_stream(self, measurement):
-        # type: (Measurement) -> None
+    def _write_result_to_stream(self, measurement: Measurement) -> None:
         stats = LineProfilerStats.from_measurement_and_unit(
             measurement, self.profiler_class.get_unit())
         for f in self.filters:
@@ -74,20 +73,19 @@ class LineProfilerMiddleware(object):
         with self.writer_lock:
             self.writer.write(stats)
 
-    def _write_result_at_exit(self):
-        # type: () -> None
+    def _write_result_at_exit(self) -> None:
         """Write profiling results to the stream when exiting
 
         This method must be registered by only one thread.
         """
-        measurement = reduce(
-            _merge_results,
-            map(itemgetter("results"), self.results.values()),
-            {})  # type: Measurement
+        measurement: Measurement = reduce(
+            _merge_results, map(itemgetter("results"), self.results.values()), {}
+        )
         self._write_result_to_stream(measurement)
 
-    def __call__(self, env, start_response):
-        # type: (WSGIEnvironment, StartResponse) -> Iterable[bytes]
+    def __call__(
+        self, env: "WSGIEnvironment", start_response: "StartResponse"
+    ) -> Iterable[bytes]:
         """Wrap an WSGI app with profiler
 
         Note that this thread may be called by multiple different threads.
@@ -130,8 +128,7 @@ class LineProfilerMiddleware(object):
         return response
 
 
-def _merge_timings(a, b):
-    # type: (CodeTiming, CodeTiming) -> CodeTiming
+def _merge_timings(a: CodeTiming, b: CodeTiming) -> CodeTiming:
     for line, timing in b.items():
         if line in a:
             a[line] += timing
@@ -140,8 +137,7 @@ def _merge_timings(a, b):
     return a
 
 
-def _merge_results(a, b):
-    # type: (Measurement, Measurement) -> Measurement
+def _merge_results(a: Measurement, b: Measurement) -> Measurement:
     for code, timings in b.items():
         if code in a:
             a[code] = _merge_timings(a[code], timings)
