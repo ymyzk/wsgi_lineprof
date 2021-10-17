@@ -83,7 +83,6 @@ setup(
         "colorama>=0.4.1",
         "Jinja2",
         "pytz",
-        "six>=1.10.0",
         "typing-extensions",
     ],
 
@@ -102,6 +101,7 @@ setup(
             "sphinx_rtd_theme>=0.4.3,<0.5",
         ],
         "test": [
+            "black",
             "codecov>=2.0.15,<3.0.0",
             "flake8>=4,<5",
             "mypy>=0.800,<1.0",
@@ -110,7 +110,6 @@ setup(
             "pytest-mock>=1.11",
             "pytest-randomly",
             "types-pytz",
-            "types-six",
         ],
     },
 

@@ -1,11 +1,10 @@
-from __future__ import print_function
+from io import StringIO
 import re
 import sys
 from wsgiref.simple_server import make_server
 from wsgiref.util import setup_testing_defaults
 
 import jinja2
-from six import StringIO
 
 from wsgi_lineprof.middleware import LineProfilerMiddleware
 
@@ -46,8 +45,8 @@ def demo_app(environ, start_response):
     print(file=stdout)
     h = sorted(environ.items())
     for k, v in h:
-        print(k, '=', repr(v), file=stdout)
-    start_response("200 OK", [('Content-Type', 'text/plain; charset=utf-8')])
+        print(k, "=", repr(v), file=stdout)
+    start_response("200 OK", [("Content-Type", "text/plain; charset=utf-8")])
     return [stdout.getvalue().encode("utf-8")]
 
 
@@ -60,8 +59,8 @@ def fib(n):
 def fib_app(environ, start_response):
     setup_testing_defaults(environ)
 
-    status = '200 OK'
-    headers = [('Content-type', 'text/plain; charset=utf-8')]
+    status = "200 OK"
+    headers = [("Content-type", "text/plain; charset=utf-8")]
 
     start_response(status, headers)
 
@@ -79,8 +78,8 @@ def fib_app(environ, start_response):
 def re_app(environ, start_response):
     setup_testing_defaults(environ)
 
-    status = '200 OK'
-    headers = [('Content-type', 'text/plain; charset=utf-8')]
+    status = "200 OK"
+    headers = [("Content-type", "text/plain; charset=utf-8")]
 
     start_response(status, headers)
 
@@ -102,8 +101,8 @@ def re_app(environ, start_response):
 def jinja_app(environ, start_response):
     setup_testing_defaults(environ)
 
-    status = '200 OK'
-    headers = [('Content-type', 'text/html; charset=utf-8')]
+    status = "200 OK"
+    headers = [("Content-type", "text/html; charset=utf-8")]
 
     start_response(status, headers)
 
@@ -130,6 +129,6 @@ if __name__ == "__main__":
     # Set up profiler
     app = LineProfilerMiddleware(app)
 
-    server = make_server('127.0.0.1', 8000, app)
+    server = make_server("127.0.0.1", 8000, app)
     print("Serving on 127.0.0.1:8000...")
     server.serve_forever()

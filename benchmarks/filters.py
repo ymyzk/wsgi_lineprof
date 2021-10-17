@@ -13,28 +13,29 @@ from .apps import fib_app, jinja_app
 from .utils import StringNoopIO
 
 
-class BaseTest(object):
+class BaseTest:
     param_names = ["filters"]
     params = ["base", "no_filter", "filter"]
 
     def prepare_app(self, app, profiler, filters):
         if profiler == "no_filter":
-            app = LineProfilerMiddleware(app,
-                                         stream=StringNoopIO(),
-                                         async_stream=True)
+            app = LineProfilerMiddleware(app, stream=StringNoopIO(), async_stream=True)
         elif profiler == "filter":
-            app = LineProfilerMiddleware(app,
-                                         filters=filters,
-                                         stream=StringNoopIO(),
-                                         async_stream=True)
+            app = LineProfilerMiddleware(
+                app, filters=filters, stream=StringNoopIO(), async_stream=True
+            )
         return TestApp(app)
 
 
 class FibAppWithFilenameFilterTest(BaseTest):
     def setup(self, filters):
-        self.app = self.prepare_app(fib_app, filters, filters=[
-            FilenameFilter("apps.py"),
-        ])
+        self.app = self.prepare_app(
+            fib_app,
+            filters,
+            filters=[
+                FilenameFilter("apps.py"),
+            ],
+        )
 
     def time_index_page(self, *args):
         self.app.get("/")
@@ -48,9 +49,13 @@ class FibAppWithFilenameFilterTest(BaseTest):
 
 class JinjaAppWithFilenameFilterTest(BaseTest):
     def setup(self, filters):
-        self.app = self.prepare_app(jinja_app, filters, filters=[
-            FilenameFilter("apps.py"),
-        ])
+        self.app = self.prepare_app(
+            jinja_app,
+            filters,
+            filters=[
+                FilenameFilter("apps.py"),
+            ],
+        )
 
     def time_10_items(self, *args):
         self.app.get("/10")

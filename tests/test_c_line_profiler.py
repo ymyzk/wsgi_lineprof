@@ -13,7 +13,7 @@ def func2():
     return "hello"
 
 
-class TestLineTiming(object):
+class TestLineTiming:
     def test_as_tuple(self):
         subject = LineTiming(func.__code__, 10)
         assert subject.as_tuple() == (10, 0, 0)
