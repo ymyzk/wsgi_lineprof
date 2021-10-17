@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 from datetime import datetime
 from types import CodeType
 from typing import Dict, TextIO

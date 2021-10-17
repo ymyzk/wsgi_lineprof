@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 import atexit
 from collections import OrderedDict
 from datetime import datetime

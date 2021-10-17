@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 from io import StringIO
 import re
 from typing import Any, Dict, Iterable, TYPE_CHECKING
