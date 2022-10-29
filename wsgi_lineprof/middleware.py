@@ -104,7 +104,7 @@ class LineProfilerMiddleware:
         relative_start = profiler.get_timer()
         try:
             profiler.enable()
-            response = self.app(env, start_response)
+            response: Iterable[bytes] = self.app(env, start_response)
         finally:
             profiler.disable()
             unit = profiler.get_unit()
