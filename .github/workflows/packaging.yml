@@ -24,80 +24,34 @@ jobs:
         name: wsgi_lineprof_dist
         path: dist
 
-  build_wheel_linux:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Build manylinux wheel
-      run: |
-        docker info
-        ./scripts/build_manylinux_wrapper.sh
-    - uses: actions/upload-artifact@v3
-      with:
-        name: wsgi_lineprof_dist
-        path: dist/wheelhouse
-
-  build_wheel_macos:
-    runs-on: macos-latest
+  build_wheel:
+    runs-on: ${{ matrix.os }}
     strategy:
-      max-parallel: 4
       matrix:
-        python-version: [3.7, 3.8, 3.9, '3.10']
+        os: [ubuntu-20.04, windows-2022, macos-11]
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
+    - name: Set up QEMU
+      if: runner.os == 'Linux'
+      uses: docker/setup-qemu-action@v2
       with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: python -m pip install --upgrade build
-    - name: Create packages
-      run: python -m build -w
-    - name: delocate for macOS wheels
-      run: |
-        python -m pip install --upgrade delocate
-        delocate-listdeps --all --depending dist/*.whl
-        delocate-addplat --rm-orig -p macosx_10_10_x86_64 dist/*.whl
-    - uses: actions/upload-artifact@v3
-      with:
-        name: wsgi_lineprof_dist
-        path: dist
-
-  build_wheel_windows:
-    runs-on: windows-2019
-    strategy:
-      max-parallel: 4
-      matrix:
-        python-version: [3.7, 3.8, 3.9, '3.10']
-        architecture: ['x86', 'x64']
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }} (${{ matrix.architecture }})
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ matrix.python-version }}
-        architecture: ${{ matrix.architecture }}
-    - name: Install dependencies
-      run: python -m pip install --upgrade build
-    - name: Create packages
-      run: python -m build -w
+        platforms: arm64
+    - name: Build wheels
+      uses: pypa/cibuildwheel@v2.11.2
       env:
-        # This is for avoiding the error like this:
-        # pyconfig.h(68): fatal error C1083: Cannot open include file: 'io.h': No such file or directory
-        INCLUDE: c:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/SDK/ScopeCppSDK/SDK/include/ucrt
+        CIBW_ARCHS_LINUX: auto aarch64
+        CIBW_ARCHS_MACOS: x86_64 arm64
+        CIBW_ARCHS_WINDOWS: auto ARM64
     - uses: actions/upload-artifact@v3
       with:
         name: wsgi_lineprof_dist
-        path: dist
+        path: ./wheelhouse/*.whl
 
   build:
     needs:
       - build_sdist
-      - build_wheel_linux
-      - build_wheel_macos
-      - build_wheel_windows
+      - build_wheel
     runs-on: ubuntu-latest
     steps:
     - uses: actions/download-artifact@v3

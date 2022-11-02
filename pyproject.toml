@@ -70,6 +70,9 @@ test = [
 Documentation = "https://wsgi-lineprof.readthedocs.io"
 Source = "https://github.com/ymyzk/wsgi_lineprof"
 
+[tool.cibuildwheel]
+skip = "cp3{6,11}-* pp*"
+
 [tool.setuptools]
 include-package-data = true
 
