@@ -1,3 +1,82 @@
 [build-system]
-requires = ["Cython>=0.29,<0.30", "setuptools>=43.0.0", "wheel"]
+requires = ["Cython>=0.29,<0.30", "setuptools>=62.3.0", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "wsgi_lineprof"
+version = "0.14.0"
+description = "WSGI middleware for line-by-line profiling"
+requires-python = ">=3.7"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Yusuke Miyazaki", email="miyazaki.dev@gmail.com"}
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX",
+    "Operating System :: Unix",
+    "Programming Language :: C",
+    "Programming Language :: Cython",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware",
+    "Topic :: Software Development",
+    "Topic :: System :: Benchmark",
+]
+dependencies = [
+    "colorama>=0.4.1",
+    "Jinja2",
+    "pytz",
+    "typing-extensions"
+]
+
+dynamic = ["readme"]
+
+[project.optional-dependencies]
+benchmark = [
+    "asv>=0.4,<0.5",
+    "virtualenv"
+]
+benchmark-deps = [
+    "Jinja2==2.10",
+    "WebTest==2.0.32"
+]
+docs = [
+    "Sphinx>=2.1,<2.2",
+    "sphinx_rtd_theme>=0.4.3,<0.5"
+]
+test = [
+    "black",
+    "codecov>=2.0.15,<3.0.0",
+    "flake8>=4,<5",
+    "mypy>=0.800,<1.0",
+    "pytest>=6.2.5,<7",
+    "pytest-cov>=2.6.0,<3.0.0",
+    "pytest-mock>=1.11",
+    "pytest-randomly",
+    "types-pytz"
+]
+
+[project.urls]
+Documentation = "https://wsgi-lineprof.readthedocs.io"
+Source = "https://github.com/ymyzk/wsgi_lineprof"
+
+[tool.setuptools]
+packages = [
+    "wsgi_lineprof"
+]
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.rst"]}
+
+[tool.setuptools.package-data]
+wsgi_lineprof = ["py.typed", "*.pyi", "templates/*"]
