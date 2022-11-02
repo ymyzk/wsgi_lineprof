@@ -1,9 +1,9 @@
 name: Benchmarks
 
-on:
-  push:
-    branches-ignore:
-      - master
+#on:
+#  push:
+#    branches-ignore:
+#      - master
 
 jobs:
   build:
