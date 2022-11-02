@@ -14,9 +14,9 @@ jobs:
         python-version: [3.8]
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
@@ -27,7 +27,7 @@ jobs:
       run: |
         asv machine --yes
         asv continuous --show-stderr $GITHUB_SHA
-    - uses: actions/upload-artifact@v1
+    - uses: actions/upload-artifact@v3
       with:
         name: wsgi_lineprof_asv_results
         path: .asv/results
