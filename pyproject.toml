@@ -71,12 +71,15 @@ Documentation = "https://wsgi-lineprof.readthedocs.io"
 Source = "https://github.com/ymyzk/wsgi_lineprof"
 
 [tool.setuptools]
-packages = [
-    "wsgi_lineprof"
-]
+include-package-data = true
 
 [tool.setuptools.dynamic]
 readme = {file = ["README.rst"]}
 
+[tool.setuptools.packages.find]
+namespaces = true
+where = ["."]
+
 [tool.setuptools.package-data]
-wsgi_lineprof = ["py.typed", "*.pyi", "templates/*"]
+wsgi_lineprof = ["py.typed", "*.pyi"]
+"wsgi_lineprof.templates" = ["*.html"]
