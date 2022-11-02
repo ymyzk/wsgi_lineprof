@@ -1,7 +1,7 @@
 from io import open
 from os import path
-from warnings import warn
 
+from Cython.Build import cythonize
 from setuptools import Extension, setup
 
 
@@ -10,18 +10,6 @@ root = path.abspath(path.dirname(__file__))
 with open(path.join(root, "README.rst"), encoding="utf-8") as f:
     long_description = f.read()
 
-source = "extensions/extensions."
-
-try:
-    from Cython.Build import cythonize
-    source += "pyx"
-except ImportError:
-    def cythonize(extensions):
-        return extensions
-    source += "c"
-    if not path.exists(path.join(root, source)):
-        raise Exception("No Cython installation, no generated C file")
-    warn("Could not import Cython, using generated C source code instead")
 
 setup(
     name="wsgi_lineprof",
@@ -73,7 +61,7 @@ setup(
     ext_package="wsgi_lineprof",
     ext_modules=cythonize([
         Extension("extensions",
-                  sources=[source, "extensions/timer.c"])
+                  sources=["extensions/extensions.pyx", "extensions/timer.c"])
     ]),
 
     python_requires=">=3.7",
@@ -94,7 +82,6 @@ setup(
             "Jinja2==2.10",
             "WebTest==2.0.32",
         ],
-        "build": ["Cython>=0.28,<0.30"],
         "docs": [
             "Sphinx>=2.1,<2.2",
             "sphinx_rtd_theme>=0.4.3,<0.5",

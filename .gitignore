@@ -116,3 +116,5 @@ dmypy.json
 
 # IntelliJ IDEA / PyCharm
 .idea
+
+/extensions/extensions.c
