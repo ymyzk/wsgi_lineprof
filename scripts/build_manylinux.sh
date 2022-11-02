@@ -6,6 +6,10 @@ cd "$(dirname $0)/.."
 # Avoid using PyPy under /opt/python/
 for PYBIN in /opt/python/cp*/bin; do
   rm -rf build
+  if [[ "$PYBIN" == /opt/python/cp311-* ]]; then
+    echo "Skipping Python 3.11 until we fully support it."
+    continue
+  fi
   "${PYBIN}/python" -m build --wheel
 done
 
