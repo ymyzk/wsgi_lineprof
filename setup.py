@@ -50,7 +50,6 @@ setup(
         "Programming Language :: Cython",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3 :: Only",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
@@ -77,7 +76,7 @@ setup(
                   sources=[source, "extensions/timer.c"])
     ]),
 
-    python_requires=">=3.6",
+    python_requires=">=3.7",
 
     install_requires=[
         "colorama>=0.4.1",
