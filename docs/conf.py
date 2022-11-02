@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'wsgi_lineprof'
-copyright = '2021, Yusuke Miyazaki'
+copyright = '2016, Yusuke Miyazaki'
 author = 'Yusuke Miyazaki'
 
 # The full version, including alpha/beta/rc tags
