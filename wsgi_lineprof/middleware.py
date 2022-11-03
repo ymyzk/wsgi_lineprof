@@ -1,12 +1,12 @@
 import atexit
+import sys
+import threading
+import uuid
 from collections import OrderedDict
 from datetime import datetime
 from functools import reduce
 from operator import itemgetter
-import sys
-import threading
-from typing import Any, Dict, Iterable, Optional, Type, TYPE_CHECKING
-import uuid
+from typing import TYPE_CHECKING, Any, Dict, Iterable, Optional, Type
 
 from pytz import utc
 
@@ -16,7 +16,6 @@ from wsgi_lineprof.profiler import LineProfiler
 from wsgi_lineprof.stats import FilterType, LineProfilerStats
 from wsgi_lineprof.types import CodeTiming, Measurement, RequestMeasurement, Stream
 from wsgi_lineprof.writers import AsyncStreamWriter, BaseStreamWriter, SyncStreamWriter
-
 
 if TYPE_CHECKING:
     from wsgiref.types import StartResponse, WSGIApplication, WSGIEnvironment

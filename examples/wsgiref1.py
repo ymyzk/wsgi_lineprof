@@ -2,7 +2,6 @@ from wsgiref.simple_server import demo_app, make_server
 
 from wsgi_lineprof.middleware import LineProfilerMiddleware
 
-
 app = LineProfilerMiddleware(demo_app)
 
 if __name__ == "__main__":

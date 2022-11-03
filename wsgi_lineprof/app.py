@@ -1,6 +1,6 @@
-from io import StringIO
 import re
-from typing import Any, Dict, Iterable, TYPE_CHECKING
+from io import StringIO
+from typing import TYPE_CHECKING, Any, Dict, Iterable
 from uuid import UUID
 
 from jinja2 import Environment, PackageLoader
