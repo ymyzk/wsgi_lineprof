@@ -1,9 +1,10 @@
 name: Benchmarks
 
-#on:
-#  push:
-#    branches-ignore:
-#      - master
+on:
+  # push:
+  #   branches-ignore:
+  #     - master
+  workflow_dispatch:
 
 jobs:
   build:
