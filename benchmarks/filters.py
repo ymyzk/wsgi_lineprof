@@ -9,6 +9,7 @@ from webtest import TestApp
 
 from wsgi_lineprof.filters import FilenameFilter
 from wsgi_lineprof.middleware import LineProfilerMiddleware
+
 from .apps import fib_app, jinja_app
 from .utils import StringNoopIO
 

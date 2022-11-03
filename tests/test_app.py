@@ -7,7 +7,6 @@ from pytz import utc
 
 from wsgi_lineprof.app import ResultsApp
 
-
 SHOULD_HANDLE_REQUEST_TEST_CASES = [
     ("/wsgi_lineprof/", "/wsgi_lineprof/", True),
     ("/wsgi_lineprof/", "/wsgi_lineprof/hello", True),

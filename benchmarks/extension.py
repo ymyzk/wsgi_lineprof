@@ -11,6 +11,7 @@ import string
 from webtest import TestApp
 
 from wsgi_lineprof.extensions import LineProfiler
+
 from .apps import demo_app, fib_app, jinja_app, re_app
 
 

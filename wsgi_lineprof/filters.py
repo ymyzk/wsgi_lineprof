@@ -1,9 +1,8 @@
+import re
 from abc import ABCMeta, abstractmethod
 from itertools import islice
 from operator import attrgetter
-import re
-from typing import Iterable, TYPE_CHECKING
-
+from typing import TYPE_CHECKING, Iterable
 
 if TYPE_CHECKING:
     from wsgi_lineprof.stats import LineProfilerStat

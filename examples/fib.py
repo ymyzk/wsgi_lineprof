@@ -1,5 +1,5 @@
-from wsgiref.util import setup_testing_defaults
 from wsgiref.simple_server import make_server
+from wsgiref.util import setup_testing_defaults
 
 from wsgi_lineprof.filters import FilenameFilter, TotalTimeSorter
 from wsgi_lineprof.middleware import LineProfilerMiddleware

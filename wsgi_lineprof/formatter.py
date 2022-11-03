@@ -1,9 +1,9 @@
-from abc import ABCMeta, abstractmethod
 import inspect
 import itertools
 import linecache
+from abc import ABCMeta, abstractmethod
 from os import path
-from typing import Any, cast, Dict, Sequence
+from typing import Any, Dict, Sequence, cast
 
 import colorama
 

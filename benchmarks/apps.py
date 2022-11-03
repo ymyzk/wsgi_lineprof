@@ -1,13 +1,12 @@
-from io import StringIO
 import re
 import sys
+from io import StringIO
 from wsgiref.simple_server import make_server
 from wsgiref.util import setup_testing_defaults
 
 import jinja2
 
 from wsgi_lineprof.middleware import LineProfilerMiddleware
-
 
 RE_IP = (
     r"(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}"

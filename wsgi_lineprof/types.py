@@ -1,12 +1,11 @@
+import uuid
 from datetime import datetime
 from types import CodeType
 from typing import Dict, TextIO
-import uuid
 
 from typing_extensions import TypedDict
 
 from wsgi_lineprof.extensions import LineTiming
-
 
 CodeTiming = Dict[int, LineTiming]
 Measurement = Dict[CodeType, CodeTiming]

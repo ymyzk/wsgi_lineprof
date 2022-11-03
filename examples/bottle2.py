@@ -2,7 +2,6 @@ import bottle
 
 from wsgi_lineprof.middleware import LineProfilerMiddleware
 
-
 app = bottle.app()
 
 
