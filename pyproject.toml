@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "wsgi_lineprof"
-version = "0.15.0"
+version = "0.16.0"
 description = "WSGI middleware for line-by-line profiling"
 requires-python = ">=3.7"
 license = {file = "LICENSE"}
