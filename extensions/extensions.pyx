@@ -1,6 +1,13 @@
 # cython: language_level=2
 from cpython cimport PyObject
-from header cimport PyEval_SetTrace, PyFrameObject, PyTrace_LINE, PyTrace_RETURN
+from header cimport (
+    PyEval_SetTrace,
+    PyFrame_GetCode,
+    PyFrame_GetLineNumber,
+    PyFrameObject,
+    PyTrace_LINE,
+    PyTrace_RETURN,
+)
 
 # It's better if we can use libc.stdint.uint64_t
 # but it produces #include <stdint.h> in the generated C code
@@ -120,7 +127,10 @@ cdef int python_trace_callback(object self_, PyFrameObject *py_frame, int what,
 
     self = <LineProfiler>self_
     last_time = self.last_time
-    code = <object>py_frame.f_code
+    IF PY_MAJOR_VERSION >= 3 and PY_MINOR_VERSION >= 9:
+        code = <object>PyFrame_GetCode(py_frame)
+    ELSE:
+        code = <object>py_frame.f_code
 
     if code in last_time:
         results = self.results
@@ -143,7 +153,8 @@ cdef int python_trace_callback(object self_, PyFrameObject *py_frame, int what,
             del last_time[code]
 
     if what == PyTrace_LINE:
-        last_time[code] = LastTime(py_frame.f_lineno, hpTimer())
+        line = PyFrame_GetLineNumber(py_frame)
+        last_time[code] = LastTime(line, hpTimer())
 
     return 0
 

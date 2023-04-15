@@ -43,5 +43,14 @@ cdef extern from "frameobject.h":
 cdef extern from "Python.h":
     cdef void PyEval_SetTrace(Py_tracefunc func, object arg)
 
+    # New in version 3.9
+    # Part of the Stable ABI since version 3.10
+    # https://docs.python.org/3/c-api/frame.html#c.PyFrame_GetCode
+    cdef PyCodeObject *PyFrame_GetCode(PyFrameObject *frame)
+
+    # Part of the Stable ABI since version 3.10
+    # https://docs.python.org/3/c-api/frame.html#c.PyFrame_GetLineNumber
+    cdef int PyFrame_GetLineNumber(PyFrameObject *frame)
+
     cdef int PyTrace_LINE
     cdef int PyTrace_RETURN
