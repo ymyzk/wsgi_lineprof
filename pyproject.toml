@@ -52,14 +52,13 @@ benchmark-deps = [
     "WebTest==2.0.32"
 ]
 docs = [
-    "Sphinx>=5,<6",
+    "Sphinx>=6,<7",
     "sphinx_rtd_theme>=1,<2"
 ]
 test = [
-    "flake8>=4,<5",
-    "mypy>=0.800,<1.0",
-    "pytest>=6.2.5,<7",
-    "pytest-cov>=2.6.0,<3.0.0",
+    "mypy>=1,<2",
+    "pytest>=7,<8",
+    "pytest-cov>=4,<5",
     "pytest-mock>=1.11",
     "pytest-randomly",
     "types-pytz"
