@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build_sdist:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         python-version: ['3.11']
@@ -28,7 +28,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-20.04, windows-2022, macos-11]
+        os: [ubuntu-22.04, windows-2022, macos-12]
         arch: [auto]
         include:
           - os: ubuntu-20.04
