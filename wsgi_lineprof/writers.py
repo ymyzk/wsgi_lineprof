@@ -38,7 +38,7 @@ class AsyncStreamWriter(BaseStreamWriter):
         # None in the queue is a special message to stop the writer thread
         self.queue: Queue[Optional[LineProfilerStats]] = Queue()
         self.writer_thread = Thread(target=self._write)
-        self.writer_thread.setDaemon(True)
+        self.writer_thread.daemon = True
         self.writer_thread.start()
 
     def write(self, stats: LineProfilerStats) -> None:
