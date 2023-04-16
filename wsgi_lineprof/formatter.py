@@ -3,7 +3,7 @@ import itertools
 import linecache
 from abc import ABCMeta, abstractmethod
 from os import path
-from typing import Any, Dict, Sequence, cast
+from typing import Any, Dict, Sequence
 
 import colorama
 
@@ -97,10 +97,10 @@ class TextFormatter(BaseFormatter):
     def style_for_percent(self, percent: float) -> str:
         """Returns ANSI style for a given percent"""
         if percent < 0.2:
-            return cast(str, colorama.Fore.LIGHTBLACK_EX)
+            return colorama.Fore.LIGHTBLACK_EX
         elif percent >= 50:
-            return cast(str, colorama.Fore.RED)
+            return colorama.Fore.RED
         elif percent >= 5:
-            return cast(str, colorama.Fore.YELLOW)
+            return colorama.Fore.YELLOW
         else:
-            return cast(str, colorama.Fore.WHITE)
+            return colorama.Fore.WHITE
