@@ -61,6 +61,7 @@ test = [
     "pytest-cov>=4,<5",
     "pytest-mock>=1.11",
     "pytest-randomly",
+    "types-colorama",
     "types-pytz"
 ]
 
@@ -71,11 +72,24 @@ Source = "https://github.com/ymyzk/wsgi_lineprof"
 [tool.cibuildwheel]
 skip = "cp36-* pp*"
 
-[tool.setuptools]
-include-package-data = true
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "if typing.TYPE_CHECKING:"
+]
+ignore_errors = true
 
 [tool.isort]
 profile = "black"
+
+[tool.setuptools]
+include-package-data = true
 
 [tool.setuptools.dynamic]
 readme = {file = ["README.rst"]}
