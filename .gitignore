@@ -118,3 +118,4 @@ dmypy.json
 .idea
 
 /extensions/extensions.c
+/wsgi_lineprof/version.py
