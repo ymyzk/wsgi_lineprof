@@ -1,10 +1,9 @@
 [build-system]
-requires = ["Cython>=0.29,<0.30", "setuptools>=62.3.0", "wheel"]
+requires = ["Cython>=0.29,<0.30", "setuptools>=62.3.0", "setuptools_scm[toml]>=6.2", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "wsgi_lineprof"
-version = "0.16.0"
 description = "WSGI middleware for line-by-line profiling"
 requires-python = ">=3.7"
 license = {file = "LICENSE"}
@@ -40,7 +39,7 @@ dependencies = [
     "typing-extensions"
 ]
 
-dynamic = ["readme"]
+dynamic = ["readme", "version"]
 
 [project.optional-dependencies]
 benchmark = [
@@ -87,3 +86,6 @@ where = ["."]
 [tool.setuptools.package-data]
 wsgi_lineprof = ["py.typed", "*.pyi"]
 "wsgi_lineprof.templates" = ["*.html"]
+
+[tool.setuptools_scm]
+write_to = "wsgi_lineprof/version.py"
