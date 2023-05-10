@@ -96,6 +96,7 @@ readme = {file = ["README.rst"]}
 [tool.setuptools.packages.find]
 namespaces = true
 where = ["."]
+include = ["extensions", "wsgi_lineprof"]
 
 [tool.setuptools.package-data]
 wsgi_lineprof = ["py.typed", "*.pyi"]
