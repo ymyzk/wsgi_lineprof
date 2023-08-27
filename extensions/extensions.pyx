@@ -1,13 +1,11 @@
 # cython: language_level=3
-from cpython cimport PyObject
+from cpython cimport PyObject, PyTrace_LINE, PyTrace_RETURN
 from header cimport (
     Py_tracefunc,
     PyEval_SetTrace,
     PyFrame_GetCode,
     PyFrame_GetLineNumber,
     PyFrameObject,
-    PyTrace_LINE,
-    PyTrace_RETURN,
 )
 
 # It's better if we can use libc.stdint.uint64_t

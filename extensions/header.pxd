@@ -38,6 +38,7 @@ cdef extern from "Python.h":
         int f_stacksize
 
 cdef extern from "frameobject.h":
+    # Once we drop Python 3.8 support, we should be able to move this definition under Python.h
     ctypedef int (*Py_tracefunc)(object self, PyFrameObject *py_frame, int what, PyObject *arg)
 
 cdef extern from "Python.h":
