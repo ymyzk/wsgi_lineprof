@@ -1,6 +1,7 @@
 # cython: language_level=2
 from cpython cimport PyObject
 from header cimport (
+    Py_tracefunc,
     PyEval_SetTrace,
     PyFrame_GetCode,
     PyFrame_GetLineNumber,
@@ -31,10 +32,10 @@ cdef class LineProfiler:
         self.last_time = {}
 
     def enable(self):
-        PyEval_SetTrace(python_trace_callback, self)
+        PyEval_SetTrace(<Py_tracefunc>python_trace_callback, self)
 
     def _enable_noop(self):
-        PyEval_SetTrace(python_trace_noop_callback, self)
+        PyEval_SetTrace(<Py_tracefunc>python_trace_noop_callback, self)
 
     def disable(self):
         PyEval_SetTrace(NULL, <object>NULL)

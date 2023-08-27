@@ -1,5 +1,5 @@
 [build-system]
-requires = ["Cython>=0.29,<0.30", "setuptools>=62.3.0", "setuptools_scm[toml]>=6.2", "wheel"]
+requires = ["Cython>=3,<4", "setuptools>=62.3.0", "setuptools_scm[toml]>=6.2", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
