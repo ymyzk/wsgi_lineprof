@@ -20,7 +20,7 @@ jobs:
       run: python -m pip install --upgrade build
     - name: Create packages
       run: python -m build -s
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: wsgi_lineprof_dist
         path: dist
@@ -50,7 +50,7 @@ jobs:
       uses: pypa/cibuildwheel@v2.18.0
       env:
         CIBW_ARCHS: ${{ matrix.arch }}
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: wsgi_lineprof_dist
         path: ./wheelhouse/*.whl
