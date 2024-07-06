@@ -28,7 +28,7 @@ jobs:
       run: |
         asv machine --yes
         asv continuous --show-stderr $GITHUB_SHA
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: wsgi_lineprof_asv_results
         path: .asv/results
