@@ -36,7 +36,7 @@ jobs:
             arch: aarch64
           - os: windows-2022
             arch: ARM64
-          - os: macos-11
+          - os: macos-12
             arch: arm64
 
     steps:
