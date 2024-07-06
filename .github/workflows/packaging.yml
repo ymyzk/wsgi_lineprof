@@ -20,9 +20,9 @@ jobs:
       run: python -m pip install --upgrade build
     - name: Create packages
       run: python -m build -s
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
-        name: wsgi_lineprof_dist
+        name: wsgi_lineprof_dist_sdist
         path: dist
 
   build_wheel:
@@ -50,9 +50,9 @@ jobs:
       uses: pypa/cibuildwheel@v2.19.2
       env:
         CIBW_ARCHS: ${{ matrix.arch }}
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
-        name: wsgi_lineprof_dist
+        name: wsgi_lineprof_dist_wheel_${{ matrix.os }}_${{ matrix.arch }}
         path: ./wheelhouse/*.whl
 
   build:
@@ -61,7 +61,11 @@ jobs:
       - build_wheel
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/download-artifact@v3
+    - uses: actions/upload-artifact/merge@v4
+      with:
+        name: wsgi_lineprof_dist
+        pattern: wsgi_lineprof_dist_*
+    - uses: actions/download-artifact@v4
       with:
         name: wsgi_lineprof_dist
         path: dist
