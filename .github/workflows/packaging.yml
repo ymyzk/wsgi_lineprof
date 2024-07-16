@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.11']
+        python-version: ['3.12']
 
     steps:
     - uses: actions/checkout@v4
@@ -29,15 +29,13 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-22.04, windows-2022, macos-12]
+        os: [ubuntu-22.04, windows-2022, macos-13, macos-14]
         arch: [auto]
         include:
           - os: ubuntu-20.04
             arch: aarch64
           - os: windows-2022
             arch: ARM64
-          - os: macos-12
-            arch: arm64
 
     steps:
     - uses: actions/checkout@v4
