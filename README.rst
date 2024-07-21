@@ -10,7 +10,7 @@ wsgi_lineprof
    :target: https://github.com/ymyzk/wsgi_lineprof/actions?workflow=Tests
    :alt: GitHub Actions (Tests)
 .. image:: https://readthedocs.org/projects/wsgi_lineprof/badge/?version=latest
-   :target: https://wsgi_lineprof.readthedocs.io/
+   :target: https://wsgi-lineprof.readthedocs.io/
    :alt: Documentation Status
 
 **wsgi_lineprof** is a WSGI middleware for line-by-line profiling.
