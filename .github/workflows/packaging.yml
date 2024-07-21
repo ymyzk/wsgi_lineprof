@@ -1,6 +1,9 @@
 name: Packaging
 
-on: [push]
+on:
+  push:
+  release:
+    types: [published]
 
 jobs:
   build_sdist:
@@ -73,3 +76,25 @@ jobs:
         path: dist
     - name: Show result
       run: ls -l dist
+
+  upload:
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+    environment: release
+    permissions:
+      contents: write # Required for uploading artifacts to GitHub release
+      id-token: write # Required for using pypa/gh-actions-pypi-publish
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: wsgi_lineprof_dist
+          path: dist
+      - name: Upload artifacts to GitHub release
+        working-directory: ./dist
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ github.event.release.tag_name }}" ./*
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
