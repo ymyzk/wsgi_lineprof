@@ -87,6 +87,7 @@ jobs:
       contents: write # Required for uploading artifacts to GitHub release
       id-token: write # Required for using pypa/gh-actions-pypi-publish
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
           name: wsgi_lineprof_dist
