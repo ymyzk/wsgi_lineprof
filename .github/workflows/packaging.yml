@@ -38,10 +38,10 @@ jobs:
         arch: [auto]
         build: [auto]
         include:
-          - os: ubuntu-20.04
+          - os: ubuntu-22.04
             arch: aarch64
             build: manylinux
-          - os: ubuntu-20.04
+          - os: ubuntu-22.04
             arch: aarch64
             build: musllinux
           - os: windows-2022
