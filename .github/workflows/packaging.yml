@@ -36,11 +36,17 @@ jobs:
       matrix:
         os: [ubuntu-22.04, windows-2022, macos-13, macos-14]
         arch: [auto]
+        build: [auto]
         include:
           - os: ubuntu-20.04
             arch: aarch64
+            build: manylinux
+          - os: ubuntu-20.04
+            arch: aarch64
+            build: musllinux
           - os: windows-2022
             arch: ARM64
+            build: auto
 
     steps:
     - uses: actions/checkout@v4
@@ -55,9 +61,10 @@ jobs:
       uses: pypa/cibuildwheel@v2.19.2
       env:
         CIBW_ARCHS: ${{ matrix.arch }}
+        CIBW_BUILD: ${{ matrix.build == 'auto' && '*' || format('*{0}*', matrix.build) }}
     - uses: actions/upload-artifact@v4
       with:
-        name: wsgi_lineprof_dist_wheel_${{ matrix.os }}_${{ matrix.arch }}
+        name: wsgi_lineprof_dist_wheel_${{ matrix.os }}_${{ matrix.arch }}_${{ matrix.build }}
         path: ./wheelhouse/*.whl
 
   build:
