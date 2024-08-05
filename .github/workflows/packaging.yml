@@ -58,7 +58,7 @@ jobs:
       with:
         platforms: arm64
     - name: Build wheels
-      uses: pypa/cibuildwheel@v2.19.2
+      uses: pypa/cibuildwheel@v2.20.0
       env:
         CIBW_ARCHS: ${{ matrix.arch }}
         CIBW_BUILD: ${{ matrix.build == 'auto' && '*' || format('*{0}*', matrix.build) }}
